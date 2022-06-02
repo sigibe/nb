@@ -1,0 +1,10 @@
+.sticky-banner {
+    background-color: var(--highlight-background-color);
+    color: white;
+    padding: 5px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
