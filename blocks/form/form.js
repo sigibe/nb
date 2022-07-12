@@ -102,6 +102,13 @@ function createLabel(fd) {
   return label;
 }
 
+function createNote(fd) {
+  const note = document.createElement('div');
+  note.classList.add('note');
+  note.textContent = fd.Note;
+  return note;
+}
+
 function applyRules(form, rules) {
   const payload = constructPayload(form);
   rules.forEach((field) => {
@@ -155,6 +162,9 @@ async function createForm(formURL) {
       default:
         fieldWrapper.append(createLabel(fd));
         fieldWrapper.append(createInput(fd));
+    }
+    if (fd.Note) {
+      fieldWrapper.append(createNote(fd));
     }
 
     if (fd.Rules) {
