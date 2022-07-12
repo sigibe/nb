@@ -27,7 +27,6 @@ main .form select {
   width: 100%;
   max-width: 50rem;
   box-sizing: border-box;
-  /* margin-top: 4px; */
   margin: 0;
   font-size: 1rem;
   font-weight: 400;
@@ -50,20 +49,19 @@ main .form select:hover {
 main .form label {
   width: 100%;
   display: block;
-  font-size: var(--type-body-s-size);
+  font-size: 14px;
   line-height: var(--type-body-s-lh);
   padding-bottom: var(--spacing-xs);
   margin-bottom: 8px;
   box-sizing: border-box;
-  font-family: "Open Sans Semibold";
-  font-size: 14px;
+  font-family: "Open Sans Semibold", sans-serif;
   font-weight: 400;
   letter-spacing: 0;
 }
 
 main .form .note {
   color: #7b7a7a;
-  font-family: "Open Sans Regular";
+  font-family: "Open Sans Regular", sans-serif;
   font-size: 14px;
   letter-spacing: 0;
   line-height: 21px;
@@ -128,7 +126,7 @@ main .form .button {
   font-weight: 300;
   padding: 6px 16px;
   border: none;
-  margin: 10px 0 10px 0;
+  margin: 10px 0;
   font-family: "Open Sans Semibold", 'Trebuchet MS', sans-serif;
   font-style: normal;
   text-align: center;
@@ -138,5 +136,4 @@ main .form .button {
 
 main .form .form-submit-wrapper {
   display: block;
-  /* justify-content: flex-end; */
 }
