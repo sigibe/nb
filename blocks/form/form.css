@@ -20,14 +20,23 @@ main .form h3 {
 main .form input,
 main .form textarea,
 main .form select {
-  border: 1px solid rgb(193 193 195);
-  padding: 11px;
+  height: 56px;
+  border: 2px solid #bbb;
+  padding: .375rem .75rem;
   border-radius: 0;
   width: 100%;
   max-width: 50rem;
   box-sizing: border-box;
-  margin-top: 4px;
+  /* margin-top: 4px; */
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
+
+/* main .form select option:disabled {
+  color: #bbb;
+} */
 
 main .form textarea {
   min-height: 100px;
@@ -44,19 +53,33 @@ main .form label {
   font-size: var(--type-body-s-size);
   line-height: var(--type-body-s-lh);
   padding-bottom: var(--spacing-xs);
-  text-transform: uppercase;
+  margin-bottom: 8px;
   box-sizing: border-box;
-  font-weight: 800;
+  font-family: "Open Sans Semibold";
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
-main .form label.required::after {
+main .form .note {
+  color: #7b7a7a;
+  font-family: "Open Sans Regular";
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 21px;
+  margin-top: 8px;
+}
+
+
+/* main .form label.required::after {
   content: "*";
   color: red;
   padding-left: 5px;
-}
+} */
 
 main .form .field-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  width: 390px;
 }
 
 main .form .form-checkbox-wrapper {
@@ -93,18 +116,27 @@ main .form .form-checkbox-wrapper label {
 }
 
 main .form .button {
+  height: 56px;
+  width: 100%;
+  max-width: 390px;
   cursor: pointer;
-  background: rgb(20 115 230);
+  background: #17252e;
   color: white;
-  border-radius: 16px;
-  font-size: var(--type-body-s-size);
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: 300;
   padding: 6px 16px;
   border: none;
-  font-family: adobe-clean, 'Trebuchet MS', sans-serif;
+  margin: 10px 0 10px 0;
+  font-family: "Open Sans Semibold", 'Trebuchet MS', sans-serif;
+  font-style: normal;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 main .form .form-submit-wrapper {
-  display: flex;
-  justify-content: flex-end;
+  display: block;
+  /* justify-content: flex-end; */
 }
