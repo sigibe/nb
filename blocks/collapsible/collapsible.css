@@ -1,0 +1,45 @@
+
+.collapsible input{
+    display: none;
+}
+
+.collapsible input + label{
+    display: block;
+}
+
+.collapsible input ~ *{
+    /* display: none; */
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.15s ease-in-out;
+}
+
+.collapsible input:checked ~ *, .collapsible input + label {
+    display: block;
+    max-height: 100vh;
+}
+
+.collapsible h2::after {
+    content: ' ';
+    display: inline-block;
+  
+    border-top: 2px solid var(--highlight-background-color);
+    border-left: 2px solid var(--highlight-background-color);
+
+    width: 20px;
+    height: 20px;
+    float: right;
+    margin-right: 10px;
+    transform: rotate(45deg)translateY(20px);
+  
+    transition: transform .2s ease-out;
+  }
+
+  .collapsible input:checked ~ label h2::after{
+
+    transform: rotate(225deg) translateY(10px);
+    border-color: grey; 
+    margin-right: 30px;
+
+  }
+
