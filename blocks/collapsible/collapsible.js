@@ -4,11 +4,13 @@ export default function decorate(block) {
         radio.type = "radio";
         radio.name = "callapsible";
         radio.id = "h" + i;
+        
         h2.after(radio);
         const label = document.createElement("label");
         label.htmlFor = radio.id;
         label.append(h2);
         radio.after(label);
+        
     });
-    
+    document.getElementById("h0").checked = true;
 }
