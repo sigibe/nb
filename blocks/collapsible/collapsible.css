@@ -1,28 +1,31 @@
-
-.collapsible input{
+.collapsible input {
     display: none;
 }
 
-.collapsible input + label{
+.collapsible input+label {
     display: block;
 }
 
-.collapsible input ~ *{
-    /* display: none; */
+.collapsible input~* {
     max-height: 0;
     overflow: hidden;
     transition: all 0.15s ease-in-out;
 }
 
-.collapsible input:checked ~ *, .collapsible input + label {
+.collapsible input:checked~*,
+.collapsible input+label {
     display: block;
     max-height: 100vh;
+}
+
+.collapsible h2{
+    font-size: var(--heading-font-size-s);
 }
 
 .collapsible h2::after {
     content: ' ';
     display: inline-block;
-  
+
     border-top: 2px solid var(--highlight-background-color);
     border-left: 2px solid var(--highlight-background-color);
 
@@ -30,16 +33,63 @@
     height: 20px;
     float: right;
     margin-right: 10px;
+    margin-top: -5px;
     transform: rotate(45deg)translateY(20px);
-  
-    transition: transform .2s ease-out;
-  }
 
-  .collapsible input:checked ~ label h2::after{
+    transition: transform .2s ease-out;
+}
+
+.collapsible input:checked~label h2::after {
 
     transform: rotate(225deg) translateY(10px);
-    border-color: grey; 
-    margin-right: 30px;
+    border-color: grey;
+    margin-right: 31px;
+    margin-top: 2px;
+}
 
-  }
+#on-the-money-app{
+    margin-top: 50px;
+}
 
+footer{
+    margin-top: 100px;
+}
+
+label{
+    background: linear-gradient(to top, #e5edec 1%,#e5edec 1%,#000000 1%,white 1%,white 10%, transparent 10%, transparent 100%);
+}
+
+/* Headlines for How-To  */
+
+.section.collapsible-container{
+    padding-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.section.collapsible-container h1{
+    text-align: center;
+    font-family: var(--body-font-family);
+    font-size: var(--body-font-size-m);
+    font-weight: normal;   
+}
+
+.section.collapsible-container h1 strong{
+    font-size: 60px;
+    font-family: var(--heading-font-family);
+    line-height: 150px;
+}
+
+.section.collapsible-container h1 strong::after{
+    content: "\a";
+    white-space: pre;
+}
+
+.default-content-wrapper{
+    padding-bottom: 80px;
+}
+
+body{
+    background: linear-gradient( #f9fbfb 330px,#f9fbfb 330px,#000000 330px,white 330px,white 100%);
+}
