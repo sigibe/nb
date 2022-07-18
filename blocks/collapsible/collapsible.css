@@ -4,6 +4,8 @@
 
 .collapsible input+label {
     display: block;
+    background: linear-gradient(to top, #e5edec 1%,#e5edec 1%,#000 1%,white 1%,white 10%, transparent 10%, transparent 100%);
+
 }
 
 .collapsible input~* {
@@ -53,17 +55,10 @@ footer{
     margin-top: 100px;
 }
 
-label{
-    background: linear-gradient(to top, #e5edec 1%,#e5edec 1%,#000 1%,white 1%,white 10%, transparent 10%, transparent 100%);
-}
-
 /* Headlines for How-To  */
 
 .section.collapsible-container{
-    padding-left: 0;
-    padding-top: 0;
-    padding-right: 0;
-    padding-bottom: 0;
+    padding: 0;
 }
 
 .section.collapsible-container h1{
