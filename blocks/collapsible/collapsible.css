@@ -24,7 +24,7 @@
 
 .collapsible h2::after {
     content: ' ';
-    display: inline-block;
+    /* display: inline-block; */
 
     border-top: 2px solid var(--highlight-background-color);
     border-left: 2px solid var(--highlight-background-color);
@@ -82,7 +82,7 @@ label{
 }
 
 .section.collapsible-container h1 strong::after{
-    content: "\a";
+    content: '\a';
     white-space: pre;
 }
 
