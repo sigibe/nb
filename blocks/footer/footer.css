@@ -1,13 +1,11 @@
 footer {
   padding: 2rem;
-  /* background-color: var(--overlay-background-color); */
+  padding-left: 100px;
   font-size: var(--body-font-size-s);
-  background: linear-gradient(white 13%, #e5edec 13%,#e5edec 13.5%,white 13.5%,white 26%, #f9fbfb 26%, #f9fbfb 89%, white 89%);
-
+  background: linear-gradient(white 15.5%, #e5edec 15.5%,#e5edec 15.7%,white 15.7%,white 30%, #f9fbfb 30%, #f9fbfb 75%, white 75%);
 }
 
 footer .footer {
-  /* max-width: 768px; */
   margin: auto;
 }
 
@@ -15,83 +13,52 @@ footer .footer p {
   margin: 0;
 }
 
-/*
-#nedbank-group {
-  float: left;
-}
-
-#nebank-group ~ p{
-  float: left;
-  margin: auto;
-  background-color: blue;
-}
-
-#connect-with-us {
-  float: left;
-  margin: auto;
-}
-
-#connect-with-us ~ p{
-  float: left;
-  margin: auto;
-  
-  background: yellow;
-}
-
-#bank-with-us {
-  float: right;
-  margin: auto;
-}
-
-#bank-with-us ~ p {
-  float: right;
-  margin: auto;
-  background-color: blueviolet;
-}
-
-#legal{
-  float:right;
-}
-
-#legal ~ p{
-  float: right;
-  background-color: red;
-} */
-
-
 .footer.block{
   margin: 0;
 }
 
+.footer a[href ^= "http"] .icon{
+  opacity: 50%;
+}
+
+.footer a[href ^= "http"]:hover .icon{
+  opacity: 100%;
+}
+
 .footer .icon.icon-twitter svg{
+  
   float: right;
-  margin-left: 18px;
+  margin-left: 14px ;
+  margin-right: 90px;
 }
 
 .footer .icon.icon-linkedin svg{
-  float: right;
   margin-left: 10px
 }
 
 .footer .icon.icon-instagram svg{
-  float: right;
+  
   margin-left: 12px
 }
 
 .footer .icon.icon-youtube svg{
-  float: right;
   margin-left: 15px
 }
 
 .footer .icon.icon-facebook svg{
-  float: right;
+  margin-left: 345px;
 }
 
+.footer .icon.icon-nedbank-footer svg{
+  width: 100px;
+  height: auto;
+}
 
 .footer .icon.icon-back-to-top svg{
   margin-left: 1400px;
   float: right;
-  padding-bottom: 60px;
+  margin-right: 90px;
+  padding-bottom: 80px;
 }
 
 footer p{
@@ -105,124 +72,40 @@ footer p strong{
   margin-right: 30px;
 }
 
-footer a{
+footer a:any-link{
   font-family: var(--body-font-family);
   font-size: 16px;
   font-weight: normal;
-  /* color: red; */
-  /* background-color: red; */
+  color: var(--link-footer-color);
+}
+
+.footer.block div:nth-child(2){
+  padding-bottom: 100px;
 }
 
 .footer.block div:nth-child(3){
-  display: grid;
-  grid-template-columns: repeat(4,auto);
-  grid-template-rows: repeat(6,auto);
-  gap: 0;
-  /* justify-content: space-evenly; */
+  column-count: 4;
 }
 
-#nedbank-group{
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
+.footer.block h3{
+  break-before:  column;
+  font-size: var(--body-font-size-s);
+  padding-bottom: 40px;
 }
 
-#connect-with-us{
-  grid-row: 1 / 2;
-  grid-column: 2 / 3;
+.footer.block div:nth-child(4){
+  padding-top: 100px;
 }
 
-#bank-with-us{
-  grid-row: 1 / 2;
-  grid-column: 3 / 4;
+.footer.block div:nth-child(5) p{
+  color: #565c5d;
+  float: left;
 }
 
-#legal{
-  grid-row: 1 / 2;
-  grid-column: 4 / 5;
+.footer.block div:nth-child(5) div:nth-child(1){
+  margin-left: 100px;
 }
 
-.footer.block div:nth-child(3) {
-  /* background-color: red; */
-  /* border: 1px solid rgba(0, 0, 0, 0.8); */
-  grid-row:   2/3;
-  grid-column: 1 / 2;
-  padding: 20px;
-  font-size: 30px;
-  /* text-align: center; */
-}
-
-#nedbank-group ~ p:nth-child(2) {
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
-  /* background-color: red; */
-}
-
-#nedbank-group +p + p {
-  grid-row: 3 / 4;
-  grid-column: 1 / 2;
-}
-
-#nedbank-group + p + p + p {
-  grid-row: 4 / 5;
-  grid-column: 1 / 2;
-}
-
-#nedbank-group + p + p + p + p {
-  grid-row: 5 / 6;
-  grid-column: 1 / 2;
-}
-
-#connect-with-us + p {
-  grid-row: 2 / 3;
-  grid-column: 2 / 3;
-}
-
-#connect-with-us + p + p {
-  grid-row: 3 / 4;
-  grid-column: 2 / 3;
-}
-
-#bank-with-us + p {
-  grid-row: 2 / 3;
-  grid-column: 3 / 4;
-}
-
-#bank-with-us + p + p {
-  grid-row: 3 / 4;
-  grid-column: 3 / 4;
-}
-
-#bank-with-us + p + p + p {
-  grid-row: 4 / 5;
-  grid-column: 3 / 4;
-}
-
-#bank-with-us + p + p + p + p {
-  grid-row: 5 / 6;
-  grid-column: 3 / 4;
-}
-
-#legal + p {
-  grid-row: 2 / 3;
-  grid-column: 4 / 5;
-}
-
-#legal + p + p {
-  grid-row: 3 / 4;
-  grid-column: 4 / 5;
-}
-
-#legal + p + p + p {
-  grid-row: 4 / 5;
-  grid-column: 4 / 5;
-}
-
-#legal + p + p + p + p {
-  grid-row: 5 / 6;
-  grid-column: 4 / 5;
-}
-
-#legal + p +  p + p + p + p {
-  grid-row: 6 / 7;
-  grid-column: 4 / 5;
+.footer.block div:nth-child(5){
+  padding-bottom: 50px;
 }
