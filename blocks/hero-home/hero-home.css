@@ -79,3 +79,28 @@ main .hero-home .icon-play {
         max-width: 1000px;
     }
 }
+
+.hero-home-container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center
+}
+
+@media only screen and (max-width: 767px) {
+    .hero-home-container {
+        background-image: none
+    }
+}
+
+@media only screen and (min-width: 767px) {
+    .hero-home-container {
+        height:346px;
+        background-color: rgba(23,37,46,0.3);
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .hero-home-container {
+        min-height:500px
+    }
+}
