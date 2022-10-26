@@ -84,3 +84,182 @@
   transform: unset;
   text-align: left;
 }
+
+main .home.cards-container {
+  margin: auto;
+  background-color: var(--overlay-background-color);
+}
+
+main .home.cards-container {
+  padding: 40px 0 32px 0;
+}
+
+.home.cards-container .cards-wrapper {
+  margin: 0 22px;
+  padding: 0
+}
+
+.home.cards-container .default-content-wrapper {
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto
+}
+
+.home.cards-container .default-content-wrapper > h1 {
+  color: #17252e;
+  font-family: "Nedbank Sans Bold";
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 32px;
+  margin: 0 0 32px 0
+}
+
+.home.cards-container .cards.medium > ul {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: stretch;
+  gap: 15px;
+}
+
+.home.cards-container .cards.medium > ul > li {
+  border: 1px solid #e5edec;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 26px 18px -26px rgba(0,0,0,0.07);
+  padding: 24px 18px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.home.cards-container .cards.medium .cards-image {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.home.cards-container .cards.medium .cards-image > p:first-child {
+  height: 62px;
+  width: 60px;
+  background-image: url(../../../../etc.clientlibs/nedbank/clientlibs/clientlib-base/resources/img/intercept_bg.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0px;
+  border-radius:calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+.home.cards-container .cards.medium .cards-image > p:first-child svg {
+  height: 32px;
+  width: 32px;
+  margin: 15px 14px;
+}
+
+.home.cards-container .cards.medium .cards-image > h3 {
+  margin: 0 14px;
+  letter-spacing: 0;
+  color: #17252e;
+  font-family: "Nedbank Sans Bold";
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.home.cards-container .cards.medium .cards-image > p:not(:first-child, :last-child) {
+  color: #494f50;
+  font-family: "Open Sans Regular";
+  font-size: 14px;
+  line-height: 20px;
+  margin: 2px 14px 0 14px;
+}
+
+.home.cards-container .cards.medium .cards-image > p:last-child {
+  border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
+  margin: 0px;
+}
+
+@media only screen and (min-width: 768px) {
+  main .home.cards-container {
+    padding: 48px 0
+  }
+
+  .home.cards-container .cards-wrapper {
+    margin: 0 106px;
+    padding: 0
+  }
+
+  .home.cards-container .default-content-wrapper > h1 {
+    font-size: 32px;
+    line-height: 40px;
+    margin: 0 0 48px 0
+  }
+
+  .home.cards-container .cards-wrapper .cards.medium > ul > li {
+    padding: 27px 18px
+  }
+
+  .home.cards-container .cards.medium .cards-image > h3 {
+    margin: 0 16px
+  }
+  
+  .home.cards-container .cards.medium .cards-image > p:not(:first-child, :last-child) {
+    margin: 0 16px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {  
+  main .home.cards-container {
+    padding: 32px 0 80px 0
+  }
+
+  .home.cards-container .default-content-wrapper > h1 {
+    margin: 0 0 80px 0
+  }
+
+  .home.cards-container .cards.medium > ul {
+    flex-flow: row wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 15px 23px;
+  }
+
+  .home.cards-container .cards-wrapper .cards.medium > ul > li {
+    flex: 1 0 0;
+    border-radius: 12px;
+    min-width: 180px;
+    max-width: 225px;
+    box-shadow: 0 6px 20px 0 rgba(0,0,0,0.1);
+    padding: 24px
+  }
+
+  .home.cards-container .cards.medium .cards-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+
+  .home.cards-container .cards.medium .cards-image > p:first-child {
+    height: 82px;
+    width: 80px;
+  }
+
+  .home.cards-container .cards.medium .cards-image > p:first-child svg {
+    margin: 25px 24px;
+  }
+
+  .home.cards-container .cards.medium .cards-image > h3 {
+    margin: 24px 0 0 0;
+    letter-spacing: 0;
+    font-size: 22px;
+    line-height: 28px;
+  }
+  
+  .home.cards-container .cards.medium .cards-image > p:not(:first-child, :last-child) {
+    letter-spacing: 0;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 8px 0 24px 0;
+    flex-grow: 1;
+  }
+}
