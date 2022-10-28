@@ -31,6 +31,6 @@ export default async function decorate(block) {
   multiImageCarousel.classList.add('multiImageCarousel');
   block.appendChild(multiImageCarousel);
   decorateBlock(multiImageCarousel);
-  loadBlock(multiImageCarousel);
+  await loadBlock(multiImageCarousel);
   return multiImageCarousel;
 }
