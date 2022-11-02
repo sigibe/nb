@@ -273,25 +273,21 @@ export function decorateSections($main) {
     section.setAttribute('data-section-status', 'initialized');
 
     /* process section metadata */
-    processSectionMetadata(section);
+    const sectionMeta = section.querySelector('div.section-metadata');
+
+    if (sectionMeta) {
+      const meta = readBlockConfig(sectionMeta);
+      const keys = Object.keys(meta);
+      keys.forEach((key) => {
+        if (key === 'style') {
+          const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
+          styles.forEach((style) => section.classList.add(style));
+        }
+        else section.dataset[key] = meta[key];
+      });
+      sectionMeta.remove();
+    }
   });
-}
-
-function processSectionMetadata(section) {
-  const sectionMeta = section.querySelector('div.section-metadata');
-
-  if (sectionMeta) {
-    const meta = readBlockConfig(sectionMeta);
-    const keys = Object.keys(meta);
-    keys.forEach((key) => {
-      if (key === 'style') {
-        const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
-        styles.forEach((style) => section.classList.add(style));
-      }
-      else section.dataset[key] = meta[key];
-    });
-    sectionMeta.remove();
-  }
 }
 
 /**
@@ -703,9 +699,11 @@ function buildBannerBlock(main) {
           content.push([item]);
         });
         const block = buildBlock('banner', content);
+        block.style.display = 'none';
         section.append(block);
         decorateBlock(block);
         await loadBlock(block);
+        block.style.display = 'flex';
       });
     }
   });
