@@ -281,7 +281,6 @@ function processSectionMetadata(section) {
   const sectionMeta = section.querySelector('div.section-metadata');
 
   if (sectionMeta) {
-    console.log(sectionMeta.textContent);
     const meta = readBlockConfig(sectionMeta);
     const keys = Object.keys(meta);
     keys.forEach((key) => {
@@ -679,25 +678,37 @@ function loadFooter(footer) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    if (getMetadata('show-banner')) {
+      buildBannerBlock(main);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
   }
 }
 
-function addBanner(main) {
-  const banner = document.createElement('div');
-  banner.classList.add('banner-placeholder');
-  main.prepend(banner);
-}
-
-async function loadBanner(main) {
-  const resp = await fetch(`${window.hlx.codeBasePath}/banner.plain.html`);
-  if (resp.status === 200) {
-    const section = main.querySelector('.banner-placeholder.section')
-    section.innerHTML = await resp.text();
-    processSectionMetadata(section);
-  }
+function buildBannerBlock(main) {
+  const placeholder = document.createElement('div');
+  placeholder.classList.add('banner-placeholder');
+  main.prepend(placeholder);
+  fetch(`${window.hlx.codeBasePath}/banner.plain.html`).then((resp) => {
+    if (resp.status === 200) {
+      const section = main.querySelector('.banner-placeholder.section')
+      resp.text().then(async (txt) => {
+        let bannerDiv = document.createElement('div');
+        bannerDiv.innerHTML = txt;
+        bannerDiv = bannerDiv.querySelector('div');
+        const content = [];
+        [...bannerDiv.children].forEach((item) => {
+          content.push([item]);
+        });
+        const block = buildBlock('banner', content);
+        section.append(block);
+        decorateBlock(block);
+        await loadBlock(block);
+      });
+    }
+  });
 }
 
 /**
@@ -714,7 +725,6 @@ export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
-  addBanner(main);
   decorateSections(main);
   decorateBlocks(main);
 }
@@ -736,7 +746,6 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
-  await loadBanner(main);
   await loadBlocks(main);
   const { hash } = window.location;
   const element = hash ? main.querySelector(hash) : false;

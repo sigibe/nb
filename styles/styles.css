@@ -374,16 +374,7 @@ main .legal-content p {
 main .banner-placeholder {
   height: var(--banner-height);
   display: block;
-}
-
-main .banner {
-  display: flex;
-  align-items: center;
   padding: 16px 2rem;
   background-color: #f7f7f7;
   box-sizing: border-box;
-}
-
-main .banner p {
-  margin: unset;
 }
