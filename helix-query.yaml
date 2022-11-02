@@ -27,8 +27,8 @@ indices:
         select: head > meta[name="description"]
         value: |
           attribute(el, 'content')
-      read:
-        select: head > meta[name="read"]
+      readTime:
+        select: head > meta[name="readtime"]
         value: |
           attribute(el, 'content')
       lastModified:
