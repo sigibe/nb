@@ -42,6 +42,8 @@
   /* nav height */
   --nav-height: 64px;
 
+  --banner-height: 64px;
+
 }
 
 @font-face {
@@ -367,4 +369,21 @@ main .legal-content p {
   font-size: 16px;
   letter-spacing: 0;
   line-height: 24px;
+}
+
+main .banner-placeholder {
+  height: var(--banner-height);
+  display: block;
+}
+
+main .banner {
+  display: flex;
+  align-items: center;
+  padding: 16px 2rem;
+  background-color: #f7f7f7;
+  box-sizing: border-box;
+}
+
+main .banner p {
+  margin: unset;
 }

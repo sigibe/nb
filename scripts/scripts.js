@@ -273,20 +273,26 @@ export function decorateSections($main) {
     section.setAttribute('data-section-status', 'initialized');
 
     /* process section metadata */
-    const sectionMeta = section.querySelector('div.section-metadata');
-    if (sectionMeta) {
-      const meta = readBlockConfig(sectionMeta);
-      const keys = Object.keys(meta);
-      keys.forEach((key) => {
-        if (key === 'style') {
-          const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
-          styles.forEach((style) => section.classList.add(style));
-        }
-        else section.dataset[key] = meta[key];
-      });
-      sectionMeta.remove();
-    }
+    processSectionMetadata(section);
   });
+}
+
+function processSectionMetadata(section) {
+  const sectionMeta = section.querySelector('div.section-metadata');
+
+  if (sectionMeta) {
+    console.log(sectionMeta.textContent);
+    const meta = readBlockConfig(sectionMeta);
+    const keys = Object.keys(meta);
+    keys.forEach((key) => {
+      if (key === 'style') {
+        const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
+        styles.forEach((style) => section.classList.add(style));
+      }
+      else section.dataset[key] = meta[key];
+    });
+    sectionMeta.remove();
+  }
 }
 
 /**
@@ -679,6 +685,21 @@ function buildAutoBlocks(main) {
   }
 }
 
+function addBanner(main) {
+  const banner = document.createElement('div');
+  banner.classList.add('banner-placeholder');
+  main.prepend(banner);
+}
+
+async function loadBanner(main) {
+  const resp = await fetch(`${window.hlx.codeBasePath}/banner.plain.html`);
+  if (resp.status === 200) {
+    const section = main.querySelector('.banner-placeholder.section')
+    section.innerHTML = await resp.text();
+    processSectionMetadata(section);
+  }
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -693,6 +714,7 @@ export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
+  addBanner(main);
   decorateSections(main);
   decorateBlocks(main);
 }
@@ -714,8 +736,8 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
+  await loadBanner(main);
   await loadBlocks(main);
-
   const { hash } = window.location;
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
