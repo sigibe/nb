@@ -38,14 +38,14 @@ async function fetchData() {
                     const description = document.createElement('h3');
                     const author = document.createElement('h5');
                     const publishDate = document.createElement('p');
-                    // const readTime = document.createElement('h6');
+                    const readTime = document.createElement('h6');
                     const readLink = document.createElement('h4');
 
                     title.textContent = itr.title;
                     description.textContent = itr.description;
                     author.textContent = "By " + itr.author;
                     publishDate.textContent = 'Published ' + formatDate(itr.date) + ' in Loans';
-                    // readTime.textContent = itr.read;
+                    readTime.textContent = itr.readTime;
                     readLink.textContent = "Read > "
                     carouselCard.push(pic);
         
@@ -57,7 +57,7 @@ async function fetchData() {
                     carouselText.appendChild(description);
                     
                     read.appendChild(readLink);
-                    // read.appendChild(readTime);
+                    read.appendChild(readTime);
                     carouselText.appendChild(read);
 
                     carouselCard.push(carouselText);
