@@ -35,9 +35,12 @@ async function fetchData() {
                     </picture>
                     `;
                     const title = document.createElement('h2');
-                    const description = document.createElement('h3');
+                    const desc = document.createElement('p');
+                    const description = document.createElement('strong');
                     const author = document.createElement('h5');
-                    const publishDate = document.createElement('p');
+                    const pdate = document.createElement("p");
+                    const publishDate = document.createElement('em');
+                    
                     const readTime = document.createElement('h6');
                     const readLink = document.createElement('h4');
 
@@ -52,9 +55,11 @@ async function fetchData() {
                     var read = document.createElement("div");
                     var carouselText = document.createElement("div");
                     carouselText.appendChild(author);
-                    carouselText.appendChild(publishDate);
+                    pdate.appendChild(publishDate);
+                    carouselText.appendChild(pdate);
                     carouselText.appendChild(title);
-                    carouselText.appendChild(description);
+                    desc.appendChild(description);
+                    carouselText.appendChild(desc);
                     
                     read.appendChild(readLink);
                     read.appendChild(readTime);
