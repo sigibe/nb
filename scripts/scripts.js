@@ -674,7 +674,7 @@ function loadFooter(footer) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
-    if (getMetadata('show-banner')) {
+    if (['yes','on'].includes(getMetadata('show-banner'))) {
       buildBannerBlock(main);
     }
   } catch (error) {
