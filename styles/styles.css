@@ -301,7 +301,6 @@ main .section.steps-container li {
 
 main .section.disclaimer {
   width: 100%;
-  color: #8a9596;
   font-family: "Open Sans Regular";
   font-size: 12px;
   letter-spacing: 0;
@@ -310,8 +309,11 @@ main .section.disclaimer {
 }
 
 main .section.readytoapply {
+  background-color: #17252e;
+}
+
+main .section.readytoapply h2 {
   color: var(--background-color);
-  background-color: var(--text-color);
 }
 
 main .section.readytoapply>.default-content-wrapper {
@@ -378,3 +380,18 @@ main .banner-placeholder {
   background-color: #f7f7f7;
   box-sizing: border-box;
 }
+@media only screen and (max-width:600px) {
+  main .section {
+    padding: unset;
+  }
+
+  main .section.disclaimer {
+    padding: unset;
+  }
+}
+
+/*
+* {
+  border: 1px solid black;
+}
+*/
