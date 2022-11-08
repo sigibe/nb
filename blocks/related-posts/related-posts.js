@@ -47,7 +47,6 @@ export default async function decorate(block) {
     readLink.textContent = "Read > "
     a.href = itr.path;
     a.appendChild(readLink);
-    console.log(a);
     carouselCard.push(pic);
 
     var read = document.createElement("div");
