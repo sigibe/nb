@@ -37,13 +37,17 @@ export default async function decorate(block) {
 
     const readTime = document.createElement('h6');
     const readLink = document.createElement('h4');
-
+    const a = document.createElement('a');
+    
     title.textContent = itr.title;
     description.textContent = itr.description;
     author.textContent = "By " + itr.author;
     publishDate.textContent = 'Published ' + formatDate(itr.date) + ' in Loans';
     readTime.textContent = itr.readTime;
     readLink.textContent = "Read > "
+    a.href = itr.path;
+    a.appendChild(readLink);
+    console.log(a);
     carouselCard.push(pic);
 
     var read = document.createElement("div");
@@ -55,7 +59,7 @@ export default async function decorate(block) {
     desc.appendChild(description);
     carouselText.appendChild(desc);
 
-    read.appendChild(readLink);
+    read.appendChild(a);
     read.appendChild(readTime);
     carouselText.appendChild(read);
 
