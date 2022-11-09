@@ -84,12 +84,12 @@
   text-align: left;
 }
 
-main .home-overlay.cards-container {
+main .home-services.cards-container {
   background-color: var(--overlay-background-color);
   padding: 40px 0 32px 0;
 }
 
-.home-overlay.cards-container h1 {
+.home-services.cards-container h1 {
   color: #17252e;
   font-family: "Nedbank Sans Bold";
   font-size: 24px;
@@ -178,11 +178,11 @@ main .home-overlay.cards-container {
 }
 
 @media only screen and (min-width: 768px) {
-  main .home-overlay.cards-container {
+  main .home-services.cards-container {
     padding: 48px 0
   }
 
-  .home-overlay.cards-container h1 {
+  .home-services.cards-container h1 {
     font-size: 32px;
     line-height: 40px;
     margin: 0 0 48px 0
@@ -207,11 +207,11 @@ main .home-overlay.cards-container {
 }
 
 @media only screen and (min-width: 1025px) {  
-  main .home-overlay.cards-container {
+  main .home-services.cards-container {
     padding: 32px 0 80px 0
   }
 
-  .home-overlay.cards-container h1 {
+  .home-services.cards-container h1 {
     margin: 0 0 80px 0
   }
 
