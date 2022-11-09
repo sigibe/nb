@@ -7,19 +7,19 @@ main .banner p {
     margin: unset;
 }
 
-main .home.banner-container {
+main .home-banner {
     background: #f2f9f5;
     margin: 0 calc((100% - 100vw) / 2);
     padding: 24px 10px 0 10px
 }
 
-.home.banner-container .banner-wrapper {
+.home-banner .banner-wrapper {
     background-color: #fff;
     padding: 24px 24px 8px 24px;
     letter-spacing: 0
 }
 
-.home.banner-container .banner-wrapper .banner h1 {
+.home-banner .banner-wrapper .banner h1 {
     color: #17252e;
     font-family: "Nedbank Sans Bold";
     font-size: 24px;
@@ -27,7 +27,7 @@ main .home.banner-container {
     margin: 0 0 16px 0
 }
 
-.home.banner-container .banner-wrapper .banner p {
+.home-banner .banner-wrapper .banner p {
     color: #494f50;
     font-family: "Open Sans Regular";
     font-size: 16px;
@@ -35,32 +35,32 @@ main .home.banner-container {
 }
 
 @media only screen and (min-width: 768px) {
-    main .home.banner-container {
+    main .home-banner {
         padding: 0;
         display: block
     }
 
-    .home.banner-container .banner-wrapper {
+    .home-banner .banner-wrapper {
         margin: 0 22px;
         top: -48px;
         position: relative;
         padding: 64px 22px 40px 22px;
     }
 
-    .home.banner-container .banner-wrapper .banner h1 {
+    .home-banner .banner-wrapper .banner h1 {
         font-size: 40px;
         line-height: 48px;
         margin: 0 0 24px 0
     }
 
-    .home.banner-container .banner-wrapper .banner p {
+    .home-banner .banner-wrapper .banner p {
         font-size: 24px;
         line-height: 32px
     }
 }
 
 @media only screen and (min-width: 1025px) {
-    .home.banner-container .banner-wrapper {
+    .home-banner .banner-wrapper {
         margin: 0 105px;
         padding: 64px 105px 40px 105px
     }
