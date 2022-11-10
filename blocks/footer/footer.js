@@ -41,6 +41,7 @@ function decorateFooterLinks(footer) {
 }
 
 function handleclick(event) {
+    event.preventDefault();
     if(document.getElementById(this).classList.contains('selected')) {
       (document.getElementById(this)).classList.remove('selected');
       (document.getElementById(this)).classList.add('deselect');
