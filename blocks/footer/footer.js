@@ -16,17 +16,39 @@ function decorateFooterLinks(footer) {
   }
   const footerLinkGroupsDiv = document.createElement('div');
   footerLinkGroupsDiv.classList.add('footer-link-groups');
+  let i = 0;
   footerLinkGroups.forEach((group) => {
+    i++;
     const footerLinkGroupDiv = document.createElement('div');
     footerLinkGroupDiv.classList.add('footer-link-group');
     group.forEach((item) => {
       footerLinkGroupDiv.appendChild(item);
+      if (!item.tagName.match(pattern)) {
+        item.setAttribute('id', 'list'+i);
+        item.setAttribute('class', 'deselect');
+      }
+      if (item.tagName.match(pattern )) {
+        let children = item.children[0];
+        children.classList.add('inactive');
+        children.addEventListener('click', handleclick.bind('list'+i));
+    }
     });
     footerLinkGroupsDiv.appendChild(footerLinkGroupDiv);
   });
   const parent = footer.querySelector(':scope > .footer-links > div');
   parent.innerHTML = '';
   parent.appendChild(footerLinkGroupsDiv);
+}
+
+function handleclick(event) {
+    if(document.getElementById(this).classList.contains('selected')) {
+      (document.getElementById(this)).classList.remove('selected');
+      (document.getElementById(this)).classList.add('deselect');
+    }
+    else {
+      (document.getElementById(this)).classList.remove('deselect');
+      (document.getElementById(this)).classList.add('selected');
+    }
 }
 
 function decorateFooterSocial(footer) {
