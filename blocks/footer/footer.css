@@ -3,13 +3,12 @@ footer {
 }
 
 footer .section {
-  padding: 64px 30px;
+  padding: 30px;
 }
 
 footer .footer-links {
   background-color: #f8fbfa;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
 }
 
 footer .footer-social-items {
