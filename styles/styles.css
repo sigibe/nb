@@ -321,6 +321,16 @@ main .section.calc-example {
 main .section.calc-example .columns.block > div {
   border-bottom: 1px solid #979797;
 }
+main .section.home-banner {
+  position: relative;
+  top: -48px;
+  background-color: white;
+  width: 80%;
+  margin: auto;
+  padding: 20px 60px;
+  letter-spacing: 0;
+  box-sizing: border-box;
+}
 main .legal-content .columns > div > div:nth-child(1) {
   margin: unset;
   opacity: 0.87;
