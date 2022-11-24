@@ -439,14 +439,10 @@ main .banner-placeholder {
   background-color: #fafafa;
   box-sizing: border-box;
 }
-<<<<<<< HEAD
 main .banner {
   margin-top: auto;
   margin-bottom: auto;
 }
-=======
-
->>>>>>> d462a83 (Issue-11: Correcting homepage)
 hr {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
