@@ -15,7 +15,6 @@
   --highlight-background-color: #008533;
   --text-color: #17252e;
   --heading-text-color: #17252e;
-  --paragraph-text-color: #494f50;
   --body-font-family: 'Open Sans Regular', 'Open Sans-fallback';
   --heading-font-family: 'Nedbank Sans Bold', 'Open Sans-fallback';
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
@@ -30,6 +29,7 @@
   --nav-height: 64px;
   --banner-height: 64px;
   --section-left-right-padding: 105px;
+  --paragraph-text-color: #494f50;
 }
 
 body {
@@ -439,10 +439,12 @@ main .banner-placeholder {
   background-color: #fafafa;
   box-sizing: border-box;
 }
+
 main .banner {
   margin-top: auto;
   margin-bottom: auto;
 }
+
 hr {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
