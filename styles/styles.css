@@ -32,6 +32,21 @@
   --paragraph-text-color: #494f50;
 }
 
+:root .light {
+  --background-color: #ffffff;
+  --background-color-banner: #fafafa;
+  --highlight-background-color: #008533;
+  --text-color: #17252e;
+  --heading-text-color: #17252e;
+}
+:root .dark {
+  --background-color: #000000;
+  --background-color-banner: #494f50;
+  --highlight-background-color: #008533;
+  --text-color: #ffffff;
+  --heading-text-color: #ffffff;
+}
+
 body {
   font-size: var(--body-font-size-m);
   margin: 0;
@@ -283,6 +298,7 @@ main .section[data-section-status='initialized'] {
 main .section {
   padding-left: var(--section-left-right-padding);
   padding-right: var(--section-left-right-padding);
+  background-color: var(--background-color);
 }
 
 main .section.shaded-background {
