@@ -544,7 +544,7 @@ main .home-help.cards-container {
 
   .home-help .cards.large > ul > li {
     flex-basis: 48%;
-    max-width: max-content;
+    max-width: 47%;
   }
 
   .home-help .cards.large li:last-child > .cards-body > h3 {
