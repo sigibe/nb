@@ -465,6 +465,23 @@ hr {
   border-bottom: 1px solid var(--overlay-background-color);
 }
 
+main .section.back-to-top {
+  margin-top: 32px;
+  padding: 40px 35px 40px 15px;
+}
+
+main .section.back-to-top p {
+  margin: 0;
+  text-align: end;
+}
+
+main .section.back-to-top a.button {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
 @media (min-width: 900px) {
   :root {
     --heading-font-size-xxl: 48px;
@@ -507,5 +524,11 @@ hr {
 
   main .banner-placeholder {
     padding: 16px 2rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  main .section.back-to-top {
+    padding: 40px 121px 40px 15px;
   }
 }
