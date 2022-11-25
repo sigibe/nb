@@ -83,7 +83,6 @@ main .section.cards-container li {
   height: 32px;
   width: 32px;
 }
-
 .cards .cards-body {
   display: flex;
   flex-direction: row;

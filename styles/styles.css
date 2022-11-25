@@ -147,10 +147,6 @@ samp {
   padding: 0.125em;
 }
 
-label {
-  padding: 20px;
-}
-
 input[type=radio] {
   border: 0px;
   transform: scale(1.5);
@@ -317,7 +313,7 @@ main .section.breadcrumb {
 main .section.cards-container {
   margin: auto;
   text-align: center;
-  padding-bottom: 100px;
+  padding-bottom: 100px	;
 }
 
 main .section.cards-container li {
