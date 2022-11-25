@@ -44,6 +44,7 @@ main .section.cards-container {
   flex-direction: column;
   justify-content: space-evenly;
   align-content: stretch;
+  box-sizing: border-box;
 }
 
 main .section.cards-container li {
@@ -65,7 +66,8 @@ main .section.cards-container li {
   cursor: pointer;
 }
 
-.cards .cards-image {
+.cards .cards-image,
+.personal-nedbank .cards.large .cards-image {
   height: 62px;
   width: 60px;
   align-self: center;
@@ -76,7 +78,8 @@ main .section.cards-container li {
   background-repeat: no-repeat;
 }
 
-.cards .cards-image svg {
+.cards .cards-image svg,
+.personal-nedbank .cards.large .cards-image svg{
   margin-top: 15px;
   margin-bottom: 15px;
   transform: rotate(90deg);
@@ -98,6 +101,7 @@ main .section.cards-container li {
   line-height: 24px;
 }
 
+.cards .cards-body,
 .cards .cards-body > p {
   font-size: 14px;
   line-height: 20px;
@@ -173,6 +177,8 @@ main .section.cards-container .cards.large li {
   text-align: start;
   justify-content: flex-start;
   align-items: flex-start;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 .cards.large .cards-body > :where(h2, h3) {
@@ -278,8 +284,6 @@ main .home-promotions.cards-container {
 }
 
 .home-promotions .cards.large > ul {
-  flex-direction: row;
-  flex-wrap: wrap;
   row-gap: 40px;
   justify-content: space-between;
 }
@@ -369,15 +373,115 @@ main .home-help.cards-container {
   font-weight: bold;
 }
 
+/* personal nedbank */ 
+main .personal-nedbank.cards-container {
+  padding-top: 60px;
+}
+
+.personal-nedbank h2 {
+  font-size: 32px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  font-weight: normal;
+}
+
+.personal-nedbank h2 > strong {
+  font-weight: bold;
+}
+
+.personal-nedbank > .cards-wrapper {
+  padding-top: 4px;
+}
+
+.personal-nedbank .cards.large {
+  margin-top: 15.5px;
+}
+
+.personal-nedbank .cards.large > ul {
+  row-gap: 15.5px;
+  column-gap: 30px;
+}
+
+main .personal-nedbank.cards-container .cards.large > ul > li {
+  padding: 30.5px 36.5px;
+}
+
+.personal-nedbank .cards.large .cards-image {
+  margin-bottom: 16px;
+  height: 82px;
+  width: 80px;
+}
+
+.personal-nedbank .cards.large .cards-image svg {
+  height: 40px;
+  width: 40px;
+}
+
+.personal-nedbank .cards.large .cards-body {
+  color: #666;
+  font-family: "Open Sans Regular";
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* personal goals */
+main .personal-goals.section.cards-container {
+  padding-top: 65px;
+  padding-bottom: 40px;
+}
+
+.personal-goals h2 {
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 56px;
+  text-align: left;
+}
+
+.personal-goals .cards.large > ul {
+  row-gap: 40px;
+  justify-content: space-between;
+}
+
+.personal-goals .cards.large .cards-body > h3 + p {
+  flex-grow: 1;
+}
+
+/* personal advantages */
+main .personal-advantages.cards-container {
+  padding-top: 36px
+}
+
+.personal-advantages h2 {
+  font-size: 24px;
+  line-height: 34px;
+  margin-bottom: 8px;
+}
+
+.personal-advantages h2 {
+  margin-top: 15.5px;
+  margin-bottom: 28px;
+}
+
+.personal-advantages .cards.large > ul > li {
+  flex-basis: 100%;
+}
+
 @media (min-width: 576px) {
   .cards.large > ul {
     gap: 64px 15px;
   }
 
   .cards.large > ul > li {
-    flex-basis: 48%;
+    flex-basis: 47%;
   }
 
+  .cards.large .cards-body {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .cards.large .cards-body > p:first-child,
   .cards.large .cards-body > :where(h2, h3) + p {
     font-size: 18px;
     line-height: 28px;
@@ -420,6 +524,36 @@ main .home-help.cards-container {
     margin: 0 114px 40px 114px;
     padding: 0;
   }
+
+  main .personal-goals.section.cards-container {
+    padding-top: 80px;
+    padding-bottom: 160px;
+  }
+
+  .personal-goals h2 {
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 128px;
+  }
+
+  .personal-advantages h2 {
+    font-size: 34px;
+    line-height: 41px;
+  }
+
+  .personal-advantages h2 {
+    margin-top: 23.5px;
+    margin-bottom: 44px;
+  }
+
+  .personal-advantages .cards.large > ul {
+    justify-content: space-between;
+  }
+
+  .personal-advantages .cards.large > ul > li {
+    flex-basis: 47%;
+    flex-grow: initial;
+  }
 }
 
 @media (min-width: 768px) {
@@ -437,6 +571,12 @@ main .home-help.cards-container {
     margin-right: 16px;
   }
 
+  .cards .cards-body,
+  .cards .cards-body > p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
   main .home-services.cards-container {
     padding-top: 48px;
     padding-bottom: 48px;
@@ -451,6 +591,76 @@ main .home-help.cards-container {
   .home-services .cards .cards-body > h3 + p {
     margin-left: 16px;
     margin-right: 16px;
+    font-size: 14px;
+  }
+    
+  main .personal-nedbank.cards-container {
+    padding-top: 80px;
+  }
+
+  .personal-nedbank > .cards-wrapper {
+    padding-top: 49px;
+  }
+
+  .personal-nedbank .cards.large {
+    margin-top: 23.5px;
+  }
+
+  .personal-nedbank .cards.large > ul {
+    row-gap: 23.5px;
+  }
+
+  main .personal-nedbank.cards-container .cards.large > ul > li {
+    padding: 64px 26px 72px 24px;
+  }
+
+  .personal-nedbank .cards.large > ul > li {
+    flex-basis: 47%;
+  }
+
+  .personal-nedbank .cards.large .cards-image {
+    margin-bottom: 54px;
+  }
+
+  .personal-nedbank .cards.large .cards-body {
+    text-align: center;
+  }
+
+  .personal-advantages h2 {
+    margin-top: 23.5px;
+  }
+}
+
+@media (min-width: 992px) {
+  main .section.cards-container.personal-nedbank {
+    padding-left: 106px;
+    padding-right: 106px;
+    max-width: none;
+  }
+
+  .personal-nedbank > .cards-wrapper {
+    padding-top: 80px;
+  }
+
+  .personal-nedbank .cards.large {
+    margin-top: 24px;
+  }
+
+  .personal-nedbank .cards.large > ul {
+    row-gap: 24px;
+  }
+
+  main .personal-nedbank.cards-container .cards.large > ul > li {
+    padding: 40px 36px;
+  }
+
+  .personal-nedbank .cards.large .cards-image {
+    margin-bottom: 24px;
+  }
+
+  .personal-advantages h2 {
+    margin-top: 24px;
+    margin-bottom: 60px;
   }
 }
 
@@ -472,7 +682,8 @@ main .home-help.cards-container {
     border-radius: 12px;
   }
 
-  .cards .cards-image {
+  .cards .cards-image,
+  .personal-nedbank .cards.large .cards-image {
     height: 82px;
     width: 80px;
   }
@@ -497,8 +708,7 @@ main .home-help.cards-container {
   }
 
   .cards.large > ul > li {
-    flex-basis: 33%;
-    max-width: 30%
+    flex-basis: 30%;
   }
 
   .cards.large .cards-body > h2 + p {
@@ -525,7 +735,8 @@ main .home-help.cards-container {
     margin: 8px 0 24px 0;
   }
 
-  .home-promotions .cards.large > ul {
+  .home-promotions .cards.large > ul,
+  .personal-goals .cards.large > ul {
     justify-content: space-evenly;
   }
 
@@ -543,23 +754,54 @@ main .home-help.cards-container {
   }
 
   .home-help .cards.large > ul > li {
-    flex-basis: 48%;
-    max-width: 47%;
+    flex-basis: 47%;
   }
 
   .home-help .cards.large li:last-child > .cards-body > h3 {
     margin-top: 49px;
   }
-}
 
-@media (min-width: 1281px) {  
-  main .home-help.cards-container {
-    height: 524px;
+  /* personal nedbank*/
+  .personal-nedbank .cards.large > ul > li {
+    flex-basis: 22%;
   }
 
+  /* personal advantages */
+  main .personal-advantages.cards-container {
+    padding-top: 60px
+  }
+
+  .personal-advantages h2 {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .personal-advantages .cards.large > ul > li {
+    flex-direction: row;
+    column-gap: 20px;
+  }
+
+  .personal-advantages .cards.large .cards-image {
+    margin-top: 30px;
+  }
+
+  .personal-advantages .cards.large .cards-image svg {
+    height: 32px;
+    width: 32px;
+  } 
+}
+
+@media (min-width: 1281px) { 
+  .cards.large > ul > li,
   .home-help .cards.large > ul > li {
-    flex-basis: 33%;
-    max-width: 30%
+    flex-basis: 0;
+  }
+
+  main .home-help.cards-container {
+    height: 524px;
   }
 
   .home-help > div > h3 {
