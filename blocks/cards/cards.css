@@ -5,7 +5,6 @@ main .section.cards-container,
   padding: unset;
 }
 
-
 /* card container */
 main .section.cards-container {
   display: flex;
@@ -17,6 +16,7 @@ main .section.cards-container {
 
 .cards-container > * {
   flex-basis: 100%;
+  max-width: 100%;
 }
 
 .cards-container :where(p, a.button) > :where(.icon-arrow, .icon-diagonal-arrow) {
@@ -55,11 +55,12 @@ main .section.cards-container li {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  width: 100%;
   border-radius: 6px;
   border: 1px solid #e5edec;
   box-shadow: 0 26px 18px -26px rgba(0,0,0,0.07);
   background-color: #fff;
+  flex-basis: 100%;
+  max-width: 100%;
 }
 
 .cards.pointer > ul > li {
@@ -141,6 +142,7 @@ main .section.cards-container li {
   flex-direction: row;
   flex-wrap: wrap;
   row-gap: 40px;
+  justify-content: flex-start;
 }
 
 main .section.cards-container .cards.large li {
@@ -423,6 +425,7 @@ main .personal-nedbank.cards-container .cards.large > ul > li {
   font-size: 16px;
   line-height: 24px;
   text-align: center;
+  align-self: center;
 }
 
 /* personal goals */
@@ -438,11 +441,6 @@ main .personal-goals.section.cards-container {
   text-align: left;
 }
 
-.personal-goals .cards.large > ul {
-  row-gap: 40px;
-  justify-content: space-between;
-}
-
 .personal-goals .cards.large .cards-body > h3 + p {
   flex-grow: 1;
 }
@@ -455,16 +453,13 @@ main .personal-advantages.cards-container {
 .personal-advantages h2 {
   font-size: 24px;
   line-height: 34px;
-  margin-bottom: 8px;
-}
-
-.personal-advantages h2 {
   margin-top: 15.5px;
   margin-bottom: 28px;
 }
 
-.personal-advantages .cards.large > ul > li {
-  flex-basis: 100%;
+.personal-advantages .cards.large > ul {
+  row-gap: 15.5px;
+  column-gap: 30px;
 }
 
 @media (min-width: 576px) {
@@ -473,7 +468,8 @@ main .personal-advantages.cards-container {
   }
 
   .cards.large > ul > li {
-    flex-basis: 47%;
+    flex-basis: calc(calc(100% - 15px)/2);
+    max-width: calc(calc(100% - 15px)/2);
   }
 
   .cards.large .cards-body {
@@ -525,6 +521,12 @@ main .personal-advantages.cards-container {
     padding: 0;
   }
 
+  /* personal nedbank */
+  .personal-nedbank .cards.large > ul > li {
+    flex-basis: calc(calc(100% - 30px)/2);
+    max-width: calc(calc(100% - 30px)/2);
+  }
+
   main .personal-goals.section.cards-container {
     padding-top: 80px;
     padding-bottom: 160px;
@@ -536,23 +538,16 @@ main .personal-advantages.cards-container {
     margin-bottom: 128px;
   }
 
+  /* personal advantages */
   .personal-advantages h2 {
     font-size: 34px;
     line-height: 41px;
-  }
-
-  .personal-advantages h2 {
-    margin-top: 23.5px;
     margin-bottom: 44px;
   }
 
-  .personal-advantages .cards.large > ul {
-    justify-content: space-between;
-  }
-
   .personal-advantages .cards.large > ul > li {
-    flex-basis: 47%;
-    flex-grow: initial;
+    flex-basis: calc(calc(100% - 30px)/2);
+    max-width: calc(calc(100% - 30px)/2);
   }
 }
 
@@ -593,7 +588,8 @@ main .personal-advantages.cards-container {
     margin-right: 16px;
     font-size: 14px;
   }
-    
+  
+  /* personal nedbank */
   main .personal-nedbank.cards-container {
     padding-top: 80px;
   }
@@ -603,31 +599,24 @@ main .personal-advantages.cards-container {
   }
 
   .personal-nedbank .cards.large {
-    margin-top: 23.5px;
+    margin-top: 24px;
   }
 
   .personal-nedbank .cards.large > ul {
-    row-gap: 23.5px;
+    row-gap: 24px;
   }
 
   main .personal-nedbank.cards-container .cards.large > ul > li {
     padding: 64px 26px 72px 24px;
   }
 
-  .personal-nedbank .cards.large > ul > li {
-    flex-basis: 47%;
-  }
-
   .personal-nedbank .cards.large .cards-image {
     margin-bottom: 54px;
   }
 
-  .personal-nedbank .cards.large .cards-body {
-    text-align: center;
-  }
-
+  /* personal advantages */
   .personal-advantages h2 {
-    margin-top: 23.5px;
+    margin-top: 24px;
   }
 }
 
@@ -642,25 +631,12 @@ main .personal-advantages.cards-container {
     padding-top: 80px;
   }
 
-  .personal-nedbank .cards.large {
-    margin-top: 24px;
-  }
-
-  .personal-nedbank .cards.large > ul {
-    row-gap: 24px;
-  }
-
   main .personal-nedbank.cards-container .cards.large > ul > li {
     padding: 40px 36px;
   }
 
   .personal-nedbank .cards.large .cards-image {
     margin-bottom: 24px;
-  }
-
-  .personal-advantages h2 {
-    margin-top: 24px;
-    margin-bottom: 60px;
   }
 }
 
@@ -708,7 +684,8 @@ main .personal-advantages.cards-container {
   }
 
   .cards.large > ul > li {
-    flex-basis: 30%;
+    flex-basis: calc(calc(100% - 2*35px)/3);
+    max-width: calc(calc(100% - 2*35px)/3);
   }
 
   .cards.large .cards-body > h2 + p {
@@ -754,7 +731,8 @@ main .personal-advantages.cards-container {
   }
 
   .home-help .cards.large > ul > li {
-    flex-basis: 47%;
+    flex-basis: calc(calc(100% - 35px)/2);
+    max-width: calc(calc(100% - 35px)/2);
   }
 
   .home-help .cards.large li:last-child > .cards-body > h3 {
@@ -763,7 +741,8 @@ main .personal-advantages.cards-container {
 
   /* personal nedbank*/
   .personal-nedbank .cards.large > ul > li {
-    flex-basis: 22%;
+    flex-basis: calc(calc(100% - 3*30px)/4);
+    max-width: calc(calc(100% - 3*30px)/4);
   }
 
   /* personal advantages */
@@ -772,11 +751,14 @@ main .personal-advantages.cards-container {
   }
 
   .personal-advantages h2 {
+    box-sizing: border-box;
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
     font-size: 40px;
     line-height: 48px;
+    margin-bottom: 60px;
+    padding: 0 15px;
   }
 
   .personal-advantages .cards.large > ul > li {
@@ -823,7 +805,7 @@ main .personal-advantages.cards-container {
 }
 
 @media (min-width: 1441px) {
-  main .section.cards-container {
+  main .home-services.section.cards-container {
     max-width: 1228px;
     padding-left: calc(calc(100% - 1228px)/2);
     padding-right: calc(calc(100% - 1228px)/2);
