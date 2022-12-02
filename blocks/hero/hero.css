@@ -36,13 +36,6 @@ main .hero-container {
     display: none;
 }
 
-main .hero picture {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
 main .hero img {
     background-position: 50% 50%;
     width: 100%;
@@ -60,7 +53,7 @@ main .hero img {
     }
 
     .hero > div > picture {
-        padding: 0 15px;
+        padding-left: 15px;
     }
 
     .hero > div > div > h1 {
