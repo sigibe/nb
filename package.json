@@ -12,8 +12,8 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lessc": "less-watch-compiler --run-once styles styles & less-watch-compiler --run-once blocks blocks",
     "postlessc": "npm run cleancss:less",
-    "cleancss": "cleancss -b --batch-suffix '' blocks/*/*.css",
-    "cleancss:less": "cleancss -f keep-breaks -d -b --batch-suffix '' blocks/cards/cards.css blocks/columns/columns.css styles/styles.css",
+    "cleancss": "cleancss -f keep-breaks -d -b --batch-suffix '' blocks/*/*.css styles/*.css",
+    "cleancss:less": "cleancss -f beautify -d -b --batch-suffix '' blocks/cards/cards.css blocks/columns/columns.css styles/styles.css",
     "hlx": "less-watch-compiler styles styles & less-watch-compiler blocks blocks & hlx up"
   },
 

@@ -7,7 +7,7 @@ autocomment();
   -> Generic card container 
     example -> .cards-container 
     description -> usually define padding left/right and things common to all heading and cards even personalised container.
-    css pattern -> none
+    pattern -> none
 
   -> Generic cards
     example -> .cards, .cards-large, .cards-muted, etc.
@@ -41,7 +41,7 @@ autocomment();
 
 @import (reference) "../../styles/mixin.less";
 
-/* cards- container */
+/* cards-container */
 .section.cards-container {
   .flex(column);
   padding-left: 22px;
@@ -87,9 +87,7 @@ autocomment();
   }
 }
 
-/* 
-  cards -> when space is less, content of items will be placed horizontal  
-*/
+/* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
 .cards {
   :where(ul, li, h1, h2, h3, h4, h5, h6, p) {
     .unset();
@@ -179,7 +177,7 @@ autocomment();
   }
 }
 
-/* cards.large -> when space is less, content of items will still be placed vertical */
+/* cards.large -> when space is less, items will shift but content of items will remain vertical  */
 .cards.large {
   > ul {
     row-gap: 40px;
@@ -252,7 +250,7 @@ autocomment();
   }
 } 
 
-/* cards.horizontal -> .cards-image and .cards-body will be horizontal aligned */
+/* cards.horizontal -> .cards-image and .cards-body will be horizontally aligned */
 .cards.horizontal {
   li {
     flex-direction: row !important;
@@ -260,7 +258,7 @@ autocomment();
   }
 }
 
-/* cards.outlined -> each card will have a outline */ 
+/* cards.outlined -> card will have a outline */ 
 .cards.outlined {
   li {
     transition: .3s !important;
