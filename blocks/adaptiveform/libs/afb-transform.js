@@ -2,7 +2,7 @@
 const PROPERTY = "property";
 const PROPERTY_RULES = "rules.properties";
 
-export default class ExcelToFormModel {
+class ExcelToFormModel {
     
     fieldPropertyMapping = {
         "Default" : "default",
@@ -117,6 +117,7 @@ export default class ExcelToFormModel {
                 currentPanel.items.push(this.#handleField(field));
             }
         });
+        this.#tranformHierarichalFields(formDef);
         this.#transformPropertyRules(formDef);
         return {formDef : formDef, excelData : exData};
     }
@@ -233,4 +234,62 @@ export default class ExcelToFormModel {
     #isProperty(field) {
         return field && field.fieldType == PROPERTY;
     }
+
+    /**
+     * Create a map of parent and children
+     * @param {*} items
+     * @returns
+     * @private
+     */
+    #createModelGraph(items) {
+        const graph = new Map([['root', []]]);
+
+        items.forEach((item) => {
+            let parent = 'root';
+            if (Object.prototype.hasOwnProperty.call(item, 'parent')) {
+                parent = item.parent;
+                !graph.has(parent) && graph.set(parent, []);
+                delete item.parent;
+            }
+            graph.get(parent).push(item);
+        });
+        return graph;
+    }
+
+    /**
+     * Add children in parent items field.
+     * @param {*} modelGraph
+     * @param {*} currNode
+     * @returns
+     * @private
+     */
+    #createModelTree(modelGraph, currNode = 'root') {
+        const rootItems = modelGraph.get(currNode);
+        rootItems.forEach((item) => {
+            if (modelGraph.has(item.name)) {
+                item.items = this.#createModelTree(modelGraph, item.name);
+            }
+        });
+        modelGraph.delete(currNode);
+        return rootItems;
+    }
+
+    /**
+     *
+     * @param {*} formDef
+     * @private
+     */
+    #tranformHierarichalFields(formDef) {
+        const modelGraph = this.#createModelGraph(formDef.items);
+        formDef.items = this.#createModelTree(modelGraph);
+
+        if (modelGraph.size > 0) {
+            // eslint-disable-next-line no-console
+            console.error('form json contains some unreachable, undefined or circular dependent parent fields');
+            console.log(modelGraph);
+            // @todo print actual json fields causing error.
+        }
+    }
 }
+
+export default new ExcelToFormModel();

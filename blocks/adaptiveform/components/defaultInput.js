@@ -1,5 +1,6 @@
 import { setActive, subscribe } from "../libs/afb-interaction.js";
-import { getWidget, renderField } from "../libs/afb-builder.js";
+import * as builder from "../libs/afb-builder.js";
+import { Constants } from "../libs/constants.js";
 
 export class DefaultField {
     blockName = 'cmp-adaptiveform-textinput'
@@ -15,7 +16,7 @@ export class DefaultField {
 
     addListener() {
         if(this.element) {
-            let widget = getWidget(this.block);
+            let widget = builder?.default?.getWidget(this.block);
             widget?.addEventListener('blur', (e) => {
                 this.model.value = e.target.value;
                 if(this.element)
@@ -29,7 +30,8 @@ export class DefaultField {
     }
 
     render() {
-        this.element = renderField(this.model, this.blockName)
+        this.element = builder?.default?.renderField(this.model, this.blockName)
+        this.block.className = Constants.ADAPTIVE_FORM+"-"+this.model?.fieldType
         this.block.appendChild(this.element);
         this.addListener();
         subscribe(this.model, this.element);
