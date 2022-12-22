@@ -1,5 +1,4 @@
 import excelToFormModel from "./libs/afb-transform.js";
-import defaultInput from "./components/defaultInput.js";
 import { createFormInstance } from "./libs/afb-runtime.js";
 import * as builder from "./libs/afb-builder.js"
 
