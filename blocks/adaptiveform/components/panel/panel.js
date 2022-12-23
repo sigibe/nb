@@ -24,7 +24,6 @@ export class Panel {
             let element = await builder?.default?.getRender(fieldModel);
 
             parent.append(element);
-            
             // @todo trigger add event
         }
     }
