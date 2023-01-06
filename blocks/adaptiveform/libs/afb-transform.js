@@ -1,8 +1,8 @@
-
 const PROPERTY = "property";
 const PROPERTY_RULES = "rules.properties";
 
-class ExcelToFormModel {
+export default class ExcelToFormModel {
+    panelMap = new Map();
     
     fieldPropertyMapping = {
         "Default" : "default",
@@ -101,23 +101,23 @@ class ExcelToFormModel {
             throw new Error("Unable to retrieve the form details from " + formPath);
         }
         const formDef = this.#initFormDef(formPath);
-        var stack = [];
-        stack.push(formDef.items);
-        let currentPanel = formDef;
+        
+        this.panelMap.set("root", formDef);
+        
         exData.data.forEach((/** @type {{ [s: string]: any; } | ArrayLike<any>} */ item)=> {
 
             let source = Object.fromEntries(Object.entries(item).filter(([_, v]) => (v != null && v!= "")));
             let field = {...source, ...this.#initField()};
             this.#transformFieldNames(field);
 
-            if(this.#isProperty(field)) {
+            if (this.#isProperty(field)) {
                 this.#handleProperites(formDef, field);
-            }
-             else {
-                currentPanel.items.push(this.#handleField(field));
+            } else {
+                field?.fieldType === "panel" && this.panelMap.set(field?.name, field);
+                this.#addToParent(this.#handleField(field));
             }
         });
-        this.#tranformHierarichalFields(formDef);
+
         this.#transformPropertyRules(formDef);
         return {formDef : formDef, excelData : exData};
     }
@@ -236,60 +236,14 @@ class ExcelToFormModel {
     }
 
     /**
-     * Create a map of parent and children
-     * @param {*} items
-     * @returns
-     * @private
+     * Add the field to its relevant parent items.
+     * @param {Object} field 
      */
-    #createModelGraph(items) {
-        const graph = new Map([['root', []]]);
-
-        items.forEach((item) => {
-            let parent = 'root';
-            if (Object.prototype.hasOwnProperty.call(item, 'parent')) {
-                parent = item.parent;
-                !graph.has(parent) && graph.set(parent, []);
-                delete item.parent;
-            }
-            graph.get(parent).push(item);
-        });
-        return graph;
-    }
-
-    /**
-     * Add children in parent items field.
-     * @param {*} modelGraph
-     * @param {*} currNode
-     * @returns
-     * @private
-     */
-    #createModelTree(modelGraph, currNode = 'root') {
-        const rootItems = modelGraph.get(currNode);
-        rootItems.forEach((item) => {
-            if (modelGraph.has(item.name)) {
-                item.items = this.#createModelTree(modelGraph, item.name);
-            }
-        });
-        modelGraph.delete(currNode);
-        return rootItems;
-    }
-
-    /**
-     *
-     * @param {*} formDef
-     * @private
-     */
-    #tranformHierarichalFields(formDef) {
-        const modelGraph = this.#createModelGraph(formDef.items);
-        formDef.items = this.#createModelTree(modelGraph);
-
-        if (modelGraph.size > 0) {
-            // eslint-disable-next-line no-console
-            console.error('form json contains some unreachable, undefined or circular dependent parent fields');
-            console.log(modelGraph);
-            // @todo print actual json fields causing error.
-        }
+    #addToParent(field) {
+        let parent = field?.parent || "root";
+        let parentField = this.panelMap.get(this.panelMap.has(parent) ? parent : "root");
+        parentField.items = parentField.items || [];
+        parentField.items.push(field);
+        delete field?.parent;
     }
 }
-
-export default new ExcelToFormModel();

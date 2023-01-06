@@ -49,7 +49,7 @@ export class Radio extends DefaultField {
         builder?.default?.setDisabledAttribute(state, input);
 
         let span = document.createElement("span");
-        span.textContent = enumDisplayName || enumValue;
+        span.innerHTML = enumDisplayName || enumValue;
 
         label.appendChild(input);
         label.appendChild(span);

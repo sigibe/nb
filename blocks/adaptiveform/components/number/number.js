@@ -22,26 +22,25 @@ export class NumberInput extends DefaultField {
     }
 
     // @todo customize using better way
-    customize() {
-        let state = this.model?.getState();
-
+    renderInput(state, bemBlock) {
+        let inputs = builder?.default?.defaultInputRender(state, bemBlock)
         if(state && state.displayFormat) {
-            let widget = getWidget(this.element);
             let div = document.createElement("div");
+            div.className = `${bemBlock}__widget-wrapper`;
+
             let span = document.createElement("span");
-            span.classList.add("number-format");
+            span.className = `${bemBlock}__widget-format`;
             span.textContent = state.displayFormat.replace("{}", "");
 
-            div.append(span);
-
-            this.element.insertBefore(div, widget);
-            div.append(widget);
+            div.append(span, inputs);
+            return div;
         }
+
+        return inputs;
     }
 
     render() {
-        this.element = builder?.default?.renderField(this.model, this.blockName);
-        this.customize();
+        this.element = builder?.default?.renderField(this.model, this.blockName, this.renderInput);
         this.block.appendChild(this.element);
         this.addListener();
         subscribe(this.model, this.element, {value : this._updateValue});

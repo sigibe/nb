@@ -1,4 +1,4 @@
-import excelToFormModel from "./libs/afb-transform.js";
+import ExcelToFormModel from "./libs/afb-transform.js";
 import { createFormInstance } from "./libs/afb-runtime.js";
 import * as builder from "./libs/afb-builder.js"
 
@@ -59,7 +59,8 @@ export class AdaptiveForm {
     console.log("Loading & Converting excel form to Crispr Form")
     
     console.time('Json Transformation (including Get)');
-    const convertedData = await excelToFormModel.getFormModel(url);
+    const transform = new ExcelToFormModel();
+    const convertedData = await transform.getFormModel(url);
     console.timeEnd('Json Transformation (including Get)')
     console.log(convertedData);
 
@@ -76,11 +77,11 @@ export class AdaptiveForm {
    */
   export default async function decorate(block) {
     const formLinkWrapper = block.querySelector('div.button-container:has(> a[href$=".json"]');
-    const formLink = (formLinkWrapper == null ? block : formLinkWrapper).querySelector('a[href$=".json"]');
+    const formLink = (formLinkWrapper || block).querySelector('a[href$=".json"]');
 
     if (!formLink || !formLink.href) {
         throw new Error("No formdata action is provided, can't render adaptiveformblock");
     }
 
-    await createFormContainer(formLinkWrapper || formLink, formLink.href);
+    return await createFormContainer(formLinkWrapper || formLink, formLink.href);
   }

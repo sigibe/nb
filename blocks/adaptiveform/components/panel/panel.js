@@ -18,7 +18,7 @@ export class Panel {
         let fields = state?.items;
         let length = fields ? fields.length : 0;
 
-        for(let i = 0; i< length; i++) {
+        for(let i = 0; i < length; i++) {
             let field = fields[i];
             let fieldModel = adaptiveform.model?.getElement(field.id);
             let element = await builder?.default?.getRender(fieldModel);
@@ -28,15 +28,19 @@ export class Panel {
         }
     }
 
-    renderField = (state) => {
+    renderField = (state) => {    
         let element = builder?.default?.createWidgetWrapper(state, this.blockName);
-        state?.name && element.setAttribute("name", state.name);
+        let label = builder?.default?.createLabel(state, this.blockName);
+        let longDesc = builder?.default?.createLongDescHTML(state, this.blockName);
+        let help = builder?.default?.createQuestionMarkHTML(state, this.blockName);
 
-        let child = document.createElement("div");
-        child.className = this.blockName + "__widget";
-        child.tabIndex = state?.value ? 0 : -1;
-        child.textContent = state?.value;
-        element.append(child);
+        label ? element.appendChild(label) : null;
+        longDesc ?  element.appendChild(longDesc) : null;
+        help ? element.appendChild(help) : null;
+
+        state?.name && element.setAttribute("name", state.name);
+        label.tabIndex = label.textContent ? 0 : -1;
+        
         return element;
     }
 
