@@ -323,6 +323,8 @@ export function decorateSections($main) {
     });
     wrappers.forEach((wrapper) => section.append(wrapper));
     section.classList.add('section');
+    section.classList.add('row');
+    section.classList.add('g-0');
     section.setAttribute('data-section-status', 'initialized');
 
     /* process section metadata */
@@ -767,6 +769,8 @@ function buildBannerBlock(main) {
  * @param {Element} main The main element
  */
 export function decorateMain(main) {
+  main.classList.add('container-fluid');
+  main.classList.add('g-0');
   // forward compatible pictures redecoration
   decoratePictures(main);
   // forward compatible link rewriting
