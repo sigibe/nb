@@ -30,17 +30,19 @@ export class Panel {
 
     renderField = (state) => {    
         let element = builder?.default?.createWidgetWrapper(state, this.blockName);
+        
         let label = builder?.default?.createLabel(state, this.blockName);
+        label.tabIndex = label.textContent ? 0 : -1;
+
         let longDesc = builder?.default?.createLongDescHTML(state, this.blockName);
         let help = builder?.default?.createQuestionMarkHTML(state, this.blockName);
-
+    
         label ? element.appendChild(label) : null;
         longDesc ?  element.appendChild(longDesc) : null;
         help ? element.appendChild(help) : null;
-
+    
         state?.name && element.setAttribute("name", state.name);
-        label.tabIndex = label.textContent ? 0 : -1;
-        
+
         return element;
     }
 

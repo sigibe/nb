@@ -1,25 +1,24 @@
-import { getWidget, setActive, subscribe } from "../../libs/afb-interaction.js";
+import { getWidget, setActive } from "../../libs/afb-interaction.js";
 import { DefaultField } from "../defaultInput.js";
 import * as builder from "../../libs/afb-builder.js";
-import { Constants } from "../../libs/constants.js";
 
 export class Range extends DefaultField {
 
-     blockName = 'cmp-adaptiveform-textinput'
+    blockName = 'cmp-adaptiveform-textinput'
      
     addListener() {
         if(this.element) {
             let widget = getWidget(this.block);
+
             widget?.addEventListener('change', (e) => {
                 let hover = this.element.querySelector(`.${this.blockName}__widget-value`);
                 let state = this.model?.getState();
 
                 this.model.value = e.target.value;
-                
                 this.element && setActive(this.element, false);
-
-                hover && this.#updateView(state, hover, e.target);
+                this.#updateView(state, hover, e.target);
             });
+
             widget?.addEventListener('focus', (e) => {
                 this.element && setActive(this.element, true);    
             });
@@ -31,24 +30,26 @@ export class Range extends DefaultField {
     }
 
     /**
-     * updates the hover as per input value and style the hover accordingly.
+     * updates the hover as per widget value and style the hover accordingly.
      * @param {*} state
      * @param {HTMLSpanElement} hover 
-     * @param {HTMLInputElement} input 
+     * @param {HTMLInputElement} widget 
      */
-    #updateView(state, hover, input) {
+    #updateView(state, hover, widget) {
         try {
-            let min = Number(input.min) || 0;
-            let max = Number(input.max) || 1;
-            let value = Number(input.value) || 0;
-            let step = Number(input.step) || 1;
+            let min = Number(widget.min) || 0;
+            let max = Number(widget.max) || 1;
+            let value = Number(widget.value) || 0;
+            let step = Number(widget.step) || 1;
     
             let totalSteps = Math.ceil((max - min)/step);
             let currStep = Math.ceil((value - min)/step);
     
-            hover.textContent = this.#getFormattedValue(state, value);
-            hover.style.left = `calc(${currStep}*(100%/${totalSteps + 1}))`;
-            input.setAttribute("style", "background-image: linear-gradient(to right, #78be20 " + 100*(currStep/totalSteps) + "%, #C5C5C5 " + 100*(currStep/totalSteps) + "%)");
+            if(hover) {
+                hover.textContent = this.#getFormattedValue(state, value);
+                hover.style.left = `calc(${currStep}*(100%/${totalSteps + 1}))`;
+            }
+            widget.setAttribute("style", "background-image: linear-gradient(to right, #78be20 " + 100*(currStep/totalSteps) + "%, #C5C5C5 " + 100*(currStep/totalSteps) + "%)");
         } catch(err) {
             console.error(err);
         }
@@ -72,19 +73,15 @@ export class Range extends DefaultField {
         max.className = `${bemBlock}__widget-max`;
         max.textContent = this.#getFormattedValue(state, input.max);
         
-
         div.append(hover, input, min, max);
         return div;
     }
 
-    render() {
-        this.element = builder?.default?.renderField(this.model, this.blockName, this.renderInput.bind(this));
-        this.block.className = Constants.ADAPTIVE_FORM+"-"+this.model?.fieldType
-        this.block.appendChild(this.element);
-        this.addListener();
-        subscribe(this.model, this.element);
+    renderElement() {
+        return builder?.default?.renderField(this.model, this.blockName, this.renderInput.bind(this));
     }
 }
+
 export default async function decorate(block, model) {
     let range = new Range(block, model);
     range.render();

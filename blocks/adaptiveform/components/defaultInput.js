@@ -29,12 +29,23 @@ export class DefaultField {
         }
     }
 
+    renderElement() {
+        if (this.model.fieldType === 'hidden') {
+            const state = this.model.getState();
+            return builder?.default?.defaultInputRender(state, this.blockName);
+        } else {
+            return builder?.default?.renderField(this.model, this.blockName)
+        }
+    }
+
     render() {
-        this.element = builder?.default?.renderField(this.model, this.blockName)
-        this.block.className = Constants.ADAPTIVE_FORM+"-"+this.model?.fieldType
+        this.element = this.renderElement();
+        this.block.classList.add(Constants.ADAPTIVE_FORM+"-"+this.model?.fieldType)
         this.block.appendChild(this.element);
-        this.addListener();
-        subscribe(this.model, this.element);
+        if (this.model.fieldType !== 'hidden') {
+            this.addListener();
+            subscribe(this.model, this.element);
+        }
     }
 }
 

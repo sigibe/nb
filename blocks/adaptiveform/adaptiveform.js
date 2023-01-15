@@ -1,6 +1,8 @@
 import ExcelToFormModel from "./libs/afb-transform.js";
-import { createFormInstance } from "./libs/afb-runtime.js";
+import { createFormInstance, FunctionRuntime } from "./libs/afb-runtime.js";
 import * as builder from "./libs/afb-builder.js"
+import {customFunctions} from "./customization/custom-functions.js";
+
 
 export class AdaptiveForm {
     model;
@@ -14,6 +16,7 @@ export class AdaptiveForm {
      constructor(element, formJson) {
         this.element = element;
         this.model = createFormInstance(formJson, undefined);
+        FunctionRuntime?.registerFunctions(customFunctions);
      }
  
   /**
@@ -70,6 +73,7 @@ export class AdaptiveForm {
     await adaptiveform.render();
     
     console.timeEnd('Form Model Instance Creation');
+    return adaptiveform;
   }
   
   /**
@@ -77,7 +81,7 @@ export class AdaptiveForm {
    */
   export default async function decorate(block) {
     const formLinkWrapper = block.querySelector('div.button-container:has(> a[href$=".json"]');
-    const formLink = (formLinkWrapper || block).querySelector('a[href$=".json"]');
+    const formLink = (formLinkWrapper == null ? block : formLinkWrapper).querySelector('a[href$=".json"]');
 
     if (!formLink || !formLink.href) {
         throw new Error("No formdata action is provided, can't render adaptiveformblock");
