@@ -34,6 +34,11 @@ export class Button {
         button.dataset.cmpIs = this.blockName;
         button.setAttribute("aria-label", getLabelValue(state));
 
+        if(state?.style) {
+            //@ts-ignore
+            button.className += " " + state?.style;
+        }
+
         let span = document.createElement("span");
         span.className = `${this.blockName}__text`;
         span.textContent = getLabelValue(state);

@@ -44,7 +44,7 @@ export class RadioGroup extends DefaultField {
         input.checked = enumValue == state.value;
 
         let span = document.createElement("span");
-        span.textContent = enumDisplayName || enumValue;
+        span.innerHTML = enumDisplayName || enumValue;
 
         label.appendChild(input);
         label.appendChild(span);
