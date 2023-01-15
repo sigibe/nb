@@ -292,8 +292,7 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     background-color: unset;
 }
 
-.cmp-adaptiveform__questionmark-tooltip {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";;
+.cmp-adaptiveform__tooltip {
     line-height: 1.5;
     font-weight: 400;
     color: #fff;
@@ -311,18 +310,51 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     box-sizing: border-box;
     text-align: center;
     z-index: 100;
-}
-
-.cmp-adaptiveform__questionmark-tooltip::after {
+    position: absolute;
+  }
+  
+  .cmp-adaptiveform__tooltip-top::after {
+    top: 100%;
+    left: calc(50% - 7px);
     content: "";
     position: absolute;
-    top: 100%;
-    left: calc(50% + 9px);
-    margin-left: -10px;
     border-width: 7px;
     border-style: solid;
     border-color: #17252e transparent transparent transparent;
-}
+  }
+  
+  .cmp-adaptiveform__tooltip-left::after {
+    top: calc(50% - 7px);
+    left: 100%;
+    content: "";
+    position: absolute;
+    border-width: 7px;
+    border-style: solid;
+    transform: rotate(-90deg);
+    border-color: #17252e transparent transparent transparent;
+  }
+  
+  .cmp-adaptiveform__tooltip-right::before {
+    top: calc(50% - 7px);
+    left: calc(0% - 14px);
+    content: "";
+    position: absolute;
+    border-width: 7px;
+    transform: rotate(90deg);
+    border-style: solid;
+    border-color: #17252e transparent transparent transparent;
+  }
+  
+  .cmp-adaptiveform__tooltip-bottom::before {
+    top: calc(0% - 14px);
+    left: calc(50% - 7px);
+    content: "";
+    position: absolute;
+    border-width: 7px;
+    border-style: solid;
+    border-color: #17252e transparent transparent transparent;
+    transform: rotate(180deg);
+  }
 
 .cmp-adaptiveform-numberinput__widget-format {
     position: absolute;
