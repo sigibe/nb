@@ -14,7 +14,7 @@ export let defaultInputRender = (state, bemBlock, tag = "input") => {
         input.className = `${bemBlock}__widget`;
         input.title = isTooltipVisible(state) ? getTooltipValue(state) : '';
         input.name = state?.name || "";
-        input.value = state?.value || "";
+        input.value = (state?.displayFormat ? state?.displayValue  : state?.value)|| "";
         input.placeholder = state?.placeholder || ""
         input.required = state?.required === true;
         input.setAttribute("aria-label", isLabelVisible(state) ? getLabelValue(state) : '' );
@@ -215,9 +215,10 @@ export const getWidget = (element) => {
  export const getRender = async (fieldModel) => {
     const block = document.createElement('div');
     try {
-        let component, fieldType = fieldModel?.fieldType;
-        if(!Constants.DEFAULT_INPUT_TYPES.includes(fieldType) && fieldType) {
-            component = await loadComponent(fieldType);
+        let component, fieldType = fieldModel?.fieldType || '';
+        const widgetType = Constants.fieldTypeMappings[fieldType] || fieldType
+        if(!Constants.DEFAULT_INPUT_TYPES.includes(widgetType) && widgetType) {
+            component = await loadComponent(widgetType);
         }
         if(component && component.default) {
             await component?.default(block, fieldModel);

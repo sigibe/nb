@@ -441,7 +441,8 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     display: inline;
 }
 
-.muted .cmp-adaptiveform-textinput__widget {
+.muted .cmp-adaptiveform-textinput__widget,
+.muted .cmp-adaptiveform-numberinput__widget {
     border: none;
     background: none;
     height: unset;
@@ -668,7 +669,8 @@ input.cmp-adaptiveform-radiobutton__option__widget {
         max-width: 50%;
     }
 
-    .muted .cmp-adaptiveform-textinput__widget {
+    .muted .cmp-adaptiveform-textinput__widget,
+    .muted .cmp-adaptiveform-numberinput__widget {
         margin-bottom: 16px;
     }
 
