@@ -1,9 +1,15 @@
+import { ExcelToJsonFormula } from "./afb-transformrules.js";
+import Formula from "./json-formula.js";
 
 const PROPERTY = "property";
 const PROPERTY_RULES = "rules.properties";
 
 export default class ExcelToFormModel {
+
+    rowNumberFieldMap = new Map();
     panelMap = new Map();
+    interpreter = new ExcelToJsonFormula(this.rowNumberFieldMap);
+    errors = [];
     
     fieldPropertyMapping = {
         "Default" : "default",
@@ -33,7 +39,7 @@ export default class ExcelToFormModel {
         ["checkbox-group", "checkbox-group"],
         ["plain-text", "plain-text"],
         ["checkbox", "checkbox"],
-        ["multiline-input", "text-area"],
+        ["multiline-input", "textarea"],
         ["panel", "panel"],
         ["submit", "button"]
     ]);
@@ -83,7 +89,7 @@ export default class ExcelToFormModel {
             console.time("Get Excel JSON")
             let exData = await this._getForm(formPath);
             console.timeEnd("Get Excel JSON")
-            return this.transform(exData, formPath);
+            return this.transform(exData, formPath, false);
         }
     }
 
@@ -93,7 +99,8 @@ export default class ExcelToFormModel {
      * 
      * @return {{formDef: any, excelData: any}} response
      */
-    transform(exData, formPath) {
+    transform(exData, formPath, validateRules) {
+        this.errors = [];
         // if its adaptive form json just return it.
         if(exData?.adaptiveform) {
             return {formDef : exData, excelData : null}
@@ -104,23 +111,31 @@ export default class ExcelToFormModel {
         const formDef = this.#initFormDef(formPath);
         
         this.panelMap.set("root", formDef);
+
+        let transformRules = [];
+        let rowNo = 2;
         
         exData.data.forEach((/** @type {{ [s: string]: any; } | ArrayLike<any>} */ item)=> {
-
-            let source = Object.fromEntries(Object.entries(item).filter(([_, v]) => (v != null && v!= "")));
-            let field = {...source, ...this.#initField()};
-            this.#transformFieldNames(field);
-
-            if (this.#isProperty(field)) {
-                this.#handleProperites(formDef, field);
-            } else {
-                field?.fieldType === "panel" && this.panelMap.set(field?.name, field);
-                this.#addToParent(this.#handleField(field));
+            if(item.name || item.Field) {
+                let source = Object.fromEntries(Object.entries(item).filter(([_, v]) => (v != null && v!= "")));
+                let field = {...source, ...this.#initField()};
+                this.#transformFieldNames(field);
+    
+                if (this.#isProperty(field)) {
+                    this.#handleProperites(formDef, field);
+                } else {
+                    field?.fieldType === "panel" && this.panelMap.set(field?.name, field);
+                    field = this.#handleField(field)
+                    this.#addToParent(field);
+                    field?.rules?.value && field?.rules?.value?.charAt(0) == "=" && transformRules.push(field);
+                }
+                this.rowNumberFieldMap.set(rowNo++, field);
             }
         });
 
+        this.#transformExcelForumulaToRule(transformRules, validateRules);
         this.#transformPropertyRules(formDef);
-        return {formDef : formDef, excelData : exData};
+        return {formDef : formDef, excelData : exData, errors : this.errors};
     }
 
     /**
@@ -238,7 +253,7 @@ export default class ExcelToFormModel {
         if(field?.fieldType === 'panel') {
             // Ignore name if type is not defined on panel.
             if (typeof field?.type === "undefined") {
-                field.name = undefined
+                field.name = null
             }
         }
     }
@@ -260,5 +275,30 @@ export default class ExcelToFormModel {
         parentField.items = parentField.items || [];
         parentField.items.push(field);
         delete field?.parent;
+    }
+
+    /**
+     * Transform excel formula to json formula
+     * @param {*} fields 
+     */
+    #transformExcelForumulaToRule(fields, validate) {
+        fields?.forEach(field => {
+            let valueRule = field?.rules?.value;
+            if(valueRule && valueRule.charAt(0) == "=") {
+                try {
+                    let excelExpression = valueRule?.slice(1)?.replaceAll('"', "'")?.toLowerCase(); // better way to handle double to single quotes 
+                    let formula = new Formula(); 
+                    let ast = formula.compile(excelExpression)
+                    let jsonExpression = this.interpreter.transform(ast);
+                    if(validate) {
+                        formula = new Formula(); 
+                        formula.search(jsonExpression, {})
+                    }
+                    field.rules.value = jsonExpression;
+                } catch (e) {
+                    this.errors.push({rule: valueRule, error: e.message})
+                }
+            }
+        })
     }
 }

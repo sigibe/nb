@@ -95,4 +95,16 @@
     static DEFAULT_INPUT_TYPES = ["color", "date", "datetime-local", "email", "hidden",
                 "month", "password", "tel", "text", "time",
                 "url", "week"];
-   }
+
+   /**
+    * This would go away once we have the proper nomenclature in af
+    */
+    static fieldTypeMappings = {
+      "text-input" : "text",
+      "multiline-input" : "textarea",
+      "date-input" : "date",
+      "drop-down" : "select",
+      "radio-group" : "radio-group",
+      "number-input" : "number",
+    }
+}
