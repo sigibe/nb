@@ -26,7 +26,7 @@ export class Range extends DefaultField {
     }
 
     #getFormattedValue(state, value) {
-        return state?.displayFormat ? state?.displayFormat.replace("{}", value) : value;
+        return value === 0 ? "6 months" : state?.displayFormat ? state?.displayFormat.replace("{}", value) : value;
     }
 
     /**
@@ -67,7 +67,7 @@ export class Range extends DefaultField {
 
         let min = document.createElement("span");
         min.className = `${bemBlock}__widget-min`;
-        min.textContent = this.#getFormattedValue(state, input.min);
+        min.textContent = this.#getFormattedValue(state, input.min || 0);
 
         let max = document.createElement("span");
         max.className = `${bemBlock}__widget-max`;
