@@ -14,7 +14,7 @@ export let defaultInputRender = (state, bemBlock, tag = "input") => {
         input.className = `${bemBlock}__widget`;
         input.title = isTooltipVisible(state) ? getTooltipValue(state) : '';
         input.name = state?.name || "";
-        input.value = (state?.displayFormat ? state?.displayValue  : state?.value)|| "";
+        input.value = (state?.displayFormat && state?.fieldType !== "range" ? state?.displayValue  : state?.value)|| "";
         input.placeholder = state?.placeholder || ""
         input.required = state?.required === true;
         input.setAttribute("aria-label", isLabelVisible(state) ? getLabelValue(state) : '' );
