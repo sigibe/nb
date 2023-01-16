@@ -330,24 +330,23 @@ hr {
   border-bottom: 1px solid var(--overlay-background-color);
 }
 main .home-banner.section {
-  background: #f2f9f5;
-  margin: 0 calc((100% - 100vw) / 2);
+  background: var(--background-color);
   padding: 24px 10px 0 10px;
 }
 main .home-banner.section .default-content-wrapper {
-  background-color: #fff;
+  background-color: var(--background-color);
   padding: 24px;
   letter-spacing: 0;
 }
 main .home-banner.section h1 {
-  color: #17252e;
+  color: var(--text-color);
   font-family: "Nedbank Sans Bold";
   font-size: 24px;
   line-height: 28px;
   margin: 0 0 16px 0;
 }
 main .home-banner.section p {
-  color: #494f50;
+  color: var(--text-color);
   font-family: "Open Sans Regular";
   font-size: 16px;
   line-height: 24px;
