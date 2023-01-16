@@ -677,7 +677,7 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     }
 
     .bold .cmp-adaptiveform-text__widget,
-    .bold .cmp-adaptiveform-textinput__widget
+    .bold .cmp-adaptiveform-textinput__widget,
     .bold .cmp-adaptiveform-numberinput__widget {
         font-size: 40px;
         line-height: 48px;
