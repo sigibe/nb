@@ -128,11 +128,12 @@ blockquote {
   margin-bottom: 1em;
 }
 a:any-link {
+  margin-left: 10px;
+  margin-right: 8px;
   color: var(--link-color);
   text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
   color: var(--link-hover-color);
 }
 code {
@@ -288,6 +289,20 @@ main .section.breadcrumb {
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.08);
   height: 75px;
   display: flex;
+}
+main .section.breadcrumb p {
+  font-size: 18px;
+  line-height: 20px;
+}
+main .section.breadcrumb a {
+  color: #bbbbbb;
+}
+main .section.breadcrumb a:hover {
+  color: #494f50;
+}
+main .section.breadcrumb .icon {
+  vertical-align: middle;
+  padding-right: 5px;
 }
 main .section.steps-container {
   margin: auto;
