@@ -20,20 +20,6 @@
   flex-basis: calc(100%/1);
   max-width: calc(100%/1);
 }
-.section.cards-container :where(p, a.button) > :where(.icon-arrow, .icon-diagonal-arrow) {
-  display: inline-block;
-}
-.section.cards-container :where(p, a.button):hover > .icon-arrow {
-  transition: transform 900ms;
-  transform: translateX(8px);
-}
-.section.cards-container p:hover > .icon-diagonal-arrow {
-  transition: transform 900ms;
-  transform: translate(6px, -5px);
-}
-.section.cards-container p:has(.icon-arrow, .icon-diagonal-arrow) > a {
-  text-decoration: none;
-}
 /* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
 .cards :where(ul, li, h1, h2, h3, h4, h5, h6, p) {
   margin: unset;
@@ -671,7 +657,7 @@
     justify-content: space-evenly;
   }
 }
-@media (min-width: 1100px) {
+@media (min-width: 1281px) {
   .cards.large li {
     flex-basis: 0;
   }
