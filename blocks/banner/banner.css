@@ -12,6 +12,7 @@ main .banner p {
 }
 main .banner p > a {
   margin-left: 10px;
+  margin-right: 8px;
   font-size: 18px;
   letter-spacing: 0;
   line-height: 24px;

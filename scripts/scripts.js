@@ -757,6 +757,7 @@ function buildBannerBlock(main) {
         decorateBlock(block);
         await loadBlock(block);
         block.style.display = 'flex';
+        decorateIcons(block);
       });
     }
   });

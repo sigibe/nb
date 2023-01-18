@@ -20,8 +20,10 @@
   --text-color: #17252e;
   --heading-text-color: #17252e;
   --body-font-family: 'Open Sans Regular', 'Open Sans-fallback';
-  --heading-font-family: 'Nedbank Sans Bold', 'Open Sans-fallback';
+  --heading-font-family: 'Nedbank Sans Regular', 'Open Sans-fallback';
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
+  --strong-font-family: 'Nedbank Sans Bold', 'Open Sans-bold';
+  --btn-font-family: 'Open Sans Semibold';
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
   --heading-font-size-xxl: 32px;
@@ -118,6 +120,9 @@ pre {
   font-size: var(--body-font-size-s);
   overflow: scroll;
 }
+strong {
+  font-family: var(--strong-font-family);
+}
 blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -151,27 +156,25 @@ input[type=radio] {
   background-color: var(--background-color-black);
 }
 a.button:any-link {
-  font-family: var(--font-family-body);
+  font-family: var(--btn-font-family);
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
   display: inline-block;
   box-sizing: border-box;
   text-decoration: none;
   border: 2px solid transparent;
-  padding: 5px 30px;
   text-align: center;
-  font-style: normal;
-  font-weight: 600;
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
+  color: #ffffff;
+  background-color: #000000;
+  padding: 14px 0;
   margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   border-radius: 5px;
-}
-a.button:hover {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
 }
 a.button:focus {
   background-color: var(--link-hover-color);
@@ -185,6 +188,7 @@ button {
   border: 2px solid transparent;
   padding: 5px 30px;
   text-align: center;
+  vertical-align: middle;
   font-style: normal;
   font-weight: 600;
   cursor: pointer;
@@ -195,6 +199,7 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   border-radius: 5px;
+  user-select: none;
 }
 button:hover {
   background-color: var(--link-hover-color);
@@ -212,15 +217,11 @@ button:disabled:hover {
   background-color: var(--overlay-background-color);
   cursor: unset;
 }
-a.button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
-}
+a.button.secondary,
 button.secondary {
-  background-color: unset;
+  background-color: #ffffff;
   border: 2px solid currentcolor;
-  color: var(--text-color);
+  color: #000000;
 }
 main pre {
   background-color: var(--overlay-background-color);
@@ -253,6 +254,20 @@ main .section {
 main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
   display: none !important;
+}
+main .section :where(p, a.button) > :where(.icon-arrow, .icon-diagonal-arrow) {
+  display: inline-block;
+}
+main .section :where(p, a.button):hover > .icon-arrow {
+  transition: transform 900ms;
+  transform: translateX(8px);
+}
+main .section p:hover > .icon-diagonal-arrow {
+  transition: transform 900ms;
+  transform: translate(6px, -5px);
+}
+main .section p:has(.icon-arrow, .icon-diagonal-arrow) > a {
+  text-decoration: none;
 }
 main .section.shaded-background {
   background-color: var(--overlay-background-color);
@@ -411,6 +426,10 @@ main .home-banner.section p {
   }
 }
 @media (min-width: 1025px) {
+  a.button:any-link {
+    height: 56px;
+    width: 283px;
+  }
   main .home-banner.section .default-content-wrapper {
     margin: 0 105px;
     padding: 64px 105px;
