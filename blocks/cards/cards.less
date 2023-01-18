@@ -42,10 +42,8 @@ autocomment();
       }
     }
 
-    &:has(.icon-arrow, .icon-diagonal-arrow) {
-      > a {
-        text-decoration: none;
-      }
+    > a {
+      text-decoration: none;
     }
   }
 }
@@ -109,7 +107,7 @@ autocomment();
       font-size: 14px;
       line-height: 20px;
 
-      &:has(.icon) {
+      + p {
         font-size: 18px;
         line-height: 24px;
         font-family: "Open Sans Semibold";
@@ -126,10 +124,7 @@ autocomment();
           background-color: transparent;
           font-family: "Open Sans Semibold";
           color: #008533;
-
-          &:has(.icon) {
-            overflow: visible;
-          }
+          overflow: visible;
         }
       }
 
@@ -197,8 +192,8 @@ autocomment();
       margin-top: 16px;
       margin-bottom: 32px;
 
-      &:has(.icon),
-      &.button-container {
+      &.button-container,
+      + p {
         margin-top: 0px;
         margin-bottom: 0px;
       }

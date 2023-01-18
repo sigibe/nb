@@ -31,7 +31,7 @@
   transition: transform 900ms;
   transform: translate(6px, -5px);
 }
-.section.cards-container p:has(.icon-arrow, .icon-diagonal-arrow) > a {
+.section.cards-container p > a {
   text-decoration: none;
 }
 /* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
@@ -94,7 +94,7 @@
   font-size: 14px;
   line-height: 20px;
 }
-.cards .cards-body > p:has(.icon) {
+.cards .cards-body > p + p {
   font-size: 18px;
   line-height: 24px;
   font-family: "Open Sans Semibold";
@@ -111,8 +111,6 @@
   background-color: transparent;
   font-family: "Open Sans Semibold";
   color: #008533;
-}
-.cards .cards-body > p.button-container > a:has(.icon) {
   overflow: visible;
 }
 .cards .cards-body > p > a + .icon {
@@ -173,8 +171,8 @@
   margin-top: 16px;
   margin-bottom: 32px;
 }
-.cards.large .cards-body > p:has(.icon),
-.cards.large .cards-body > p.button-container {
+.cards.large .cards-body > p.button-container,
+.cards.large .cards-body > p + p {
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -671,7 +669,7 @@
     justify-content: space-evenly;
   }
 }
-@media (min-width: 1100px) {
+@media (min-width: 1281px) {
   .cards.large li {
     flex-basis: 0;
   }
