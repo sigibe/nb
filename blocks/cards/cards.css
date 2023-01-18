@@ -109,7 +109,7 @@
   letter-spacing: 0;
   border: none;
   background-color: transparent;
-  font-family: "Open Sans Semibold";
+  font-family: "Open Sans Bold";
   color: #008533;
 }
 .cards .cards-body > p.button-container > a:has(.icon) {
@@ -671,7 +671,7 @@
     justify-content: space-evenly;
   }
 }
-@media (min-width: 1100px) {
+@media (min-width: 1281px) {
   .cards.large li {
     flex-basis: 0;
   }

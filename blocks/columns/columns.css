@@ -170,6 +170,7 @@
     width: auto;
     max-width: calc(100% + 85px);
     height: 271px;
+    padding-left: 52px;
   }
   .home-partners.columns-container .columns.columns-2-cols > div > div:last-child {
     padding: 20px 25px 0 0;
