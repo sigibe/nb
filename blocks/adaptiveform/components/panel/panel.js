@@ -52,6 +52,10 @@ export class Panel {
         this.element = this.renderField(state);
         await this.renderChildren(this.element, state);
 
+        if(state.name || state.dataName) {
+            this.block.classList.add(state.name || state.dataName);
+        }
+        
         this.block.appendChild(this.element);
         subscribe(this.model, this.element);
     }

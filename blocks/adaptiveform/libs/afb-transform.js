@@ -116,9 +116,10 @@ export default class ExcelToFormModel {
         let rowNo = 2;
         
         exData.data.forEach((/** @type {{ [s: string]: any; } | ArrayLike<any>} */ item)=> {
+            let source = Object.fromEntries(Object.entries(item).filter(([_, v]) => (v != null && v!= "")));
+            let field = {...source, ...this.#initField()};
+            
             if(item.name || item.Field) {
-                let source = Object.fromEntries(Object.entries(item).filter(([_, v]) => (v != null && v!= "")));
-                let field = {...source, ...this.#initField()};
                 this.#transformFieldNames(field);
     
                 if (this.#isProperty(field)) {
@@ -129,8 +130,9 @@ export default class ExcelToFormModel {
                     this.#addToParent(field);
                     field?.rules?.value && field?.rules?.value?.charAt(0) == "=" && transformRules.push(field);
                 }
-                this.rowNumberFieldMap.set(rowNo++, field);
             }
+            // always add field to avoid difference in row number and excel number.
+            this.rowNumberFieldMap.set(rowNo++, field);
         });
 
         this.#transformExcelForumulaToRule(transformRules, validateRules);
@@ -253,7 +255,8 @@ export default class ExcelToFormModel {
         if(field?.fieldType === 'panel') {
             // Ignore name if type is not defined on panel.
             if (typeof field?.type === "undefined") {
-                field.name = null
+                field.dataName = field.name;
+                field.name = null;
             }
         }
     }
