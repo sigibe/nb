@@ -570,54 +570,6 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     color: var(--button-widget-color-link);
 }
 
-.loanAmount {
-    grid-area: loanAmount;
-}
-
-.term {
-    grid-area: term;
-}
-
-.insuranceOption {
-    grid-area: insuranceOption;
-}
-
-.summaryPanel {
-    grid-area: summaryPanel;
-}
-
-.infoPanel {
-    grid-area: infoPanel;
-}
-
-.emi {
-    grid-area: emi;
-}
-
-.total {
-    grid-area: total;
-}
-
-.rateDisplay {
-    grid-area: rateDisplay;
-}
-
-.exploreRate {
-    grid-area: exploreRate;
-}
-
-.rate {
-    grid-area: rate;
-}
-
-.seeLoanDetails {
-    grid-area: seeLoanDetails;
-}
-
-.startLoanApplication {
-    grid-area: startLoanApplication;
-}
-
 /* personal calculator heading */
 .section.personal-calculator-heading {
     margin: 0 18px;
@@ -669,6 +621,54 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 /* personal calculator block */
+.repayments-calculator-block .loanAmount {
+    grid-area: loanAmount;
+}
+
+.repayments-calculator-block .term {
+    grid-area: term;
+}
+
+.repayments-calculator-block .insuranceOption {
+    grid-area: insuranceOption;
+}
+
+.repayments-calculator-block .summaryPanel {
+    grid-area: summaryPanel;
+}
+
+.repayments-calculator-block .infoPanel {
+    grid-area: infoPanel;
+}
+
+.repayments-calculator-block .emi {
+    grid-area: emi;
+}
+
+.repayments-calculator-block .total {
+    grid-area: total;
+}
+
+.repayments-calculator-block .rateDisplay {
+    grid-area: rateDisplay;
+}
+
+.repayments-calculator-block .exploreRate {
+    grid-area: exploreRate;
+}
+
+.repayments-calculator-block .rate {
+    grid-area: rate;
+}
+
+.repayments-calculator-block .seeLoanDetails {
+    grid-area: seeLoanDetails;
+}
+
+.repayments-calculator-block .startLoanApplication {
+    grid-area: startLoanApplication;
+}
+
 .repayments-calculator-block .cmp-adaptiveform-container {
     grid-template-columns: 1fr;
     grid-template-areas: 
