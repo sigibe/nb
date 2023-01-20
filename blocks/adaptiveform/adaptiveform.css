@@ -8,17 +8,11 @@
     box-sizing: border-box;
 }
 
-.adaptiveform-container h1, 
-.adaptiveform-container h2,
-.adaptiveform-container h3, 
-.adaptiveform-container h4, 
-.adaptiveform-container h5, 
-.adaptiveform-container h6, 
-.adaptiveform-container p,
-.adaptiveform-header h2,
-.adaptiveform-header h3 {
+.section.adaptiveform-container :where(h1, h2, h3, h4, h5, h6, p) {
+    /* unset margin and padding added by helix by default */
     margin: unset;
     padding: unset;
+   
 }
 
 .block.adaptiveform {
@@ -40,126 +34,115 @@
     flex-wrap: wrap !important;
 }
 
-.block.adaptiveform .two-columns {
-    display: flex;
-    flex-direction: row;
-}
-
-.block.adaptiveform .two-columns > div:has(> .two-columns__column-1),
-.block.adaptiveform .two-columns > div.two-columns__column-1 {
-    flex-basis: 50%;
-    max-width: 50%;
-    order: 1;
-}
-
-.block.adaptiveform .two-columns > div:has(> .two-columns__column-2),
-.block.adaptiveform .two-columns > div.two-columns__column-2 {
-    flex-basis: 50%;
-    max-width: 50%;
-    order: 2;
-}
-
-.block.adaptiveform .two-columns.wrapped > div:has(> .two-columns__column-1),
-.block.adaptiveform .two-columns.wrapped > div.two-columns__column-1,
-.block.adaptiveform .two-columns.wrapped > div:has(> .two-columns__column-2),
-.block.adaptiveform .two-columns.wrapped > div.two-columns__column-2 {
-    flex-basis: 100%;
-    max-width: 100%;
-}
-
-.block.adaptiveform .two-rows {
-    display: flex;
-    flex-direction: column;
-}
-
-.block.adaptiveform .two-rows > div:has(> .two-rows__row-1),
-.block.adaptiveform .two-rows > div.two-rows__row-1 {
-    flex-basis: 100%;
-    max-width: 100%;
-    order: 1;
-}
-
-.block.adaptiveform .two-rows > div:has(> .two-rows__row-2),
-.block.adaptiveform .two-rows > div.two-rows__row-2 {
-    flex-basis: 100%;
-    max-width: 100%;
-    order: 2;
-}
-
 .block.adaptiveform.grid .cmp-adaptiveform-container, 
 .block.adaptiveform .grid {
     display: grid;
 }
 
-div:has(> .field1) {
-    grid-area: field1;
-}
-
-div:has(> .field2) {
-    grid-area: field2;
-}
-
-div:has(> .field3) {
-    grid-area: field3;
-}
-
-div:has(> .field4) {
-    grid-area: field4;
-}
-
-div:has(> .field5) {
-    grid-area: field5;
-}
-
-div:has(> .field6) {
-    grid-area: field6;
-}
-
-div:has(> .field7) {
-    grid-area: field7;
-}
-
-.cmp-adaptiveform-container div:has(> div > input[type='hidden']),
-.cmp-adaptiveform-container div:has(> input[type='hidden']),
-.cmp-adaptiveform-container div:has(> [data-cmp-visible="false"]),
-.cmp-adaptiveform-container [data-cmp-visible="false"] {
+[data-cmp-visible="false"],
+.cmp-adaptiveform-hidden {
     display: none !important;
 }
 
-.cmp-adaptiveform-textinput,
-.cmp-adaptiveform-numberinput,
-.cmp-adaptiveform-radiobutton {
-    color: #666;
-    font-size: 1rem;
+.personal-calculator-heading :where(h1, h2, h3, h4, h5, h6, p) {
+    /* unset margin and padding added by helix by default */
+    margin: unset;
+    padding: unset;
+   
 }
 
-.cmp-adaptiveform-panel,
-.cmp-adaptiveform-textinput,
-.cmp-adaptiveform-numberinput,
-.cmp-adaptiveform-radiobutton {
+:root {
+    --adaptiveform-tooltip-color: #fff;
+    --adaptiveform-tooltip-backgroundColor: #17252e;
+    --adaptiveform-tooltip-borderWidth: 7px;
+}
+
+/* personal-calculator variables */
+.personal-calculator-heading,
+.repayments-calculator-section {
+    --text-color:#17252e;
+    --text-color-bold: #000;
+    --text-color-green: #5fa317;
+    --link-color: #008533;
+    --tooltip-icon: url('/icons/tooltip.svg');
+    --up-arrow-icon: url('/icons/up-arrow.svg');
+    --down-arrow-icon: url('/icons/down-arrow.svg');
+    --diagonal-arrow-icon: url('/icons/diagonal-arrow.svg');
+    --fontFamily-nedbank-medium: "Nedbank Sans Medium";
+    --fontFamily-nedbank-bold: "Nedbank Sans Bold";
+    --fontFamily-open-regular: "Open Sans Regular";
+    --fontFamily-open-semibold: "Open Sans Semibold";
+
+
+    --adaptiveform-outlined-borderColor: #d5e4e1;
+    --adaptiveform-label-color: var(--text-color);
+    --adaptiveform-label-fontFamily: var(--fontFamily-nedbank-medium);
+    --adaptiveform-widget-color: var(--text-color); /* widget text color */
+    --adaptiveform-widget-color-bold: var(--text-color-bold); /* widget text color */
+    --adaptiveform-widget-color-green: var(--text-color-green); /* widget text color */
+    --adaptiveform-widget-border: 2px solid #78be20;
+    --adaptiveform-widget-fontFamily: var(--fontFamily-open-semibold);
+    --adaptiveform-widget-fontFamily-bold: var(--fontFamily-nedbank-bold);
+    --adaptiveform-widget-focus-borderColor: #006341;
+    --adaptiveform-longdescription-color: #565c5d;
+    --adaptiveform-longdescription-fontFamily: var(--fontFamily-open-regular);
+    --adaptiveform-errormessage-color: #eb3c36;
+    --adaptiveform-questionmark-background: var(--tooltip-icon);
+
+    --radiobutton-option-label-color: #494f50;
+    --radiobutton-option-label-fontFamily: var(--fontFamily-open-regular);
+    --radiobutton-option-widget-border: 2px solid #78be20;
+    --radiobutton-option-widget-color: #78be20;
+
+    --panel-label-color: #494f50;
+    --panel-label-fontFamily: var(--fontFamily-open-regular);
+
+    --range-widget-thumb-borderColor: #78be20;
+    --range-widget-thumb-backgroundColor: #fff;
+    --range-minmax-color: #565c5d; 
+    --range-minmax-fontFamily: var(--fontFamily-open-regular);
+
+    --button-widget-color: #fff;
+    --button-widget-color-link: var(--link-color);
+    --button-widget-backgroundColor: #008533;
+    --button-widget-backgroundColor-black: #17252e;
+
+    --personal-calculator-heading-h2-fontFamily: var(--fontFamily-nedbank-bold);
+    --personal-calculator-heading-h2-color: var(--text-color);
+    --personal-calculator-heading-h3-fontFamily: var(--fontFamily-nedbank-medium);
+    --personal-calculator-heading-h3-color: var(--text-color);
+    --personal-calculator-heading-selected-borderColor: #008533;
+    --personal-calculator-info-backgroundColor: #f9fbfb;
+    --personal-calculator-exploreRate-color: #008533;
+    --personal-calculator-exploreRate-unchecked-icon: var(--up-arrow-icon);
+    --personal-calculator-exploreRate-checked-icon: var(--down-arrow-icon);
+    --personal-calculator-rate-longdescription-fontFamily: var(--fontFamily-open-regular);
+    --personal-calculator-rate-longdescription-color: #333;
+    --personal-calculator-seeLoanDetails-icon: var(--diagonal-arrow-icon);
+}
+
+/* component textinput */
+.cmp-adaptiveform-textinput {
     display: flex;
     flex-direction: column;
 }
 
-.cmp-adaptiveform-textinput__label,
-.cmp-adaptiveform-numberinput__label,
-.cmp-adaptiveform-radiobutton__label {
+.cmp-adaptiveform-textinput__label {
     line-height: 24px;
-    font-family: "Nedbank Sans Medium";
-    color: #17252e;
+    font-family: var(--adaptiveform-label-fontFamily);
+    color: var(--adaptiveform-label-color);
     font-size: 16px;
     margin-bottom: 10px;
     padding-right: 16px;
 }
 
-.cmp-adaptiveform-numberinput__widget,
 .cmp-adaptiveform-textinput__widget {
     border-radius: 0;
     font-size: 16px;
     line-height: 24px;
-    font-family: "Open Sans Semibold";
-    color: #17252e;
-    border: 2px solid rgb(120, 190, 32);
+    font-family: var(--adaptiveform-widget-fontFamily);
+    color: var(--adaptiveform-widget-color);
+    border: var(--adaptiveform-widget-border);
     background-color: transparent;
     height: 56px;
     background-clip: padding-box;
@@ -171,6 +154,73 @@ div:has(> .field7) {
     max-width: 600px;
 }
 
+.cmp-adaptiveform-textinput__widget:focus,
+.cmp-adaptiveform-textinput__widget:active {
+    outline: none !important;
+    border:2px solid var(--adaptiveform-widget-focus-borderColor);
+    box-shadow:none;
+}
+
+.cmp-adaptiveform-textinput__longdescription {
+    font-family: var(--adaptiveform-longdescription-fontFamily);
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-top: 8px;
+    color: var(--adaptiveform-longdescription-color) !important;
+}
+
+.cmp-adaptiveform-textinput__shortdescription {
+    margin-top: 10px;
+    font-size: .875rem
+}
+
+.cmp-adaptiveform-textinput__errormessage {
+    color: var(--adaptiveform-errormessage-color);
+    margin-top: 10px;
+    font-size: .875rem
+}
+
+/* component numberinput */
+.cmp-adaptiveform-numberinput {
+    display: flex;
+    flex-direction: column;
+}
+
+.cmp-adaptiveform-numberinput__label {
+    line-height: 24px;
+    font-family: var(--adaptiveform-label-fontFamily);
+    color: var(--adaptiveform-label-color);
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-right: 16px;
+}
+
+.cmp-adaptiveform-numberinput__widget {
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: var(--adaptiveform-widget-fontFamily);
+    color: var(--adaptiveform-widget-color);
+    border: var(--adaptiveform-widget-border);
+    background-color: transparent;
+    height: 56px;
+    background-clip: padding-box;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    font-weight: 400;
+    padding: 0.375rem 0.75rem;
+    display: block;
+    width: 100%;
+    max-width: 600px;
+}
+
+.cmp-adaptiveform-numberinput__widget:focus,
+.cmp-adaptiveform-numberinput__widget:active {
+    outline: none !important;
+    border:2px solid var(--adaptiveform-widget-focus-borderColor);
+    box-shadow:none;
+}
+
 .cmp-adaptiveform-numberinput__widget::-webkit-inner-spin-button, 
 .cmp-adaptiveform-numberinput__widget::-webkit-outer-spin-button { 
     -webkit-appearance: none;
@@ -179,36 +229,39 @@ div:has(> .field7) {
     margin: 0; 
 }
 
-.cmp-adaptiveform-numberinput__widget:focus,
-.cmp-adaptiveform-textinput__widget:focus,
-.cmp-adaptiveform-numberinput__widget:active,
-.cmp-adaptiveform-textinput__widget:active {
-    outline: none !important;
-    border:2px solid rgb(0, 99, 65);
-    box-shadow:none;
-}
-
-.cmp-adaptiveform-numberinput__longdescription,
-.cmp-adaptiveform-textinput__longdescription {
-    font-family: "Open Sans Regular";
+.cmp-adaptiveform-numberinput__longdescription {
+    font-family: var(--adaptiveform-longdescription-fontFamily);
     font-size: 14px;
     letter-spacing: 0;
     line-height: 22px;
     margin-top: 8px;
-    color: #565c5d !important;
+    color: var(--adaptiveform-longdescription-color) !important;
 }
 
-.cmp-adaptiveform-textinput__shortdescription,
 .cmp-adaptiveform-numberinput__shortdescription {
     margin-top: 10px;
     font-size: .875rem
 }
 
-.cmp-adaptiveform-textinput__errormessage,
 .cmp-adaptiveform-numberinput__errormessage {
-    color: #eb3c36;
+    color: var(--adaptiveform-errormessage-color);
     margin-top: 10px;
     font-size: .875rem
+}
+
+/* component radiobutton */
+.cmp-adaptiveform-radiobutton {
+    display: flex;
+    flex-direction: column;
+}
+
+.cmp-adaptiveform-radiobutton__label {
+    line-height: 24px;
+    font-family: var(--adaptiveform-label-fontFamily);
+    color: var(--adaptiveform-label-color);
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-right: 16px;
 }
 
 .cmp-adaptiveform-radiobutton__option {
@@ -217,16 +270,16 @@ div:has(> .field7) {
 
 .cmp-adaptiveform-radiobutton__option__label {
     font-size: 16px;
-    font-family: "Open Sans Regular";
+    font-family: var(--radiobutton-option-label-fontFamily);
     line-height: 26px;
-    color: #494f50;
+    color: var(--radiobutton-option-label-color);
     display: flex;
     flex-direction: row;
 }
 
 .cmp-adaptiveform-radiobutton__option__widget,
 input.cmp-adaptiveform-radiobutton__option__widget {
-    border: 2px solid #78be20;
+    border: var(--radiobutton-option-widget-border);
     height: 24px;
     width: 24px;
     border-radius: 50%;
@@ -244,7 +297,7 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 .cmp-adaptiveform-radiobutton__option__widget:checked::after {
-    background-color: #78be20;
+    background-color: var(--radiobutton-option-widget-color);
     left: 3px;
     top: 3px;
     width: 14px;
@@ -255,14 +308,19 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     padding: 0 0 0 20px;
 }
 
-.cmp-adaptiveform-panel__label,
-.personal-calculator > .default-content-wrapper > p {
+/* component panel */
+.cmp-adaptiveform-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.cmp-adaptiveform-panel__label {
     flex-basis: 100% !important;
     padding-bottom: 24px;
     font-size: 16px;
-    font-family: "Open Sans Regular";
+    font-family: var(--panel-label-fontFamily);
     line-height: 24px;
-    color: #494f50;
+    color: var(--panel-label-color);
     max-width: 100%;
     margin: 0;
 }
@@ -271,134 +329,26 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     display: none;
 }
 
-.cmp-adaptiveform__questionmark {
-    margin: unset;
-    padding: unset;
-    display: inline;
-    width: 14px;
-    height: 14px;
-    border-radius: 9px;
-    background: url('/icons/tooltip.svg');
-    cursor: pointer;
-    position: absolute;
-    box-sizing: content-box;
-    align-self: flex-end;
-    background-repeat: no-repeat;
-    margin-top: 5px;
+/* component text */
+.cmp-adaptiveform-text__widget {
+    font-family: "Nedbank Sans Bold";
 }
 
-.cmp-adaptiveform__questionmark:focus,
-.cmp-adaptiveform__questionmark:hover {
-    background-color: unset;
-}
-
-.cmp-adaptiveform__tooltip {
-    line-height: 1.5;
-    font-weight: 400;
-    color: #fff;
-    background-color: #17252e;
-    border-radius: 5px;
-    max-width: 200px;
-    padding: 4px 8px;
-    text-align: unset;
-    font-size: .875rem;
-    word-wrap: break-word;
-    word-break: normal;
-    word-spacing: normal;
-    white-space: normal;
-    letter-spacing: normal;
-    box-sizing: border-box;
-    text-align: center;
-    z-index: 100;
-    position: absolute;
-  }
-  
-  .cmp-adaptiveform__tooltip-top::after {
-    top: 100%;
-    left: calc(50% - 7px);
-    content: "";
-    position: absolute;
-    border-width: 7px;
-    border-style: solid;
-    border-color: #17252e transparent transparent transparent;
-  }
-  
-  .cmp-adaptiveform__tooltip-left::after {
-    top: calc(50% - 7px);
-    left: 100%;
-    content: "";
-    position: absolute;
-    border-width: 7px;
-    border-style: solid;
-    transform: rotate(-90deg);
-    border-color: #17252e transparent transparent transparent;
-  }
-  
-  .cmp-adaptiveform__tooltip-right::before {
-    top: calc(50% - 7px);
-    left: calc(0% - 14px);
-    content: "";
-    position: absolute;
-    border-width: 7px;
-    transform: rotate(90deg);
-    border-style: solid;
-    border-color: #17252e transparent transparent transparent;
-  }
-  
-  .cmp-adaptiveform__tooltip-bottom::before {
-    top: calc(0% - 14px);
-    left: calc(50% - 7px);
-    content: "";
-    position: absolute;
-    border-width: 7px;
-    border-style: solid;
-    border-color: #17252e transparent transparent transparent;
-    transform: rotate(180deg);
-  }
-
-.cmp-adaptiveform-numberinput__widget-format {
-    position: absolute;
-    margin-top: 28px;
-    margin-left: 12px;
-    line-height: 0;
-    font-size: 16px;
-    font-family: "Open Sans Semibold";
-    color: #17252e;
-}
-
-.cmp-adaptiveform-numberinput__widget-wrapper > .cmp-adaptiveform-numberinput__widget {
-    padding-left: 20px;
-}
-
+/* range component */
 .cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-wrapper {
     padding: 10px 0;
 }
 
 .cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-value {
     position: relative;
-    color: #000;
     padding: 4px 12px 4px 0;
     left: 50%;
     top: -10px;
     transform: translateX(-50%);
     font-size: 20px;
     line-height: 28px;
-    font-family: "Nedbank Sans Medium";
-    color: #17252e;
-}
-
-.cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-min,
-.cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-max {
-    top: 10px;
-    position: relative;
-    color: #565c5d;
-    font-size: 14px;
-    line-height: 22px;
-    font-family: "Open Sans Regular";
-}
-
-.cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-max {
-    float: right;
+    font-family: var(--adaptiveform-label-fontFamily);
+    color: var(--adaptiveform-label-color);
 }
 
 .cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget {
@@ -415,33 +365,149 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #fff;
-    border: 3px solid #78be20;
+    background: var(--range-widget-thumb-backgroundColor);
+    border: 3px solid var(--range-widget-thumb-borderColor);
     cursor: pointer;
-    outline: 3px solid #fff
+    outline: 3px solid var(--range-widget-thumb-backgroundColor);
 }
 
+.cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-min {
+    top: 10px;
+    position: relative;
+    color: var(--range-minmax-color);
+    font-size: 14px;
+    line-height: 22px;
+    font-family: var(--range-minmax-fontFamily);
+}
+
+.cmp-adaptiveform-range .cmp-adaptiveform-textinput__widget-max {
+    top: 10px;
+    position: relative;
+    color: var(--range-minmax-color);
+    font-size: 14px;
+    line-height: 22px;
+    font-family: var(--range-minmax-fontFamily);
+    float: right;
+}
+
+/* button */
 .cmp-adaptiveform-button  {
-    font-family: "Open Sans Semibold";
+    font-family: var(--adaptiveform-widget-fontFamily);
     white-space: unset;
     padding: 0px;
     border-radius: 6px;
     text-align: center;
     margin: 0px;
     height: 56px;
-    color: #fff;
-    font-family: "Open Sans Semibold";
+    color: var(--button-widget-color);
     overflow-wrap: break-word;
     font-size: 18px;
     letter-spacing: 0;
     line-height: 24px;
+    background-color: var(--button-widget-backgroundColor);
 }
 
 .cmp-adaptiveform-button > span {
     display: inline;
 }
 
-.muted .cmp-adaptiveform-textinput__widget,
+/* questionmark or helpicon */
+.cmp-adaptiveform__questionmark {
+    margin: unset;
+    padding: unset;
+    display: inline;
+    width: 14px;
+    height: 14px;
+    border-radius: 9px;
+    background: var(--adaptiveform-questionmark-background);
+    cursor: pointer;
+    position: absolute;
+    box-sizing: content-box;
+    align-self: flex-end;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+}
+
+.cmp-adaptiveform__questionmark:focus,
+.cmp-adaptiveform__questionmark:hover {
+    background-color: unset;
+}
+
+/* tooltip */
+.cmp-adaptiveform__tooltip {
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--adaptiveform-tooltip-color);
+    background-color: var(--adaptiveform-tooltip-backgroundColor);
+    border-radius: 5px;
+    max-width: 200px;
+    padding: 4px 8px;
+    text-align: unset;
+    font-size: .875rem;
+    word-wrap: break-word;
+    word-break: normal;
+    word-spacing: normal;
+    white-space: normal;
+    letter-spacing: normal;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 100;
+    position: absolute;
+}
+  
+.cmp-adaptiveform__tooltip-top::after {
+    top: 100%;
+    left: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+    content: "";
+    position: absolute;
+    border-width: var(--adaptiveform-tooltip-borderWidth);
+    border-style: solid;
+    border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+  
+.cmp-adaptiveform__tooltip-left::after {
+    top: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+    left: 100%;
+    content: "";
+    position: absolute;
+    border-width: var(--adaptiveform-tooltip-borderWidth);
+    border-style: solid;
+    transform: rotate(-90deg);
+    border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+  
+.cmp-adaptiveform__tooltip-right::before {
+    top: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+    left: calc(0% - 2*var(--adaptiveform-tooltip-borderWidth));
+    content: "";
+    position: absolute;
+    border-width: var(--adaptiveform-tooltip-borderWidth);
+    transform: rotate(90deg);
+    border-style: solid;
+    border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+  
+.cmp-adaptiveform__tooltip-bottom::before {
+    top: calc(0% - 2*var(--adaptiveform-tooltip-borderWidth));
+    left: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+    content: "";
+    position: absolute;
+    border-width: var(--adaptiveform-tooltip-borderWidth);
+    border-style: solid;
+    border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+    transform: rotate(180deg);
+}
+
+/* muted textinput */
+.muted .cmp-adaptiveform-textinput__widget {
+    border: none;
+    background: none;
+    height: unset;
+    padding: unset;
+    margin-bottom: 22px;
+}
+
+/* muted numberinput */
 .muted .cmp-adaptiveform-numberinput__widget {
     border: none;
     background: none;
@@ -450,40 +516,73 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     margin-bottom: 22px;
 }
 
-.bold .cmp-adaptiveform-text__widget,
-.bold .cmp-adaptiveform-textinput__widget,
-.bold .cmp-adaptiveform-numberinput__widget {
-    font-family: "Nedbank Sans Bold";
-    color: #000;
+/* bold textinput */
+.bold .cmp-adaptiveform-textinput__widget {
+    font-family: var(--adaptiveform-widget-fontFamily-bold);
+    color: var(--adaptiveform-widget-color-bold);
     font-size: 30px;
     letter-spacing: 0;
     line-height: 38px;
 }
 
-.green .cmp-adaptiveform-text__widget,
-.green .cmp-adaptiveform-textinput__widget,
+/* bold numberinput */
+.bold .cmp-adaptiveform-numberinput__widget {
+    font-family: var(--adaptiveform-widget-fontFamily-bold);
+    color: var(--adaptiveform-widget-color-bold);
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: 38px;
+}
+
+/* bold text */
+.bold .cmp-adaptiveform-text__widget {
+    font-family: var(--adaptiveform-widget-fontFamily-bold);
+    color: var(--adaptiveform-widget-color-bold);
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: 38px;
+}
+
+/* green textinput */
+.green .cmp-adaptiveform-textinput__widget {
+    color: var(--adaptiveform-widget-color-green);
+}
+
+/* green numberinput */
 .green .cmp-adaptiveform-numberinput__widget {
-    color: #5fa317;
+    color: var(--adaptiveform-widget-color-green);
 }
 
+/* green text */
+.green .cmp-adaptiveform-text__widget {
+    color: var(--adaptiveform-widget-color-green);
+}
+
+/* button black */
 .cmp-adaptiveform-button.black {
-    background-color: #17252e;
+    background-color: var(--button-widget-backgroundColor-black);
 }
 
+/* button link */
 .cmp-adaptiveform-button.link {
     cursor: pointer;
     background-color: transparent;
-    color: var(--link-color);
+    color: var(--button-widget-color-link);
 }
 
-/* personal calculator customization*/
+/* personal calculator heading */
+.section.personal-calculator-heading {
+    margin: 0 18px;
+    padding: 0;
+}
+
 .personal-calculator-heading h2 {
     font-size: 30px;
     line-height: 34px;
     letter-spacing: 0;
     margin: 32px 0;
-    font-family: "Nedbank Sans Bold";
-    color: #17252e;
+    font-family: var(--personal-calculator-heading-h2-fontFamily);
+    color: var(--personal-calculator-heading-h2-color);
 }
 
 .personal-calculator-heading h3 {
@@ -491,75 +590,137 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     margin: 0 20px;
     font-size: 20px;
     line-height: 28px;
-    font-family: "Nedbank Sans Medium";
+    font-family: var(--personal-calculator-heading-h3-fontFamily);
+    color: var(--personal-calculator-heading-h3-color);
     width: fit-content;
-    color: #17252e;
-    border-bottom: 4px solid #008533;
+    border-bottom: 4px solid var(--personal-calculator-heading-selected-borderColor);;
 }
 
-.personal-calculator-heading.section {
-    margin: 0 18px;
-    padding: 0;
-}
-
-.personal-calculator.adaptiveform-container {
+/* repayments calculator section */
+.section.repayments-calculator-section {
     margin: 0 18px;
     padding: 32px 0;
     margin-bottom: 32px;
 }
 
-.personal-calculator.adaptiveform-container > div {
+.section.repayments-calculator-section > div {
     margin-left: auto;
     margin-right: auto;
     padding: 0 15px;
 }
 
-.cmp-adaptiveform-personal-calculator .cmp-adaptiveform-container {
-    grid-template-columns: 1fr;
-    grid-template-areas: 
-    "field1"
-    "field2"
-    "field3"
-    "field4";
+.repayments-calculator-section > .default-content-wrapper > p {
+    flex-basis: 100% !important;
+    padding-bottom: 24px;
+    font-size: 16px;
+    font-family: "Open Sans Regular";
+    line-height: 24px;
+    color: #494f50;
+    max-width: 100%;
+    margin: 0;
 }
 
-.cmp-adaptiveform-personal-calculator .cmp-adaptiveform-container > div:not(:nth-child(4)) {
+/* personal calculator block */
+.repayments-calculator-block .loanAmount {
+    grid-area: loanAmount;
+}
+
+.repayments-calculator-block .term {
+    grid-area: term;
+}
+
+.repayments-calculator-block .insuranceOption {
+    grid-area: insuranceOption;
+}
+
+.repayments-calculator-block .summaryPanel {
+    grid-area: summaryPanel;
+}
+
+.repayments-calculator-block .infoPanel {
+    grid-area: infoPanel;
+}
+
+.repayments-calculator-block .emi {
+    grid-area: emi;
+}
+
+.repayments-calculator-block .total {
+    grid-area: total;
+}
+
+.repayments-calculator-block .rateDisplay {
+    grid-area: rateDisplay;
+}
+
+.repayments-calculator-block .exploreRate {
+    grid-area: exploreRate;
+}
+
+.repayments-calculator-block .rate {
+    grid-area: rate;
+}
+
+.repayments-calculator-block .seeLoanDetails {
+    grid-area: seeLoanDetails;
+}
+
+.repayments-calculator-block .startLoanApplication {
+    grid-area: startLoanApplication;
+}
+
+.repayments-calculator-block .cmp-adaptiveform-container {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "loanAmount"
+    "term"
+    "insuranceOption"
+    "summaryPanel";
+}
+
+.repayments-calculator-block .cmp-adaptiveform-container > div:not(:nth-child(4)) {
     margin-bottom: 42px;
 }
 
-.cmp-adaptiveform-personal-calculator .cmp-adaptiveform-container > div:nth-child(3) {
+.repayments-calculator-block .cmp-adaptiveform-container > div:nth-child(3) {
     margin-bottom: 16px;
 }
 
 /* @todo use $ to match label */
-.cmp-adaptiveform-personal-calculator .cmp-adaptiveform-numberinput__label,
-.cmp-adaptiveform-personal-calculator .cmp-adaptiveform-textinput__label,
-.cmp-adaptiveform-personal-calculator .cmp-adaptiveform-radiobutton__label {
+.repayments-calculator-block .cmp-adaptiveform-textinput__label {
+    margin-bottom: 24px;
+}
+
+.repayments-calculator-block .cmp-adaptiveform-numberinput__label {
+    margin-bottom: 24px;
+}
+
+.repayments-calculator-block .cmp-adaptiveform-radiobutton__label {
     margin-bottom: 24px;
 }
 
 .personal-calculator-summary {
     grid-template-areas: 
-    "field1"
-    "field2"
-    "field3";
+    "infoPanel"
+    "seeLoanDetails"
+    "startLoanApplication";
 }
 
 .personal-calculator-info {
-    background-color: #f9fbfb;
+    background-color: var(--personal-calculator-info-backgroundColor);
     padding: 30px 10px;
     border-radius: 5px;
     margin-bottom: 32px;
     box-shadow: 0 25px 20px -15px rgb(0 0 0 / 10%);
     grid-template-columns: 1fr 40%;
     grid-template-areas: 
-    "field1 field1"
-    "field2 field2"
-    "field3 field4"
-    "field5 field5 ";
+    "emi emi"
+    "total total"
+    "rateDisplay exploreRate"
+    "rate rate ";
 }
 
-.personal-calculator-info > div {
+.personal-calculator-info > div:not(:last-child) {
     margin-bottom: 16px;
 }
 
@@ -567,7 +728,7 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     margin-bottom: 16px;
 }
 
-.personal-calculator-info > .cmp-adaptiveform-textinput.field3 .cmp-adaptiveform-textinput__widget {
+.personal-calculator-info > .rateDisplay .cmp-adaptiveform-textinput__widget {
     margin-bottom: 0;
 }
 
@@ -577,24 +738,24 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 
 .personal-calculator-info .cmp-adaptiveform-checkbox__widget::before {
     content: 'Explore rate';
-    font-size: 1rem;
+    font-size: 16px;
     cursor: pointer;
-    color: #008533;
-    font-family: "Open Sans Semibold";
+    color: var(--personal-calculator-exploreRate-color);
+    font-family: var(--adaptiveform-widget-fontFamily);
 }
 
 .personal-calculator-info .cmp-adaptiveform-checkbox__widget::after {
-    content: url('/icons/up-arrow.svg');
-    font-size: 1rem;
+    content: var(--personal-calculator-exploreRate-unchecked-icon);
+    font-size: 16px;
     cursor: pointer;
-    color: #008533;
-    font-family: "Open Sans Semibold";
+    color: var(--personal-calculator-exploreRate-color);
+    font-family: var(--adaptiveform-widget-fontFamily);
     float: right;
     margin-left: 15px;
 }
 
 .personal-calculator-info .cmp-adaptiveform-checkbox__widget:checked:after {
-    content: url('/icons/down-arrow.svg');
+    content: var(--personal-calculator-exploreRate-checked-icon);
 }
 
 .personal-calculator-info .cmp-adaptiveform-checkbox__widget {
@@ -606,25 +767,25 @@ input.cmp-adaptiveform-radiobutton__option__widget {
     display: none;
 }
 
-.personal-calculator-info .cmp-adaptiveform-range {   
+.personal-calculator-info .cmp-adaptiveform-range > div {   
     margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .personal-calculator-info .cmp-adaptiveform-range .cmp-adaptiveform-textinput__longdescription {
     margin-top: 42px;
-    font-family: "Open Sans Regular";
+    font-family: var(--personal-calculator-rate-longdescription-fontFamily);
     font-size: 14px;
     line-height: 20px;
-    color: #333;
+    color: var(--personal-calculator-rate-longdescription-color)
 }
 
-.personal-calculator-info div:has(> .exploreRate) {
+.personal-calculator-info div.exploreRate {
     display: flex;
 }
 
 .personal-calculator-info .exploreRate {
     align-self: flex-end;
-    margin-bottom: 22px;
 }
 
 .personal-calculator-summary .cmp-adaptiveform-button {
@@ -635,7 +796,7 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 .personal-calculator-summary .cmp-adaptiveform-button.link::after {
-    content: url('/icons/diagonal-arrow.svg');
+    content: var(--personal-calculator-seeLoanDetails-icon);
     transition: transform 900ms;
     display: inline-block;
     margin-left: 8px;
@@ -646,39 +807,41 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 @media (min-width: 576px) {
-    .personal-calculator-heading.section,
-    .personal-calculator.adaptiveform-container {
+    .section.personal-calculator-heading,
+    .section.repayments-calculator-section {
         margin: 0 22px;
     }
 
-    .personal-calculator.adaptiveform-container > div {
+    .section.repayments-calculator-section > div {
         max-width: 540px;
     }
 }
 
 @media (min-width: 768px) {
-    .adaptiveform-container.outlined,
-    .adaptiveform-container .outlined {
+    .adaptiveform-container.outlined {
         border: 1px solid #d5e4e1;
         border-radius: 20px;
     }
 
-    .cmp-adaptiveform-container .two-columns.wrapped > div.two-columns__column-1,
-    .cmp-adaptiveform-container .two-columns.wrapped > div.two-columns__column-2,
-    .cmp-adaptiveform-container .two-columns.wrapped > div:has(> .two-columns__column-1),
-    .cmp-adaptiveform-container .two-columns.wrapped > div:has(> .two-columns__column-2) {
-        flex-basis: 50%;
-        max-width: 50%;
+    .muted .cmp-adaptiveform-textinput__widget {
+        margin-bottom: 16px;
     }
 
-    .muted .cmp-adaptiveform-textinput__widget,
     .muted .cmp-adaptiveform-numberinput__widget {
         margin-bottom: 16px;
     }
 
-    .bold .cmp-adaptiveform-text__widget,
-    .bold .cmp-adaptiveform-textinput__widget,
+    .bold .cmp-adaptiveform-textinput__widget {
+        font-size: 40px;
+        line-height: 48px;
+    }
+
     .bold .cmp-adaptiveform-numberinput__widget {
+        font-size: 40px;
+        line-height: 48px;
+    }
+
+    .bold .cmp-adaptiveform-text__widget {
         font-size: 40px;
         line-height: 48px;
     }
@@ -694,26 +857,26 @@ input.cmp-adaptiveform-radiobutton__option__widget {
         margin: 0 25px;
     }
 
-    .personal-calculator-heading.section,
-    .personal-calculator.adaptiveform-container {
+    .section.personal-calculator-heading,
+    .section.repayments-calculator-section {
         margin: 0 106px;
     }
 
-    .personal-calculator.adaptiveform-container > div {
+    .section.repayments-calculator-section > div {
         max-width: 720px;
     }
 
-    .cmp-adaptiveform-personal-calculator .cmp-adaptiveform-container {
+    .repayments-calculator-block .cmp-adaptiveform-container {
         grid-template-columns: 1fr 1fr;
         column-gap: 40px;
         grid-template-areas: 
-        "field1 field4"
-        "field2 field4"
-        "field3 field4"
-        ". field4";
+        "loanAmount summaryPanel"
+        "term summaryPanel"
+        "insuranceOption summaryPanel"
+        ". summaryPanel";
     }
 
-    .cmp-adaptiveform-personal-calculator .cmp-adaptiveform-container > div:nth-child(3) {
+    .repayments-calculator-block .cmp-adaptiveform-container > div:nth-child(3) {
         margin-bottom: 0px;
     }
 
@@ -725,11 +888,6 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 
     .personal-calculator-info .cmp-adaptiveform-textinput__label {
         margin-bottom: 8px;
-    }
-
-    .personal-calculator-info .exploreRate {
-        align-self: flex-end;
-        margin-bottom: 16px;
     }
 }
 
@@ -750,33 +908,32 @@ input.cmp-adaptiveform-radiobutton__option__widget {
         margin: 0 40px;
     }
 
-    .personal-calculator.adaptiveform-container {
+    .section.repayments-calculator-section {
         padding: 48px 0;
         margin-bottom: 48px;
     }
 
-    .cmp-adaptiveform-panel__label,
-    .personal-calculator > .default-content-wrapper > p {
+    .section.repayments-calculator-section > div {
+        max-width: 960px;
+        padding: 0 61px;
+    }
+
+    .section.repayments-calculator-section > div:first-child {
+        padding-top: 5px;
+    }
+
+    .repayments-calculator-section > .default-content-wrapper > p {
         font-size: 20px;
         line-height: 28px;
         padding-bottom: 58px;
         margin: 0;
     }
 
-    .personal-calculator.adaptiveform-container > div {
-        max-width: 960px;
-        padding: 0 61px;
-    }
-
-    .personal-calculator.adaptiveform-container > div:first-child {
-        padding-top: 5px;
-    }
-
-    .personal-calculator.adaptiveform-container > div:last-child {
+    .section.repayments-calculator-section > div:last-child {
         padding-bottom: 5px;
     }
 
-    .cmp-adaptiveform-personal-calculator .cmp-adaptiveform-container {
+    .repayments-calculator-block .cmp-adaptiveform-container {
         column-gap: 134px;
     }
 
@@ -784,8 +941,8 @@ input.cmp-adaptiveform-radiobutton__option__widget {
         margin-top: -12px;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: 
-        "field1 field1"
-        "field2 field3"
+        "infoPanel infoPanel"
+        "seeLoanDetails startLoanApplication"
     }
 
     .personal-calculator-info {
@@ -799,14 +956,14 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 @media (min-width: 1200px) {
-    .personal-calculator.adaptiveform-container > div {
+    .section.repayments-calculator-section > div {
         max-width: 1140px;
     }
 }
 
 @media (min-width: 1441px) {
-    .personal-calculator-heading.section,
-    .personal-calculator.adaptiveform-container {
+    .section.personal-calculator-heading,
+    .section.repayments-calculator-section {
         max-width: 1228px;
         margin-left: auto !important;
         margin-right: auto !important;
