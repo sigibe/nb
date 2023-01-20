@@ -167,6 +167,9 @@ header nav[aria-expanded='false'] .nav-hamburger-icon::before {
     position: relative;
     padding-right: 32px;
   }
+  header nav .nav-sections > ul > li.nav-drop:first-child {
+    font-family: 'Open Sans Bold';
+  }
   header nav .nav-sections > ul > li {
     padding: 0 16px;
     position: relative;
