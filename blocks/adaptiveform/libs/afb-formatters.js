@@ -1,30 +1,26 @@
 /*************************************************************************
- * ADOBE CONFIDENTIAL
- * ___________________
- *
- *  Copyright 2022 Adobe
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Adobe and its suppliers, if any. The intellectual
- * and technical concepts contained herein are proprietary to Adobe
- * and its suppliers and are protected by all applicable intellectual
- * property laws, including trade secret and copyright laws.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe.
- **************************************************************************/
-/**
- * https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
- * Credit: https://git.corp.adobe.com/dc/dfl/blob/master/src/patterns/parseDateTimeSkeleton.js
- * Created a separate library to be used elsewhere as well.
- */
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+* Copyright 2022 Adobe
+* All Rights Reserved.
+*
+* NOTICE: All information contained herein is, and remains
+* the property of Adobe and its suppliers, if any. The intellectual
+* and technical concepts contained herein are proprietary to Adobe
+* and its suppliers and are protected by all applicable intellectual
+* property laws, including trade secret and copyright laws.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe.
+
+* Adobe permits you to use and modify this file solely in accordance with
+* the terms of the Adobe license agreement accompanying it.
+*************************************************************************/
+
 const DATE_TIME_REGEX =
-    // eslint-disable-next-line max-len
     /(?:[Eec]{1,6}|G{1,5}|[Qq]{1,5}|(?:[yYur]+|U{1,5})|[ML]{1,5}|d{1,2}|D{1,3}|F{1}|[abB]{1,5}|[hkHK]{1,2}|w{1,2}|W{1}|m{1,2}|s{1,2}|[zZOvV]{1,5}|[zZOvVxX]{1,3}|S{1,3}|'(?:[^']|'')*')|[^a-zA-Z']+/g;
-
 const ShorthandStyles$1 = ["full", "long", "medium", "short"];
-
 function getSkeleton(skeleton, language) {
     if (ShorthandStyles$1.find(type => skeleton.includes(type))) {
         const parsed = parseDateStyle(skeleton, language);
@@ -45,24 +41,13 @@ function getSkeleton(skeleton, language) {
     }
     return skeleton;
 }
-
-/**
- *
- * @param skeleton shorthand style for the date concatenated with shorthand style of time. The
- * Shorthand style for both date and time is one of ['full', 'long', 'medium', 'short'].
- * @param language {string} language to parse the date shorthand style
- * @returns {[*,string][]}
- */
 function parseDateStyle(skeleton, language) {
     const options = {};
-    // the skeleton could have two keywords -- one for date, one for time
     const styles = skeleton.split(/\s/).filter(s => s.length);
     options.dateStyle = styles[0];
     if (styles.length > 1) options.timeStyle = styles[1];
-
     const testDate = new Date(2000, 2, 1, 2, 3, 4);
     const parts = new Intl.DateTimeFormat(language, options).formatToParts(testDate);
-    // oddly, the formatted month name can be different from the standalone month name
     const formattedMarch = parts.find(p => p.type === 'month').value;
     const longMarch = new Intl.DateTimeFormat(language, {month: 'long'}).formatToParts(testDate)[0].value;
     const shortMarch = new Intl.DateTimeFormat(language, {month: 'short'}).formatToParts(testDate)[0].value;
@@ -86,11 +71,6 @@ function parseDateStyle(skeleton, language) {
     });
     return result;
 }
-
-/**
- * Parse Date time skeleton into Intl.DateTimeFormatOptions parts
- * Ref: https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
- */
 function parseDateTimeSkeleton(skeleton, language) {
     if (ShorthandStyles$1.find(type => skeleton.includes(type))) {
         return parseDateStyle(skeleton, language);
@@ -99,11 +79,9 @@ function parseDateTimeSkeleton(skeleton, language) {
     skeleton.replace(DATE_TIME_REGEX, match => {
         const len = match.length;
         switch (match[0]) {
-            // Era
             case 'G':
                 result.push(['era', len === 4 ? 'long' : len === 5 ? 'narrow' : 'short', len]);
                 break;
-            // Year
             case 'y':
                 result.push(['year', len === 2 ? '2-digit' : 'numeric', len]);
                 break;
@@ -114,16 +92,13 @@ function parseDateTimeSkeleton(skeleton, language) {
                 throw new RangeError(
                     '`Y/u/U/r` (year) patterns are not supported, use `y` instead'
                 );
-            // Quarter
             case 'q':
             case 'Q':
                 throw new RangeError('`q/Q` (quarter) patterns are not supported');
-            // Month
             case 'M':
             case 'L':
                 result.push(['month', ['numeric', '2-digit', 'short', 'long', 'narrow'][len - 1], len]);
                 break;
-            // Week
             case 'w':
             case 'W':
                 throw new RangeError('`w/W` (week) patterns are not supported');
@@ -136,7 +111,6 @@ function parseDateTimeSkeleton(skeleton, language) {
                 throw new RangeError(
                     '`D/F/g` (day) patterns are not supported, use `d` instead'
                 );
-            // Weekday
             case 'E':
                 result.push(['weekday', ['short', 'short', 'short', 'long', 'narrow', 'narrow'][len - 1], len]);
                 break;
@@ -152,16 +126,14 @@ function parseDateTimeSkeleton(skeleton, language) {
                 }
                 result.push(['weekday', ['short', 'long', 'narrow', 'short'][len - 3], len]);
                 break;
-            // Period
-            case 'a': // AM, PM
+            case 'a':
                 result.push(['hour12', true, 1]);
                 break;
-            case 'b': // am, pm, noon, midnight
-            case 'B': // flexible day periods
+            case 'b':
+            case 'B':
                 throw new RangeError(
                     '`b/B` (period) patterns are not supported, use `a` instead'
                 );
-            // Hour
             case 'h':
                 result.push(['hourCycle', 'h12']);
                 result.push(['hour', ['numeric', '2-digit'][len - 1], len]);
@@ -184,11 +156,9 @@ function parseDateTimeSkeleton(skeleton, language) {
                 throw new RangeError(
                     '`j/J/C` (hour) patterns are not supported, use `h/H/K/k` instead'
                 );
-            // Minute
             case 'm':
                 result.push(['minute', ['numeric', '2-digit'][len - 1], len]);
                 break;
-            // Second
             case 's':
                 result.push(['second', ['numeric', '2-digit'][len - 1], len]);
                 break;
@@ -199,23 +169,19 @@ function parseDateTimeSkeleton(skeleton, language) {
                 throw new RangeError(
                     '`S/A` (millisecond) patterns are not supported, use `s` instead'
                 );
-            // Zone
-            case 'O': // timeZone GMT-8 or GMT-08:00
+            case 'O':
                 result.push(['timeZoneName', len < 4 ? 'shortOffset' : 'longOffset', len]);
                 result.push(['x-timeZoneName', len < 4 ? 'O' : 'OOOO', len]);
                 break;
-            case 'X': // 1, 2, 3, 4: The ISO8601 varios formats
-            case 'x': // 1, 2, 3, 4: The ISO8601 varios formats
-            case 'Z': // 1..3, 4, 5: The ISO8601 varios formats
-                // Z, ZZ, ZZZ should produce -0800
-                // ZZZZ should produce GMT-08:00
-                // ZZZZZ should produce -8:00 or -07:52:58
+            case 'X':
+            case 'x':
+            case 'Z':
                 result.push(['timeZoneName', 'longOffset', 1]);
                 result.push(['x-timeZoneName', match, 1]);
                 break;
-            case 'z': // 1..3, 4: specific non-location format
-            case 'v': // 1, 4: generic non-location format
-            case 'V': // 1, 2, 3, 4: time zone ID or city
+            case 'z':
+            case 'v':
+            case 'V':
                 throw new RangeError(
                     'z/v/V` (timeZone) patterns are not supported, use `X/x/Z/O` instead'
                 );
@@ -230,31 +196,7 @@ function parseDateTimeSkeleton(skeleton, language) {
     return result;
 }
 
-/*************************************************************************
- * ADOBE CONFIDENTIAL
- * ___________________
- *
- *  Copyright 2022 Adobe
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Adobe and its suppliers, if any. The intellectual
- * and technical concepts contained herein are proprietary to Adobe
- * and its suppliers and are protected by all applicable intellectual
- * property laws, including trade secret and copyright laws.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from Adobe.
- **************************************************************************/
-
-// get the localized month names resulting from a given pattern
 const twelveMonths = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(m => new Date(2000, m, 1));
-
-/**
- * returns the name of all the months for a given locale and given Date Format Settings
- * @param locale {string}
- * @param options {string} instance of Intl.DateTimeFormatOptions
- */
 function monthNames(locale, options) {
     return twelveMonths.map(month => {
         const parts = new Intl.DateTimeFormat(locale, options).formatToParts(month);
@@ -262,32 +204,17 @@ function monthNames(locale, options) {
         return m && m.value;
     });
 }
-
-/**
- * return an array of digits used by a given locale
- * @param locale {string}
- */
 function digitChars(locale) {
     return new Intl.NumberFormat(locale, {style:'decimal', useGrouping:false})
         .format(9876543210)
         .split('')
         .reverse();
 }
-
-/**
- * returns the calendar name used in a given locale
- * @param locale {string}
- */
 function calendarName(locale) {
     const parts = new Intl.DateTimeFormat(locale, {era:'short'}).formatToParts(new Date());
     const era = parts.find(p => p.type === 'era')?.value;
     return era === 'هـ' ? 'islamic' : 'gregory';
 }
-
-/**
- * returns the representation of the time of day for a given language
- * @param language {string}
- */
 function getDayPeriod(language) {
     const morning = new Date(2000, 1, 1, 1, 1, 1);
     const afternoon = new Date(2000, 1, 1, 16, 1, 1);
@@ -300,12 +227,6 @@ function getDayPeriod(language) {
         fn: (period, obj) => obj.hour += (period === pm.value) ? 12 : 0
     };
 }
-
-/**
- * get the offset in MS, given a date and timezone
- * @param dateObj {Date}
- * @param timeZone {string}
- */
 function offsetMS(dateObj, timeZone) {
     let tzOffset;
     try {
@@ -321,7 +242,6 @@ function offsetMS(dateObj, timeZone) {
     const result = ((nHours  * 60) + nMinutes) * 60 * 1000;
     return sign === '-' ? - result : result;
 }
-
 function getTimezoneOffsetFrom(otherTimezone) {
     var date = new Date();
     function objFromStr(str) {
@@ -336,43 +256,22 @@ function getTimezoneOffsetFrom(otherTimezone) {
     var other = objFromStr(str);
     str = date.toLocaleString('en-US', { day: 'numeric', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' });
     var myLocale = objFromStr(str);
-    var otherOffset = (other.day * 24 * 60) + (other.hour * 60) + (other.minute); // utc date + otherTimezoneDifference
-    var myLocaleOffset = (myLocale.day * 24 * 60) + (myLocale.hour * 60) + (myLocale.minute);  // utc date + myTimeZoneDifference
-    // (utc date + otherZoneDifference) - (utc date + myZoneDifference) - (-1 * myTimeZoneDifference)
+    var otherOffset = (other.day * 24 * 60) + (other.hour * 60) + (other.minute);
+    var myLocaleOffset = (myLocale.day * 24 * 60) + (myLocale.hour * 60) + (myLocale.minute);
     return otherOffset - myLocaleOffset - date.getTimezoneOffset();
 }
-
 function offsetMSFallback(dateObj, timezone) {
-    //const defaultOffset = dateObj.getTimezoneOffset();
     const timezoneOffset = getTimezoneOffsetFrom(timezone);
     return timezoneOffset * 60 * 1000;
 }
-
-/**
- * adjust from the default JavaScript timezone to the default timezone
- * @param dateObj {Date}
- * @param timeZone {string}
- */
 function adjustTimeZone(dateObj, timeZone) {
     if (dateObj === null) return null;
-    // const defaultOffset = new Intl.DateTimeFormat('en-US', { timeZoneName: 'longOffset'}).format(dateObj);
     let baseDate = dateObj.getTime() - dateObj.getTimezoneOffset() * 60 * 1000;
     const offset = offsetMS(dateObj, timeZone);
     offsetMSFallback(dateObj, timeZone);
     baseDate += - offset;
-
-
-    // get the offset for the default JS environment
-    // return days since the epoch
     return new Date(baseDate);
 }
-
-/**
- * in some cases, DateTimeFormat doesn't respect the 'numeric' vs. '2-digit' setting
- * for time values. The function corrects that
- * @param formattedParts instance of Intl.DateTimeFormatPart[]
- * @param parsed
- */
 function fixDigits(formattedParts, parsed) {
     ['hour', 'minute', 'second'].forEach(type => {
         const defn = formattedParts.find(f => f.type === type);
@@ -382,55 +281,29 @@ function fixDigits(formattedParts, parsed) {
         if (fmt === 'numeric' && defn.value.length === 2 && defn.value.charAt(0) === '0') defn.value = defn.value.slice(1);
     });
 }
-
 function fixYear(formattedParts, parsed) {
-    // two digit years are handled differently in DateTimeFormat. 00 becomes 1900
-    // providing a two digit year 0010 gets formatted to 10 and when parsed becomes 1910
-    // Hence we need to pad the year with 0 as required by the skeleton and mentioned in
-    // unicode. https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-year
     const defn = formattedParts.find(f => f.type === 'year');
     if (!defn) return;
-    // eslint-disable-next-line no-unused-vars
     const chars = parsed.find(pair => pair[0] === 'year')[2];
     while(defn.value.length < chars) {
         defn.value = `0${defn.value}`;
     }
 }
-
-/**
- *
- * @param dateValue {Date}
- * @param language {string}
- * @param skeleton {string}
- * @param timeZone {string}
- * @returns {T}
- */
 function formatDateToParts(dateValue, language, skeleton, timeZone) {
-    // DateTimeFormat renames some of the options in its formatted output
-    //@ts-ignore
     const mappings = key => ({
         hour12: 'dayPeriod',
         fractionalSecondDigits: 'fractionalSecond',
     })[key] || key;
-
-    // produces an array of name/value pairs of skeleton parts
     const allParameters = parseDateTimeSkeleton(skeleton, language);
     allParameters.push(['timeZone', timeZone]);
-
     const parsed = allParameters.filter(p => !p[0].startsWith('x-'));
     const nonStandard = allParameters.filter(p => p[0].startsWith('x-'));
-    // reduce to a set of options that can be used to format
     const options = Object.fromEntries(parsed);
     delete options.literal;
-
     const df = new Intl.DateTimeFormat(language, options);
-    // formattedParts will have all the pieces we need for our date -- but not in the correct order
     const formattedParts = df.formatToParts(dateValue);
-
     fixDigits(formattedParts, allParameters);
     fixYear(formattedParts, parsed);
-    // iterate through the original parsed components and use its ordering and literals,
-    // and add  the formatted pieces
     return parsed.reduce((result, cur) => {
         if (cur[0] === 'literal') result.push(cur);
         else {
@@ -440,37 +313,25 @@ function formatDateToParts(dateValue, language, skeleton, timeZone) {
                 const category = tz[0];
                 if (category === 'Z') {
                     if (tz.length < 4) {
-                        // handle 'Z', 'ZZ', 'ZZZ' Time Zone: ISO8601 basic hms? / RFC 822
                         v.value = v.value.replace(/(GMT|:)/g, '');
                         if (v.value === '') v.value = '+0000';
                     } else if (tz.length === 5) {
-                        // 'ZZZZZ' Time Zone: ISO8601 extended hms?
                         if (v.value === 'GMT') v.value = 'Z';
                         else v.value = v.value.replace(/GMT/, '');
                     }
                 }
                 if (category === 'X' || category === 'x') {
                     if (tz.length === 1) {
-                        // 'X' ISO8601 basic hm?, with Z for 0
-                        // -08, +0530, Z
-                        // 'x' ISO8601 basic hm?, without Z for 0
                         v.value = v.value.replace(/(GMT|:(00)?)/g, '');
                     }
                     if (tz.length === 2) {
-                        // 'XX' ISO8601 basic hm, with Z
-                        // -0800, Z
-                        // 'xx' ISO8601 basic hm, without Z
                         v.value = v.value.replace(/(GMT|:)/g, '');
                     }
                     if (tz.length === 3) {
-                        // 'XXX' ISO8601 extended hm, with Z
-                        // -08:00, Z
-                        // 'xxx' ISO8601 extended hm, without Z
                         v.value = v.value.replace(/GMT/g, '');
                     }
                     if (category === 'X' && v.value === '') v.value = 'Z';
                 } else if (tz === 'O') {
-                    // eliminate 'GMT', leading and trailing zeros
                     v.value = v.value.replace(/GMT/g, '').replace(/0(\d+):/, '$1:').replace(/:00/, '');
                     if (v.value === '') v.value = '+0';
                 }
@@ -480,18 +341,12 @@ function formatDateToParts(dateValue, language, skeleton, timeZone) {
         return result;
     }, []);
 }
-
-/**
- *
- * @param dateValue {Date}
- * @param language {string}
- * @param skeleton {string}
- * @param timeZone {string}
- */
 function formatDate(dateValue, language, skeleton, timeZone) {
+    if (skeleton.startsWith('date|')) {
+        skeleton = skeleton.split('|')[1];
+    }
     if (ShorthandStyles$1.find(type => skeleton.includes(type))) {
         const options = {timeZone};
-        // the skeleton could have two keywords -- one for date, one for time
         const parts = skeleton.split(/\s/).filter(s => s.length);
         if (ShorthandStyles$1.indexOf(parts[0]) > -1) {
             options.dateStyle = parts[0];
@@ -504,17 +359,10 @@ function formatDate(dateValue, language, skeleton, timeZone) {
     const parts = formatDateToParts(dateValue, language, skeleton, timeZone);
     return parts.map(p => p[1]).join('');
 }
-
-/**
- *
- * @param dateString {string}
- * @param language {string}
- * @param skeleton {string}
- * @param timeZone {string}
- */
 function parseDate(dateString, language, skeleton, timeZone, bUseUTC = false) {
-    // start by getting all the localized parts of a date/time picture:
-    // digits, calendar name
+    if (skeleton.startsWith('date|')) {
+        skeleton = skeleton.split('|')[1];
+    }
     const lookups = [];
     const regexParts = [];
     const calendar = calendarName(language);
@@ -525,13 +373,11 @@ function parseDate(dateString, language, skeleton, timeZone, bUseUTC = false) {
     let hourCycle = 'h12';
     let _bUseUTC = bUseUTC;
     let _setFullYear = false;
-    // functions to process the results of the regex match
     const isSeparator = str => str.length === 1 &&  ':-/.'.includes(str);
     const monthNumber = str => getNumber(str) - 1;
     const getNumber = str => str.split('').reduce((total, digit) => (total * 10) + digits.indexOf(digit), 0);
     const yearNumber = templateDigits => str => {
         let year = getNumber(str);
-        //todo: align with AF
         year = year < 100 && templateDigits === 2 ? year + 2000 : year;
         if (calendar === 'islamic') year = Math.ceil(year * 0.97 + 622);
         if (templateDigits > 2 && year < 100) {
@@ -540,40 +386,28 @@ function parseDate(dateString, language, skeleton, timeZone, bUseUTC = false) {
         return year;
     };
     const monthLookup = list => month => list.indexOf(month);
-
     const parsed = parseDateTimeSkeleton(skeleton, language);
     const months = monthNames(language, Object.fromEntries(parsed));
-    // build up a regex expression that identifies each option in the skeleton
-    // We build two parallel structures:
-    // 1. the regex expression that will extract parts of the date/time
-    // 2. a lookup array that will convert the matched results into date/time values
     parsed.forEach(([option, value, len]) => {
-        // use a generic regex pattern for all single-character separator literals.
-        // Then we'll be forgiving when it comes to separators: / vs - vs : etc
         if (option === 'literal') {
             if (isSeparator(value)) regexParts.push(`[^${digits[0]}-${digits[9]}]`);
             else regexParts.push(value);
-
         } else if (option === 'month' && ['numeric', '2-digit'].includes(value)) {
             regexParts.push(twoDigit);
             lookups.push(['month', monthNumber]);
-
         } else if (option === 'month' && ['formatted', 'long', 'short', 'narrow'].includes(value)) {
             regexParts.push(`(${months.join('|')})`);
             lookups.push(['month', monthLookup(months)]);
-
         } else if (['day', 'minute', 'second'].includes(option)) {
             if (option === 'minute' || option === 'second') {
                 _bUseUTC = false;
             }
             regexParts.push(twoDigit);
             lookups.push([option, getNumber]);
-
         } else if (option === 'fractionalSecondDigits') {
             _bUseUTC = false;
             regexParts.push(threeDigit);
             lookups.push([option, (v, obj) => obj.fractionalSecondDigits + getNumber(v)]);
-
         } else if (option === 'hour') {
             _bUseUTC = false;
             regexParts.push(twoDigit);
@@ -588,19 +422,15 @@ function parseDate(dateString, language, skeleton, timeZone, bUseUTC = false) {
                 regexParts.push(dayPeriod.regex);
                 lookups.push(['hour', dayPeriod.fn]);
             }
-            // Any other part that we don't need, we'll just add a non-greedy consumption
         } else if (option === 'hourCycle') {
             _bUseUTC = false;
             hourCycle = value;
         } else if (option === 'x-timeZoneName') {
             _bUseUTC = false;
-            // we handle only the GMT offset picture
             regexParts.push('(?:GMT|UTC|Z)?([+\\-−0-9]{0,3}:?[0-9]{0,2})');
             lookups.push([option, (v, obj) => {
                 _bUseUTC = true;
-                // v could be undefined if we're on GMT time
                 if (!v) return;
-                // replace the unicode minus, then extract hours [and minutes]
                 const timeParts = v.replace(/−/, '-').match(/([+\-\d]{2,3}):?(\d{0,2})/);
                 const hours = timeParts[1] * 1;
                 obj.hour -= hours;
@@ -611,14 +441,11 @@ function parseDate(dateString, language, skeleton, timeZone, bUseUTC = false) {
             _bUseUTC = false;
             regexParts.push('.+?');
         }
-
         return regexParts;
     }, []);
     const regex = new RegExp(regexParts.join(''));
     const match = dateString.match(regex);
     if (match === null) return dateString;
-
-    // now loop through all the matched pieces and build up an object we'll use to create a Date object
     const dateObj = {year: 1972, month: 0, day: 1, hour: 0, minute: 0, second: 0, fractionalSecondDigits: 0};
     match.slice(1).forEach((m, index) => {
         const [element, func] = lookups[index];
@@ -678,9 +505,7 @@ const currencies = {
   'ru-RU': 'RUB',
   'tr-TR': 'TRY'
 };
-
 const locales = Object.keys(currencies);
-
 const getCurrency = function (locale) {
   if (locales.indexOf(locale) > -1) {
     return currencies[locale]
@@ -694,12 +519,14 @@ const getCurrency = function (locale) {
 };
 
 const NUMBER_REGEX =
-    // eslint-disable-next-line max-len
-    /(?:[#]+|[@]+(?:#+)?|[0]+|[,]|[.]|[-]|[+]|[%]|[¤]{1,4}(?:\/([a-zA-Z]{3}))?|[;]|[K]{1,2}|E{1,2}[+]?|'(?:[^']|'')*')|[^a-zA-Z']+/g;
-
-const ShorthandStyles = [/^currency(?:\/([a-zA-Z]{3}))?$/, /^integer$/, /^decimal$/, /^percent$/];
-
-
+    /(?:[#]+|[@]+(#+)?|[0]+|[,]|[.]|[-]|[+]|[%]|[¤]{1,4}(?:\/([a-zA-Z]{3}))?|[;]|[K]{1,2}|E{1,2}[+]?|'(?:[^']|'')*')|[^a-zA-Z']+/g;
+const supportedUnits = ['acre', 'bit', 'byte', 'celsius', 'centimeter', 'day',
+    'degree', 'fahrenheit', 'fluid-ounce', 'foot', 'gallon', 'gigabit',
+    'gigabyte', 'gram', 'hectare', 'hour', 'inch', 'kilobit', 'kilobyte',
+    'kilogram', 'kilometer', 'liter', 'megabit', 'megabyte', 'meter', 'mile',
+    'mile-scandinavian', 'milliliter', 'millimeter', 'millisecond', 'minute', 'month',
+    'ounce', 'percent', 'petabyte', 'pound', 'second', 'stone', 'terabit', 'terabyte', 'week', 'yard', 'year'].join('|');
+const ShorthandStyles = [/^currency(?:\/([a-zA-Z]{3}))?$/, /^decimal$/, /^integer$/,  /^percent$/, new RegExp(`^unit\/(${supportedUnits})$`)];
 function parseNumberSkeleton(skeleton, language) {
     const options = {};
     const order = [];
@@ -728,6 +555,12 @@ function parseNumberSkeleton(skeleton, language) {
                 break;
             case 4:
                 options.style = 'percent';
+                options.maximumFractionDigits = 2;
+                break;
+            case 5:
+                options.style = "unit";
+                options.unitDisplay = "long";
+                options.unit = match[1];
                 break;
         }
         return {
@@ -739,7 +572,7 @@ function parseNumberSkeleton(skeleton, language) {
     options.minimumIntegerDigits = 1;
     options.maximumFractionDigits = 0;
     options.minimumFractionDigits = 0;
-    skeleton.replace(NUMBER_REGEX, (match, offset) => {
+    skeleton.replace(NUMBER_REGEX, (match, maxSignificantDigits, currencySymbol, offset) => {
         const len = match.length;
         switch(match[0]) {
             case '#':
@@ -752,10 +585,10 @@ function parseNumberSkeleton(skeleton, language) {
                 if (options?.minimumSignificantDigits) {
                     throw "@ symbol should occur together"
                 }
-                order.push(['@', len]);
-                options.minimumSignificantDigits = len;
-                const hashes = match.match(/#+/) || "";
-                options.maximumSignificantDigits = len + hashes.length;
+                const hashes = maxSignificantDigits || "";
+                order.push(['@', len - hashes.length]);
+                options.minimumSignificantDigits = len - hashes.length;
+                options.maximumSignificantDigits = len;
                 order.push(['digit', hashes.length]);
                 break;
             case ',':
@@ -780,6 +613,9 @@ function parseNumberSkeleton(skeleton, language) {
                 }
                 if (options?.decimal === true) {
                     options.minimumFractionDigits = len;
+                    if (!options.maximumFractionDigits) {
+                        options.maximumFractionDigits = len;
+                    }
                 } else {
                     options.minimumIntegerDigits = len;
                 }
@@ -803,18 +639,20 @@ function parseNumberSkeleton(skeleton, language) {
             case '¤':
                 if (offset !== 0 && offset !== skeleton.length - 1) {
                     console.error("currency display should be either in the beginning or at the end");
+                } else {
+                    options.style = 'currency';
+                    options.currencyDisplay = ['symbol', 'code', 'name', 'narrowSymbol'][len - 1];
+                    options.currency = currencySymbol || getCurrency(language);
+                    order.push(['currency', len]);
                 }
-                options.style = 'currency';
-                options.currencyDisplay = ['symbol', 'code', 'name', 'narrowSymbol'][len -1];
-                options.currency = getCurrency(language);
-                order.push(['currency', len]);
                 break;
             case '%':
                 if (offset !== 0 && offset !== skeleton.length - 1) {
                     console.error("percent display should be either in the beginning or at the end");
+                } else {
+                    order.push(['%', 1]);
+                    options.style = 'percent';
                 }
-                order.push(['%', 1]);
-                options.style = 'percent';
                 break;
             case 'E':
                 order.push(['E', len]);
@@ -831,49 +669,48 @@ function parseNumberSkeleton(skeleton, language) {
 }
 
 function formatNumber(numberValue, language, skeletn) {
+    if (skeletn.startsWith('num|')) {
+        skeletn = skel.split('|')[1];
+    }
     if (!skeletn) return numberValue
     language = language || "en";
     const {options, order} = parseNumberSkeleton(skeletn, language);
     return new Intl.NumberFormat(language, options).format(numberValue);
 }
-
 function getMetaInfo(language, skel) {
     const parts = {};
-    // gather digits and radix symbol
     let options = new Intl.NumberFormat(language, {style:'decimal', useGrouping:false}).formatToParts(9876543210.1);
     parts.digits = options.find(p => p.type === 'integer').value.split('').reverse();
     parts.decimal = options.find(p => p.type === 'decimal').value;
-
-    // extract type values from the parts
     const gather = type => {
         const find = options.find(p => p.type === type);
         if (find) parts[type] = find.value;
     };
-    // now gather the localized parts that correspond to the provided skeleton.
     const parsed = parseNumberSkeleton(skel);
     const nf = new Intl.NumberFormat(language, parsed);
     options = nf.formatToParts(-987654321);
     gather('group');
     gather('minusSign');
     gather('percentSign');
-    // it's possible to have multiple currency representations in a single value
     parts.currency = options.filter(p => p.type === 'currency').map(p => p.value);
-    // collect all literals.  Most likely a literal is an accounting bracket
     parts.literal = options.filter(p => p.type === 'literal').map(p => p.value);
     options = nf.formatToParts(987654321);
     gather('plusSign');
     gather('exponentSeparator');
+    gather('unit');
     return parts;
 }
-
 function parseNumber(numberString, language, skel) {
     try {
-        // factor will be updated to reflect: negative, percent, exponent etc.
+        if (skel.startsWith('num|')) {
+            skel = skel.split('|')[1];
+        }
         let factor = 1;
         let number = numberString;
         const meta = getMetaInfo(language, skel);
         if (meta.group) number = number.replaceAll(meta.group, '');
         number = number.replace(meta.decimal, '.');
+        if (meta.unit) number = number.replaceAll(meta.unit, '');
         if (meta.minusSign && number.includes(meta.minusSign)) {
             number = number.replace(meta.minusSign, '');
             factor *= -1;
@@ -903,4 +740,34 @@ function parseNumber(numberString, language, skel) {
     }
 }
 
-export { formatDate, formatNumber, getSkeleton, parseDate, parseNumber };
+const getCategory = function (skeleton) {
+    const chkCategory = skeleton?.match(/^(?:(num|date)\|)?(.+)/);
+    return [chkCategory?.[1], chkCategory?.[2]]
+};
+const format = function (value, locale, skeleton, timezone) {
+    const [category, skelton] = getCategory(skeleton);
+    switch (category) {
+        case 'date':
+            if (!(value instanceof Date)) {
+                value = new Date(value);
+            }
+            return formatDate(value, locale, skelton, timezone)
+        case 'num':
+            return formatNumber(value, locale, skelton)
+        default:
+            throw `unable to deduce the format. The skeleton should be date|<format> for date formats and num|<format> for numbers`
+    }
+};
+const parse = function (value, locale, skeleton, timezone) {
+    const [category, skelton] = getCategory(skeleton);
+    switch (category) {
+        case 'date':
+            return parseDate(value, locale, skelton, timezone)
+        case 'number':
+            return parseNumber(value, locale, skelton)
+        default:
+            throw `unable to deduce the format. The skeleton should be date|<format> for date formats and num|<format> for numbers`
+    }
+};
+
+export { format, formatDate, formatNumber, parse, parseDate, getSkeleton as parseDateSkeleton, parseNumber };

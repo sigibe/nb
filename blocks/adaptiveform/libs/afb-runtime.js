@@ -1,104 +1,26 @@
+/*************************************************************************
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+* Copyright 2022 Adobe
+* All Rights Reserved.
+*
+* NOTICE: All information contained herein is, and remains
+* the property of Adobe and its suppliers, if any. The intellectual
+* and technical concepts contained herein are proprietary to Adobe
+* and its suppliers and are protected by all applicable intellectual
+* property laws, including trade secret and copyright laws.
+* Dissemination of this information or reproduction of this material
+* is strictly forbidden unless prior written permission is obtained
+* from Adobe.
+
+* Adobe permits you to use and modify this file solely in accordance with
+* the terms of the Adobe license agreement accompanying it.
+*************************************************************************/
+
 import { propertyChange, ExecuteRule, Initialize, CustomEvent, Submit, RemoveInstance, AddInstance, Reset, RemoveItem, AddItem, Click, Change, FormLoad, FieldChanged, ValidationComplete, Valid, Invalid } from './afb-events.js';
 import Formula from './json-formula.js';
-import { formatDate, formatNumber, getSkeleton } from './afb-formatters.js';
-
-class ValidationError {
-    fieldName;
-    errorMessages;
-    constructor(fieldName = '', errorMessages = []) {
-        this.errorMessages = errorMessages;
-        this.fieldName = fieldName;
-    }
-}
-
-const objToMap = (o) => new Map(Object.entries(o));
-const stringViewTypes = objToMap({ 'date': 'date-input', 'data-url': 'file-input', 'binary': 'file-input' });
-const typeToViewTypes = objToMap({
-    'number': 'number-input',
-    'boolean': 'checkbox',
-    'object': 'panel',
-    'array': 'panel',
-    'file': 'file-input',
-    'file[]': 'file-input'
-});
-const arrayTypes = ['string[]', 'boolean[]', 'number[]', 'array'];
-const defaultFieldTypes = (schema) => {
-    const type = schema.type || 'string';
-    if ('enum' in schema) {
-        const enums = schema.enum;
-        if (enums.length > 2 || arrayTypes.indexOf(type) > -1) {
-            return 'drop-down';
-        }
-        else {
-            return 'checkbox';
-        }
-    }
-    if (type === 'string' || type === 'string[]') {
-        return stringViewTypes.get(schema.format) || 'text-input';
-    }
-    return typeToViewTypes.get(type) || 'text-input';
-};
-
-const getProperty = (data, key, def) => {
-    if (key in data) {
-        return data[key];
-    }
-    else if (!key.startsWith(':')) {
-        const prefixedKey = `:${key}`;
-        if (prefixedKey in data) {
-            return data[prefixedKey];
-        }
-    }
-    return def;
-};
-const isFile = function (item) {
-    return (item?.type === 'file' || item?.type === 'file[]') ||
-        ((item?.type === 'string' || item?.type === 'string[]') &&
-            (item?.format === 'binary' || item?.format === 'data-url'));
-};
-const isCheckbox = function (item) {
-    const fieldType = item?.fieldType || defaultFieldTypes(item);
-    return fieldType === 'checkbox';
-};
-const isCheckboxGroup = function (item) {
-    const fieldType = item?.fieldType || defaultFieldTypes(item);
-    return fieldType === 'checkbox-group';
-};
-const isDateField = function (item) {
-    const fieldType = item?.fieldType || defaultFieldTypes(item);
-    return (fieldType === 'text-input' && item?.format === 'date') || fieldType === 'date-input';
-};
-function deepClone(obj, idGenerator) {
-    let result;
-    if (obj instanceof Array) {
-        result = [];
-        result = obj.map(x => deepClone(x, idGenerator));
-    }
-    else if (typeof obj === 'object' && obj !== null) {
-        result = {};
-        Object.entries(obj).forEach(([key, value]) => {
-            result[key] = deepClone(value, idGenerator);
-        });
-    }
-    else {
-        result = obj;
-    }
-    if (idGenerator && result && result.id) {
-        result.id = idGenerator();
-    }
-    return result;
-}
-const jsonString = (obj) => {
-    return JSON.stringify(obj, null, 2);
-};
-const isRepeatable = (obj) => {
-    return ((obj.repeatable &&
-        ((obj.minOccur === undefined && obj.maxOccur === undefined) ||
-            (obj.minOccur !== undefined && obj.maxOccur !== undefined && obj.maxOccur !== 0) ||
-            (obj.minOccur !== undefined && obj.maxOccur !== undefined && obj.minOccur !== 0 && obj.maxOccur !== 0) ||
-            (obj.minOccur !== undefined && obj.minOccur >= 0) ||
-            (obj.maxOccur !== undefined && obj.maxOccur !== 0))) || false);
-};
+import { format, parseDateSkeleton, formatDate } from './afb-formatters.js';
 
 class DataValue {
     $_name;
@@ -473,12 +395,12 @@ const resolveData = (data, input, create) => {
     return result;
 };
 
-var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
+}
 const editableProperties = [
     'value',
     'label',
@@ -848,7 +770,9 @@ class BaseNode {
             if (this.parent) {
                 this._lang = this.parent.language;
             }
-            this._lang = Intl.DateTimeFormat().resolvedOptions().locale;
+            else {
+                this._lang = Intl.DateTimeFormat().resolvedOptions().locale;
+            }
         }
         return this._lang;
     }
@@ -907,21 +831,110 @@ class BaseNode {
         }
     }
 }
-__decorate$3([
+__decorate([
     dependencyTracked()
 ], BaseNode.prototype, "index", null);
-__decorate$3([
+__decorate([
     dependencyTracked()
 ], BaseNode.prototype, "description", null);
-__decorate$3([
+__decorate([
     dependencyTracked()
 ], BaseNode.prototype, "visible", null);
-__decorate$3([
+__decorate([
     dependencyTracked()
 ], BaseNode.prototype, "label", null);
-__decorate$3([
+__decorate([
     dependencyTracked()
 ], BaseNode.prototype, "properties", null);
+
+const objToMap = (o) => new Map(Object.entries(o));
+const stringViewTypes = objToMap({ 'date': 'date-input', 'data-url': 'file-input', 'binary': 'file-input' });
+const typeToViewTypes = objToMap({
+    'number': 'number-input',
+    'boolean': 'checkbox',
+    'object': 'panel',
+    'array': 'panel',
+    'file': 'file-input',
+    'file[]': 'file-input'
+});
+const arrayTypes = ['string[]', 'boolean[]', 'number[]', 'array'];
+const defaultFieldTypes = (schema) => {
+    const type = schema.type || 'string';
+    if ('enum' in schema) {
+        const enums = schema.enum;
+        if (enums.length > 2 || arrayTypes.indexOf(type) > -1) {
+            return 'drop-down';
+        }
+        else {
+            return 'checkbox';
+        }
+    }
+    if (type === 'string' || type === 'string[]') {
+        return stringViewTypes.get(schema.format) || 'text-input';
+    }
+    return typeToViewTypes.get(type) || 'text-input';
+};
+
+const getProperty = (data, key, def) => {
+    if (key in data) {
+        return data[key];
+    }
+    else if (!key.startsWith(':')) {
+        const prefixedKey = `:${key}`;
+        if (prefixedKey in data) {
+            return data[prefixedKey];
+        }
+    }
+    return def;
+};
+const isFile = function (item) {
+    return (item?.type === 'file' || item?.type === 'file[]') ||
+        ((item?.type === 'string' || item?.type === 'string[]') &&
+            (item?.format === 'binary' || item?.format === 'data-url'));
+};
+const isCheckbox = function (item) {
+    const fieldType = item?.fieldType || defaultFieldTypes(item);
+    return fieldType === 'checkbox';
+};
+const isCheckboxGroup = function (item) {
+    const fieldType = item?.fieldType || defaultFieldTypes(item);
+    return fieldType === 'checkbox-group';
+};
+const isDateField = function (item) {
+    const fieldType = item?.fieldType || defaultFieldTypes(item);
+    return (fieldType === 'text-input' && item?.format === 'date') || fieldType === 'date-input';
+};
+function deepClone(obj, idGenerator) {
+    let result;
+    if (obj instanceof Array) {
+        result = [];
+        result = obj.map(x => deepClone(x, idGenerator));
+    }
+    else if (typeof obj === 'object' && obj !== null) {
+        result = {};
+        Object.entries(obj).forEach(([key, value]) => {
+            result[key] = deepClone(value, idGenerator);
+        });
+    }
+    else {
+        result = obj;
+    }
+    if (idGenerator && result && result.id) {
+        result.id = idGenerator();
+    }
+    return result;
+}
+const jsonString = (obj) => {
+    return JSON.stringify(obj, null, 2);
+};
+const isRepeatable = (obj) => {
+    return ((obj.repeatable &&
+        ((obj.minOccur === undefined && obj.maxOccur === undefined) ||
+            (obj.minOccur !== undefined && obj.maxOccur !== undefined && obj.maxOccur !== 0) ||
+            (obj.minOccur !== undefined && obj.maxOccur !== undefined && obj.minOccur !== 0 && obj.maxOccur !== 0) ||
+            (obj.minOccur !== undefined && obj.minOccur >= 0) ||
+            (obj.maxOccur !== undefined && obj.maxOccur !== 0))) || false);
+};
 
 class Scriptable extends BaseNode {
     _events = {};
@@ -1085,12 +1098,6 @@ class Scriptable extends BaseNode {
     }
 }
 
-var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 class Container extends Scriptable {
     _children = [];
     _childrenReference;
@@ -1360,13 +1367,13 @@ class Container extends Scriptable {
         }
     }
 }
-__decorate$2([
+__decorate([
     dependencyTracked()
 ], Container.prototype, "maxItems", null);
-__decorate$2([
+__decorate([
     dependencyTracked()
 ], Container.prototype, "minItems", null);
-__decorate$2([
+__decorate([
     dependencyTracked()
 ], Container.prototype, "activeChild", null);
 
@@ -2229,16 +2236,15 @@ class Form extends Container {
             super.dispatch(action);
         }
     }
-    executeAction(action) {
-        if ((action.type !== 'submit') || this._invalidFields.length === 0) {
-            super.executeAction(action);
-        }
-    }
     submit(action, context) {
         if (this.validate().length === 0) {
             const payload = action?.payload || {};
             submit(context, payload?.success, payload?.error, payload?.submit_as, payload?.data);
         }
+    }
+    reset() {
+        super.reset();
+        this._invalidFields = [];
     }
     getElement(id) {
         if (id == this.id) {
@@ -2312,7 +2318,8 @@ class RuleEngine {
 }
 
 const defaults = {
-    visible: true
+    visible: true,
+    enabled: true
 };
 class Fieldset extends Container {
     constructor(params, _options) {
@@ -2355,12 +2362,6 @@ class Fieldset extends Container {
     }
 }
 
-var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 class InstanceManager extends Fieldset {
     get maxOccur() {
         return this._jsonModel.maxItems;
@@ -2378,12 +2379,21 @@ class InstanceManager extends Fieldset {
         return this.removeItem(action);
     }
 }
-__decorate$1([
+__decorate([
     dependencyTracked()
 ], InstanceManager.prototype, "maxOccur", null);
-__decorate$1([
+__decorate([
     dependencyTracked()
 ], InstanceManager.prototype, "minOccur", null);
+
+class ValidationError {
+    fieldName;
+    errorMessages;
+    constructor(fieldName = '', errorMessages = []) {
+        this.errorMessages = errorMessages;
+        this.fieldName = fieldName;
+    }
+}
 
 const dateRegex = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
 const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -2658,12 +2668,6 @@ const Constraints = {
     }
 };
 
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 const validTypes = ['string', 'number', 'boolean', 'file', 'string[]', 'number[]', 'boolean[]', 'file[]', 'array', 'object'];
 class Field extends Scriptable {
     constructor(params, _options) {
@@ -2812,10 +2816,10 @@ class Field extends Scriptable {
         }
     }
     get editFormat() {
-        return this._jsonModel.editFormat;
+        return this.withCategory(this._jsonModel.editFormat);
     }
     get displayFormat() {
-        return this._jsonModel.displayFormat;
+        return this.withCategory(this._jsonModel.displayFormat);
     }
     get placeholder() {
         return this._jsonModel.placeholder;
@@ -2887,23 +2891,43 @@ class Field extends Scriptable {
     isEmpty() {
         return this._jsonModel.value === undefined || this._jsonModel.value === null || this._jsonModel.value === '';
     }
+    withCategory(df) {
+        if (df) {
+            const hasCategory = df?.match(/^(?:date|num)\|/);
+            if (hasCategory === null) {
+                if (this.format === 'date') {
+                    df = `date|${df}`;
+                }
+                else if (this.type === 'number') {
+                    df = `num|${df}`;
+                }
+                return df;
+            }
+        }
+        return df;
+    }
     get editValue() {
-        const format = this.editFormat;
-        if (this.format == 'date' && this.isNotEmpty(this.value) && this.valid !== false) {
-            return formatDate(new Date(this.value), this.language, format);
+        const df = this.editFormat;
+        if (df && this.isNotEmpty(this.value) && this.valid !== false) {
+            try {
+                return format(this.value, this.language, df);
+            }
+            catch (e) {
+                return this.value;
+            }
         }
         else {
             return this.value;
         }
     }
     get displayValue() {
-        const format = this.displayFormat;
-        if (this.isNotEmpty(this.value) && this.valid !== false) {
-            if (this.format === 'date') {
-                return formatDate(new Date(this.value), this.language, format);
+        const df = this.displayFormat;
+        if (df && this.isNotEmpty(this.value) && this.valid !== false) {
+            try {
+                return format(this.value, this.language, df);
             }
-            else if (this.fieldType === 'number-input') {
-                return formatNumber(this.value, this.language, format);
+            catch (e) {
+                return this.value;
             }
         }
         else {
@@ -3035,11 +3059,30 @@ class Field extends Scriptable {
     }
     checkStep() {
         const value = this._jsonModel.value;
-        if (typeof this._jsonModel.step === 'number') {
-            const initialValue = this._jsonModel.minimum || this._jsonModel.default || 0;
-            return (value - initialValue) % this._jsonModel.step === 0;
+        const step = this._jsonModel.step;
+        if (typeof step === 'number') {
+            const prec = step.toString().split('.')?.[1]?.length || 0;
+            const factor = Math.pow(10, prec);
+            const fStep = step * factor;
+            const fVal = value * factor;
+            const iv = this._jsonModel.minimum || this._jsonModel.default || 0;
+            const fIVal = iv * factor;
+            const qt = (fVal - fIVal) / fStep;
+            const valid = Math.abs(fVal - fIVal) % fStep < .001;
+            let next, prev;
+            if (!valid) {
+                next = (Math.ceil(qt) * fStep + fIVal) / factor;
+                prev = (next - fStep) / factor;
+            }
+            return {
+                valid,
+                next,
+                prev
+            };
         }
-        return true;
+        return {
+            valid: true
+        };
     }
     checkValidationExpression() {
         if (typeof this._jsonModel.validationExpression === 'string') {
@@ -3176,7 +3219,7 @@ class Field extends Scriptable {
                 valid = this.checkEnum(value, Constraints);
                 constraint = 'enum';
                 if (valid && this.type === 'number') {
-                    valid = this.checkStep();
+                    valid = this.checkStep().valid;
                     constraint = 'step';
                 }
                 if (valid) {
@@ -3228,6 +3271,8 @@ class Field extends Scriptable {
     getState() {
         return {
             ...super.getState(),
+            editFormat: this.editFormat,
+            displayFormat: this.displayFormat,
             editValue: this.editValue,
             displayValue: this.displayValue
         };
@@ -3256,9 +3301,6 @@ __decorate([
 __decorate([
     include('date-input', 'number-input')
 ], Field.prototype, "editValue", null);
-__decorate([
-    include('date-input', 'number-input')
-], Field.prototype, "displayValue", null);
 __decorate([
     dependencyTracked()
 ], Field.prototype, "value", null);
@@ -3442,7 +3484,7 @@ class DateField extends Field {
             this._jsonModel.displayFormat = this._jsonModel.editFormat;
         }
         if (!this._jsonModel.placeholder) {
-            this._jsonModel.placeholder = getSkeleton(this._jsonModel.editFormat, locale);
+            this._jsonModel.placeholder = parseDateSkeleton(this._jsonModel.editFormat, locale);
         }
         if (!this._jsonModel.description) {
             this._jsonModel.description = `To enter today's date use ${formatDate(new Date(), locale, this._jsonModel.editFormat)}`;
@@ -3518,19 +3560,25 @@ class FormFieldFactoryImpl {
 const FormFieldFactory = new FormFieldFactoryImpl();
 
 const createFormInstance = (formModel, callback, logLevel = 'error', fModel = undefined) => {
-    let f = fModel;
-    if (f == null) {
-        f = new Form({ ...formModel }, FormFieldFactory, new RuleEngine(), new EventQueue(new Logger(logLevel)), logLevel);
+    try {
+        let f = fModel;
+        if (f == null) {
+            f = new Form({ ...formModel }, FormFieldFactory, new RuleEngine(), new EventQueue(new Logger(logLevel)), logLevel);
+        }
+        const formData = formModel?.data;
+        if (formData) {
+            f.importData(formData);
+        }
+        if (typeof callback === 'function') {
+            callback(f);
+        }
+        f.getEventQueue().runPendingQueue();
+        return f;
     }
-    const formData = formModel?.data;
-    if (formData) {
-        f.importData(formData);
+    catch (e) {
+        console.error(`Unable to create an instance of the Form ${e}`);
+        throw new Error(e);
     }
-    if (typeof callback === 'function') {
-        callback(f);
-    }
-    f.getEventQueue().runPendingQueue();
-    return f;
 };
 const validateFormInstance = (formModel, data) => {
     try {
