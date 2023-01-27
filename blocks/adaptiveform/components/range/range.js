@@ -13,7 +13,7 @@ export class Range extends DefaultField {
       widget?.addEventListener('change', (e) => {
         const hover = this.element.querySelector(`.${this.blockName}__widget-value`);
 
-        this.model.value = e.target.value;
+        this.model.value = e.target.value === 0 ? 0.5 : e.target.value;
         const state = this.model?.getState();
         if (this.element) {
           setActive(this.element, false);
