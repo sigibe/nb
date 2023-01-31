@@ -1,0 +1,10 @@
+/* stylelint-disable selector-class-pattern */
+
+.responsivegrid.gyshop-cmp-responsivegrid>.aem-Grid,
+.container {
+    max-width: 100vw;
+}
+
+.support .support__icon .cmp-icon {
+    width: 0;
+}
