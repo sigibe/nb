@@ -671,7 +671,7 @@
     justify-content: space-evenly;
   }
 }
-@media (min-width: 1100px) {
+@media (min-width: 1281px) {
   .cards.large li {
     flex-basis: 0;
   }
