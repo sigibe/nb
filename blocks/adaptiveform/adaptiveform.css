@@ -127,72 +127,17 @@
 }
 
 /* component textinput */
-.cmp-adaptiveform-textinput {
-    display: flex;
-    flex-direction: column;
-}
-
-.cmp-adaptiveform-textinput__label {
-    line-height: 24px;
-    font-family: var(--adaptiveform-label-font-family);
-    color: var(--adaptiveform-label-color);
-    font-size: 16px;
-    margin-bottom: 10px;
-    padding-right: 16px;
-}
-
-.cmp-adaptiveform-textinput__widget {
-    border-radius: 0;
-    font-size: 16px;
-    line-height: 24px;
-    font-family: var(--adaptiveform-widget-font-family);
-    color: var(--adaptiveform-widget-color);
-    border: var(--adaptiveform-widget-border);
-    background-color: transparent;
-    height: 56px;
-    background-clip: padding-box;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    font-weight: 400;
-    padding: 0.375rem 0.75rem;
-    display: block;
-    width: 100%;
-    max-width: 600px;
-}
-
-.cmp-adaptiveform-textinput__widget:focus,
-.cmp-adaptiveform-textinput__widget:active {
-    outline: none !important;
-    border: var(--adaptiveform-widget-focus-border);
-    box-shadow:none;
-}
-
-.cmp-adaptiveform-textinput__longdescription {
-    font-family: var(--adaptiveform-longdescription-font-family);
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: 22px;
-    margin-top: 8px;
-    color: var(--adaptiveform-longdescription-color) !important;
-}
-
-.cmp-adaptiveform-textinput__shortdescription {
-    margin-top: 10px;
-    font-size: .875rem
-}
-
-.cmp-adaptiveform-textinput__errormessage {
-    color: var(--adaptiveform-errormessage-color);
-    margin-top: 10px;
-    font-size: .875rem
-}
-
 /* component numberinput */
-.cmp-adaptiveform-numberinput {
+.cmp-adaptiveform-textinput,
+.cmp-adaptiveform-numberinput,
+.cmp-adaptiveform-radiobutton {
     display: flex;
     flex-direction: column;
 }
 
-.cmp-adaptiveform-numberinput__label {
+.cmp-adaptiveform-textinput__label,
+.cmp-adaptiveform-numberinput__label,
+.cmp-adaptiveform-radiobutton__label {
     line-height: 24px;
     font-family: var(--adaptiveform-label-font-family);
     color: var(--adaptiveform-label-color);
@@ -201,6 +146,7 @@
     padding-right: 16px;
 }
 
+.cmp-adaptiveform-textinput__widget,
 .cmp-adaptiveform-numberinput__widget {
     border-radius: 0;
     font-size: 16px;
@@ -219,6 +165,8 @@
     max-width: 600px;
 }
 
+.cmp-adaptiveform-textinput__widget:focus,
+.cmp-adaptiveform-textinput__widget:active,
 .cmp-adaptiveform-numberinput__widget:focus,
 .cmp-adaptiveform-numberinput__widget:active {
     outline: none !important;
@@ -226,12 +174,7 @@
     box-shadow:none;
 }
 
-.cmp-adaptiveform-numberinput__widget::-webkit-inner-spin-button, 
-.cmp-adaptiveform-numberinput__widget::-webkit-outer-spin-button { 
-    appearance: none;
-    margin: 0; 
-}
-
+.cmp-adaptiveform-textinput__longdescription,
 .cmp-adaptiveform-numberinput__longdescription {
     font-family: var(--adaptiveform-longdescription-font-family);
     font-size: 14px;
@@ -241,15 +184,23 @@
     color: var(--adaptiveform-longdescription-color) !important;
 }
 
+.cmp-adaptiveform-textinput__shortdescription,
 .cmp-adaptiveform-numberinput__shortdescription {
     margin-top: 10px;
     font-size: .875rem
 }
 
+.cmp-adaptiveform-textinput__errormessage,
 .cmp-adaptiveform-numberinput__errormessage {
     color: var(--adaptiveform-errormessage-color);
     margin-top: 10px;
     font-size: .875rem
+}
+
+.cmp-adaptiveform-numberinput__widget::-webkit-inner-spin-button, 
+.cmp-adaptiveform-numberinput__widget::-webkit-outer-spin-button { 
+    appearance: none;
+    margin: 0; 
 }
 
 /* component text */
@@ -258,19 +209,6 @@
 }
 
 /* component radiobutton */
-.cmp-adaptiveform-radiobutton {
-    display: flex;
-    flex-direction: column;
-}
-
-.cmp-adaptiveform-radiobutton__label {
-    line-height: 24px;
-    font-family: var(--adaptiveform-label-font-family);
-    color: var(--adaptiveform-label-color);
-    font-size: 16px;
-    margin-bottom: 10px;
-    padding-right: 16px;
-}
 
 .cmp-adaptiveform-radiobutton__option {
     margin-bottom: 16px;
@@ -519,24 +457,8 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 /* bold textinput */
-.bold .cmp-adaptiveform-textinput__widget {
-    font-family: var(--adaptiveform-widget-font-family-bold);
-    color: var(--adaptiveform-widget-color-bold);
-    font-size: 30px;
-    letter-spacing: 0;
-    line-height: 38px;
-}
-
-/* bold numberinput */
-.bold .cmp-adaptiveform-numberinput__widget {
-    font-family: var(--adaptiveform-widget-font-family-bold);
-    color: var(--adaptiveform-widget-color-bold);
-    font-size: 30px;
-    letter-spacing: 0;
-    line-height: 38px;
-}
-
-/* bold text */
+.bold .cmp-adaptiveform-textinput__widget,
+.bold .cmp-adaptiveform-numberinput__widget,
 .bold .cmp-adaptiveform-text__widget {
     font-family: var(--adaptiveform-widget-font-family-bold);
     color: var(--adaptiveform-widget-color-bold);
@@ -546,16 +468,8 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 /* green textinput */
-.green .cmp-adaptiveform-textinput__widget {
-    color: var(--adaptiveform-widget-color-green);
-}
-
-/* green numberinput */
-.green .cmp-adaptiveform-numberinput__widget {
-    color: var(--adaptiveform-widget-color-green);
-}
-
-/* green text */
+.green .cmp-adaptiveform-textinput__widget,
+.green .cmp-adaptiveform-numberinput__widget,
 .green .cmp-adaptiveform-text__widget {
     color: var(--adaptiveform-widget-color-green);
 }
@@ -689,14 +603,8 @@ input.cmp-adaptiveform-radiobutton__option__widget {
 }
 
 /* @todo use $ to match label */
-.block.adaptiveform.repayments-calculator-block .cmp-adaptiveform-textinput__label {
-    margin-bottom: 24px;
-}
-
-.block.adaptiveform.repayments-calculator-block .cmp-adaptiveform-numberinput__label {
-    margin-bottom: 24px;
-}
-
+.block.adaptiveform.repayments-calculator-block .cmp-adaptiveform-textinput__label,
+.block.adaptiveform.repayments-calculator-block .cmp-adaptiveform-numberinput__label,
 .block.adaptiveform.repayments-calculator-block .cmp-adaptiveform-radiobutton__label {
     margin-bottom: 24px;
 }
@@ -825,24 +733,13 @@ input.cmp-adaptiveform-radiobutton__option__widget {
         border-radius: 20px;
     }
 
-    .muted .cmp-adaptiveform-textinput__widget {
-        margin-bottom: 16px;
-    }
-
+    .muted .cmp-adaptiveform-textinput__widget,
     .muted .cmp-adaptiveform-numberinput__widget {
         margin-bottom: 16px;
     }
 
-    .bold .cmp-adaptiveform-textinput__widget {
-        font-size: 40px;
-        line-height: 48px;
-    }
-
-    .bold .cmp-adaptiveform-numberinput__widget {
-        font-size: 40px;
-        line-height: 48px;
-    }
-
+    .bold .cmp-adaptiveform-textinput__widget,
+    .bold .cmp-adaptiveform-numberinput__widget,
     .bold .cmp-adaptiveform-text__widget {
         font-size: 40px;
         line-height: 48px;
@@ -971,5 +868,4 @@ input.cmp-adaptiveform-radiobutton__option__widget {
         margin-right: auto !important;
     }
 }
-
 /* stylelint-enable selector-class-pattern */
