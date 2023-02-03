@@ -18,3 +18,9 @@ sampleRUM('cwv');
   j.src = `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
   f.parentNode.insertBefore(j, f);
 }(window, document, 'script', 'dataLayer', 'GTM-JRNHH3P'));
+
+(function adobeotm() {
+  const adobeotmscript = document.createElement('script');
+  adobeotmscript.setAttribute('src', 'https://assets.adobedtm.com/6422e0f550a2/017d80491d7e/launch-1e8527b948f6-development.min.js');
+  document.head.append(adobeotmscript);
+}());
