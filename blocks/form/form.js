@@ -1,4 +1,5 @@
 import decorateRange from './components/range.js';
+import formatNumber from './formatting.js';
 
 const appendChild = (parent, element) => {
   if (parent && element) {
@@ -130,7 +131,9 @@ function createInput(fd) {
 function createOutput(fd) {
   const output = document.createElement('output');
   output.name = fd.Name;
-  output.textContent = fd.Value;
+  const displayFormat = fd['Display Format'];
+  const formattedValue = displayFormat ? formatNumber(fd.Value, displayFormat) : fd.Value;
+  output.textContent = formattedValue;
   return output;
 }
 
