@@ -1,6 +1,54 @@
+const appendChild = (parent, element) => {
+  if (parent && element) {
+    parent.appendChild(element);
+  }
+};
+
+function setPlaceholder(element, fd) {
+  if (fd.Placeholder) {
+    element.setAttribute('placeholder', fd.Placeholder);
+  }
+}
+
+function setNumberConstraints(element, fd) {
+  if (fd.Max) {
+    element.max = fd.Max;
+  }
+  if (fd.Min) {
+    element.min = fd.Min;
+  }
+  if (fd.Step) {
+    element.step = fd.Step || 1;
+  }
+}
+
+function setStringConstraints(element, fd) {
+  if (fd.MaxLength) {
+    element.maxlength = fd.MaxLength;
+  }
+  if (fd.MinLength) {
+    element.minlength = fd.MinLength;
+  }
+  if (fd.Pattern) {
+    element.pattern = fd.Pattern;
+  }
+}
+
+function widgetProps(element, fd) {
+  element.id = fd.Id;
+  if (fd.Mandatory === 'TRUE') {
+    element.setAttribute('required', 'required');
+  }
+  element.name = fd.Name;
+  setPlaceholder(element, fd);
+  setStringConstraints(element, fd);
+  setNumberConstraints(element, fd);
+  element.value = fd.Value;
+}
+
 function createSelect(fd) {
   const select = document.createElement('select');
-  select.id = fd.Field;
+  widgetProps(select, fd);
   if (fd.Placeholder) {
     const ph = document.createElement('option');
     ph.textContent = fd.Placeholder;
@@ -14,9 +62,6 @@ function createSelect(fd) {
     option.value = o.trim();
     select.append(option);
   });
-  if (fd.Mandatory === 'x') {
-    select.setAttribute('required', 'required');
-  }
   return select;
 }
 
@@ -50,6 +95,8 @@ function createButton(fd) {
   const button = document.createElement('button');
   button.textContent = fd.Label;
   button.classList.add('button');
+  button.type = fd.Type;
+  button.id = fd.Id;
   if (fd.Type === 'submit') {
     button.addEventListener('click', async (event) => {
       const form = button.closest('form');
@@ -74,32 +121,40 @@ function createHeading(fd) {
 function createInput(fd) {
   const input = document.createElement('input');
   input.type = fd.Type;
-  input.id = fd.Field;
-  input.setAttribute('placeholder', fd.Placeholder);
-  if (fd.Mandatory === 'x') {
-    input.setAttribute('required', 'required');
-  }
+  widgetProps(input, fd);
   return input;
+}
+
+function createOutput(fd) {
+  const output = document.createElement('output');
+  output.name = fd.Name;
+  output.textContent = fd.Value;
+  return output;
 }
 
 function createTextArea(fd) {
   const input = document.createElement('textarea');
-  input.id = fd.Field;
-  input.setAttribute('placeholder', fd.Placeholder);
-  if (fd.Mandatory === 'x') {
-    input.setAttribute('required', 'required');
-  }
+  widgetProps(input, fd);
   return input;
 }
 
+// eslint-disable-next-line consistent-return
 function createLabel(fd) {
-  const label = document.createElement('label');
-  label.setAttribute('for', fd.Field);
-  label.textContent = fd.Label;
-  if (fd.Mandatory === 'x') {
-    label.classList.add('required');
+  if (fd.Label) {
+    const label = document.createElement('label');
+    label.setAttribute('for', fd.Name);
+    label.textContent = fd.Label;
+    return label;
   }
-  return label;
+}
+
+// eslint-disable-next-line consistent-return
+function createLegend(fd) {
+  if (fd.Label) {
+    const label = document.createElement('legend');
+    label.textContent = fd.Label;
+    return label;
+  }
 }
 
 function applyRules(form, rules) {
@@ -118,54 +173,91 @@ function applyRules(form, rules) {
   });
 }
 
+function createWidget(fd) {
+  switch (fd.Type) {
+    case 'select':
+      return createSelect(fd);
+    case 'checkbox':
+    case 'radio':
+      return createInput(fd);
+    case 'textarea':
+      return createTextArea(fd);
+    case 'output':
+      return createOutput(fd);
+    default:
+      return createInput(fd);
+  }
+}
+
 async function createForm(formURL) {
   const { pathname } = new URL(formURL);
   const resp = await fetch(pathname);
   const json = await resp.json();
   const form = document.createElement('form');
   const rules = [];
+  const ids = {};
+  const getId = function (name) {
+    ids[name] = ids[name] || 0;
+    const idSuffix = ids[name] ? `-${ids[name]}` : '';
+    ids[name] += 1;
+    return `${name}${idSuffix}`;
+  };
+  const fieldsets = {};
   // eslint-disable-next-line prefer-destructuring
   form.dataset.action = pathname.split('.json')[0];
   json.data.forEach((fd) => {
+    fd.Id = fd.Id || getId(fd.Name);
     fd.Type = fd.Type || 'text';
-    const fieldWrapper = document.createElement('div');
-    const style = fd.Style ? ` form-${fd.Style}` : '';
-    const fieldId = `form-${fd.Type}-wrapper${style}`;
-    fieldWrapper.className = fieldId;
-    fieldWrapper.classList.add('field-wrapper');
-    switch (fd.Type) {
-      case 'select':
-        fieldWrapper.append(createLabel(fd));
-        fieldWrapper.append(createSelect(fd));
-        break;
-      case 'heading':
-        fieldWrapper.append(createHeading(fd));
-        break;
-      case 'checkbox':
-        fieldWrapper.append(createInput(fd));
-        fieldWrapper.append(createLabel(fd));
-        break;
-      case 'text-area':
-        fieldWrapper.append(createLabel(fd));
-        fieldWrapper.append(createTextArea(fd));
-        break;
-      case 'submit':
-        fieldWrapper.append(createButton(fd));
-        break;
-      default:
-        fieldWrapper.append(createLabel(fd));
-        fieldWrapper.append(createInput(fd));
-    }
+    if (fd.Type === 'hidden') {
+      form.append(createWidget(fd));
+    } else {
+      const wrapperTag = fd.Type === 'fieldset' ? 'fieldset' : 'div';
+      const fieldWrapper = document.createElement(wrapperTag);
+      const style = fd.Style ? ` form-${fd.Style}` : '';
+      const nameStyle = fd.Name ? ` form-${fd.Name}` : '';
+      const fieldId = `form-${fd.Type}-wrapper${style}${nameStyle}`;
+      fieldWrapper.className = fieldId;
+      fieldWrapper.classList.add('field-wrapper');
+      fieldWrapper.dataset.hidden = fd.Hidden || 'false';
+      fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
+      fieldWrapper.dataset.tooltip = fd.Tooltip;
+      fieldWrapper.title = fd.Tooltip;
+      switch (fd.Type) {
+        case 'heading':
+          fieldWrapper.append(createHeading(fd));
+          break;
+        case 'button':
+        case 'submit':
+          fieldWrapper.append(createButton(fd));
+          break;
+        case 'fieldset':
+          appendChild(fieldWrapper, createLegend(fd));
+          fieldsets[fd.Name] = fieldWrapper;
+          break;
+        case 'checkbox':
+        case 'radio':
+          fieldWrapper.append(createWidget(fd));
+          appendChild(fieldWrapper, createLabel(fd));
+          break;
+        default:
+          appendChild(fieldWrapper, createLabel(fd));
+          fieldWrapper.append(createWidget(fd));
+      }
 
-    if (fd.Rules) {
-      try {
-        rules.push({ fieldId, rule: JSON.parse(fd.Rules) });
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.warn(`Invalid Rule ${fd.Rules}: ${e}`);
+      if (fd.Rules) {
+        try {
+          rules.push({ fieldId, rule: JSON.parse(fd.Rules) });
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.warn(`Invalid Rule ${fd.Rules}: ${e}`);
+        }
+      }
+      if (fd.Group) {
+        fieldsets?.[fd.Group].append(fieldWrapper);
+      } else {
+        form.append(fieldWrapper);
       }
     }
-    form.append(fieldWrapper);
   });
 
   form.addEventListener('change', () => applyRules(form, rules));
