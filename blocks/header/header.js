@@ -13,14 +13,6 @@ function collapseAllNavSections(sections) {
   });
 }
 
-window.login = function login() {
-  document.getElementById('nblogin').close();
-  localStorage.setItem('nbuser', document.getElementById('nbuser').value);
-  localStorage.setItem('nbpswd', document.getElementById('nbpswd').value);
-  decorate(document.querySelector('div.header.block'));
-  console.log('login');
-};
-
 class NedbankNavDiv extends HTMLDivElement {
   constructor(elems) {
     super();
@@ -51,35 +43,13 @@ export default async function decorate(block) {
   let resp;
   if (xfNav) {
     navUrl = new URL(xfNav);
-    const nbuser = localStorage.getItem('nbuser');
-    const nbpswd = localStorage.getItem('nbpswd');
-    if (nbuser != null && nbpswd != null) {
-      resp = await fetch(navUrl, {
-        headers: {
-          Authorization: `Basic ${btoa(`${nbuser}:${nbpswd}`)}`,
-        },
-      });
-    } else {
-      resp = await fetch(navUrl);
-    }
+    resp = await fetch(navUrl);
   } else {
     const navPath = cfg.nav || `${getRootPath()}/nav`;
     navUrl = `${navPath}.plain.html`;
     resp = await fetch(navUrl);
   }
   // load default nav
-
-  if (xfNav && !resp.ok) {
-    const loginDlg = document.createElement('dialog');
-    loginDlg.setAttribute('id', 'nblogin');
-    loginDlg.innerHTML = '<div>'
-      + '<label>User</label><input id="nbuser" type="text"/>'
-      + '<label>Password</label><input id="nbpswd" type="pasword"/>'
-      + '<button onclick="login()">Submit</button>'
-      + '</div>';
-    document.getElementsByTagName('BODY')[0].prepend(loginDlg);
-    loginDlg.show();
-  }
   if (resp.ok) {
     const html = await resp.text();
     if (xfNav) {
