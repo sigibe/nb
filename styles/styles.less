@@ -107,7 +107,7 @@ h6 {
 	margin-top: 1em;
 	margin-bottom: 0.5em;
 	scroll-margin: calc(var(--nav-height) + 1em);
-	font-family: @font_family_2;
+	font-family: var(--strong-font-family);
 	color: @color_2;
 }
 
@@ -357,6 +357,12 @@ main {
 			}
 		}
 
+		&.narrow {
+			max-width: 1228px;
+			margin: auto;
+			padding: unset;
+		}
+
 
 		&.shaded-background {
 			background-color: var(--overlay-background-color);
@@ -511,7 +517,7 @@ main .home-banner.section {
 
 		.default-content-wrapper {
 			margin: 0 22px;
-			top: -48px;
+			top: -97px;
 			position: relative;
 			padding: 64px 22px;
 		}
