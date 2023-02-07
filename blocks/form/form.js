@@ -1,3 +1,5 @@
+import decorateRange from './components/range.js';
+
 const appendChild = (parent, element) => {
   if (parent && element) {
     parent.appendChild(element);
@@ -142,7 +144,7 @@ function createTextArea(fd) {
 function createLabel(fd) {
   if (fd.Label) {
     const label = document.createElement('label');
-    label.setAttribute('for', fd.Name);
+    label.setAttribute('for', fd.Id);
     label.textContent = fd.Label;
     return label;
   }
@@ -189,6 +191,14 @@ function createWidget(fd) {
   }
 }
 
+export const loadComponent = async (componentName) => {
+  try {
+    return await import(`./components/${componentName}.js`);
+    // eslint-disable-next-line no-empty
+  } catch (error) { }
+  return undefined;
+};
+
 async function createForm(formURL) {
   const { pathname } = new URL(formURL);
   const resp = await fetch(pathname);
@@ -205,7 +215,7 @@ async function createForm(formURL) {
   const fieldsets = {};
   // eslint-disable-next-line prefer-destructuring
   form.dataset.action = pathname.split('.json')[0];
-  json.data.forEach((fd) => {
+  json.data.forEach(async (fd) => {
     fd.Id = fd.Id || getId(fd.Name);
     fd.Type = fd.Type || 'text';
     if (fd.Type === 'hidden') {
@@ -221,6 +231,7 @@ async function createForm(formURL) {
       fieldWrapper.dataset.hidden = fd.Hidden || 'false';
       fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
       fieldWrapper.dataset.tooltip = fd.Tooltip;
+      fieldWrapper.dataset.displayFormat = fd['Display Format'];
       fieldWrapper.title = fd.Tooltip;
       switch (fd.Type) {
         case 'heading':
@@ -243,19 +254,22 @@ async function createForm(formURL) {
           appendChild(fieldWrapper, createLabel(fd));
           fieldWrapper.append(createWidget(fd));
       }
-
       if (fd.Rules) {
         try {
           rules.push({ fieldId, rule: JSON.parse(fd.Rules) });
         } catch (e) {
           // eslint-disable-next-line no-console
-          console.warn(`Invalid Rule ${fd.Rules}: ${e}`);
+          console.log(`Invalid Rule ${fd.Rules}: ${e}`);
         }
       }
       if (fd.Group) {
         fieldsets?.[fd.Group].append(fieldWrapper);
       } else {
         form.append(fieldWrapper);
+      }
+
+      if (fd.Type === 'range') {
+        decorateRange(fieldWrapper);
       }
     }
   });

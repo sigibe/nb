@@ -1,11 +1,14 @@
 .field-wrapper {
   display: flex;
   flex-direction: column;
+  margin-top: 42px;
+  max-width: 600px;
 }
 
 .form-radio-wrapper,
 .form-checkbox-wrapper {
   flex-direction: row;
+  margin-top: 0;
 }
 
 .repayments-calculator-section {
@@ -252,4 +255,57 @@ button {
   background-color: #17252e;
   color: #fff;
   border: 2px solid #17252e;
+}
+
+.range-widget-wrapper .range-hover-value::after {
+  content: var(--current-value)
+}
+
+input[type="range"] {
+  appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  border: none;
+  outline: 0;
+  padding: 0;
+  background-image: linear-gradient(to right, #78be20 calc(100% * var(--current-steps)/var(--total-steps)), #C5C5C5 calc(100% * var(--current-steps)/var(--total-steps)));
+  ;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--range-widget-thumb-backgroundColor);
+  border: 3px solid var(--range-widget-thumb-borderColor);
+  cursor: pointer;
+  outline: 3px solid var(--range-widget-thumb-backgroundColor);
+}
+
+.range-widget-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.range-hover-value::after {
+  position: relative;
+  left: calc(var(--current-steps)*100% / (var(--total-steps) + 1));
+  font-size: 20px;
+  line-height: 28px;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.range-min-max {
+  display: flex;
+  justify-content: space-between;
+}
+
+.range-min-max::before {
+  content: var(--min-value);
+}
+
+.range-min-max::after {
+  content: var(--max-value);
 }
