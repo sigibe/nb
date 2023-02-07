@@ -194,14 +194,6 @@ function createWidget(fd) {
   }
 }
 
-export const loadComponent = async (componentName) => {
-  try {
-    return await import(`./components/${componentName}.js`);
-    // eslint-disable-next-line no-empty
-  } catch (error) { }
-  return undefined;
-};
-
 async function createForm(formURL) {
   const { pathname } = new URL(formURL);
   const resp = await fetch(pathname);
