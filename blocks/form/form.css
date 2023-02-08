@@ -11,6 +11,12 @@
   margin-top: 0;
 }
 
+:root {
+  --adaptiveform-tooltip-color: #fff;
+  --adaptiveform-tooltip-backgroundColor: #17252e;
+  --adaptiveform-tooltip-borderWidth: 7px;
+}
+
 .repayments-calculator-section {
   box-sizing: border-box;
   --text-color: #17252e;
@@ -351,4 +357,97 @@ input[type="range"]:focus::-webkit-slider-thumb {
 
 .range-min-max::after {
   content: var(--max-value);
+}
+
+/* tooltip */
+.field-tooltip-icon {
+  margin: unset;
+  padding: unset;
+  display: inline;
+  width: 14px;
+  height: 14px;
+  border-radius: 9px;
+  background: var(--adaptiveform-questionmark-background);
+  cursor: pointer;
+  position: absolute;
+  box-sizing: content-box;
+  align-self: flex-end;
+  background-repeat: no-repeat;
+  margin-top: 5px;
+}
+
+.field-tooltip-icon:hover {
+  background-color: unset;
+}
+
+.field-tooltip-text[data-hidden="true"] {
+  visibility: hidden;
+}
+
+.field-tooltip-text[data-hidden="false"] {
+  visibility: visible;
+}
+
+.field-tooltip-text {
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--adaptiveform-tooltip-color);
+  background-color: var(--adaptiveform-tooltip-backgroundColor);
+  border-radius: 5px;
+  max-width: 200px;
+  padding: 4px 8px;
+  text-align: unset;
+  font-size: .875rem;
+  word-wrap: break-word;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  letter-spacing: normal;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 100;
+  position: absolute;
+}
+
+.field-tooltip-text.top::after {
+  top: 100%;
+  left: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  border-style: solid;
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+
+.field-tooltip-text.left::after {
+  top: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  left: 100%;
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  border-style: solid;
+  transform: rotate(-90deg);
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+
+.field-tooltip-text.right::before {
+  top: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  left: calc(0% - 2*var(--adaptiveform-tooltip-borderWidth));
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  transform: rotate(90deg);
+  border-style: solid;
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+
+.field-tooltip-text.bottom::before {
+  top: calc(0% - 2*var(--adaptiveform-tooltip-borderWidth));
+  left: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  border-style: solid;
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+  transform: rotate(180deg);
 }

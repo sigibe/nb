@@ -1,5 +1,6 @@
 import decorateRange from './components/range.js';
 import formatNumber from './formatting.js';
+import decorateTooltip from './components/tooltip.js';
 
 const appendChild = (parent, element) => {
   if (parent && element) {
@@ -151,6 +152,7 @@ function createLabel(fd) {
   if (fd.Label) {
     const label = document.createElement('label');
     label.setAttribute('for', fd.Id);
+    label.className = 'field-label';
     label.textContent = fd.Label;
     return label;
   }
@@ -160,6 +162,7 @@ function createLabel(fd) {
 function createLegend(fd) {
   if (fd.Label) {
     const label = document.createElement('legend');
+    label.className = 'field-label';
     label.textContent = fd.Label;
     return label;
   }
@@ -244,7 +247,6 @@ async function createForm(formURL) {
       fieldWrapper.classList.add('field-wrapper');
       fieldWrapper.dataset.hidden = fd.Hidden || 'false';
       fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
-      fieldWrapper.dataset.tooltip = fd.Tooltip;
       fieldWrapper.dataset.displayFormat = fd['Display Format'];
       fieldWrapper.title = fd.Tooltip;
       switch (fd.Type) {
@@ -288,6 +290,7 @@ async function createForm(formURL) {
       if (fd.Type === 'range') {
         decorateRange(fieldWrapper);
       }
+      decorateTooltip(fieldWrapper);
     }
   });
 
