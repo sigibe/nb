@@ -1,5 +1,7 @@
 import decorateRange from './components/range.js';
 import formatNumber from './formatting.js';
+import { RuleCompiler } from './formula/RuleCompiler.js';
+import RuleEngine from './formula/RuleEngine.js';
 
 const appendChild = (parent, element) => {
   if (parent && element) {
@@ -71,8 +73,8 @@ function createSelect(fd) {
 function constructPayload(form) {
   const payload = {};
   [...form.elements].forEach((fe) => {
-    if (fe.type === 'checkbox') {
-      if (fe.checked) payload[fe.id] = fe.value;
+    if (fe.type === 'checkbox' || fe.type === 'radio') {
+      if (fe.checked) payload[fe.name] = fe.value;
     } else if (fe.id) {
       payload[fe.id] = fe.value;
     }
@@ -124,6 +126,10 @@ function createHeading(fd) {
 function createInput(fd) {
   const input = document.createElement('input');
   input.type = fd.Type;
+  const displayFormat = fd['Display Format'];
+  if (displayFormat) {
+    input.dataset.displayFormat = displayFormat;
+  }
   widgetProps(input, fd);
   return input;
 }
@@ -132,7 +138,11 @@ function createOutput(fd) {
   const output = document.createElement('output');
   output.name = fd.Name;
   const displayFormat = fd['Display Format'];
-  const formattedValue = displayFormat ? formatNumber(fd.Value, displayFormat) : fd.Value;
+  let formattedValue = fd.Value;
+  if (displayFormat) {
+    output.dataset.displayFormat = displayFormat;
+    formattedValue = formatNumber(fd.Value, displayFormat);
+  }
   output.textContent = formattedValue;
   return output;
 }
@@ -162,22 +172,6 @@ function createLegend(fd) {
   }
 }
 
-function applyRules(form, rules) {
-  const payload = constructPayload(form);
-  rules.forEach((field) => {
-    const { type, condition: { key, operator, value } } = field.rule;
-    if (type === 'visible') {
-      if (operator === 'eq') {
-        if (payload[key] === value) {
-          form.querySelector(`.${field.fieldId}`).classList.remove('hidden');
-        } else {
-          form.querySelector(`.${field.fieldId}`).classList.add('hidden');
-        }
-      }
-    }
-  });
-}
-
 function createWidget(fd) {
   switch (fd.Type) {
     case 'select':
@@ -194,23 +188,34 @@ function createWidget(fd) {
   }
 }
 
-async function createForm(formURL) {
-  const { pathname } = new URL(formURL);
-  const resp = await fetch(pathname);
+function getRules(fd) {
+  const entries = [
+    ['Value', fd?.['Value Expression']],
+    ['Hidden', fd?.['Hidden Expression']],
+    ['Label', fd?.['Label Expression']],
+  ];
+  return entries.filter((e) => e[1]).map(([propName, expression]) => ({
+    propName,
+    expression,
+  }));
+}
+
+async function renderFields(formURL, form, ids = {}) {
+  const { pathname, search } = new URL(formURL);
+  const resp = await fetch(pathname + search);
   const json = await resp.json();
-  const form = document.createElement('form');
-  const rules = [];
-  const ids = {};
-  const getId = function (name) {
+  const getId = (name) => {
     ids[name] = ids[name] || 0;
     const idSuffix = ids[name] ? `-${ids[name]}` : '';
     ids[name] += 1;
     return `${name}${idSuffix}`;
   };
+  let fieldToCellMap = {};
   const fieldsets = {};
-  // eslint-disable-next-line prefer-destructuring
-  form.dataset.action = pathname.split('.json')[0];
-  json.data.forEach(async (fd) => {
+  let extraSheets = new Set([]);
+  let ruleCompiler;
+  json.data.forEach(async (fd, index) => {
+    fieldToCellMap[index + 2] = fd.Name;
     fd.Id = fd.Id || getId(fd.Name);
     fd.Type = fd.Type || 'text';
     if (fd.Type === 'hidden') {
@@ -249,14 +254,6 @@ async function createForm(formURL) {
           appendChild(fieldWrapper, createLabel(fd));
           fieldWrapper.append(createWidget(fd));
       }
-      if (fd.Rules) {
-        try {
-          rules.push({ fieldId, rule: JSON.parse(fd.Rules) });
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.log(`Invalid Rule ${fd.Rules}: ${e}`);
-        }
-      }
       if (fd.Group) {
         fieldsets?.[fd.Group].append(fieldWrapper);
       } else {
@@ -267,17 +264,76 @@ async function createForm(formURL) {
         decorateRange(fieldWrapper);
       }
     }
+    const rules = getRules(fd);
+    if (rules.length > 0) {
+      if (!ruleCompiler) {
+        ruleCompiler = new RuleCompiler();
+      }
+      const newSheets = new Set(...(rules.flatMap((r) => ruleCompiler.addRule(fd.Name, r))));
+      extraSheets = new Set([...extraSheets, ...newSheets]);
+    }
   });
-
-  form.addEventListener('change', () => applyRules(form, rules));
-  applyRules(form, rules);
-
-  return (form);
+  let fragments = {};
+  if (extraSheets.size > 0) {
+    const arr = Array.from(extraSheets);
+    // todo: maintain order of fragment fields and prevent de-duplicating nested fragment
+    const res = await Promise.all(arr.map(async (sheet) => {
+      const { origin } = new URL(document.location.href);
+      const paramName = sheet.replace(/^helix-/, '');
+      const url = `${origin}${pathname}?sheet=${paramName}`;
+      // eslint-disable-next-line no-shadow
+      const { fieldToCellMap, rules, deps } = await renderFields(url, form, ids);
+      return {
+        fieldToCellMap: Object.fromEntries(Object.entries(fieldToCellMap)
+          .map(([rowNum, name]) => [`${sheet}_${rowNum}`, name])),
+        rules,
+        deps,
+      };
+    }));
+    // eslint-disable-next-line no-shadow
+    fragments = res.reduce((accMap, { rules, deps, fieldToCellMap }) => ({
+      fieldToCellMap: {
+        ...accMap.fieldToCellMap,
+        ...fieldToCellMap,
+      },
+      rules: {
+        ...accMap.rules,
+        ...rules,
+      },
+      deps: {
+        ...accMap.deps,
+        ...deps,
+      },
+    }));
+  }
+  fieldToCellMap = {
+    ...(fragments.fieldToCellMap || {}),
+    ...fieldToCellMap,
+  };
+  ruleCompiler.transform(fieldToCellMap, form);
+  // eslint-disable-next-line no-shadow
+  return {
+    fieldToCellMap,
+    rules: {
+      ...ruleCompiler.rules,
+      ...fragments.rules,
+    },
+    deps: {
+      ...ruleCompiler.deps,
+      ...fragments.deps,
+    },
+  };
 }
 
 export default async function decorate(block) {
   const form = block.querySelector('a[href$=".json"]');
   if (form) {
-    form.replaceWith(await createForm(form.href));
+    const formTag = document.createElement('form');
+    // eslint-disable-next-line prefer-destructuring
+    formTag.dataset.action = form.href.split('.json')[0];
+    const { rules, deps } = await renderFields(form.href, formTag);
+    const ruleEngine = new RuleEngine(rules, deps, formTag, constructPayload(formTag));
+    ruleEngine.applyRules();
+    form.replaceWith(formTag);
   }
 }

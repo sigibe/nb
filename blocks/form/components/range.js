@@ -1,6 +1,6 @@
 import formatNumber from '../formatting.js';
 
-const addInlineStyle = function ({
+function addInlineStyle({
   min, max, value, step, format,
 }, element) {
   const totalSteps = Math.ceil((max - min) / step);
@@ -15,7 +15,7 @@ const addInlineStyle = function ({
   };
   const style = Object.entries(vars).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
   element.setAttribute('style', style);
-};
+}
 
 export default async function decorate(block) {
   const input = block.querySelector('input');
