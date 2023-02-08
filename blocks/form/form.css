@@ -11,6 +11,12 @@
   margin-top: 0;
 }
 
+:root {
+  --adaptiveform-tooltip-color: #fff;
+  --adaptiveform-tooltip-backgroundColor: #17252e;
+  --adaptiveform-tooltip-borderWidth: 7px;
+}
+
 .repayments-calculator-section {
   box-sizing: border-box;
   --text-color: #17252e;
@@ -85,12 +91,17 @@ select {
   max-width: 50rem;
   box-sizing: border-box;
   margin-top: 4px;
+  outline: 0;
 }
 
 input,
 textarea,
 select {
   border: 1px solid rgb(193 193 195);
+}
+
+input:focus {
+  border-color: rgb(0, 99, 65);
 }
 
 output {
@@ -115,6 +126,19 @@ legend {
   padding-right: 16px;
 }
 
+.field-description {
+  font-family: var(--adaptiveform-longdescription-fontFamily);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-top: 8px;
+  color: var(--adaptiveform-longdescription-color);
+}
+
+[data-invalid="true"] .field-description {
+  color: #ea394d;
+}
+
 form fieldset {
   border: none;
   padding: 0;
@@ -137,6 +161,10 @@ input[type="radio"] {
   margin: unset;
   transform: unset;
   appearance: none;
+}
+
+input[type="radio"]:focus {
+  box-shadow: 0 0 0 1px #78be20;
 }
 
 input[type="checkbox"]:checked::after,
@@ -181,6 +209,10 @@ input[type="number"] {
   max-width: 600px;
 }
 
+input[type="number"]:focus {
+  border-color: rgb(0, 99, 65);
+}
+
 .form-exploreRate label {
   margin: 0;
   padding: 0;
@@ -202,6 +234,12 @@ input[type="number"] {
   font-family: var(--adaptiveform-widget-fontFamily);
   margin-left: 15px;
   position: static;
+  width: 24px;
+  height: 24px;
+}
+
+.form-exploreRate input[type="checkbox"]:focus::after {
+  box-shadow: 0 0 0 1px #78be20;
 }
 
 .form-exploreRate input[type="checkbox"]:checked::after {
@@ -283,6 +321,10 @@ input[type="range"]::-webkit-slider-thumb {
   outline: 3px solid var(--range-widget-thumb-backgroundColor);
 }
 
+input[type="range"]:focus::-webkit-slider-thumb {
+  border-color: rgb(0, 99, 65);
+}
+
 .range-widget-wrapper {
   display: flex;
   flex-direction: column;
@@ -305,6 +347,7 @@ input[type="range"]::-webkit-slider-thumb {
   color: var(--range-minmax-color);
   font-size: 14px;
   line-height: 22px;
+  margin-top: 15px;
   font-family: var(--range-minmax-fontFamily);
 }
 
@@ -314,4 +357,97 @@ input[type="range"]::-webkit-slider-thumb {
 
 .range-min-max::after {
   content: var(--max-value);
+}
+
+/* tooltip */
+.field-tooltip-icon {
+  margin: unset;
+  padding: unset;
+  display: inline;
+  width: 14px;
+  height: 14px;
+  border-radius: 9px;
+  background: var(--adaptiveform-questionmark-background);
+  cursor: pointer;
+  position: absolute;
+  box-sizing: content-box;
+  align-self: flex-end;
+  background-repeat: no-repeat;
+  margin-top: 5px;
+}
+
+.field-tooltip-icon:hover {
+  background-color: unset;
+}
+
+.field-tooltip-text[data-hidden="true"] {
+  visibility: hidden;
+}
+
+.field-tooltip-text[data-hidden="false"] {
+  visibility: visible;
+}
+
+.field-tooltip-text {
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--adaptiveform-tooltip-color);
+  background-color: var(--adaptiveform-tooltip-backgroundColor);
+  border-radius: 5px;
+  max-width: 200px;
+  padding: 4px 8px;
+  text-align: unset;
+  font-size: .875rem;
+  word-wrap: break-word;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  letter-spacing: normal;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 100;
+  position: absolute;
+}
+
+.field-tooltip-text.top::after {
+  top: 100%;
+  left: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  border-style: solid;
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+
+.field-tooltip-text.left::after {
+  top: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  left: 100%;
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  border-style: solid;
+  transform: rotate(-90deg);
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+
+.field-tooltip-text.right::before {
+  top: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  left: calc(0% - 2*var(--adaptiveform-tooltip-borderWidth));
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  transform: rotate(90deg);
+  border-style: solid;
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+}
+
+.field-tooltip-text.bottom::before {
+  top: calc(0% - 2*var(--adaptiveform-tooltip-borderWidth));
+  left: calc(50% - var(--adaptiveform-tooltip-borderWidth));
+  content: "";
+  position: absolute;
+  border-width: var(--adaptiveform-tooltip-borderWidth);
+  border-style: solid;
+  border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
+  transform: rotate(180deg);
 }

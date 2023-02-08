@@ -43,5 +43,15 @@ export default async function decorate(block) {
   div.appendChild(hover);
   div.appendChild(input);
   div.appendChild(rangeEl);
-  block.appendChild(div);
+  const label = block.querySelector('label');
+  if (label) {
+    label.after(div);
+  } else {
+    const helpText = block.querySelector('.field-description');
+    if (helpText) {
+      helpText.before(div);
+    } else {
+      block.appendChild(div);
+    }
+  }
 }

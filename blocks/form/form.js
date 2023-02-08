@@ -2,6 +2,7 @@ import decorateRange from './components/range.js';
 import formatNumber from './formatting.js';
 import { RuleCompiler } from './formula/RuleCompiler.js';
 import RuleEngine from './formula/RuleEngine.js';
+import decorateTooltip from './components/tooltip.js';
 
 const appendChild = (parent, element) => {
   if (parent && element) {
@@ -48,6 +49,9 @@ function widgetProps(element, fd) {
   setPlaceholder(element, fd);
   setStringConstraints(element, fd);
   setNumberConstraints(element, fd);
+  if (fd.Description) {
+    element.dataset.description = fd.Description;
+  }
   element.value = fd.Value;
 }
 
@@ -158,6 +162,7 @@ function createLabel(fd) {
   if (fd.Label) {
     const label = document.createElement('label');
     label.setAttribute('for', fd.Id);
+    label.className = 'field-label';
     label.textContent = fd.Label;
     return label;
   }
@@ -167,6 +172,7 @@ function createLabel(fd) {
 function createLegend(fd) {
   if (fd.Label) {
     const label = document.createElement('legend');
+    label.className = 'field-label';
     label.textContent = fd.Label;
     return label;
   }
@@ -200,6 +206,14 @@ function getRules(fd) {
   }));
 }
 
+function createHelpText(description) {
+  const div = document.createElement('div');
+  div.className = 'field-description';
+  div.setAttribute('aria-live', 'polite');
+  div.innerText = description;
+  return div;
+}
+
 async function renderFields(formURL, form, ids = {}) {
   const { pathname, search } = new URL(formURL);
   const resp = await fetch(pathname + search);
@@ -230,7 +244,6 @@ async function renderFields(formURL, form, ids = {}) {
       fieldWrapper.classList.add('field-wrapper');
       fieldWrapper.dataset.hidden = fd.Hidden || 'false';
       fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
-      fieldWrapper.dataset.tooltip = fd.Tooltip;
       fieldWrapper.dataset.displayFormat = fd['Display Format'];
       fieldWrapper.title = fd.Tooltip;
       switch (fd.Type) {
@@ -253,6 +266,9 @@ async function renderFields(formURL, form, ids = {}) {
         default:
           appendChild(fieldWrapper, createLabel(fd));
           fieldWrapper.append(createWidget(fd));
+          if (fd.Description) {
+            fieldWrapper.appendChild(createHelpText(fd.Description));
+          }
       }
       if (fd.Group) {
         fieldsets?.[fd.Group].append(fieldWrapper);
@@ -263,6 +279,7 @@ async function renderFields(formURL, form, ids = {}) {
       if (fd.Type === 'range') {
         decorateRange(fieldWrapper);
       }
+      decorateTooltip(fieldWrapper);
     }
     const rules = getRules(fd);
     if (rules.length > 0) {
@@ -334,6 +351,28 @@ export default async function decorate(block) {
     const { rules, deps } = await renderFields(form.href, formTag);
     const ruleEngine = new RuleEngine(rules, deps, formTag, constructPayload(formTag));
     ruleEngine.applyRules();
+    formTag.addEventListener('change', (e) => {
+      const input = e.target;
+      const wrapper = input.closest('.field-wrapper');
+      let helpTextDiv = wrapper.querySelector('.field-description');
+      input.checkValidity();
+      const { valid } = input.validity;
+      const invalidity = wrapper.dataset.invalid;
+      if (valid === !!invalidity) {
+        if (!valid) {
+          if (!helpTextDiv) {
+            helpTextDiv = createHelpText('');
+          }
+          input.setAttribute('aria-invalid', true);
+          wrapper.setAttribute('data-invalid', true);
+          helpTextDiv.innerText = input.validationMessage;
+        } else if (helpTextDiv) {
+          helpTextDiv.innerText = input.dataset.description || '';
+          input.removeAttribute('aria-invalid');
+          wrapper.removeAttribute('data-invalid');
+        }
+      }
+    });
     form.replaceWith(formTag);
   }
 }
