@@ -85,12 +85,17 @@ select {
   max-width: 50rem;
   box-sizing: border-box;
   margin-top: 4px;
+  outline: 0;
 }
 
 input,
 textarea,
 select {
   border: 1px solid rgb(193 193 195);
+}
+
+input:focus {
+  border-color: rgb(0, 99, 65);
 }
 
 output {
@@ -152,6 +157,10 @@ input[type="radio"] {
   appearance: none;
 }
 
+input[type="radio"]:focus {
+  box-shadow: 0 0 0 1px #78be20;
+}
+
 input[type="checkbox"]:checked::after,
 input[type="radio"]:checked::after {
   background-color: var(--radiobutton-option-widget-color);
@@ -194,6 +203,10 @@ input[type="number"] {
   max-width: 600px;
 }
 
+input[type="number"]:focus {
+  border-color: rgb(0, 99, 65);
+}
+
 .form-exploreRate label {
   margin: 0;
   padding: 0;
@@ -215,6 +228,12 @@ input[type="number"] {
   font-family: var(--adaptiveform-widget-fontFamily);
   margin-left: 15px;
   position: static;
+  width: 24px;
+  height: 24px;
+}
+
+.form-exploreRate input[type="checkbox"]:focus::after {
+  box-shadow: 0 0 0 1px #78be20;
 }
 
 .form-exploreRate input[type="checkbox"]:checked::after {
@@ -296,6 +315,10 @@ input[type="range"]::-webkit-slider-thumb {
   outline: 3px solid var(--range-widget-thumb-backgroundColor);
 }
 
+input[type="range"]:focus::-webkit-slider-thumb {
+  border-color: rgb(0, 99, 65);
+}
+
 .range-widget-wrapper {
   display: flex;
   flex-direction: column;
@@ -318,6 +341,7 @@ input[type="range"]::-webkit-slider-thumb {
   color: var(--range-minmax-color);
   font-size: 14px;
   line-height: 22px;
+  margin-top: 15px;
   font-family: var(--range-minmax-fontFamily);
 }
 
