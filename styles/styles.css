@@ -256,10 +256,10 @@ main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
   display: none !important;
 }
-main .section :where(p, a.button) > :where(.icon-arrow, .icon-diagonal-arrow) {
+main .section :where(.icon-arrow, .icon-diagonal-arrow) {
   display: inline-block;
 }
-main .section :where(p, a.button):hover > .icon-arrow {
+main .section :where(.icon-arrow, .icon-diagonal-arrow):hover {
   transition: transform 900ms;
   transform: translateX(8px);
 }
@@ -271,9 +271,8 @@ main .section p:has(.icon-arrow, .icon-diagonal-arrow) > a {
   text-decoration: none;
 }
 main .section.narrow {
-  max-width: 1228px;
-  margin: auto;
-  padding: unset;
+  padding-left: 250px;
+  padding-right: 250px;
 }
 main .section.shaded-background {
   background-color: var(--overlay-background-color);
@@ -350,6 +349,36 @@ main .section.back-to-top a.button {
   padding: 0;
   background-color: transparent;
   border: none;
+}
+main .section.switchcard {
+  background-color: var(--highlight-background-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.25fr 1fr;
+  grid-template-areas: "a a a a" "b b . d";
+}
+main .section.switchcard > .cards-wrapper {
+  grid-area: b;
+  position: relative;
+}
+main .section.switchcard > .cards-wrapper > .cards.block {
+  position: absolute;
+  top: -50px;
+}
+main .section.switchcard > div:nth-last-child(2) {
+  grid-area: d;
+}
+main .section.switchcard > .text-wrapper,
+main .section.switchcard .default-content-wrapper {
+  padding-bottom: 50px;
+}
+main .section.switchcard > .text-wrapper :where(h1, h2, h3, p),
+main .section.switchcard .default-content-wrapper :where(h1, h2, h3, p) {
+  color: white;
+  text-align: left;
+}
+main .section.switchcard .button-container > a {
+  background-color: white;
+  color: var(--highlight-background-color);
 }
 main .banner-placeholder {
   height: var(--banner-height);

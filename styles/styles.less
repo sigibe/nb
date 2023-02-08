@@ -329,16 +329,13 @@ main {
 			display: none !important;
 		}
 
-		:where(p, a.button) {
-			> :where(.icon-arrow, .icon-diagonal-arrow) {
-				display: inline-block;
-			}
+
+		:where(.icon-arrow, .icon-diagonal-arrow) {
+			display: inline-block;
 
 			&:hover {
-				>.icon-arrow {
-					transition: transform 900ms;
-					transform: translateX(8px);
-				}
+				transition: transform 900ms;
+				transform: translateX(8px);
 			}
 		}
 
@@ -358,9 +355,8 @@ main {
 		}
 
 		&.narrow {
-			max-width: 1228px;
-			margin: auto;
-			padding: unset;
+			padding-left: 250px;
+			padding-right: 250px;
 		}
 
 
@@ -460,6 +456,47 @@ main {
 				border: none;
 			}
 		}
+
+		&.switchcard {
+			background-color: var(--highlight-background-color);
+			display: grid;
+			grid-template-columns: 1fr 1fr 0.25fr 1fr;
+			grid-template-areas:
+			"a a a a"
+			"b b . d";
+
+			>.cards-wrapper {
+				grid-area: b;
+				position: relative;
+
+				>.cards.block {
+					position: absolute;
+					top: -50px;
+				}
+			}
+
+			>div {
+				&:nth-last-child(2) { //Should be last child once is fixed
+					grid-area: d;
+				}
+			}
+
+			>.text-wrapper, .default-content-wrapper {
+				padding-bottom: 50px;
+				:where(h1, h2, h3, p) {
+					color: @color_6;
+					text-align: left;
+				}
+
+			}
+
+			.button-container {
+				>a {
+					background-color: @color_6;
+					color: var(--highlight-background-color);
+				}
+			}
+		}
 	}
 
 	.banner-placeholder {
@@ -552,6 +589,7 @@ main .home-banner.section {
 		line-height: 32px
 	}
 }
+
 
 @media (@width_900) {
 	:root {

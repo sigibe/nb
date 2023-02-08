@@ -134,12 +134,24 @@
   width: 48px;
   height: 48px;
 }
+.cards.large .cards-image .cards-body > p {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+.cards.large .cards-image .cards-body > p:last-child {
+  margin-bottom: 0px;
+}
+.cards.large .cards-image .cards-body > :where(h2, h3) + p {
+  flex-grow: unset;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0 0 32px 0;
+}
 .cards.large .cards-body {
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
   text-align: start;
-  justify-content: space-between;
   align-items: flex-start;
   font-size: 20px;
   line-height: 28px;
@@ -156,13 +168,11 @@
 .cards.large .cards-body > p {
   font-size: 20px;
   line-height: 28px;
-  margin-top: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
-.cards.large .cards-body > p:has(.icon),
-.cards.large .cards-body > p.button-container {
-  margin-top: 0px;
-  margin-bottom: 0px;
+.cards.large .cards-body > p > a {
+  margin-left: 0;
+  margin-right: 0;
 }
 /* cards.pointer -> change mouse cursor to pointer when hovering items  */
 .cards.pointer li {
@@ -204,79 +214,6 @@
 }
 .home-services.cards-container .cards .cards-body > h3 + p {
   flex-grow: 1;
-}
-/* home help */
-.home-help.cards-container {
-  padding-top: 30px;
-  padding-bottom: 40px;
-  margin-top: 64px;
-  background-color: #008533;
-}
-.home-help.cards-container > div:first-child > h3 {
-  color: #fff;
-  margin-bottom: 36px;
-  text-align: left;
-}
-.home-help.cards-container .cards.large .cards-body > p {
-  margin-top: 0;
-  margin-bottom: 24px;
-}
-.home-help.cards-container .cards.large .cards-body > p:last-child {
-  margin-bottom: 0px;
-}
-.home-help.cards-container .cards.large .cards-body > :where(h2, h3) + p {
-  flex-grow: unset;
-  font-size: 16px;
-  line-height: 24px;
-  margin: 0 0 32px 0;
-}
-.home-help.cards-container .cards.large li:last-child {
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-  flex-grow: 1;
-  max-width: none;
-  background-color: transparent !important;
-  box-shadow: unset !important;
-  transform: unset !important;
-  border: unset !important;
-  padding: 0px !important;
-}
-.home-help.cards-container .cards.large li:last-child .cards-image {
-  display: none;
-}
-.home-help.cards-container .cards.large li:last-child .cards-body {
-  align-items: flex-start;
-  text-align: left;
-}
-.home-help.cards-container .cards.large li:last-child .cards-body > h3 {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 32px;
-  margin: 2px 0 24px 0;
-  height: auto;
-}
-.home-help.cards-container .cards.large li:last-child .cards-body > h3 + p {
-  color: #fff;
-  font-size: 20px;
-  line-height: 28px;
-  margin: 0 0 40px 0;
-}
-.home-help.cards-container .cards.large li:last-child .cards-body > p.button-container > a {
-  padding: 16px 0 16px 0;
-  font-size: 16px;
-  margin: 0;
-  cursor: pointer;
-  border: 2px solid #008533;
-  background-color: #fff;
-  color: #008533;
-  height: 56px;
-  max-width: 390px;
-  border-radius: 6px;
-  letter-spacing: 0;
-  line-height: 24px;
-  width: 285px;
-  font-weight: bold;
 }
 /* personal nedbank */
 .personal-nedbank.cards-container {
@@ -541,8 +478,6 @@
   }
   .cards.large li {
     padding: 48px 32px 48px 32px;
-    flex-basis: calc((100% - 70px)/3);
-    max-width: calc((100% - 70px)/3);
   }
   .cards.large .cards-body > h2 + p {
     font-size: 20px;
