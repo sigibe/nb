@@ -46,6 +46,9 @@ function widgetProps(element, fd) {
   setPlaceholder(element, fd);
   setStringConstraints(element, fd);
   setNumberConstraints(element, fd);
+  if (fd.Description) {
+    element.dataset.description = fd.Description;
+  }
   element.value = fd.Value;
 }
 
@@ -194,6 +197,14 @@ function createWidget(fd) {
   }
 }
 
+function createHelpText(description) {
+  const div = document.createElement('div');
+  div.className = 'field-description';
+  div.setAttribute('aria-live', 'polite');
+  div.innerText = description;
+  return div;
+}
+
 export const loadComponent = async (componentName) => {
   try {
     return await import(`./components/${componentName}.js`);
@@ -256,6 +267,9 @@ async function createForm(formURL) {
         default:
           appendChild(fieldWrapper, createLabel(fd));
           fieldWrapper.append(createWidget(fd));
+          if (fd.Description) {
+            fieldWrapper.appendChild(createHelpText(fd.Description));
+          }
       }
       if (fd.Rules) {
         try {
@@ -277,7 +291,30 @@ async function createForm(formURL) {
     }
   });
 
-  form.addEventListener('change', () => applyRules(form, rules));
+  form.addEventListener('change', (e) => {
+    const input = e.target;
+    const wrapper = input.closest('.field-wrapper');
+    let helpTextDiv = wrapper.querySelector('.field-description');
+    input.checkValidity();
+    const { valid } = input.validity;
+    const invalidity = wrapper.dataset.invalid;
+    if (valid === !!invalidity) {
+      if (!valid) {
+        if (!helpTextDiv) {
+          helpTextDiv = createHelpText('');
+        }
+        input.setAttribute('aria-invalid', true);
+        wrapper.setAttribute('data-invalid', true);
+        helpTextDiv.innerText = input.validationMessage;
+      } else if (helpTextDiv) {
+        helpTextDiv.innerText = input.dataset.description || '';
+        input.removeAttribute('aria-invalid');
+        wrapper.removeAttribute('data-invalid');
+      }
+    }
+
+    applyRules(form, rules);
+  });
   applyRules(form, rules);
 
   return (form);

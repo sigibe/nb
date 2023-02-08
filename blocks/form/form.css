@@ -115,6 +115,19 @@ legend {
   padding-right: 16px;
 }
 
+.field-description {
+  font-family: var(--adaptiveform-longdescription-fontFamily);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-top: 8px;
+  color: var(--adaptiveform-longdescription-color);
+}
+
+[data-invalid="true"] .field-description {
+  color: #ea394d;
+}
+
 form fieldset {
   border: none;
   padding: 0;
