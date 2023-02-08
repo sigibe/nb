@@ -1,4 +1,4 @@
-const supportedUnits = ['percent', 'month', 'year'].join('|');
+const supportedUnits = ['month', 'year'].join('|');
 
 const ShorthandStyles = [/^currency(?:\/([a-zA-Z]{3}))?$/, /^percent$/, new RegExp(`^unit/(${supportedUnits})$`)];
 
