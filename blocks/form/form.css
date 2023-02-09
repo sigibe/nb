@@ -528,7 +528,7 @@ form {
 
 .repayments-calculator-section .default-content-wrapper p {
   width: 100%;
-  color: #8a9596;
+  color: var(--adaptiveform-longdescription-color);
   font-family: var(--fontFamily-open-regular);
   font-size: 12px;
   letter-spacing: 0;
