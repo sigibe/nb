@@ -1,6 +1,6 @@
 /** base styling **/
-[data-hidden="true"] {
-  display: none !important;
+.field-wrapper[data-hidden="true"] {
+  display: none;
 }
 .field-wrapper {
   display: flex;

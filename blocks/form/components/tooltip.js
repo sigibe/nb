@@ -9,6 +9,7 @@ function createTooltipHTML() {
 
 function renderTooltip(target, title) {
   const tooltip = document.querySelector('.field-tooltip-text');
+  tooltip.innerText = title;
   const targetPos = target.getBoundingClientRect();
   const tooltipPos = tooltip.getBoundingClientRect();
 
@@ -36,8 +37,7 @@ function renderTooltip(target, title) {
 
   tooltip.style.top = `${top}px`;
   tooltip.style.left = `${left}px`;
-  tooltip.className += ` ${placement}`;
-  tooltip.innerText = title;
+  tooltip.className = `field-tooltip-text ${placement}`;
   tooltip.dataset.hidden = false;
 }
 
