@@ -230,12 +230,19 @@ async function createForm(formURL) {
     return `${name}${idSuffix}`;
   };
   const fieldsets = {};
+  let currentSection = form;
+  const sectionNameRegex = /^\s*---\s*(?:([^-]+)\s*---)?\s*$/;
   // eslint-disable-next-line prefer-destructuring
   form.dataset.action = pathname.split('.json')[0];
   json.data.forEach(async (fd) => {
+    const matchSection = sectionNameRegex.exec(fd.Name);
     fd.Id = fd.Id || getId(fd.Name);
     fd.Type = fd.Type || 'text';
-    if (fd.Type === 'hidden') {
+    if (matchSection) {
+      currentSection = document.createElement('div');
+      currentSection.classList.add('form-section-wrapper', matchSection[1]);
+      form.appendChild(currentSection);
+    } else if (fd.Type === 'hidden') {
       form.append(createWidget(fd));
     } else {
       const wrapperTag = fd.Type === 'fieldset' ? 'fieldset' : 'div';
@@ -284,7 +291,7 @@ async function createForm(formURL) {
       if (fd.Group) {
         fieldsets?.[fd.Group].append(fieldWrapper);
       } else {
-        form.append(fieldWrapper);
+        currentSection.append(fieldWrapper);
       }
 
       if (fd.Type === 'range') {
