@@ -515,3 +515,24 @@ form {
 [data-hidden="true"] {
   display: none;
 }
+
+.repayments-calculator-section h3 {
+  font-size: 20px;
+  line-height: 28px;
+  padding-bottom: 58px;
+  margin-bottom: 0;
+  font-family: var(--fontFamily-open-regular);
+  color: #494f50;
+}
+
+
+.repayments-calculator-section .default-content-wrapper p {
+  width: 100%;
+  color: #8a9596;
+  font-family: var(--fontFamily-open-regular);
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 24px;
+  display: block;
+  margin-top: 3em;
+}
