@@ -294,7 +294,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
   padding: 32px 40px 16px 40px;
   margin-bottom: 24px;
   border-radius: 10px;
-  background-color: #fafafa;
+  background-color: #f9fbfb;
   box-shadow: 0 25px 20px -15px rgba(0, 0, 0, 0.1);
   align-self: flex-start;
 }
