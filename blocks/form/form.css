@@ -1,7 +1,6 @@
 .field-wrapper {
   display: flex;
   flex-direction: column;
-  margin-top: 42px;
   max-width: 600px;
 }
 
@@ -266,11 +265,12 @@ input[type="number"]:focus {
   content: var(--personal-calculator-seeLoanDetails-icon);
   transition: transform 900ms;
   display: inline-block;
-  margin-left: 8px;
+  margin-left: 4px;
+  transform: translate(0, 4px) scale(0.7);
 }
 
 .form-seeLoanDetails button:hover::after {
-  transform: translate(6px, -5px);
+  transform: scale(0.8) translate(6px, -5px);
 }
 
 button {
@@ -450,4 +450,89 @@ input[type="range"]:focus::-webkit-slider-thumb {
   border-style: solid;
   border-color: var(--adaptiveform-tooltip-backgroundColor) transparent transparent transparent;
   transform: rotate(180deg);
+}
+
+/** layout **/
+form {
+  display: grid;
+  grid-template-areas: "input output"
+    "input buttons";
+  column-gap: 134px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.Input {
+  grid-area: input;
+}
+
+.Input .field-wrapper {
+  margin-bottom: 42px;
+}
+
+.Input .form-radio-wrapper {
+  margin-bottom: 0;
+}
+
+.Output {
+  box-sizing: border-box;
+  grid-area: output;
+  padding: 32px 42px 16px 42px;
+  margin-bottom: 22px;
+  border-radius: 10px;
+  background-color: var(--personal-calculator-info-backgroundColor);
+  box-shadow: 0 25px 20px -15px rgb(0 0 0 / 10%);
+  align-self: flex-start;
+}
+
+.Output .field-wrapper {
+  padding-bottom: 16px;
+}
+
+.Output label {
+  padding-bottom: 14px;
+  margin-bottom: 0;
+}
+
+.buttons {
+  grid-area: buttons;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.form-button-wrapper {
+  padding-left: 13px;
+  padding-right: 0;
+}
+
+.buttons button {
+  padding: 0.375rem 0.75rem;
+}
+
+/* hidden */
+[data-hidden="true"] {
+  display: none;
+}
+
+.repayments-calculator-section h3 {
+  font-size: 20px;
+  line-height: 28px;
+  padding-bottom: 58px;
+  margin-bottom: 0;
+  font-family: var(--fontFamily-open-regular);
+  color: #494f50;
+}
+
+
+.repayments-calculator-section .default-content-wrapper p {
+  width: 100%;
+  color: var(--adaptiveform-longdescription-color);
+  font-family: var(--fontFamily-open-regular);
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 24px;
+  display: block;
+  margin-top: 3em;
 }
