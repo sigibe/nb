@@ -89,10 +89,20 @@ export default class RuleEngine {
     }
   }
 
+  updateHidden(fieldName, value) {
+    const element = this.#formTag.elements[fieldName];
+    const wrapper = element.closest('.field-wrapper');
+    wrapper.dataset.hidden = value;
+  }
+
   applyRules() {
     this.#formTag.addEventListener('change', (e) => {
       const fieldName = e.target.name;
-      this.#data[fieldName] = coerceValue(e.target.value);
+      if (e.target.type === 'checkbox') {
+        this.#data[fieldName] = e.target.checked ? coerceValue(e.target.value) : undefined;
+      } else {
+        this.#data[fieldName] = coerceValue(e.target.value);
+      }
       if (!this.#ruleOrder[fieldName]) {
         this.#ruleOrder[fieldName] = this.listRules(fieldName);
       }
