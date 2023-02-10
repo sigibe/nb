@@ -3,6 +3,12 @@ header.global-nav {
   width: 100%;
   border: none;
 }
+header.global-nav > div.header.block {
+  display: none;
+}
+header.global-nav > div.header.block.appear {
+  display: block;
+}
 header nav {
   display: grid;
   grid-template: 'hamburger brand tools' var(--nav-height) 'sections sections sections' 1fr / 50px 1fr 50px;

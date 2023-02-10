@@ -2,6 +2,19 @@ import {
   readBlockConfig, decorateIcons, makeLinksRelative, getRootPath, getMetadata,
 } from '../../scripts/scripts.js';
 
+const loadScript = async (url, callback, type) => {
+  const head = document.querySelector('head');
+  const script = document.createElement('script');
+  script.src = url;
+  if (type) {
+    script.setAttribute('type', type);
+  }
+  script.onload = callback;
+  script.async = false;
+  head.append(script);
+  return script;
+};
+
 /**
  * collapses all open nav sections
  * @param {Element} sections The container element
@@ -60,10 +73,8 @@ export default async function decorate(block) {
       const doc = parser.parseFromString(html, 'text/html');
 
       doc.querySelectorAll('script').forEach((script) => {
-        script.src = new URL(script.getAttribute('src'), navUrl.origin);
-        //script.setAttribute('crossorigin', 'anonymous');
+        loadScript(new URL(script.getAttribute('src'), navUrl.origin));
         elems.push(script);
-        //document.head.append(script);
       });
       doc.head.querySelectorAll('link').forEach((link) => {
         link.href = new URL(link.getAttribute('href'), navUrl.origin);
@@ -84,7 +95,9 @@ export default async function decorate(block) {
       logo.src = `${getRootPath()}/icons/logo.svg`;
       const nav = new NedbankNavDiv(elems);
       block.append(nav);
-      block.closest('header').classList.add('appear');
+      setInterval(() => {
+        block.classList.add('appear');
+      }, 2000);
     } else {
       // decorate nav DOM
       const nav = document.createElement('nav');
