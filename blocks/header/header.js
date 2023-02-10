@@ -20,6 +20,7 @@ class NedbankNavDiv extends HTMLDivElement {
     shadow.append(...elems);
     const css = shadow.appendChild(document.createElement('link'));
     css.rel = 'stylesheet';
+    css.type = 'text/css';
     css.href = '/blocks/header/global-nav.css';
   }
 }
@@ -57,6 +58,18 @@ export default async function decorate(block) {
       const elems = [];
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
+
+      doc.querySelectorAll('script').forEach((script) => {
+        script.src = new URL(script.getAttribute('src'), navUrl.origin);
+        //script.setAttribute('crossorigin', 'anonymous');
+        elems.push(script);
+        //document.head.append(script);
+      });
+      doc.head.querySelectorAll('link').forEach((link) => {
+        link.href = new URL(link.getAttribute('href'), navUrl.origin);
+        elems.push(link);
+      });
+
       const container = doc.body.querySelector('.container');
       elems.push(container);
       // rewrite relative to absolute links
@@ -66,16 +79,12 @@ export default async function decorate(block) {
       doc.querySelectorAll('a').forEach((a) => {
         a.href = new URL(a.getAttribute('href'), navUrl.origin);
       });
-      doc.querySelectorAll('script').forEach((script) => {
-        script.src = new URL(script.getAttribute('src'), navUrl.origin);
-        elems.push(script);
-      });
-      doc.head.querySelectorAll('link').forEach((link) => {
-        link.href = new URL(link.getAttribute('href'), navUrl.origin);
-        elems.push(link);
-      });
+      // Patch the logo
+      const logo = doc.querySelector('a.navbar-brand>img');
+      logo.src = `${getRootPath()}/icons/logo.svg`;
       const nav = new NedbankNavDiv(elems);
       block.append(nav);
+      block.closest('header').classList.add('appear');
     } else {
       // decorate nav DOM
       const nav = document.createElement('nav');
