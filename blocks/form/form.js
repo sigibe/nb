@@ -47,6 +47,7 @@ function widgetProps(element, fd) {
   setPlaceholder(element, fd);
   setStringConstraints(element, fd);
   setNumberConstraints(element, fd);
+  element.dataset.displayFormat = fd['Display Format'];
   if (fd.Description) {
     element.dataset.description = fd.Description;
   }
@@ -179,6 +180,8 @@ function createWidget(fd) {
       return createTextArea(fd);
     case 'output':
       return createOutput(fd);
+    case 'range':
+      return decorateRange(createInput(fd));
     default:
       return createInput(fd);
   }
@@ -229,7 +232,6 @@ async function createForm(formURL) {
       fieldWrapper.classList.add('field-wrapper');
       fieldWrapper.dataset.hidden = fd.Hidden || 'false';
       fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
-      fieldWrapper.dataset.displayFormat = fd['Display Format'];
       fieldWrapper.title = fd.Tooltip;
       switch (fd.Type) {
         case 'heading':
@@ -261,9 +263,6 @@ async function createForm(formURL) {
         currentSection.append(fieldWrapper);
       }
 
-      if (fd.Type === 'range') {
-        decorateRange(fieldWrapper);
-      }
       decorateTooltip(fieldWrapper);
     }
   });

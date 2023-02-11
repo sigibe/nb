@@ -1,8 +1,11 @@
 import formatNumber from '../formatting.js';
 
-const addInlineStyle = function ({
-  min, max, value, step, format,
-}, element) {
+function addInlineStyle(input, element) {
+  const min = input.min || 0;
+  const max = input.max || 0;
+  const step = input.step || 1;
+  const value = input.value || 0;
+  const format = input.dataset.displayFormat;
   const totalSteps = Math.ceil((max - min) / step);
   const currSteps = Math.ceil((value - min) / step);
   const formattedValue = format ? formatNumber(value, format) : value;
@@ -15,43 +18,24 @@ const addInlineStyle = function ({
   };
   const style = Object.entries(vars).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
   element.setAttribute('style', style);
-};
+}
 
-export default async function decorate(block) {
-  const input = block.querySelector('input');
-  const { max } = input;
-  const min = input.min || 0;
-  const step = input.step || 1;
-  const value = input.value || 0;
-  const format = block.getAttribute('data-display-format');
+export default function styleRangeWidget(input) {
   const div = document.createElement('div');
   div.className = 'range-widget-wrapper';
-  addInlineStyle({
-    max, min, value, step, format,
-  }, div);
-  div.addEventListener('input', (e) => {
-    // eslint-disable-next-line no-shadow
-    const format = block.getAttribute('data-display-format');
-    addInlineStyle({
-      max, min, value: e.target.value, step, format,
-    }, e.currentTarget);
+  addInlineStyle(input, div);
+
+  input.addEventListener('change', (e) => {
+    addInlineStyle(e.target, div);
   });
+
   const hover = document.createElement('span');
   hover.className = 'range-hover-value';
   const rangeEl = document.createElement('span');
   rangeEl.className = 'range-min-max';
+
   div.appendChild(hover);
   div.appendChild(input);
   div.appendChild(rangeEl);
-  const label = block.querySelector('label');
-  if (label) {
-    label.after(div);
-  } else {
-    const helpText = block.querySelector('.field-description');
-    if (helpText) {
-      helpText.before(div);
-    } else {
-      block.appendChild(div);
-    }
-  }
+  return div;
 }
