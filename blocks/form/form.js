@@ -2,11 +2,11 @@ import decorateRange from './components/range.js';
 import formatNumber from './formatting.js';
 import decorateTooltip from './components/tooltip.js';
 
-const appendChild = (parent, element) => {
+function appendChild(parent, element) {
   if (parent && element) {
     parent.appendChild(element);
   }
-};
+}
 
 function setPlaceholder(element, fd) {
   if (fd.Placeholder) {
@@ -168,22 +168,6 @@ function createLegend(fd) {
   }
 }
 
-function applyRules(form, rules) {
-  const payload = constructPayload(form);
-  rules.forEach((field) => {
-    const { type, condition: { key, operator, value } } = field.rule;
-    if (type === 'visible') {
-      if (operator === 'eq') {
-        if (payload[key] === value) {
-          form.querySelector(`.${field.fieldId}`).classList.remove('hidden');
-        } else {
-          form.querySelector(`.${field.fieldId}`).classList.add('hidden');
-        }
-      }
-    }
-  });
-}
-
 function createWidget(fd) {
   switch (fd.Type) {
     case 'select':
@@ -208,27 +192,18 @@ function createHelpText(description) {
   return div;
 }
 
-export const loadComponent = async (componentName) => {
-  try {
-    return await import(`./components/${componentName}.js`);
-    // eslint-disable-next-line no-empty
-  } catch (error) { }
-  return undefined;
-};
-
 async function createForm(formURL) {
   const { pathname } = new URL(formURL);
   const resp = await fetch(pathname);
   const json = await resp.json();
   const form = document.createElement('form');
-  const rules = [];
   const ids = {};
-  const getId = function (name) {
+  function getId(name) {
     ids[name] = ids[name] || 0;
     const idSuffix = ids[name] ? `-${ids[name]}` : '';
     ids[name] += 1;
     return `${name}${idSuffix}`;
-  };
+  }
   const fieldsets = {};
   let currentSection = form;
   const sectionNameRegex = /^\s*---\s*(?:([^-]+)\s*---)?\s*$/;
@@ -280,14 +255,6 @@ async function createForm(formURL) {
             fieldWrapper.appendChild(createHelpText(fd.Description));
           }
       }
-      if (fd.Rules) {
-        try {
-          rules.push({ fieldId, rule: JSON.parse(fd.Rules) });
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.log(`Invalid Rule ${fd.Rules}: ${e}`);
-        }
-      }
       if (fd.Group) {
         fieldsets?.[fd.Group].append(fieldWrapper);
       } else {
@@ -322,11 +289,7 @@ async function createForm(formURL) {
         wrapper.removeAttribute('data-invalid');
       }
     }
-
-    applyRules(form, rules);
   });
-  applyRules(form, rules);
-
   return (form);
 }
 
