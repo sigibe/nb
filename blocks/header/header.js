@@ -2,19 +2,6 @@ import {
   readBlockConfig, decorateIcons, makeLinksRelative, getRootPath, getMetadata,
 } from '../../scripts/scripts.js';
 
-const loadScript = async (url, callback, type) => {
-  const head = document.querySelector('head');
-  const script = document.createElement('script');
-  script.src = url;
-  if (type) {
-    script.setAttribute('type', type);
-  }
-  script.onload = callback;
-  script.async = false;
-  head.append(script);
-  return script;
-};
-
 /**
  * collapses all open nav sections
  * @param {Element} sections The container element
@@ -73,8 +60,13 @@ export default async function decorate(block) {
       const doc = parser.parseFromString(html, 'text/html');
 
       doc.querySelectorAll('script').forEach((script) => {
-        loadScript(new URL(script.getAttribute('src'), navUrl.origin));
-        elems.push(script);
+        const newScript = document.createElement('script');
+        newScript.src = new URL(script.getAttribute('src'), navUrl.origin);
+        if (script.type) {
+          newScript.setAttribute('type', script.type);
+        }
+        newScript.defer = true;
+        elems.push(newScript);
       });
       doc.head.querySelectorAll('link').forEach((link) => {
         link.href = new URL(link.getAttribute('href'), navUrl.origin);
