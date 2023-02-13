@@ -16,9 +16,12 @@ function collapseAllNavSections(sections) {
 class NedbankNavDiv extends HTMLDivElement {
   constructor(elems) {
     super();
-    const shadow = this.attachShadow({ mode: 'closed' });
-    shadow.append(...elems);
-    const css = shadow.appendChild(document.createElement('link'));
+    //const shadow = this.attachShadow({ mode: 'closed' });
+    //shadow.append(...elems);
+    //const css = shadow.appendChild(document.createElement('link'));
+
+    this.append(...elems);
+    const css = this.appendChild(document.createElement('link'));
     css.rel = 'stylesheet';
     css.type = 'text/css';
     css.href = '/blocks/header/global-nav.css';
@@ -65,7 +68,7 @@ export default async function decorate(block) {
         if (script.type) {
           newScript.setAttribute('type', script.type);
         }
-        newScript.defer = true;
+        newScript.async = false;
         elems.push(newScript);
       });
       doc.head.querySelectorAll('link').forEach((link) => {
@@ -87,9 +90,10 @@ export default async function decorate(block) {
       logo.src = `${getRootPath()}/icons/logo.svg`;
       const nav = new NedbankNavDiv(elems);
       block.append(nav);
-      setInterval(() => {
+      setTimeout(() => {
         block.classList.add('appear');
-      }, 2000);
+        window.dispatchEvent(new Event('load'));
+      }, 5000);
     } else {
       // decorate nav DOM
       const nav = document.createElement('nav');
