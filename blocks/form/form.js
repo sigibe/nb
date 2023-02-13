@@ -1,6 +1,135 @@
-import decorateRange from './components/range.js';
-import formatNumber from './formatting.js';
-import decorateTooltip from './components/tooltip.js';
+function formatNumberPromise(inputs, format) {
+  let arrayInputs = inputs;
+  if (!(inputs instanceof Array)) {
+    arrayInputs = [inputs];
+  }
+  if (!format) {
+    return Promise.resolve(arrayInputs);
+  }
+  function formatFn(formatters) {
+    return arrayInputs.map((num) => {
+      try {
+        return formatters.default(num, format);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(`unable to format ${num} with format ${format}`);
+        return num;
+      }
+    });
+  }
+  function errorFn(e) {
+    // eslint-disable-next-line no-console
+    console.log('error in obtaining formatters', e);
+    return arrayInputs;
+  }
+  return import('./formatting.js').then(formatFn, errorFn);
+}
+
+function createTooltipHTML() {
+  if (!document.getElementById('field-tooltip-text')) {
+    const tooltip = document.createElement('div');
+    tooltip.id = 'field-tooltip-text';
+    tooltip.dataset.hidden = true;
+    document.body.append(tooltip);
+  }
+}
+
+function showTooltip(target, title) {
+  const tooltip = document.getElementById('field-tooltip-text');
+  tooltip.innerText = title;
+  const targetPos = target.getBoundingClientRect();
+  const tooltipPos = tooltip.getBoundingClientRect();
+
+  let left = targetPos.left + (targetPos.width / 2) + window.scrollX - (tooltipPos.width / 2);
+  let top = targetPos.top + window.scrollY - (tooltipPos.height + 10);
+  let placement = 'top';
+
+  if (left < 0) {
+    placement = 'right';
+    left = targetPos.left + targetPos.width + window.scrollX + 10;
+    top = targetPos.top + (targetPos.height / 2) + window.scrollY - (tooltipPos.height / 2);
+  }
+
+  if (left + tooltipPos.width > document.documentElement.clientWidth) {
+    placement = 'left';
+    left = targetPos.left + window.scrollX - (tooltipPos.width + 10);
+    top = targetPos.top + (targetPos.height / 2) + window.scrollY - (tooltipPos.height / 2);
+  }
+
+  if (top < 0) {
+    placement = 'bottom';
+    left = targetPos.left + (targetPos.width / 2) + window.scrollX - (tooltipPos.width / 2);
+    top = targetPos.top + targetPos.height + window.scrollY + 10;
+  }
+
+  tooltip.style.top = `${top}px`;
+  tooltip.style.left = `${left}px`;
+  tooltip.className = `field-tooltip-text ${placement}`;
+  tooltip.dataset.hidden = false;
+}
+
+function createQuestionMark(title) {
+  const button = document.createElement('button');
+  button.dataset.text = title;
+  button.setAttribute('aria-label', title);
+  button.className = 'field-tooltip-icon';
+  button.type = 'button';
+
+  button.addEventListener('mouseenter', (event) => {
+    createTooltipHTML(title);
+    showTooltip(event.target, title);
+    event.stopPropagation();
+  });
+
+  button.addEventListener('mouseleave', (event) => {
+    const tooltip = document.getElementById('field-tooltip-text');
+    tooltip.dataset.hidden = true;
+    event.stopPropagation();
+  });
+
+  return button;
+}
+
+function addInlineStyle(input, element) {
+  const min = input.min || 0;
+  const max = input.max || 0;
+  const step = input.step || 1;
+  const value = input.value || 0;
+  const format = input.dataset.displayFormat;
+  const totalSteps = Math.ceil((max - min) / step);
+  const currSteps = Math.ceil((value - min) / step);
+  formatNumberPromise([value, min, max], format).then(([formattedValue, minValue, maxValue]) => {
+    const vars = {
+      '--total-steps': totalSteps,
+      '--current-steps': currSteps,
+      '--current-value': `"${formattedValue}"`,
+      '--min-value': `"${minValue}"`,
+      '--max-value': `"${maxValue}"`,
+    };
+    const style = Object.entries(vars).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
+    element.setAttribute('style', style);
+  });
+}
+
+function decorateRange(input) {
+  const div = document.createElement('div');
+  div.className = 'range-widget-wrapper';
+  addInlineStyle(input, div);
+
+  input.addEventListener('change', (e) => {
+    addInlineStyle(e.target, div);
+  });
+
+  const hover = document.createElement('span');
+  hover.className = 'range-hover-value';
+  const rangeEl = document.createElement('span');
+  rangeEl.className = 'range-min-max';
+
+  div.appendChild(hover);
+  div.appendChild(input);
+  div.appendChild(rangeEl);
+  return div;
+}
 
 function appendChild(parent, element) {
   if (parent && element) {
@@ -137,8 +266,9 @@ function createOutput(fd) {
   const output = document.createElement('output');
   output.name = fd.Name;
   const displayFormat = fd['Display Format'];
-  const formattedValue = displayFormat ? formatNumber(fd.Value, displayFormat) : fd.Value;
-  output.textContent = formattedValue;
+  formatNumberPromise(fd.Value, displayFormat).then(([formattedValue]) => {
+    output.textContent = formattedValue;
+  });
   return output;
 }
 
@@ -155,6 +285,9 @@ function createLabel(fd) {
     label.setAttribute('for', fd.Id);
     label.className = 'field-label';
     label.textContent = fd.Label;
+    if (fd.Tooltip) {
+      label.append(createQuestionMark(fd.Tooltip));
+    }
     return label;
   }
 }
@@ -165,6 +298,9 @@ function createLegend(fd) {
     const label = document.createElement('legend');
     label.className = 'field-label';
     label.textContent = fd.Label;
+    if (fd.Tooltip) {
+      label.append(createQuestionMark(fd.Tooltip));
+    }
     return label;
   }
 }
@@ -232,7 +368,6 @@ async function createForm(formURL) {
       fieldWrapper.classList.add('field-wrapper');
       fieldWrapper.dataset.hidden = fd.Hidden || 'false';
       fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
-      fieldWrapper.title = fd.Tooltip;
       switch (fd.Type) {
         case 'heading':
           fieldWrapper.append(createHeading(fd));
@@ -262,8 +397,6 @@ async function createForm(formURL) {
       } else {
         currentSection.append(fieldWrapper);
       }
-
-      decorateTooltip(fieldWrapper);
     }
   });
 

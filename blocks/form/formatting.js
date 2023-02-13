@@ -1,39 +1,47 @@
-const supportedUnits = ['percent', 'month', 'year'].join('|');
+const supportedUnits = ['month', 'year'].join('|');
+const unitSkeleton = new RegExp(`^unit/(${supportedUnits})$`);
 
-const ShorthandStyles = [/^currency(?:\/([a-zA-Z]{3}))?$/, /^percent$/, new RegExp(`^unit/(${supportedUnits})$`)];
-
-function parseNumberSkeleton(skeleton) {
-  const options = {};
-  let match; let
-    index;
-  for (index = 0; index < ShorthandStyles.length && match == null; index += 1) {
-    match = ShorthandStyles[index].exec(skeleton);
-  }
-  if (match) {
-    switch (index) {
-      case 1: // currency
-        options.style = 'currency';
-        options.currencyDisplay = 'narrowSymbol';
-        // eslint-disable-next-line prefer-destructuring
-        options.currency = match[1];
-        break;
-      case 2:
-        options.style = 'percent';
-        options.maximumFractionDigits = 2;
-        break;
-      case 3:
-        options.style = 'unit';
-        options.unitDisplay = 'long';
-        // eslint-disable-next-line prefer-destructuring
-        options.unit = match[1];
-        break;
-      default:
-    }
-  }
-  return options;
-}
-
+const formatters = {};
 export default function formatNumber(num, format, language = 'en-US') {
-  const options = parseNumberSkeleton(format);
-  return new Intl.NumberFormat(language, options).format(num);
+  if (!formatters[language]) {
+    formatters[language] = {};
+  }
+  const formatterCache = formatters[language];
+  let formatter;
+  if (/^currency(?:\/([a-zA-Z]{3}))?$/.test(format)) {
+    const [style, currency] = format.split('/');
+    if (!formatterCache?.currency?.[currency]) {
+      formatterCache.currency = formatterCache.currency || {};
+      formatterCache.currency[currency] = new Intl.NumberFormat(language, {
+        style,
+        currencyDisplay: 'narrowSymbol',
+        currency,
+      });
+    }
+    formatter = formatterCache.currency[currency];
+  } else if (format === 'percent') {
+    if (!formatterCache.percent) {
+      formatterCache.percent = new Intl.NumberFormat(language, {
+        style: format,
+        maximumFractionDigits: 2,
+      });
+    }
+    formatter = formatterCache.percent;
+  } else if (unitSkeleton.test(format)) {
+    const [style, unit] = format.split('/');
+    if (!formatterCache?.unit?.[unit]) {
+      formatterCache.unit = formatterCache.unit || {};
+      formatterCache.unit[unit] = new Intl.NumberFormat(language, {
+        style,
+        unitDisplay: 'long',
+        unit,
+      });
+    }
+    formatter = formatterCache.unit[unit];
+  }
+  let formatValue = num;
+  if (formatter) {
+    formatValue = formatter.format(num);
+  }
+  return formatValue;
 }
