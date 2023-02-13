@@ -3,8 +3,8 @@
 
 /** base styling **/
 
-[data-hidden="true"] {
-  display: none !important;
+.field-wrapper[data-hidden="true"] {
+  display: none;
 }
 
 .field-wrapper {
@@ -144,6 +144,15 @@ input[type="number"] {
   height: 56px;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   padding: calc(@spacing-01 * 3) @spacing-04;
+  appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 /** form button */

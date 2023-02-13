@@ -1,11 +1,22 @@
 import Formula from './jsonformula/json-formula.js';
-import formatNumber from '../formatting.js';
 
-const coerceValue = (val) => {
+function coerceValue(val) {
   if (val === 'true') return true;
   if (val === 'false') return false;
   return val;
-};
+}
+
+function constructPayload(form) {
+  const payload = {};
+  [...form.elements].forEach((fe) => {
+    if (fe.type === 'checkbox' || fe.type === 'radio') {
+      if (fe.checked) payload[fe.name] = coerceValue(fe.value);
+    } else if (fe.id) {
+      payload[fe.id] = coerceValue(fe.value);
+    }
+  });
+  return payload;
+}
 
 export default class RuleEngine {
   #rules;
@@ -20,14 +31,15 @@ export default class RuleEngine {
 
   #formula;
 
-  constructor(rules, deps, formTag, data) {
+  #formatter;
+
+  constructor(rules, deps, formTag, formatter) {
     this.#rules = rules;
     this.#deps = deps;
     this.#formTag = formTag;
-    this.#data = Object.fromEntries(Object.entries(data)
-      // eslint-disable-next-line no-nested-ternary
-      .map(([key, value]) => [key, coerceValue(value)]));
+    this.#data = constructPayload(formTag);
     this.#formula = new Formula();
+    this.#formatter = formatter;
   }
 
   listRules(fieldName) {
@@ -81,11 +93,9 @@ export default class RuleEngine {
     if (!(element instanceof NodeList)) {
       this.#data[fieldName] = coerceValue(value);
       const { displayFormat } = element.dataset;
-      let fValue = value;
-      if (displayFormat) {
-        fValue = formatNumber(value, displayFormat);
-      }
-      element.value = fValue;
+      this.#formatter(value, displayFormat).then((fValue) => {
+        element.value = fValue;
+      });
     }
   }
 
@@ -96,7 +106,7 @@ export default class RuleEngine {
   }
 
   applyRules() {
-    this.#formTag.addEventListener('change', (e) => {
+    this.#formTag.addEventListener('input', (e) => {
       const fieldName = e.target.name;
       if (e.target.type === 'checkbox') {
         this.#data[fieldName] = e.target.checked ? coerceValue(e.target.value) : undefined;

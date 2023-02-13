@@ -1,14 +1,158 @@
-import decorateRange from './components/range.js';
-import formatNumber from './formatting.js';
 import { RuleCompiler } from './formula/RuleCompiler.js';
 import RuleEngine from './formula/RuleEngine.js';
-import decorateTooltip from './components/tooltip.js';
 
-const appendChild = (parent, element) => {
+function formatNumberPromise(inputs, format) {
+  let arrayInputs = inputs;
+  if (!(inputs instanceof Array)) {
+    arrayInputs = [inputs];
+  }
+  if (!format) {
+    return Promise.resolve(arrayInputs);
+  }
+  function formatFn(formatters) {
+    return arrayInputs.map((num) => {
+      try {
+        if (typeof num === 'object' && num?.format) {
+          return formatters.default(num.num, num.format);
+        }
+        return formatters.default(num, format);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(`unable to format ${num} with format ${format}`);
+        return num;
+      }
+    });
+  }
+  function errorFn(e) {
+    // eslint-disable-next-line no-console
+    console.log('error in obtaining formatters', e);
+    return arrayInputs;
+  }
+  return import('./formatting.js').then(formatFn, errorFn);
+}
+
+function createTooltipHTML() {
+  if (!document.getElementById('field-tooltip-text')) {
+    const tooltip = document.createElement('div');
+    tooltip.id = 'field-tooltip-text';
+    tooltip.dataset.hidden = true;
+    document.body.append(tooltip);
+  }
+}
+
+function showTooltip(target, title) {
+  const tooltip = document.getElementById('field-tooltip-text');
+  tooltip.innerText = title;
+  const targetPos = target.getBoundingClientRect();
+  const tooltipPos = tooltip.getBoundingClientRect();
+
+  let left = targetPos.left + (targetPos.width / 2) + window.scrollX - (tooltipPos.width / 2);
+  let top = targetPos.top + window.scrollY - (tooltipPos.height + 10);
+  let placement = 'top';
+
+  if (left < 0) {
+    placement = 'right';
+    left = targetPos.left + targetPos.width + window.scrollX + 10;
+    top = targetPos.top + (targetPos.height / 2) + window.scrollY - (tooltipPos.height / 2);
+  }
+
+  if (left + tooltipPos.width > document.documentElement.clientWidth) {
+    placement = 'left';
+    left = targetPos.left + window.scrollX - (tooltipPos.width + 10);
+    top = targetPos.top + (targetPos.height / 2) + window.scrollY - (tooltipPos.height / 2);
+  }
+
+  if (top < 0) {
+    placement = 'bottom';
+    left = targetPos.left + (targetPos.width / 2) + window.scrollX - (tooltipPos.width / 2);
+    top = targetPos.top + targetPos.height + window.scrollY + 10;
+  }
+
+  tooltip.style.top = `${top}px`;
+  tooltip.style.left = `${left}px`;
+  tooltip.className = `field-tooltip-text ${placement}`;
+  tooltip.dataset.hidden = false;
+}
+
+function createQuestionMark(title) {
+  const button = document.createElement('button');
+  button.dataset.text = title;
+  button.setAttribute('aria-label', title);
+  button.className = 'field-tooltip-icon';
+  button.type = 'button';
+
+  button.addEventListener('mouseenter', (event) => {
+    createTooltipHTML(title);
+    showTooltip(event.target, title);
+    event.stopPropagation();
+  });
+
+  button.addEventListener('mouseleave', (event) => {
+    const tooltip = document.getElementById('field-tooltip-text');
+    tooltip.dataset.hidden = true;
+    event.stopPropagation();
+  });
+
+  return button;
+}
+
+function addInlineStyle(input, element) {
+  const max = input.max || 0;
+  const step = input.step || 1;
+  let min = input.min || 0;
+  let value = input.value || 0;
+  const format = input.dataset.displayFormat;
+  const steps = {
+    '--total-steps': Math.ceil((max - min) / step),
+    '--current-steps': Math.ceil((value - min) / step),
+  };
+
+  function applyFormatting(val, minVal, maxVal) {
+    const vars = {
+      ...steps,
+      '--current-value': `"${val}"`,
+      '--min-value': `"${minVal}"`,
+      '--max-value': `"${maxVal}"`,
+    };
+    const style = Object.entries(vars).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
+    element.setAttribute('style', style);
+  }
+  if (input.name === 'term') {
+    min = { num: 6, format: 'unit/month' };
+    if (parseInt(value, 10) === 0) {
+      value = { num: 6, format: 'unit/month' };
+    }
+  }
+  formatNumberPromise([value, min, max], format).then(([formattedValue, minValue, maxValue]) => {
+    applyFormatting(formattedValue, minValue, maxValue);
+  });
+}
+
+function decorateRange(input) {
+  const div = document.createElement('div');
+  div.className = 'range-widget-wrapper';
+  addInlineStyle(input, div);
+
+  input.addEventListener('input', (e) => {
+    addInlineStyle(e.target, div);
+  });
+
+  const hover = document.createElement('span');
+  hover.className = 'range-hover-value';
+  const rangeEl = document.createElement('span');
+  rangeEl.className = 'range-min-max';
+
+  div.appendChild(hover);
+  div.appendChild(input);
+  div.appendChild(rangeEl);
+  return div;
+}
+
+function appendChild(parent, element) {
   if (parent && element) {
     parent.appendChild(element);
   }
-};
+}
 
 function setPlaceholder(element, fd) {
   if (fd.Placeholder) {
@@ -49,6 +193,7 @@ function widgetProps(element, fd) {
   setPlaceholder(element, fd);
   setStringConstraints(element, fd);
   setNumberConstraints(element, fd);
+  element.dataset.displayFormat = fd['Display Format'];
   if (fd.Description) {
     element.dataset.description = fd.Description;
   }
@@ -74,57 +219,13 @@ function createSelect(fd) {
   return select;
 }
 
-function constructPayload(form) {
-  const payload = {};
-  [...form.elements].forEach((fe) => {
-    if (fe.type === 'checkbox' || fe.type === 'radio') {
-      if (fe.checked) payload[fe.name] = fe.value;
-    } else if (fe.id) {
-      payload[fe.id] = fe.value;
-    }
-  });
-  return payload;
-}
-
-async function submitForm(form) {
-  const payload = constructPayload(form);
-  const resp = await fetch(form.dataset.action, {
-    method: 'POST',
-    cache: 'no-cache',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ data: payload }),
-  });
-  await resp.text();
-  return payload;
-}
-
 function createButton(fd) {
   const button = document.createElement('button');
   button.textContent = fd.Label;
   button.classList.add('button');
   button.type = fd.Type;
   button.id = fd.Id;
-  if (fd.Type === 'submit') {
-    button.addEventListener('click', async (event) => {
-      const form = button.closest('form');
-      if (form.checkValidity()) {
-        event.preventDefault();
-        button.setAttribute('disabled', '');
-        await submitForm(form);
-        const redirectTo = fd.Extra;
-        window.location.href = redirectTo;
-      }
-    });
-  }
   return button;
-}
-
-function createHeading(fd) {
-  const heading = document.createElement('h3');
-  heading.textContent = fd.Label;
-  return heading;
 }
 
 function createInput(fd) {
@@ -142,12 +243,9 @@ function createOutput(fd) {
   const output = document.createElement('output');
   output.name = fd.Name;
   const displayFormat = fd['Display Format'];
-  let formattedValue = fd.Value;
-  if (displayFormat) {
-    output.dataset.displayFormat = displayFormat;
-    formattedValue = formatNumber(fd.Value, displayFormat);
-  }
-  output.textContent = formattedValue;
+  formatNumberPromise(fd.Value, displayFormat).then(([formattedValue]) => {
+    output.textContent = formattedValue;
+  });
   return output;
 }
 
@@ -164,6 +262,9 @@ function createLabel(fd) {
     label.setAttribute('for', fd.Id);
     label.className = 'field-label';
     label.textContent = fd.Label;
+    if (fd.Tooltip) {
+      label.append(createQuestionMark(fd.Tooltip));
+    }
     return label;
   }
 }
@@ -174,6 +275,9 @@ function createLegend(fd) {
     const label = document.createElement('legend');
     label.className = 'field-label';
     label.textContent = fd.Label;
+    if (fd.Tooltip) {
+      label.append(createQuestionMark(fd.Tooltip));
+    }
     return label;
   }
 }
@@ -189,6 +293,8 @@ function createWidget(fd) {
       return createTextArea(fd);
     case 'output':
       return createOutput(fd);
+    case 'range':
+      return decorateRange(createInput(fd));
     default:
       return createInput(fd);
   }
@@ -218,12 +324,12 @@ async function renderFields(formURL, form, ids = {}) {
   const { pathname, search } = new URL(formURL);
   const resp = await fetch(pathname + search);
   const json = await resp.json();
-  const getId = (name) => {
+  function getId(name) {
     ids[name] = ids[name] || 0;
     const idSuffix = ids[name] ? `-${ids[name]}` : '';
     ids[name] += 1;
     return `${name}${idSuffix}`;
-  };
+  }
   let fieldToCellMap = {};
   const fieldsets = {};
   let extraSheets = new Set([]);
@@ -253,12 +359,7 @@ async function renderFields(formURL, form, ids = {}) {
       fieldWrapper.classList.add('field-wrapper');
       fieldWrapper.dataset.hidden = fd.Hidden || 'false';
       fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
-      fieldWrapper.dataset.displayFormat = fd['Display Format'];
-      fieldWrapper.title = fd.Tooltip;
       switch (fd.Type) {
-        case 'heading':
-          fieldWrapper.append(createHeading(fd));
-          break;
         case 'button':
         case 'submit':
           fieldWrapper.append(createButton(fd));
@@ -284,11 +385,6 @@ async function renderFields(formURL, form, ids = {}) {
       } else {
         currentSection.append(fieldWrapper);
       }
-
-      if (fd.Type === 'range') {
-        decorateRange(fieldWrapper);
-      }
-      decorateTooltip(fieldWrapper);
     }
     const rules = getRules(fd);
     if (rules.length > 0) {
@@ -358,9 +454,9 @@ export default async function decorate(block) {
     // eslint-disable-next-line prefer-destructuring
     formTag.dataset.action = form.href.split('.json')[0];
     const { rules, deps } = await renderFields(form.href, formTag);
-    const ruleEngine = new RuleEngine(rules, deps, formTag, constructPayload(formTag));
+    const ruleEngine = new RuleEngine(rules, deps, formTag, formatNumberPromise);
     ruleEngine.applyRules();
-    formTag.addEventListener('change', (e) => {
+    formTag.addEventListener('input', (e) => {
       const input = e.target;
       const wrapper = input.closest('.field-wrapper');
       let helpTextDiv = wrapper.querySelector('.field-description');
