@@ -121,6 +121,14 @@ input[type="number"] {
   height: 56px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   padding: calc(2px * 3) 12px;
+  appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 /** form button */
 form button {

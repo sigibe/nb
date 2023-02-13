@@ -9,6 +9,9 @@ function formatNumberPromise(inputs, format) {
   function formatFn(formatters) {
     return arrayInputs.map((num) => {
       try {
+        if (typeof num === 'object' && num?.format) {
+          return formatters.default(num.num, num.format);
+        }
         return formatters.default(num, format);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -91,23 +94,34 @@ function createQuestionMark(title) {
 }
 
 function addInlineStyle(input, element) {
-  const min = input.min || 0;
   const max = input.max || 0;
   const step = input.step || 1;
-  const value = input.value || 0;
+  let min = input.min || 0;
+  let value = input.value || 0;
   const format = input.dataset.displayFormat;
-  const totalSteps = Math.ceil((max - min) / step);
-  const currSteps = Math.ceil((value - min) / step);
-  formatNumberPromise([value, min, max], format).then(([formattedValue, minValue, maxValue]) => {
+  const steps = {
+    '--total-steps': Math.ceil((max - min) / step),
+    '--current-steps': Math.ceil((value - min) / step),
+  };
+
+  function applyFormatting(val, minVal, maxVal) {
     const vars = {
-      '--total-steps': totalSteps,
-      '--current-steps': currSteps,
-      '--current-value': `"${formattedValue}"`,
-      '--min-value': `"${minValue}"`,
-      '--max-value': `"${maxValue}"`,
+      ...steps,
+      '--current-value': `"${val}"`,
+      '--min-value': `"${minVal}"`,
+      '--max-value': `"${maxVal}"`,
     };
     const style = Object.entries(vars).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
     element.setAttribute('style', style);
+  }
+  if (input.name === 'term') {
+    min = { num: 6, format: 'unit/month' };
+    if (parseInt(value, 10) === 0) {
+      value = { num: 6, format: 'unit/month' };
+    }
+  }
+  formatNumberPromise([value, min, max], format).then(([formattedValue, minValue, maxValue]) => {
+    applyFormatting(formattedValue, minValue, maxValue);
   });
 }
 
@@ -116,7 +130,7 @@ function decorateRange(input) {
   div.className = 'range-widget-wrapper';
   addInlineStyle(input, div);
 
-  input.addEventListener('change', (e) => {
+  input.addEventListener('input', (e) => {
     addInlineStyle(e.target, div);
   });
 
@@ -400,7 +414,7 @@ async function createForm(formURL) {
     }
   });
 
-  form.addEventListener('change', (e) => {
+  form.addEventListener('input', (e) => {
     const input = e.target;
     const wrapper = input.closest('.field-wrapper');
     let helpTextDiv = wrapper.querySelector('.field-description');
