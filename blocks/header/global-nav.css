@@ -2,3 +2,6 @@
   max-width: unset;
   padding: 0;
 }
+.container .nav-item > a {
+  pointer-events: none;
+}

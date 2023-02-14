@@ -2,6 +2,8 @@ import {
   readBlockConfig, decorateIcons, makeLinksRelative, getRootPath, getMetadata,
 } from '../../scripts/scripts.js';
 
+import decorateXFNav from './navxf.js';
+
 /**
  * collapses all open nav sections
  * @param {Element} sections The container element
@@ -16,15 +18,20 @@ function collapseAllNavSections(sections) {
 class NedbankNavDiv extends HTMLDivElement {
   constructor(elems) {
     super();
-    //const shadow = this.attachShadow({ mode: 'closed' });
-    //shadow.append(...elems);
-    //const css = shadow.appendChild(document.createElement('link'));
+    const shadow = this.attachShadow({ mode: 'open' });
+    shadow.append(...elems);
+    const css = shadow.appendChild(document.createElement('link'));
 
-    this.append(...elems);
-    const css = this.appendChild(document.createElement('link'));
+    // this.append(...elems);
+    // const css = this.appendChild(document.createElement('link'));
     css.rel = 'stylesheet';
     css.type = 'text/css';
     css.href = '/blocks/header/global-nav.css';
+
+    const navxf = shadow.appendChild(document.createElement('script'));
+    navxf.src = '/blocks/header/navxf.js';
+    navxf.type = 'module';
+    decorateXFNav(shadow);
   }
 }
 
