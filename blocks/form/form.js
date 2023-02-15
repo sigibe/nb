@@ -1,158 +1,7 @@
 import { RuleCompiler } from './formula/RuleCompiler.js';
 import RuleEngine from './formula/RuleEngine.js';
-
-function formatNumberPromise(inputs, format) {
-  let arrayInputs = inputs;
-  if (!(inputs instanceof Array)) {
-    arrayInputs = [inputs];
-  }
-  if (!format) {
-    return Promise.resolve(arrayInputs);
-  }
-  function formatFn(formatters) {
-    return arrayInputs.map((num) => {
-      try {
-        if (typeof num === 'object' && num?.format) {
-          return formatters.default(num.num, num.format);
-        }
-        return formatters.default(num, format);
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(`unable to format ${num} with format ${format}`);
-        return num;
-      }
-    });
-  }
-  function errorFn(e) {
-    // eslint-disable-next-line no-console
-    console.log('error in obtaining formatters', e);
-    return arrayInputs;
-  }
-  return import('./formatting.js').then(formatFn, errorFn);
-}
-
-function createTooltipHTML() {
-  if (!document.getElementById('field-tooltip-text')) {
-    const tooltip = document.createElement('div');
-    tooltip.id = 'field-tooltip-text';
-    tooltip.dataset.hidden = true;
-    document.body.append(tooltip);
-  }
-}
-
-function showTooltip(target, title) {
-  const tooltip = document.getElementById('field-tooltip-text');
-  tooltip.innerText = title;
-  const targetPos = target.getBoundingClientRect();
-  const tooltipPos = tooltip.getBoundingClientRect();
-
-  let left = targetPos.left + (targetPos.width / 2) + window.scrollX - (tooltipPos.width / 2);
-  let top = targetPos.top + window.scrollY - (tooltipPos.height + 10);
-  let placement = 'top';
-
-  if (left < 0) {
-    placement = 'right';
-    left = targetPos.left + targetPos.width + window.scrollX + 10;
-    top = targetPos.top + (targetPos.height / 2) + window.scrollY - (tooltipPos.height / 2);
-  }
-
-  if (left + tooltipPos.width > document.documentElement.clientWidth) {
-    placement = 'left';
-    left = targetPos.left + window.scrollX - (tooltipPos.width + 10);
-    top = targetPos.top + (targetPos.height / 2) + window.scrollY - (tooltipPos.height / 2);
-  }
-
-  if (top < 0) {
-    placement = 'bottom';
-    left = targetPos.left + (targetPos.width / 2) + window.scrollX - (tooltipPos.width / 2);
-    top = targetPos.top + targetPos.height + window.scrollY + 10;
-  }
-
-  tooltip.style.top = `${top}px`;
-  tooltip.style.left = `${left}px`;
-  tooltip.className = `field-tooltip-text ${placement}`;
-  tooltip.dataset.hidden = false;
-}
-
-function createQuestionMark(title) {
-  const button = document.createElement('button');
-  button.dataset.text = title;
-  button.setAttribute('aria-label', title);
-  button.className = 'field-tooltip-icon';
-  button.type = 'button';
-
-  button.addEventListener('mouseenter', (event) => {
-    createTooltipHTML(title);
-    showTooltip(event.target, title);
-    event.stopPropagation();
-  });
-
-  button.addEventListener('mouseleave', (event) => {
-    const tooltip = document.getElementById('field-tooltip-text');
-    tooltip.dataset.hidden = true;
-    event.stopPropagation();
-  });
-
-  return button;
-}
-
-function addInlineStyle(input, element) {
-  const max = input.max || 0;
-  const step = input.step || 1;
-  let min = input.min || 0;
-  let value = input.value || 0;
-  const format = input.dataset.displayFormat;
-  const steps = {
-    '--total-steps': Math.ceil((max - min) / step),
-    '--current-steps': Math.ceil((value - min) / step),
-  };
-
-  function applyFormatting(val, minVal, maxVal) {
-    const vars = {
-      ...steps,
-      '--current-value': `"${val}"`,
-      '--min-value': `"${minVal}"`,
-      '--max-value': `"${maxVal}"`,
-    };
-    const style = Object.entries(vars).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
-    element.setAttribute('style', style);
-  }
-  if (input.name === 'term') {
-    min = { num: 6, format: 'unit/month' };
-    if (parseInt(value, 10) === 0) {
-      value = { num: 6, format: 'unit/month' };
-    }
-  }
-  formatNumberPromise([value, min, max], format).then(([formattedValue, minValue, maxValue]) => {
-    applyFormatting(formattedValue, minValue, maxValue);
-  });
-}
-
-function decorateRange(input) {
-  const div = document.createElement('div');
-  div.className = 'range-widget-wrapper';
-  addInlineStyle(input, div);
-
-  input.addEventListener('input', (e) => {
-    addInlineStyle(e.target, div);
-  });
-
-  const hover = document.createElement('span');
-  hover.className = 'range-hover-value';
-  const rangeEl = document.createElement('span');
-  rangeEl.className = 'range-min-max';
-
-  div.appendChild(hover);
-  div.appendChild(input);
-  div.appendChild(rangeEl);
-  return div;
-}
-
-function appendChild(parent, element) {
-  if (parent && element) {
-    parent.appendChild(element);
-  }
-}
+import decorateForm from './decorators/customDecorator.js';
+import formatFns from './formatting.js';
 
 function setPlaceholder(element, fd) {
   if (fd.Placeholder) {
@@ -184,48 +33,30 @@ function setStringConstraints(element, fd) {
   }
 }
 
-function widgetProps(element, fd) {
-  element.id = fd.Id;
-  if (fd.Mandatory === 'TRUE') {
-    element.setAttribute('required', 'required');
+function createLabel(fd, tagName = 'label') {
+  const label = document.createElement(tagName);
+  if (tagName === 'label') {
+    label.setAttribute('for', fd.Id);
   }
-  element.name = fd.Name;
-  setPlaceholder(element, fd);
-  setStringConstraints(element, fd);
-  setNumberConstraints(element, fd);
-  element.dataset.displayFormat = fd['Display Format'];
-  if (fd.Description) {
-    element.dataset.description = fd.Description;
+  label.className = 'field-label';
+  label.textContent = fd.Label || '';
+  if (fd.Tooltip) {
+    label.title = fd.Tooltip;
   }
-  element.value = fd.Value;
+  return label;
 }
 
-function createSelect(fd) {
-  const select = document.createElement('select');
-  widgetProps(select, fd);
-  if (fd.Placeholder) {
-    const ph = document.createElement('option');
-    ph.textContent = fd.Placeholder;
-    ph.setAttribute('selected', '');
-    ph.setAttribute('disabled', '');
-    select.append(ph);
-  }
-  fd.Options.split(',').forEach((o) => {
-    const option = document.createElement('option');
-    option.textContent = o.trim();
-    option.value = o.trim();
-    select.append(option);
-  });
-  return select;
+function createLegend(fd) {
+  return createLabel(fd, 'legend');
 }
 
-function createButton(fd) {
-  const button = document.createElement('button');
-  button.textContent = fd.Label;
-  button.classList.add('button');
-  button.type = fd.Type;
-  button.id = fd.Id;
-  return button;
+function createHelpText(fd) {
+  const div = document.createElement('div');
+  div.className = 'field-description';
+  div.setAttribute('aria-live', 'polite');
+  div.innerText = fd.Description;
+  div.id = `${fd.ID}-description`;
+  return div;
 }
 
 function createInput(fd) {
@@ -235,69 +66,91 @@ function createInput(fd) {
   if (displayFormat) {
     input.dataset.displayFormat = displayFormat;
   }
-  widgetProps(input, fd);
+  input.id = fd.Id;
+  if (fd.Mandatory === 'TRUE') {
+    input.setAttribute('required', 'required');
+  }
+  input.name = fd.Name;
+  setPlaceholder(input, fd);
+  setStringConstraints(input, fd);
+  setNumberConstraints(input, fd);
+  input.dataset.displayFormat = fd['Display Format'];
+  if (fd.Description) {
+    input.setAttribute('aria-describedby', `${fd.ID}-description`);
+  }
+  input.value = fd.Value;
   return input;
+}
+
+function createFieldWrapper(fd, tagName = 'div') {
+  const fieldWrapper = document.createElement(tagName);
+  fieldWrapper.append(createLabel(fd));
+  const style = fd.Style ? ` form-${fd.Style}` : '';
+  const nameStyle = fd.Name ? ` form-${fd.Name}` : '';
+  const fieldId = `form-${fd.Type}-wrapper${style}${nameStyle}`;
+  fieldWrapper.className = fieldId;
+  fieldWrapper.classList.add('field-wrapper');
+  fieldWrapper.dataset.hidden = fd.Hidden || 'false';
+  fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
+  if (fd.Group) {
+    fieldWrapper.dataset.group = fd.Group;
+  }
+  return fieldWrapper;
+}
+
+function createButton(fd) {
+  const wrapper = createFieldWrapper(fd);
+  const button = document.createElement('button');
+  button.textContent = fd.Label;
+  button.classList.add('button');
+  button.type = fd.Type;
+  button.id = fd.Id;
+  wrapper.replaceChildren(button);
+  return wrapper;
+}
+
+function createRadio(fd) {
+  const wrapper = createFieldWrapper(fd);
+  wrapper.insertAdjacentElement('afterbegin', createInput(fd));
+  return wrapper;
+}
+
+function createFieldset(fd) {
+  const wrapper = createFieldWrapper(fd, 'fieldset');
+  wrapper.name = fd.Name;
+  wrapper.replaceChildren(createLegend(fd));
+  return wrapper;
 }
 
 function createOutput(fd) {
+  const wrapper = createFieldWrapper(fd);
   const output = document.createElement('output');
   output.name = fd.Name;
   const displayFormat = fd['Display Format'];
-  formatNumberPromise(fd.Value, displayFormat).then(([formattedValue]) => {
-    output.textContent = formattedValue;
-  });
-  return output;
-}
-
-function createTextArea(fd) {
-  const input = document.createElement('textarea');
-  widgetProps(input, fd);
-  return input;
-}
-
-// eslint-disable-next-line consistent-return
-function createLabel(fd) {
-  if (fd.Label) {
-    const label = document.createElement('label');
-    label.setAttribute('for', fd.Id);
-    label.className = 'field-label';
-    label.textContent = fd.Label;
-    if (fd.Tooltip) {
-      label.append(createQuestionMark(fd.Tooltip));
-    }
-    return label;
+  if (displayFormat) {
+    output.dataset.displayFormat = displayFormat;
   }
+  const formatFn = formatFns[displayFormat] || formatFns.identity;
+  output.innerText = formatFn(fd.Value);
+  wrapper.append(output);
+  return wrapper;
 }
 
-// eslint-disable-next-line consistent-return
-function createLegend(fd) {
-  if (fd.Label) {
-    const label = document.createElement('legend');
-    label.className = 'field-label';
-    label.textContent = fd.Label;
-    if (fd.Tooltip) {
-      label.append(createQuestionMark(fd.Tooltip));
-    }
-    return label;
-  }
+function createHidden(fd) {
+  const element = document.createElement('input');
+  element.type = 'hidden';
+  element.id = fd.Id;
+  element.name = fd.Name;
+  return element;
 }
 
-function createWidget(fd) {
-  switch (fd.Type) {
-    case 'select':
-      return createSelect(fd);
-    case 'checkbox':
-    case 'radio':
-      return createInput(fd);
-    case 'textarea':
-      return createTextArea(fd);
-    case 'output':
-      return createOutput(fd);
-    case 'range':
-      return decorateRange(createInput(fd));
-    default:
-      return createInput(fd);
-  }
+function createCurrency(fd) {
+  const wrapper = createFieldWrapper(fd);
+  wrapper.append(createInput({
+    ...fd,
+    Type: 'number',
+  }));
+  return wrapper;
 }
 
 function getRules(fd) {
@@ -312,139 +165,106 @@ function getRules(fd) {
   }));
 }
 
-function createHelpText(description) {
-  const div = document.createElement('div');
-  div.className = 'field-description';
-  div.setAttribute('aria-live', 'polite');
-  div.innerText = description;
-  return div;
-}
-
-async function renderFields(formURL, form, ids = {}) {
-  const { pathname, search } = new URL(formURL);
-  const resp = await fetch(pathname + search);
-  const json = await resp.json();
-  function getId(name) {
+function idGenerator() {
+  const ids = {};
+  return (name) => {
     ids[name] = ids[name] || 0;
     const idSuffix = ids[name] ? `-${ids[name]}` : '';
     ids[name] += 1;
     return `${name}${idSuffix}`;
+  };
+}
+
+const fieldRenderers = {
+  radio: createRadio,
+  checkbox: createRadio,
+  button: createButton,
+  fieldset: createFieldset,
+  output: createOutput,
+  currency: createCurrency,
+  hidden: createHidden,
+};
+
+function renderField(fd) {
+  const renderer = fieldRenderers[fd.Type];
+  let field;
+  if (typeof renderer === 'function') {
+    field = renderer(fd);
+  } else {
+    field = createFieldWrapper(fd);
+    field.append(createInput(fd));
   }
-  let fieldToCellMap = {};
-  const fieldsets = {};
-  let extraSheets = new Set([]);
-  let ruleCompiler;
-  let currentSection = form;
-  const sectionNameRegex = /^\s*---\s*(?:([^-]+)\s*---)?\s*$/;
-  // eslint-disable-next-line prefer-destructuring
-  form.dataset.action = pathname.split('.json')[0];
-  json.data.forEach(async (fd, index) => {
-    const matchSection = sectionNameRegex.exec(fd.Name);
-    fieldToCellMap[index + 2] = fd.Name;
-    fd.Id = fd.Id || getId(fd.Name);
-    fd.Type = fd.Type || 'text';
-    if (matchSection) {
-      currentSection = document.createElement('div');
-      currentSection.classList.add('form-section-wrapper', matchSection[1]);
-      form.appendChild(currentSection);
-    } else if (fd.Type === 'hidden') {
-      form.append(createWidget(fd));
-    } else {
-      const wrapperTag = fd.Type === 'fieldset' ? 'fieldset' : 'div';
-      const fieldWrapper = document.createElement(wrapperTag);
-      const style = fd.Style ? ` form-${fd.Style}` : '';
-      const nameStyle = fd.Name ? ` form-${fd.Name}` : '';
-      const fieldId = `form-${fd.Type}-wrapper${style}${nameStyle}`;
-      fieldWrapper.className = fieldId;
-      fieldWrapper.classList.add('field-wrapper');
-      fieldWrapper.dataset.hidden = fd.Hidden || 'false';
-      fieldWrapper.dataset.mandatory = fd.Mandatory || 'true';
-      switch (fd.Type) {
-        case 'button':
-        case 'submit':
-          fieldWrapper.append(createButton(fd));
-          break;
-        case 'fieldset':
-          appendChild(fieldWrapper, createLegend(fd));
-          fieldsets[fd.Name] = fieldWrapper;
-          break;
-        case 'checkbox':
-        case 'radio':
-          fieldWrapper.append(createWidget(fd));
-          appendChild(fieldWrapper, createLabel(fd));
-          break;
-        default:
-          appendChild(fieldWrapper, createLabel(fd));
-          fieldWrapper.append(createWidget(fd));
-          if (fd.Description) {
-            fieldWrapper.appendChild(createHelpText(fd.Description));
-          }
+  if (fd.Description) {
+    field.append(createHelpText(fd));
+  }
+  return field;
+}
+
+const sectionNameRegex = /^\s*---\s*(?:([^-]+)\s*---)?\s*$/;
+
+function partitionIntoSections(acc, fd) {
+  const matchSection = sectionNameRegex.exec(fd.Name);
+  if (matchSection) {
+    acc.push([matchSection[1]]);
+  } else if (fd.Type === 'hidden') {
+    acc[0].push(fd);
+  } else {
+    acc[acc.length - 1].push(fd);
+  }
+  return acc;
+}
+
+function extractRuleData(acc, fd, index) {
+  acc.fieldNameMap[index + 2] = fd.Name;
+  const rules = getRules(fd);
+  if (rules.length) {
+    acc.rules[fd.Name] = getRules(fd);
+  }
+  return acc;
+}
+
+function updateFieldsets(fields) {
+  const fieldsets = fields.filter((x) => x.tagName === 'FIELDSET');
+  if (fieldsets.length) {
+    const fieldsetMap = Object.fromEntries(fieldsets.map((f) => [f.name, f]));
+    return fields.flatMap((f) => {
+      const { group } = f.dataset;
+      if (group) {
+        fieldsetMap[group].append(f);
+        return [];
       }
-      if (fd.Group) {
-        fieldsets?.[fd.Group].append(fieldWrapper);
-      } else {
-        currentSection.append(fieldWrapper);
-      }
-    }
-    const rules = getRules(fd);
-    if (rules.length > 0) {
-      if (!ruleCompiler) {
-        ruleCompiler = new RuleCompiler();
-      }
-      const newSheets = new Set(...(rules.flatMap((r) => ruleCompiler.addRule(fd.Name, r))));
-      extraSheets = new Set([...extraSheets, ...newSheets]);
-    }
+      return [f];
+    });
+  }
+  return fields;
+}
+
+async function renderFields(formURL, form, getId = idGenerator()) {
+  const { pathname, search } = new URL(formURL);
+  const resp = await fetch(pathname + search);
+  const json = await resp.json();
+  const { fieldNameMap, rules } = json.data
+    .reduce(extractRuleData, { fieldNameMap: {}, rules: {} });
+
+  const dataWithIds = json.data.map((fd) => ({
+    ...fd,
+    Id: fd.Id || getId(fd.Name),
+  }));
+
+  const [formSection, ...rest] = dataWithIds.reduce(partitionIntoSections, [['form']])
+    .map((section) => {
+      const fields = section.slice(1).map((fd) => renderField(fd));
+      return [section[0], ...updateFieldsets(fields)];
+    });
+
+  const remaining = rest.map((s) => {
+    const sectionDiv = document.createElement('div');
+    sectionDiv.className = `form-section-wrapper ${s[0]}`;
+    sectionDiv.append(...s.slice(1));
+    return sectionDiv;
   });
-  let fragments = {};
-  if (extraSheets.size > 0) {
-    const arr = Array.from(extraSheets);
-    // todo: maintain order of fragment fields and prevent de-duplicating nested fragment
-    const res = await Promise.all(arr.map(async (sheet) => {
-      const { origin } = new URL(document.location.href);
-      const paramName = sheet.replace(/^helix-/, '');
-      const url = `${origin}${pathname}?sheet=${paramName}`;
-      // eslint-disable-next-line no-shadow
-      const { fieldToCellMap, rules, deps } = await renderFields(url, form, ids);
-      return {
-        fieldToCellMap: Object.fromEntries(Object.entries(fieldToCellMap)
-          .map(([rowNum, name]) => [`${sheet}_${rowNum}`, name])),
-        rules,
-        deps,
-      };
-    }));
-    // eslint-disable-next-line no-shadow
-    fragments = res.reduce((accMap, { rules, deps, fieldToCellMap }) => ({
-      fieldToCellMap: {
-        ...accMap.fieldToCellMap,
-        ...fieldToCellMap,
-      },
-      rules: {
-        ...accMap.rules,
-        ...rules,
-      },
-      deps: {
-        ...accMap.deps,
-        ...deps,
-      },
-    }));
-  }
-  fieldToCellMap = {
-    ...(fragments.fieldToCellMap || {}),
-    ...fieldToCellMap,
-  };
-  ruleCompiler.transform(fieldToCellMap, form);
-  // eslint-disable-next-line no-shadow
-  return {
-    fieldToCellMap,
-    rules: {
-      ...ruleCompiler.rules,
-      ...fragments.rules,
-    },
-    deps: {
-      ...ruleCompiler.deps,
-      ...fragments.deps,
-    },
-  };
+
+  return [...formSection.slice(1), ...remaining];
 }
 
 export default async function decorate(block) {
@@ -453,9 +273,12 @@ export default async function decorate(block) {
     const formTag = document.createElement('form');
     // eslint-disable-next-line prefer-destructuring
     formTag.dataset.action = form.href.split('.json')[0];
-    const { rules, deps } = await renderFields(form.href, formTag);
-    const ruleEngine = new RuleEngine(rules, deps, formTag, formatNumberPromise);
-    ruleEngine.applyRules();
+    const fields = await renderFields(form.href, formTag);
+    formTag.append(...fields);
+    decorateForm(formTag);
+    // const { rules, deps } = await renderFields(form.href, formTag);
+    // const ruleEngine = new RuleEngine(rules, deps, formTag);
+    // ruleEngine.applyRules();
     formTag.addEventListener('input', (e) => {
       const input = e.target;
       const wrapper = input.closest('.field-wrapper');
@@ -466,7 +289,7 @@ export default async function decorate(block) {
       if (valid === !!invalidity) {
         if (!valid) {
           if (!helpTextDiv) {
-            helpTextDiv = createHelpText('');
+            helpTextDiv = createHelpText({ Id: e.target.id, description: '' });
           }
           input.setAttribute('aria-invalid', true);
           wrapper.setAttribute('data-invalid', true);

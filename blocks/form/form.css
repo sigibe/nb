@@ -116,6 +116,27 @@ input[type="radio"]:checked::after {
   width: 14px;
   height: 14px;
 }
+/** currency field **/
+.currency-widget {
+  display: flex;
+  align-items: center;
+  border: 2px solid #78be20;
+  margin-bottom: 15px;
+  padding: calc(2px * 3) 12px;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Open Sans Semibold";
+  font-weight: 400;
+}
+.currency-widget .currency-symbol {
+  margin-right: 4px;
+}
+.currency-widget input[type="number"] {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
 /** number field **/
 input[type="number"] {
   height: 56px;
@@ -138,10 +159,6 @@ form button {
   height: 56px;
 }
 /** range - slider */
-.range-widget-wrapper {
-  display: flex;
-  flex-direction: column;
-}
 input[type="range"] {
   margin: unset;
   padding: unset;
@@ -164,7 +181,7 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]:focus::-webkit-slider-thumb {
   border-color: #006341;
 }
-.range-hover-value::after {
+.range-bubble {
   font-family: "Nedbank Sans Medium";
   color: #17252e;
   font-size: 20px;
@@ -173,19 +190,18 @@ input[type="range"]:focus::-webkit-slider-thumb {
   left: calc(var(--current-steps)*100% / (var(--total-steps) + 1));
   display: inline-block;
   padding-bottom: 12px;
-  content: var(--current-value);
 }
-.range-min-max {
-  display: flex;
-  justify-content: space-between;
+.range-min,
+.range-max {
   font-family: "Open Sans Regular";
   font-size: 14px;
   line-height: 22px;
   color: #494f50;
   margin-top: 16px;
+  display: inline-block;
 }
-.range-min-max::before {
-  content: var(--min-value);
+.range-max {
+  float: right;
 }
 .range-min-max::after {
   content: var(--max-value);

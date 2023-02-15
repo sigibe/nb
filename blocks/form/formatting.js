@@ -1,46 +1,38 @@
-const supportedUnits = ['month', 'year'].join('|');
-const unitSkeleton = new RegExp(`^unit/(${supportedUnits})$`);
-const formatters = {};
-export default function formatNumber(num, format, language = 'en-US') {
-  if (!formatters[language]) {
-    formatters[language] = {};
+const decimalSymbol = '.';
+const groupingSymbol = ',';
+const minFractionDigits = '00';
+
+function toString(num) {
+  const [integer, fraction] = num.toString().split('.');
+  const formattedInteger = integer.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, `$1${groupingSymbol}`);
+  let formattedFraction = fraction || minFractionDigits;
+  const lengthFraction = formattedFraction.length;
+  if (lengthFraction < minFractionDigits) {
+    formattedFraction += Array(minFractionDigits - lengthFraction).fill(0).join('');
   }
-  const formatterCache = formatters[language];
-  let formatter;
-  if (/^currency(?:\/([a-zA-Z]{3}))?$/.test(format)) {
-    const [style, currency] = format.split('/');
-    if (!formatterCache?.currency?.[currency]) {
-      formatterCache.currency = formatterCache.currency || {};
-      formatterCache.currency[currency] = new Intl.NumberFormat(language, {
-        style,
-        currencyDisplay: 'narrowSymbol',
-        currency,
-      });
-    }
-    formatter = formatterCache.currency[currency];
-  } else if (format === 'percent') {
-    if (!formatterCache.percent) {
-      formatterCache.percent = new Intl.NumberFormat(language, {
-        style: format,
-        maximumFractionDigits: 2,
-      });
-    }
-    formatter = formatterCache.percent;
-  } else if (unitSkeleton.test(format)) {
-    const [style, unit] = format.split('/');
-    if (!formatterCache?.unit?.[unit]) {
-      formatterCache.unit = formatterCache.unit || {};
-      formatterCache.unit[unit] = new Intl.NumberFormat(language, {
-        style,
-        unitDisplay: 'long',
-        unit,
-      });
-    }
-    formatter = formatterCache.unit[unit];
-  }
-  let formatValue = num;
-  if (formatter) {
-    formatValue = formatter.format(num);
-  }
-  return formatValue;
+  return `${formattedInteger}${decimalSymbol}${fraction || '00'}`;
 }
+
+function currency(num, currencySymbol = 'R') {
+  return `${currencySymbol} ${toString(num)}`;
+}
+
+function year(num) {
+  if (num < 1) {
+    return `${num * 12} months`;
+  } if (num === 1) {
+    return `${num} year`;
+  }
+  return `${num} years`;
+}
+
+function percent(num) {
+  return `${(num * 100).toFixed(2).replace(/(\.0*$)|0*$/, '')}%`;
+}
+
+export default {
+  currency,
+  year,
+  '%': percent,
+  identity: (x) => x,
+};

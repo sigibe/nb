@@ -139,6 +139,30 @@ input[type="radio"] {
   }
 }
 
+/** currency field **/
+.currency-widget {
+  display: flex;
+  align-items: center;
+  border: 2px solid #78be20;
+  margin-bottom: 15px;
+  padding: calc(@spacing-01 * 3) @spacing-04;
+  font-size: @font-size-base;
+  line-height: @font-lineheight-base;
+  font-family: @font-family-opensans-bold;
+  font-weight: @font-weight-regular;
+
+  .currency-symbol {
+    margin-right: @spacing-02;
+  }
+
+  input[type="number"] {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
 /** number field **/
 input[type="number"] {
   height: 56px;
@@ -165,12 +189,6 @@ form button {
 }
 
 /** range - slider */
-
-.range-widget-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
 input[type="range"] {
   .unset();
   appearance: none;
@@ -195,7 +213,7 @@ input[type="range"] {
   }
 }
 
-.range-hover-value::after {
+.range-bubble {
   font-family: @font-family-nedbank-medium;
   color: @dotcoza-color-title-grey;
   font-size: @font-size-large;
@@ -205,12 +223,10 @@ input[type="range"] {
   left: calc(var(--current-steps)*100% / (var(--total-steps) + 1));
   display: inline-block;
   padding-bottom: @spacing-04;
-  content: var(--current-value)
 }
 
-.range-min-max {
-  display: flex;
-  justify-content: space-between;
+.range-min,
+.range-max {
   font-family: @font-family-opensans-regular;
   font-size: @font-size-small;
   line-height: @font-lineheight-small;
@@ -218,10 +234,12 @@ input[type="range"] {
   color: @range-color-light;
 
   margin-top: @spacing-05;
+  display: inline-block;
 }
 
-.range-min-max::before {
-  content: var(--min-value);
+
+.range-max {
+  float: right;
 }
 
 .range-min-max::after {
