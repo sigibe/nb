@@ -1,4 +1,6 @@
+/* eslint-disable max-classes-per-file */
 import Formula from './jsonformula/json-formula.js';
+import formatFns from '../formatting.js';
 
 function coerceValue(val) {
   if (val === 'true') return true;
@@ -19,108 +21,78 @@ function constructPayload(form) {
 }
 
 export default class RuleEngine {
-  #rules;
+  rulesOrder = {};
 
-  #deps;
-
-  #formTag;
-
-  #ruleOrder = {};
-
-  #data;
-
-  #formula;
-
-  #formatter;
-
-  constructor(rules, deps, formTag, formatter) {
-    this.#rules = rules;
-    this.#deps = deps;
-    this.#formTag = formTag;
-    this.#data = constructPayload(formTag);
-    this.#formula = new Formula();
-    this.#formatter = formatter;
+  constructor(formRules, formTag) {
+    this.formRules = Object.fromEntries(formRules);
+    this.formTag = formTag;
+    this.data = constructPayload(formTag);
+    this.formula = new Formula();
+    this.dependencyTree = formRules.reduce((fields, [fieldName, rules]) => {
+      fields[fieldName] = fields[fieldName] || { deps: {} };
+      rules.forEach(({ prop, deps }) => {
+        deps.forEach((dep) => {
+          fields[dep] = fields[dep] || { deps: {} };
+          fields[dep].deps[prop] = fields[dep].deps[prop] || [];
+          fields[dep].deps[prop].push(fieldName);
+        });
+      });
+      return fields;
+    }, {});
   }
 
   listRules(fieldName) {
-    const explored = new Set();
-    explored.add(fieldName);
+    const arr = {};
+    let index = 0;
     const stack = [fieldName];
-    const pending = new Set();
-    let element = fieldName;
-    const nonValueRules = [];
-    while (element) {
-      (this.#deps[element]?.outgoing || []).forEach((x) => {
-        if (x[1] === 'Value') {
-          pending.add(x[0]);
-        } else {
-          nonValueRules.push(x[0]);
-        }
-      });
-      const entries = Array.from(pending.entries());
-      const res = entries.find((entry) => {
-        const d = entry[1];
-        const dependsOn = this.#deps[d].incoming;
-        return (
-          // no deps
-          dependsOn.length === 0
-          // all deps already explored
-          || dependsOn.every((x) => explored.has(x[0]))
-          // no deps in the pending list
-          || dependsOn.every((x) => entries.findIndex((e) => x[0] === e[1]) === -1)
-        );
-      });
-      if (res) {
-        const [entryKey, entryValue] = res;
-        element = entryValue;
-        explored.add(entryValue);
-        stack.push(entryValue);
-        pending.delete(entryKey);
-      } else if (entries.length > 0) {
-        element = null;
-        // eslint-disable-next-line no-console
-        console.log('there is a cyclic dependency in your form');
-        break;
-      } else {
-        element = null;
+    do {
+      const el = stack.pop();
+      arr[el] = index;
+      index += 1;
+      if (this.dependencyTree[el].deps.Value) {
+        stack.push(...this.dependencyTree[el].deps.Value);
       }
-    }
-    return stack.slice(1).concat(nonValueRules);
+      // eslint-disable-next-line no-loop-func
+      this.dependencyTree[el].deps.Hidden?.forEach((field) => {
+        arr[field] = index;
+        index += 1;
+      });
+    } while (stack.length > 0);
+    return Object.entries(arr).sort((a, b) => a[1] - b[1]).map((_) => _[0]).slice(1);
   }
 
   updateValue(fieldName, value) {
-    const element = this.#formTag.elements[fieldName];
+    const element = this.formTag.elements[fieldName];
     if (!(element instanceof NodeList)) {
-      this.#data[fieldName] = coerceValue(value);
+      this.data[fieldName] = coerceValue(value);
       const { displayFormat } = element.dataset;
-      this.#formatter(value, displayFormat).then((fValue) => {
-        element.value = fValue;
-      });
+      const formatFn = formatFns[displayFormat] || formatFns.identity;
+      element.value = formatFn(value);
     }
   }
 
   updateHidden(fieldName, value) {
-    const element = this.#formTag.elements[fieldName];
+    const element = this.formTag.elements[fieldName];
     const wrapper = element.closest('.field-wrapper');
     wrapper.dataset.hidden = value;
   }
 
   applyRules() {
-    this.#formTag.addEventListener('input', (e) => {
+    this.formTag.addEventListener('input', (e) => {
       const fieldName = e.target.name;
       if (e.target.type === 'checkbox') {
-        this.#data[fieldName] = e.target.checked ? coerceValue(e.target.value) : undefined;
+        this.data[fieldName] = e.target.checked ? coerceValue(e.target.value) : undefined;
       } else {
-        this.#data[fieldName] = coerceValue(e.target.value);
+        this.data[fieldName] = coerceValue(e.target.value);
       }
-      if (!this.#ruleOrder[fieldName]) {
-        this.#ruleOrder[fieldName] = this.listRules(fieldName);
+      if (!this.rulesOrder[fieldName]) {
+        this.rulesOrder[fieldName] = this.listRules(fieldName);
       }
-      const rules = this.#ruleOrder[fieldName];
+      const rules = this.rulesOrder[fieldName];
       rules.forEach((fName) => {
-        Object.entries(this.#rules[fName]).forEach(([propName, rule]) => {
-          const newValue = this.#formula.run(rule, this.#data);
-          const handler = this[`update${propName}`];
+        this.formRules[fName]?.forEach((rule) => {
+          const newValue = this.formula.run(rule.ast, this.data);
+          const handler = this[`update${rule.prop}`];
           if (handler instanceof Function) {
             handler.apply(this, [fName, newValue]);
           }

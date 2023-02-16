@@ -1,4 +1,4 @@
-import { RuleCompiler } from './formula/RuleCompiler.js';
+import transformRule from './formula/RuleCompiler.js';
 import RuleEngine from './formula/RuleEngine.js';
 import decorateForm from './decorators/customDecorator.js';
 import formatFns from './formatting.js';
@@ -141,6 +141,7 @@ function createHidden(fd) {
   element.type = 'hidden';
   element.id = fd.Id;
   element.name = fd.Name;
+  element.value = fd.Value;
   return element;
 }
 
@@ -159,8 +160,8 @@ function getRules(fd) {
     ['Hidden', fd?.['Hidden Expression']],
     ['Label', fd?.['Label Expression']],
   ];
-  return entries.filter((e) => e[1]).map(([propName, expression]) => ({
-    propName,
+  return entries.filter((e) => e[1]).map(([prop, expression]) => ({
+    prop,
     expression,
   }));
 }
@@ -200,9 +201,8 @@ function renderField(fd) {
   return field;
 }
 
-const sectionNameRegex = /^\s*---\s*(?:([^-]+)\s*---)?\s*$/;
-
 function partitionIntoSections(acc, fd) {
+  const sectionNameRegex = /^\s*---\s*(?:([^-]+)\s*---)?\s*$/;
   const matchSection = sectionNameRegex.exec(fd.Name);
   if (matchSection) {
     acc.push([matchSection[1]]);
@@ -210,15 +210,6 @@ function partitionIntoSections(acc, fd) {
     acc[0].push(fd);
   } else {
     acc[acc.length - 1].push(fd);
-  }
-  return acc;
-}
-
-function extractRuleData(acc, fd, index) {
-  acc.fieldNameMap[index + 2] = fd.Name;
-  const rules = getRules(fd);
-  if (rules.length) {
-    acc.rules[fd.Name] = getRules(fd);
   }
   return acc;
 }
@@ -239,19 +230,90 @@ function updateFieldsets(fields) {
   return fields;
 }
 
-async function renderFields(formURL, form, getId = idGenerator()) {
-  const { pathname, search } = new URL(formURL);
-  const resp = await fetch(pathname + search);
-  const json = await resp.json();
-  const { fieldNameMap, rules } = json.data
-    .reduce(extractRuleData, { fieldNameMap: {}, rules: {} });
+function getFragmentName(r) {
+  const SHEET_NAME_REGEX = /('.{1,31}'|[\w.]{1,31}?)!([$]?[A-Z]+[$]?([0-9]+))/;
+  const sheetName = r.expression.match(SHEET_NAME_REGEX)?.[1]?.replace(/^'|'$/g, '');
+  return sheetName;
+}
 
-  const dataWithIds = json.data.map((fd) => ({
+async function fetchData(url, getId) {
+  const resp = await fetch(url);
+  const json = await resp.json();
+  return json.data.map((fd) => ({
     ...fd,
     Id: fd.Id || getId(fd.Name),
   }));
+}
 
-  const [formSection, ...rest] = dataWithIds.reduce(partitionIntoSections, [['form']])
+function extractFragments(data) {
+  return new Set(data
+    .map((fd) => getRules(fd))
+    .filter((x) => x.length)
+    .flatMap((rules) => rules.map(getFragmentName).filter((x) => x)));
+}
+
+function extractRules(data) {
+  return data
+    .reduce(({ fieldNameMap, formRules }, fd, index) => {
+      const rules = getRules(fd);
+      return {
+        fieldNameMap: {
+          ...fieldNameMap,
+          [index + 2]: fd.Name,
+        },
+        formRules: rules.length ? formRules.concat([[fd.Name, getRules(fd)]]) : formRules,
+      };
+    }, { fieldNameMap: {}, formRules: [] });
+}
+
+async function fetchForm(formUrl, getId) {
+  let url = formUrl;
+  // get the main form
+  const jsonData = await fetchData(url, getId);
+  const fragments = [...extractFragments(jsonData)];
+  const ruleData = extractRules(jsonData);
+  const formData = {
+    data: jsonData,
+    ...ruleData,
+  };
+
+  // get the fragments
+  const fragmentData = (await Promise.all(fragments.map(async (fragName) => {
+    const paramName = fragName.replace(/^helix-/, '');
+    url = `${formUrl}?sheet=${paramName}`;
+    return [fragName, await fetchForm(url, getId)];
+  }))).reduce((finalData, [fragmentName, fragment]) => {
+    const { fieldNameMap, formRules: fragmentRules, data } = fragment;
+    finalData.fieldNameMap[fragmentName] = fieldNameMap.$;
+    finalData.formRules.push(...fragmentRules);
+    finalData.data.push(...data);
+    return finalData;
+  }, { fieldNameMap: {}, formRules: [], data: [] });
+
+  const fieldNameMap = {
+    $: formData.fieldNameMap,
+    ...fragmentData.fieldNameMap,
+  };
+
+  return {
+    fieldNameMap,
+    formRules: [
+      ...fragmentData.formRules,
+      ...formData.formRules
+        // eslint-disable-next-line arrow-body-style
+        .map(([fieldName, fieldRules]) => {
+          return [fieldName, fieldRules.map((rule) => transformRule(rule, fieldNameMap))];
+        }),
+    ],
+    data: [
+      ...formData.data,
+      ...fragmentData.data,
+    ],
+  };
+}
+
+function renderFields(data) {
+  const [formSection, ...rest] = data.reduce(partitionIntoSections, [['form']])
     .map((section) => {
       const fields = section.slice(1).map((fd) => renderField(fd));
       return [section[0], ...updateFieldsets(fields)];
@@ -267,18 +329,23 @@ async function renderFields(formURL, form, getId = idGenerator()) {
   return [...formSection.slice(1), ...remaining];
 }
 
+async function renderForm(formUrl, formTag) {
+  const getId = idGenerator();
+  const { data, formRules } = await fetchForm(formUrl, getId);
+  const sections = renderFields(data);
+  formTag.append(...sections);
+  const ruleEngine = new RuleEngine(formRules, formTag);
+  ruleEngine.applyRules();
+}
+
 export default async function decorate(block) {
   const form = block.querySelector('a[href$=".json"]');
   if (form) {
     const formTag = document.createElement('form');
     // eslint-disable-next-line prefer-destructuring
     formTag.dataset.action = form.href.split('.json')[0];
-    const fields = await renderFields(form.href, formTag);
-    formTag.append(...fields);
+    await renderForm(form.href, formTag);
     decorateForm(formTag);
-    // const { rules, deps } = await renderFields(form.href, formTag);
-    // const ruleEngine = new RuleEngine(rules, deps, formTag);
-    // ruleEngine.applyRules();
     formTag.addEventListener('input', (e) => {
       const input = e.target;
       const wrapper = input.closest('.field-wrapper');

@@ -1,4 +1,4 @@
-const numberRegEx = /(.+?_\d+)$|[^_]+?(\d+)$/;
+const numberRegEx = /^\$?[A-Z]+\$?(\d+)$/;
 
 function visit(n, nameMap, fields) {
   if (n.type === 'Field') {
@@ -6,9 +6,7 @@ function visit(n, nameMap, fields) {
     const match = numberRegEx.exec(name);
     let field;
     if (match?.[1]) {
-      field = nameMap[match[1]];
-    } else {
-      field = nameMap[match[2]];
+      field = nameMap.$[match[1]];
     }
     if (!field) {
       // eslint-disable-next-line no-console
@@ -16,14 +14,23 @@ function visit(n, nameMap, fields) {
     }
     n.name = field;
     fields.add(field);
-  } else if (n.type === 'Function') {
+  } if (n.type === 'Function') {
     n.name = n.name.toLowerCase();
+  } else if (n.type === 'Subexpression') {
+    const fragmentName = n.children[0].name;
+    return visit({
+      type: 'Field',
+      name: n.children[1].name,
+    }, { $: nameMap[fragmentName] }, fields);
   }
-  n.children?.forEach((c) => visit(c, nameMap, fields));
+  return {
+    ...n,
+    children: n.children?.map((c) => visit(c, nameMap, fields)),
+  };
 }
 
 export default function updateCellNames(ast, rowNumberFieldMap) {
   const fields = new Set();
-  visit(ast, rowNumberFieldMap, fields);
-  return Array.from(fields);
+  const newAst = visit(ast, rowNumberFieldMap, fields);
+  return [newAst, Array.from(fields)];
 }

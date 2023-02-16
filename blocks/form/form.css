@@ -277,6 +277,24 @@ input[type="range"]:focus::-webkit-slider-thumb {
   transform: rotate(180deg);
 }
 /** form specific style */
+@media (min-width: 1441px) {
+  .repayments-calculator-section form {
+    display: grid;
+    grid-template-areas: "input output" "input buttons" "input .";
+    column-gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    box-sizing: border-box;
+  }
+  .repayments-calculator-section form .Input {
+    grid-area: input;
+  }
+  .repayments-calculator-section form .Output {
+    grid-area: output;
+  }
+  .repayments-calculator-section form .buttons {
+    grid-area: buttons;
+  }
+}
 .repayments-calculator-section {
   box-sizing: border-box;
   max-width: 1228px;
