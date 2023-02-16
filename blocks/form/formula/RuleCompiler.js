@@ -9,9 +9,8 @@ function updateExpression(expression) {
   return updatedExpression;
 }
 
-export default function transformRule({ prop, expression }, fieldToCellMap, fragmentName) {
+export default function transformRule({ prop, expression }, fieldToCellMap, fragmentName, formula) {
   const updatedRule = updateExpression(expression);
-  const formula = new Formula();
   const ast = formula.compile(updatedRule);
   const [newAst, deps] = updateCellNames(ast, fieldToCellMap, fragmentName);
   return {

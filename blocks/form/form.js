@@ -1,6 +1,5 @@
-import transformRule from './formula/RuleCompiler.js';
-import { applyRuleEngine, getRules } from './formula/RuleEngine.js';
-import decorateForm from './decorators/customDecorator.js';
+import { getRules, applyRuleEngine } from './formula/index.js';
+import decorateForm from './decorators/index.js';
 import formatFns from './formatting.js';
 
 function setPlaceholder(element, fd) {
@@ -300,7 +299,7 @@ export default async function decorate(block) {
     // eslint-disable-next-line prefer-destructuring
     formTag.dataset.action = formEl.href.split('.json')[0];
     const { form, fragments } = await renderForm(formEl.href, formTag);
-    decorateForm(formTag);
+    await decorateForm(formTag);
     applyRuleEngine(form, fragments, formTag);
     formTag.addEventListener('input', (e) => {
       const input = e.target;
