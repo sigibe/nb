@@ -1,5 +1,4 @@
 import updateCellNames from './ExcelToJsonFormula.js';
-import Formula from './jsonformula/json-formula.js';
 
 const SHEET_NAME_REGEX = /('.{1,31}'|[\w.]{1,31}?)!([$]?[A-Z]+[$]?[0-9]+)/g;
 

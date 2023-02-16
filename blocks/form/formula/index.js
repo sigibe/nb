@@ -46,6 +46,7 @@ export async function applyRuleEngine(form, fragments, formTag) {
 
     new RuleEngine(rules, fieldNameMap, formTag).enable();
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log('unable to apply rules ', e);
   }
 }
