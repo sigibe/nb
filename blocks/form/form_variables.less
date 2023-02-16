@@ -39,8 +39,9 @@
 .calculatorLayout() {
   display: grid;
   grid-template-areas: "input output"
-    "input buttons";
-  column-gap: 134px;
+    "input buttons"
+    "input .";
+  column-gap: 40px;
   grid-template-columns: 1fr 1fr;
   box-sizing: border-box;
 
@@ -50,12 +51,6 @@
 
   .Output {
     grid-area: output;
-    padding: @spacing-07 @spacing-08 @spacing-05 @spacing-08;
-    margin-bottom: @spacing-06;
-    border-radius: 10px;
-    background-color: @test17;
-    box-shadow: 0 25px 20px -15px rgb(0 0 0 / 10%);
-    align-self: flex-start;
   }
 
   .buttons {

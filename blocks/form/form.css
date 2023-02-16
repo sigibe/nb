@@ -303,28 +303,6 @@ input[type="range"]:focus::-webkit-slider-thumb {
   display: block;
   margin-top: 48px;
 }
-.repayments-calculator-section form {
-  display: grid;
-  grid-template-areas: "input output" "input buttons";
-  column-gap: 134px;
-  grid-template-columns: 1fr 1fr;
-  box-sizing: border-box;
-}
-.repayments-calculator-section form .Input {
-  grid-area: input;
-}
-.repayments-calculator-section form .Output {
-  grid-area: output;
-  padding: 32px 40px 16px 40px;
-  margin-bottom: 24px;
-  border-radius: 10px;
-  background-color: #f9fbfb;
-  box-shadow: 0 25px 20px -15px rgba(0, 0, 0, 0.1);
-  align-self: flex-start;
-}
-.repayments-calculator-section form .buttons {
-  grid-area: buttons;
-}
 .repayments-calculator-section .Input .field-wrapper {
   margin-bottom: 42px;
 }
@@ -332,10 +310,13 @@ input[type="range"]:focus::-webkit-slider-thumb {
   margin-bottom: 0;
 }
 .repayments-calculator-section .Output {
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: row;
-  flex-wrap: wrap;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  background-color: #f9fbfb;
+  box-shadow: 0 25px 20px -15px rgba(0, 0, 0, 0.1);
+  padding: 32px 40px 16px 40px;
+  display: grid;
+  grid-template-areas: "emi emi" "total total" "rate explore" "range range";
 }
 .repayments-calculator-section .Output .field-wrapper {
   padding-bottom: 16px;
@@ -344,11 +325,59 @@ input[type="range"]:focus::-webkit-slider-thumb {
   padding-bottom: 16px;
   margin-bottom: 0;
 }
-.repayments-calculator-section .Output > .field-wrapper {
-  flex-grow: 2;
+.repayments-calculator-section .Output .form-exploreRate {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  grid-area: explore;
+  align-self: end;
 }
-.repayments-calculator-section .Output > .form-exploreRate {
-  align-self: flex-end;
+.repayments-calculator-section .Output .form-exploreRate label {
+  margin: unset;
+  padding: unset;
+  cursor: pointer;
+  color: #008533;
+  font-family: "Open Sans Semibold";
+}
+.repayments-calculator-section .Output .form-exploreRate input[type="checkbox"] {
+  border: none;
+  margin: unset;
+  padding: unset;
+  appearance: none;
+}
+.repayments-calculator-section .Output .form-exploreRate input[type="checkbox"]::after {
+  content: url(/icons/up-arrow.svg);
+  font-size: 16px;
+  cursor: pointer;
+  color: #008533;
+  font-family: "Open Sans Semibold";
+  margin-left: 16px;
+  width: 24px;
+  height: 24px;
+}
+.repayments-calculator-section .Output .form-exploreRate input[type="checkbox"]:focus::after {
+  box-shadow: 0 0 0 1px #78be20;
+}
+.repayments-calculator-section .Output .form-exploreRate input[type="checkbox"]:checked::after {
+  content: url(/icons/down-arrow.svg);
+  background: transparent;
+}
+.repayments-calculator-section .Output .form-emi {
+  grid-area: emi;
+}
+.repayments-calculator-section .Output .form-emi output {
+  color: #5fa317;
+}
+.repayments-calculator-section .Output .form-total {
+  grid-area: total;
+}
+.repayments-calculator-section .Output .form-rateDisplay {
+  grid-area: rate;
+}
+.repayments-calculator-section .Output .form-rateDisplay output {
+  margin-bottom: 0;
+}
+.repayments-calculator-section .Output .form-rate {
+  grid-area: range;
 }
 .repayments-calculator-section .buttons {
   display: flex;
@@ -384,40 +413,38 @@ input[type="range"]:focus::-webkit-slider-thumb {
   color: #ffffff;
   border: 2px solid #17252e;
 }
-.repayments-calculator-section .form-exploreRate label {
-  margin: unset;
-  padding: unset;
-  cursor: pointer;
-  color: #008533;
-  font-family: "Open Sans Semibold";
+@media (min-width: 768px) {
+  .repayments-calculator-section form {
+    display: grid;
+    grid-template-areas: "input output" "input buttons" "input .";
+    column-gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    box-sizing: border-box;
+  }
+  .repayments-calculator-section form .Input {
+    grid-area: input;
+  }
+  .repayments-calculator-section form .Output {
+    grid-area: output;
+  }
+  .repayments-calculator-section form .buttons {
+    grid-area: buttons;
+  }
+  .repayments-calculator-section .Output {
+    padding: 32px 24px;
+  }
+  .repayments-calculator-section .buttons {
+    flex-direction: column;
+  }
 }
-.repayments-calculator-section .form-exploreRate input[type="checkbox"] {
-  border: none;
-  margin: unset;
-  padding: unset;
-  appearance: none;
-}
-.repayments-calculator-section .form-exploreRate input[type="checkbox"]::after {
-  content: url(/icons/up-arrow.svg);
-  font-size: 16px;
-  cursor: pointer;
-  color: #008533;
-  font-family: "Open Sans Semibold";
-  margin-left: 16px;
-  width: 24px;
-  height: 24px;
-}
-.repayments-calculator-section .form-exploreRate input[type="checkbox"]:focus::after {
-  box-shadow: 0 0 0 1px #78be20;
-}
-.repayments-calculator-section .form-exploreRate input[type="checkbox"]:checked::after {
-  content: url(/icons/down-arrow.svg);
-  background: transparent;
-}
-.repayments-calculator-section .form-exploreRate {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-.repayments-calculator-section .form-emi output {
-  color: #5fa317;
+@media (min-width: 991px) {
+  .repayments-calculator-section form {
+    column-gap: 134px;
+  }
+  .repayments-calculator-section .Output {
+    padding: 32px 40px 16px 40px;
+  }
+  .repayments-calculator-section .buttons {
+    flex-direction: row;
+  }
 }

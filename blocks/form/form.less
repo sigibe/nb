@@ -361,10 +361,6 @@ input[type="range"] {
     margin-top: @spacing-09;
   }
 
-  form {
-    .calculatorLayout();
-  }
-
   .Input {
     .field-wrapper {
       margin-bottom: 42px;
@@ -376,6 +372,18 @@ input[type="range"] {
   }
 
   .Output {
+    margin-bottom: @spacing-06;
+    border-radius: 10px;
+    background-color: @test17;
+    box-shadow: 0 25px 20px -15px rgb(0 0 0 / 10%);
+    padding: @spacing-07 @spacing-08 @spacing-05 @spacing-08;
+    display: grid;
+    grid-template-areas:
+      "emi emi"
+      "total total"
+      "rate explore"
+      "range range";
+
     .field-wrapper {
       padding-bottom: @spacing-05;
     }
@@ -385,16 +393,72 @@ input[type="range"] {
       margin-bottom: 0;
     }
 
-    .flex(row, wrap);
+    .form-exploreRate {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      grid-area: explore;
+      align-self: end;
 
-    >.field-wrapper {
-      flex-grow: 2;
+      label {
+        .unset();
+        cursor: pointer;
+        color: @dotcoza-color-greens-default;
+        font-family: @font-family-opensans-bold;
+      }
+
+      input[type="checkbox"] {
+        border: none;
+        .unset();
+        appearance: none;
+      }
+
+      input[type="checkbox"]::after {
+        content: @up-arrow-icon;
+        font-size: @font-size-base;
+        cursor: pointer;
+        color: @dotcoza-color-greens-default;
+        font-family: @font-family-opensans-bold;
+        margin-left: @spacing-05;
+        width: 24px;
+        height: 24px;
+      }
+
+      input[type="checkbox"]:focus::after {
+        box-shadow: 0 0 0 1px @dotcoza-color-greens-bright;
+      }
+
+      input[type="checkbox"]:checked::after {
+        content: @down-arrow-icon;
+        background: transparent;
+      }
     }
 
-    >.form-exploreRate {
-      align-self: flex-end;
+    .form-emi {
+      grid-area: emi;
+
+      output {
+        color: @green-color-1;
+      }
     }
+
+    .form-total {
+      grid-area: total;
+    }
+
+    .form-rateDisplay {
+      grid-area: rate;
+
+      output {
+        margin-bottom: 0;
+      }
+    }
+
+    .form-rate {
+      grid-area: range;
+    }
+
   }
+
 
   .buttons {
     display: flex;
@@ -436,46 +500,36 @@ input[type="range"] {
     color: @dotcoza-color-neutrals-white;
     border: 2px solid @dotcoza-color-title-grey;
   }
+}
 
-  .form-exploreRate label {
-    .unset();
-    cursor: pointer;
-    color: @dotcoza-color-greens-default;
-    font-family: @font-family-opensans-bold;
+@media (@width_768) {
+  .repayments-calculator-section {
+    form {
+      .calculatorLayout();
+    }
+
+    .Output {
+      padding: @spacing-07 @spacing-06;
+    }
+
+    .buttons {
+      flex-direction: column;
+    }
   }
+}
 
-  .form-exploreRate input[type="checkbox"] {
-    border: none;
-    .unset();
-    appearance: none;
-  }
+@media(@width_991) {
+  .repayments-calculator-section {
+    form {
+      column-gap: 134px;
+    }
 
-  .form-exploreRate input[type="checkbox"]::after {
-    content: @up-arrow-icon;
-    font-size: @font-size-base;
-    cursor: pointer;
-    color: @dotcoza-color-greens-default;
-    font-family: @font-family-opensans-bold;
-    margin-left: @spacing-05;
-    width: 24px;
-    height: 24px;
-  }
+    .Output {
+      padding: @spacing-07 @spacing-08 @spacing-05 @spacing-08;
+    }
 
-  .form-exploreRate input[type="checkbox"]:focus::after {
-    box-shadow: 0 0 0 1px @dotcoza-color-greens-bright;
-  }
-
-  .form-exploreRate input[type="checkbox"]:checked::after {
-    content: @down-arrow-icon;
-    background: transparent;
-  }
-
-  .form-exploreRate {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-  }
-
-  .form-emi output {
-    color: @green-color-1;
+    .buttons {
+      flex-direction: row;
+    }
   }
 }
