@@ -54,7 +54,7 @@ function createHelpText(fd) {
   div.className = 'field-description';
   div.setAttribute('aria-live', 'polite');
   div.innerText = fd.Description;
-  div.id = `${fd.ID}-description`;
+  div.id = `${fd.Id}-description`;
   return div;
 }
 
@@ -75,7 +75,7 @@ function createInput(fd) {
   setNumberConstraints(input, fd);
   input.dataset.displayFormat = fd['Display Format'];
   if (fd.Description) {
-    input.setAttribute('aria-describedby', `${fd.ID}-description`);
+    input.setAttribute('aria-describedby', `${fd.Id}-description`);
   }
   input.value = fd.Value;
   return input;
