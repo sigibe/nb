@@ -1,5 +1,5 @@
 import transformRule from './formula/RuleCompiler.js';
-import RuleEngine from './formula/RuleEngine.js';
+import { applyRuleEngine, getRules } from './formula/RuleEngine.js';
 import decorateForm from './decorators/customDecorator.js';
 import formatFns from './formatting.js';
 
@@ -154,18 +154,6 @@ function createCurrency(fd) {
   return wrapper;
 }
 
-function getRules(fd) {
-  const entries = [
-    ['Value', fd?.['Value Expression']],
-    ['Hidden', fd?.['Hidden Expression']],
-    ['Label', fd?.['Label Expression']],
-  ];
-  return entries.filter((e) => e[1]).map(([prop, expression]) => ({
-    prop,
-    expression,
-  }));
-}
-
 function idGenerator() {
   const ids = {};
   return (name) => {
@@ -252,63 +240,26 @@ function extractFragments(data) {
     .flatMap((rules) => rules.map(getFragmentName).filter((x) => x)));
 }
 
-function extractRules(data) {
-  return data
-    .reduce(({ fieldNameMap, formRules }, fd, index) => {
-      const rules = getRules(fd);
-      return {
-        fieldNameMap: {
-          ...fieldNameMap,
-          [index + 2]: fd.Name,
-        },
-        formRules: rules.length ? formRules.concat([[fd.Name, getRules(fd)]]) : formRules,
-      };
-    }, { fieldNameMap: {}, formRules: [] });
-}
-
 async function fetchForm(formUrl, getId) {
   let url = formUrl;
   // get the main form
   const jsonData = await fetchData(url, getId);
   const fragments = [...extractFragments(jsonData)];
-  const ruleData = extractRules(jsonData);
-  const formData = {
-    data: jsonData,
-    ...ruleData,
-  };
 
   // get the fragments
   const fragmentData = (await Promise.all(fragments.map(async (fragName) => {
     const paramName = fragName.replace(/^helix-/, '');
     url = `${formUrl}?sheet=${paramName}`;
     return [fragName, await fetchForm(url, getId)];
-  }))).reduce((finalData, [fragmentName, fragment]) => {
-    const { fieldNameMap, formRules: fragmentRules, data } = fragment;
-    finalData.fieldNameMap[fragmentName] = fieldNameMap.$;
-    finalData.formRules.push(...fragmentRules);
-    finalData.data.push(...data);
-    return finalData;
-  }, { fieldNameMap: {}, formRules: [], data: [] });
-
-  const fieldNameMap = {
-    $: formData.fieldNameMap,
-    ...fragmentData.fieldNameMap,
-  };
+  }))).reduce((finalData, [fragmentName, fragment]) => ({
+    [fragmentName]: fragment.form,
+    ...fragment.fragments,
+    ...finalData,
+  }), {});
 
   return {
-    fieldNameMap,
-    formRules: [
-      ...fragmentData.formRules,
-      ...formData.formRules
-        // eslint-disable-next-line arrow-body-style
-        .map(([fieldName, fieldRules]) => {
-          return [fieldName, fieldRules.map((rule) => transformRule(rule, fieldNameMap))];
-        }),
-    ],
-    data: [
-      ...formData.data,
-      ...fragmentData.data,
-    ],
+    form: jsonData,
+    fragments: fragmentData,
   };
 }
 
@@ -329,23 +280,28 @@ function renderFields(data) {
   return [...formSection.slice(1), ...remaining];
 }
 
+function mergeFormWithFragments(form, fragments) {
+  return [...form, ...(Object.values(fragments).flat())];
+}
+
 async function renderForm(formUrl, formTag) {
   const getId = idGenerator();
-  const { data, formRules } = await fetchForm(formUrl, getId);
+  const { form, fragments } = await fetchForm(formUrl, getId);
+  const data = mergeFormWithFragments(form, fragments);
   const sections = renderFields(data);
   formTag.append(...sections);
-  const ruleEngine = new RuleEngine(formRules, formTag);
-  ruleEngine.applyRules();
+  return { form, fragments };
 }
 
 export default async function decorate(block) {
-  const form = block.querySelector('a[href$=".json"]');
-  if (form) {
+  const formEl = block.querySelector('a[href$=".json"]');
+  if (formEl) {
     const formTag = document.createElement('form');
     // eslint-disable-next-line prefer-destructuring
-    formTag.dataset.action = form.href.split('.json')[0];
-    await renderForm(form.href, formTag);
+    formTag.dataset.action = formEl.href.split('.json')[0];
+    const { form, fragments } = await renderForm(formEl.href, formTag);
     decorateForm(formTag);
+    applyRuleEngine(form, fragments, formTag);
     formTag.addEventListener('input', (e) => {
       const input = e.target;
       const wrapper = input.closest('.field-wrapper');
@@ -368,6 +324,6 @@ export default async function decorate(block) {
         }
       }
     });
-    form.replaceWith(formTag);
+    formEl.replaceWith(formTag);
   }
 }
