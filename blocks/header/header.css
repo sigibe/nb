@@ -28,6 +28,22 @@ header nav .nav-hamburger {
   height: 56px;
   background-repeat: no-repeat;
 }
+header nav .nav-hamburger .hamburger-menu-wrapper {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+  background-color: #006341;
+}
+header nav .nav-hamburger .hamburger-menu-wrapper.appear {
+  width: 100%;
+}
 header nav .nav-sections {
   flex-grow: 1;
   font-size: 14px;

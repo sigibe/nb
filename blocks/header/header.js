@@ -13,6 +13,27 @@ function collapseAllNavSections(sections) {
   });
 }
 
+async function loadHamburgerMenu(hamburger) {
+  // fetch nav content
+  const hamburgerMenuPath = `${getRootPath()}/hamburger`;
+  const resp = await fetch(`${hamburgerMenuPath}.plain.html`);
+  if (resp.ok) {
+    const html = await resp.text();
+    const hamburgerMenuWrapper = document.createElement('div');
+    hamburgerMenuWrapper.classList.add('hamburger-menu-wrapper');
+    hamburgerMenuWrapper.innerHTML = html;
+    const hamburgerMenu = hamburgerMenuWrapper.querySelector('div');
+    const closeBtn = document.createElement('a');
+    closeBtn.innerHTML = '<img src="/icons/white_close.svg"></img>';
+    closeBtn.addEventListener('click', (event) => {
+      hamburgerMenuWrapper.classList.remove('appear');
+      event.stopPropagation();
+    });
+    hamburgerMenu.prepend(closeBtn);
+    hamburger.append(hamburgerMenuWrapper);
+  }
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -55,18 +76,16 @@ export default async function decorate(block) {
       });
     }
 
-    // hamburger for mobile
     const hamburger = document.createElement('div');
     hamburger.classList.add('nav-hamburger');
     hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
     hamburger.addEventListener('click', () => {
-      const expanded = nav.getAttribute('aria-expanded') === 'true';
-      document.body.style.overflowY = expanded ? '' : 'hidden';
-      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      hamburger.querySelector('.hamburger-menu-wrapper').classList.add('appear');
     });
     nav.append(hamburger);
     nav.setAttribute('aria-expanded', 'false');
     decorateIcons(nav);
+    await loadHamburgerMenu(hamburger);
     block.append(nav);
   }
 }
