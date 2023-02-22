@@ -2,19 +2,18 @@
 
 footer {
 	font-size: var(--body-font-size-s);
+
 	.section {
-		padding: 15px;
-	}
-	.footer-awareness {
-		padding: 25px 20px 0 20px;
 		border-top: 1px solid #e5edec;
-		p {
-			margin: 0;
+
+		p,
+		ul,
+		h2,
+		h5 {
+			padding-left: 20px;
 		}
 	}
-	.footer-links {
-		background-color: @background_color_1;
-	}
+
 	.footer-social-items {
 		display: flex;
 		justify-content: space-between;
@@ -24,24 +23,40 @@ footer {
 			margin-right: 24px;
 		}
 	}
+
 	.footer-link-groups {
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
 	}
+
 	.footer-link-group {
-		h3 {
-			color: @color_1;
-			font-family: @font_family_1;
-			font-size: 18px;
-			font-weight: 500;
-			letter-spacing: 0;
-			line-height: 26px;
-			margin: 60px 0 0 0;
+		h5 {
+			border: 1px solid #e5edec;
+			margin: unset;
+			padding: 20px 0 20px 20px;
+
+			>span.icon {
+				float: right;
+				padding-right: 20px;
+
+				&.icon-up-arrow-f {
+					display: none;
+				}
+			}
 		}
+
 		>ul {
+			margin: unset;
+			padding: 40px 0 20px 20px;
 			list-style: none;
-			padding-inline-start: unset;
+			display: none;
+			background-color: @dotcoza-color-neutrals-grey-background;
+
+			&.appear {
+				display: block;
+			}
+
 			>li {
 				>a {
 					color: @color_2;
@@ -49,6 +64,7 @@ footer {
 					font-size: 16px;
 					letter-spacing: 0;
 					line-height: 32px;
+					margin: unset;
 				}
 			}
 		}
@@ -57,8 +73,10 @@ footer {
 
 @media (@width_991) {
 	footer {
-		.footer-awareness {
-			padding: 24px 105px;
+		.section {
+			.default-content-wrapper {
+				padding: 0 90px;
+			}
 		}
 
 		.footer-social-items {
@@ -73,14 +91,36 @@ footer {
 			}
 		}
 
-		.section {
-			padding-left: var(--section-left-right-padding);
-			padding-right: var(--section-left-right-padding);
+		.footer-links {
+			background-color: @dotcoza-color-neutrals-grey-background;
+
+			.footer-link-groups {
+				display: flex;
+				justify-content: space-between;
+				flex-direction: row;
+
+				.footer-link-group {
+					h5 {
+						border: none;
+						padding: 40px 0 0 0;
+
+						>span.icon {
+							display: none !important;
+						}
+					}
+
+					>ul {
+						padding: 40px 0 20px 0;
+						display: block;
+						background-color: unset;
+					}
+				}
+
+			}
+
+
 		}
-		.footer-link-groups {
-			display: flex;
-			justify-content: space-between;
-			flex-direction: row;
-		}
+
+
 	}
 }

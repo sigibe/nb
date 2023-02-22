@@ -25,6 +25,22 @@ function decorateFooterLinks(footer) {
       footerLinkGroupDiv.appendChild(item);
     });
     footerLinkGroupsDiv.appendChild(footerLinkGroupDiv);
+    footerLinkGroupDiv.addEventListener('click', () => {
+      if (footerLinkGroupDiv.querySelector('ul').classList.contains('appear')) {
+        footerLinkGroupDiv.querySelector('ul').classList.remove('appear');
+        footerLinkGroupDiv.querySelector('span.icon-down-arrow-f').style.display = 'unset';
+        footerLinkGroupDiv.querySelector('span.icon-up-arrow-f').style.display = 'none';
+      } else {
+        footerLinkGroupsDiv.querySelectorAll('.footer-link-group').forEach((item) => {
+          item.querySelector('ul').classList.remove('appear');
+          item.querySelector('span.icon-down-arrow-f').style.display = 'unset';
+          item.querySelector('span.icon-up-arrow-f').style.display = 'none';
+        });
+        footerLinkGroupDiv.querySelector('ul').classList.add('appear');
+        footerLinkGroupDiv.querySelector('span.icon-down-arrow-f').style.display = 'none';
+        footerLinkGroupDiv.querySelector('span.icon-up-arrow-f').style.display = 'unset';
+      }
+    });
   });
   const parent = footer.querySelector(':scope > .footer-links > div');
   parent.innerHTML = '';
