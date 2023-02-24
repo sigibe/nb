@@ -21,17 +21,6 @@ const LANG = {
   BR: 'br',
 };
 
-const LANG_LOCALE = {
-  en: 'en_US',
-  de: 'de_DE',
-  fr: 'fr_FR',
-  ko: 'ko_KR',
-  es: 'es_ES',
-  it: 'it_IT',
-  jp: 'ja_JP',
-  br: 'pt_BR',
-};
-
 let language;
 
 export function getLanguage() {
@@ -58,11 +47,24 @@ export function getRootPath() {
   const loc = getLanguage();
   if (loc) {
     return `/${loc}`;
-  } else {
-    return '';
   }
-
+  return '';
 }
+
+/**
+ *
+ * retrieve cookie by name
+ * @returns cookie value
+ */
+
+function getCookieValue(name) {
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+  if (match) {
+    return match[2];
+  }
+  return null;
+}
+
 /**
  * log RUM if part of the sample.
  * @param {string} checkpoint identifies the checkpoint in funnel
@@ -335,10 +337,10 @@ export function decorateSections($main) {
         if (key === 'style') {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
-        }
-        else section.dataset[key] = meta[key];
+        } else section.dataset[key] = meta[key];
       });
-      sectionMeta.remove();
+
+      sectionMeta.parentNode.remove();
     }
   });
 }
@@ -720,29 +722,16 @@ function loadFooter(footer) {
   loadBlock(footerBlock);
 }
 
-/**
- * Builds all synthetic blocks in a container element.
- * @param {Element} main The container element
- */
-function buildAutoBlocks(main) {
-  try {
-    buildHeroBlock(main);
-    if (['yes', 'on'].includes(getMetadata('show-banner'))) {
-      buildBannerBlock(main);
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Auto Blocking failed', error);
-  }
-}
-
 function buildBannerBlock(main) {
   const placeholder = document.createElement('div');
   placeholder.classList.add('banner-placeholder');
+  if (!getCookieValue('oldSitePopUpCookies')) {
+    placeholder.classList.add('appear');
+  }
   main.prepend(placeholder);
   fetch(`${window.hlx.codeBasePath}${getRootPath()}/banner.plain.html`).then((resp) => {
     if (resp.status === 200) {
-      const section = main.querySelector('.banner-placeholder.section')
+      const section = main.querySelector('.banner-placeholder.section');
       resp.text().then(async (txt) => {
         let bannerDiv = document.createElement('div');
         bannerDiv.innerHTML = txt;
@@ -757,9 +746,26 @@ function buildBannerBlock(main) {
         decorateBlock(block);
         await loadBlock(block);
         block.style.display = 'flex';
+        decorateIcons(block);
       });
     }
   });
+}
+
+/**
+ * Builds all synthetic blocks in a container element.
+ * @param {Element} main The container element
+ */
+function buildAutoBlocks(main) {
+  try {
+    buildHeroBlock(main);
+    if (['yes', 'on'].includes(getMetadata('show-banner'))) {
+      buildBannerBlock(main);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Auto Blocking failed', error);
+  }
 }
 
 /**
