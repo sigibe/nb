@@ -32,8 +32,11 @@ footer .footer-link-group h5 > span.icon {
   float: right;
   padding-right: 20px;
 }
-footer .footer-link-group h5 > span.icon.icon-up-arrow-f {
+footer .footer-link-group h5 > span.icon.icon {
   display: none;
+}
+footer .footer-link-group h5 > span.icon.icon.appear {
+  display: block;
 }
 footer .footer-link-group > ul {
   margin: unset;
@@ -83,10 +86,13 @@ footer .footer-link-group > ul > li > a {
   }
   footer .footer-links .footer-link-groups .footer-link-group h5 {
     border: none;
-    padding: 40px 0 0 0;
+    padding: 40px 0 0;
   }
   footer .footer-links .footer-link-groups .footer-link-group h5 > span.icon {
-    display: none !important;
+    display: none;
+  }
+  footer .footer-links .footer-link-groups .footer-link-group h5 > span.icon.appear {
+    display: none;
   }
   footer .footer-links .footer-link-groups .footer-link-group > ul {
     max-height: unset;
