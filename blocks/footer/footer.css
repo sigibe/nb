@@ -38,7 +38,6 @@ footer .footer-link-group h5 > span.icon.icon-up-arrow-f {
 footer .footer-link-group > ul {
   margin: unset;
   list-style: none;
-  box-sizing: border-box;
   max-height: 0;
   background-color: #fafafa;
   transition: all ease-in-out 0.5s;
@@ -90,8 +89,13 @@ footer .footer-link-group > ul > li > a {
     display: none !important;
   }
   footer .footer-links .footer-link-groups .footer-link-group > ul {
-    padding: 40px 0 20px 0;
+    max-height: unset;
     display: block;
     background-color: unset;
+    padding: 40px 0 20px;
+    transition: none;
+  }
+  footer .footer-links .footer-link-groups .footer-link-group > ul > li {
+    padding: unset;
   }
 }
