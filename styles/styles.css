@@ -9,7 +9,6 @@
   ascent-override: 105%;
   src: local("Arial");
 }
-
 :root {
   --link-color: #008533;
   --link-hover-color: #008533;
@@ -38,7 +37,6 @@
   --section-left-right-padding: 105px;
   scroll-behavior: smooth;
 }
-
 :root .light {
   --background-color: #ffffff;
   --background-color-banner: #fafafa;
@@ -46,7 +44,6 @@
   --text-color: #17252e;
   --heading-text-color: #17252e;
 }
-
 :root .dark {
   --background-color: #000000;
   --background-color-banner: #494f50;
@@ -54,7 +51,6 @@
   --text-color: #ffffff;
   --heading-text-color: #ffffff;
 }
-
 body {
   font-size: var(--body-font-size-m);
   margin: 0;
@@ -64,19 +60,15 @@ body {
   background-color: var(--background-color);
   display: none;
 }
-
 body svg {
   pointer-events: none;
 }
-
 body.appear {
   display: unset;
 }
-
 header {
   height: var(--nav-height);
 }
-
 h1,
 h2,
 h3,
@@ -87,13 +79,11 @@ h6 {
   font-weight: 700;
   line-height: 26px;
   letter-spacing: 0;
-  line-height: 1.2;
   margin-top: 1em;
   margin-bottom: 0.5em;
   scroll-margin: calc(var(--nav-height) + 1em);
   color: var(--heading-text-color);
 }
-
 h1,
 h2,
 h3,
@@ -103,51 +93,40 @@ h6 {
   font-weight: 700;
   font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
 }
-
 h1 {
   font-size: var(--heading-font-size-xxl);
 }
-
 h2 {
   font-size: var(--heading-font-size-xl);
 }
-
 h3 {
   font-size: var(--heading-font-size-l);
 }
-
 h4 {
   font-size: var(--heading-font-size-m);
 }
-
 h5 {
   font-size: 18px;
 }
-
 h6 {
   font-size: var(--heading-font-size-xs);
 }
-
 p {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
 dl {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
 ol {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
 ul {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
 pre {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -155,57 +134,46 @@ pre {
   font-size: var(--body-font-size-s);
   overflow: scroll;
 }
-
 strong {
   font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
   font-weight: 700;
 }
-
 strong a.button:any-link {
   font-family: var(--strong-font-family);
 }
-
 blockquote {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
 a:any-link {
   margin-left: 10px;
   margin-right: 8px;
   color: var(--link-color);
   text-decoration: none;
 }
-
 a:hover {
   color: var(--link-hover-color);
 }
-
 code {
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-s);
   padding: 0.125em;
 }
-
 samp {
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-s);
   padding: 0.125em;
 }
-
 input[type=radio] {
   border: 0px;
   transform: scale(1.5);
 }
-
 .grey {
   background-color: var(--background-color-grey);
 }
-
 .black {
   background-color: var(--background-color-black);
 }
-
 a.button:any-link {
   font-family: var(--btn-font-family);
   font-style: normal;
@@ -227,12 +195,10 @@ a.button:any-link {
   text-overflow: ellipsis;
   border-radius: 5px;
 }
-
 a.button:focus {
   background-color: var(--link-hover-color);
   cursor: pointer;
 }
-
 button {
   font-family: var(--font-family-body);
   display: inline-block;
@@ -254,34 +220,28 @@ button {
   border-radius: 5px;
   user-select: none;
 }
-
 button:hover {
   background-color: var(--link-hover-color);
   cursor: pointer;
 }
-
 button:focus {
   background-color: var(--link-hover-color);
   cursor: pointer;
 }
-
 button:disabled {
   background-color: var(--overlay-background-color);
   cursor: unset;
 }
-
 button:disabled:hover {
   background-color: var(--overlay-background-color);
   cursor: unset;
 }
-
 a.button.secondary,
 button.secondary {
   background-color: #ffffff;
   border: 2px solid currentcolor;
   color: #000000;
 }
-
 main pre {
   background-color: var(--overlay-background-color);
   padding: 1em;
@@ -289,114 +249,91 @@ main pre {
   overflow-x: auto;
   white-space: pre;
 }
-
 main blockquote {
   font-style: italic;
   margin: 3rem;
   text-indent: -1rem;
   hanging-punctuation: first;
 }
-
 main blockquote p::before {
   content: "“";
   line-height: 0;
 }
-
 main blockquote p::after {
   content: "”";
   line-height: 0;
 }
-
 main img {
   max-width: 100%;
   height: auto;
 }
-
 main .section {
   background-color: var(--background-color);
 }
-
 main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
   display: none !important;
 }
-
 main .section :where(.icon-arrow, .icon-diagonal-arrow) {
   display: inline-block;
 }
-
 main .section :where(.icon-arrow, .icon-diagonal-arrow):hover {
   transition: transform 900ms;
   transform: translateX(8px);
 }
-
-main .section p:hover>.icon-diagonal-arrow {
+main .section p:hover > .icon-diagonal-arrow {
   transition: transform 900ms;
   transform: translate(6px, -5px);
 }
-
-main .section p:has(.icon-arrow, .icon-diagonal-arrow)>a {
+main .section p:has(.icon-arrow, .icon-diagonal-arrow) > a {
   text-decoration: none;
 }
-
 main .section.shaded-background {
   background-color: var(--overlay-background-color);
 }
-
 main .section.highlight {
   background-color: var(--highlight-background-color);
   color: white;
   text-align: center;
 }
-
 main .section.highlight .default-content-wrapper a.button {
   background-color: var(--background-color);
   color: var(--link-color);
 }
-
 main .section.overlay {
   background-color: var(--overlay-background-color);
 }
-
 main .section.breadcrumb {
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.08);
   height: 75px;
   display: flex;
   position: relative;
 }
-
-main .section.breadcrumb>.default-content-wrapper {
+main .section.breadcrumb > .default-content-wrapper {
   display: flex;
   align-items: center;
 }
-
-main .section.breadcrumb>.default-content-wrapper p {
+main .section.breadcrumb > .default-content-wrapper p {
   font-size: 18px;
   line-height: 20px;
 }
-
-main .section.breadcrumb>.default-content-wrapper a {
+main .section.breadcrumb > .default-content-wrapper a {
   color: #bbbbbb;
 }
-
-main .section.breadcrumb>.default-content-wrapper a:hover {
+main .section.breadcrumb > .default-content-wrapper a:hover {
   color: #494f50;
 }
-
-main .section.breadcrumb>.default-content-wrapper .icon {
+main .section.breadcrumb > .default-content-wrapper .icon {
   vertical-align: middle;
   padding-right: 5px;
 }
-
 main .section.steps-container {
   margin: auto;
   text-align: center;
 }
-
 main .section.steps-container li {
   padding: 20px;
 }
-
 main .section.disclaimer {
   font-family: "Open Sans Regular";
   font-size: 12px;
@@ -404,35 +341,28 @@ main .section.disclaimer {
   line-height: 24px;
   color: #8a9596;
 }
-
 main .section.disclaimer p {
   margin: unset;
 }
-
 main .section.readytoapply {
   background-color: #17252e;
   display: flex;
   justify-content: center;
 }
-
 main .section.readytoapply h2 {
   color: var(--background-color);
 }
-
-main .section.readytoapply>.default-content-wrapper {
+main .section.readytoapply > .default-content-wrapper {
   text-align: center;
 }
-
 main .section.back-to-top {
   margin-top: 32px;
   padding: 40px 35px 40px 15px;
 }
-
 main .section.back-to-top p {
   margin: 0;
   text-align: end;
 }
-
 main .section.back-to-top a.button {
   margin: 0;
   padding: 0;
@@ -440,30 +370,25 @@ main .section.back-to-top a.button {
   border: none;
   width: unset;
 }
-
 main .section.switchcard {
   background-color: var(--highlight-background-color);
   display: flex;
   flex-direction: column;
 }
-
-main .section.switchcard>.text-wrapper,
+main .section.switchcard > .text-wrapper,
 main .section.switchcard .default-content-wrapper {
   padding-bottom: 50px;
 }
-
-main .section.switchcard>.text-wrapper :where(h1, h2, h3, p),
+main .section.switchcard > .text-wrapper :where(h1, h2, h3, p),
 main .section.switchcard .default-content-wrapper :where(h1, h2, h3, p) {
   color: white;
   text-align: center;
 }
-
 main .section.switchcard a.button:any-link {
   width: 100%;
   background-color: white;
   color: var(--highlight-background-color);
 }
-
 main .banner-placeholder {
   height: var(--banner-height);
   display: flex;
@@ -471,37 +396,31 @@ main .banner-placeholder {
   box-sizing: border-box;
   padding: 16px 2rem;
 }
-
 main .banner {
   margin-top: auto;
   margin-bottom: auto;
 }
-
 hr {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   border: 0;
   border-bottom: 1px solid var(--overlay-background-color);
 }
-
 main .home-banner.section {
   background: #f2f9f5;
   padding: 24px 10px 0 10px;
 }
-
 main .home-banner.section .default-content-wrapper {
   background-color: #fff;
   padding: 24px;
   letter-spacing: 0;
 }
-
 main .home-banner.section h1 {
   color: #17252e;
   font-size: 24px;
   line-height: 28px;
   margin: 0 0 16px 0;
 }
-
 main .home-banner.section p {
   color: #494f50;
   font-family: "Open Sans Regular";
@@ -509,19 +428,16 @@ main .home-banner.section p {
   line-height: 24px;
   margin: unset;
 }
-
 @media (min-width: 576px) {
   main a.button:any-link {
     height: 56px;
     width: 283px;
   }
-
-  main>.section.switchcard a.button:any-link {
+  main > .section.switchcard a.button:any-link {
     height: 56px;
     width: 283px;
   }
 }
-
 @media (min-width: 900px) {
   :root {
     --heading-font-size-xxl: 48px;
@@ -531,78 +447,65 @@ main .home-banner.section p {
     --heading-font-size-s: 22px;
     --heading-font-size-xs: 20px;
   }
-
   main .home-banner.section {
     padding: 0;
     display: block;
   }
-
   main .home-banner.section .default-content-wrapper {
     margin: 0 22px;
     top: -60px;
     position: relative;
     padding: 64px 22px;
   }
-
   main .home-banner.section h1 {
     font-size: 40px;
     line-height: 48px;
     margin: 0 0 24px 0;
   }
-
   main .home-banner.section p {
     font-size: 24px;
     line-height: 32px;
   }
-
   .home-banner .banner-wrapper {
     margin: 0 22px;
     top: -48px;
     position: relative;
     padding: 64px 22px 40px 22px;
   }
-
   .home-banner .banner-wrapper .banner h1 {
     font-size: 40px;
     line-height: 48px;
     margin: 0 0 24px 0;
   }
-
   .home-banner .banner-wrapper .banner p {
     font-size: 24px;
     line-height: 32px;
   }
 }
-
 @media only screen and (min-width: 600px) {
   :root {
     --banner-height: 64px;
   }
-
   main .section {
     padding-left: var(--section-left-right-padding);
     padding-right: var(--section-left-right-padding);
   }
-
   main .section.steps-container {
     padding: 64px;
   }
 }
-
 @media (min-width: 1025px) {
   main .home-banner.section .default-content-wrapper {
     margin: 0 105px;
     padding: 64px 105px;
   }
 }
-
 @media (min-width: 1281px) {
   main .section.narrow {
     max-width: 1228px;
     margin: auto;
     padding: 0;
   }
-
   main .section.switchcard {
     padding: 0;
     background-color: var(--highlight-background-color);
@@ -610,34 +513,27 @@ main .home-banner.section p {
     grid-template-columns: 0.7fr 1fr 1fr 0.25fr 1fr 0.7fr;
     grid-template-areas: ". a a a a ." ". b b . d .";
   }
-
-  main .section.switchcard>.text-wrapper {
+  main .section.switchcard > .text-wrapper {
     grid-area: a;
   }
-
-  main .section.switchcard>.cards-wrapper {
+  main .section.switchcard > .cards-wrapper {
     grid-area: b;
     position: relative;
   }
-
-  main .section.switchcard>.cards-wrapper>.cards.block {
+  main .section.switchcard > .cards-wrapper > .cards.block {
     position: absolute;
   }
-
-  main .section.switchcard>.cards-wrapper>.cards.block>ul>li {
+  main .section.switchcard > .cards-wrapper > .cards.block > ul > li {
     flex-basis: calc(calc(100% - 35px)/2);
   }
-
-  main .section.switchcard>div:nth-last-child(1) {
+  main .section.switchcard > div:nth-last-child(1) {
     grid-area: d;
   }
-
-  main .section.switchcard>.text-wrapper,
+  main .section.switchcard > .text-wrapper,
   main .section.switchcard .default-content-wrapper {
     padding-bottom: 50px;
   }
-
-  main .section.switchcard>.text-wrapper :where(h1, h2, h3, p),
+  main .section.switchcard > .text-wrapper :where(h1, h2, h3, p),
   main .section.switchcard .default-content-wrapper :where(h1, h2, h3, p) {
     color: white;
     text-align: left;

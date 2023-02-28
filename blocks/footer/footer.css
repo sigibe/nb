@@ -37,13 +37,21 @@ footer .footer-link-group h5 > span.icon.icon-up-arrow-f {
 }
 footer .footer-link-group > ul {
   margin: unset;
-  padding: 40px 0 20px 20px;
   list-style: none;
-  display: none;
+  box-sizing: border-box;
+  max-height: 0;
   background-color: #fafafa;
+  transition: all ease-in-out 0.5s;
+  overflow: hidden;
 }
 footer .footer-link-group > ul.appear {
-  display: block;
+  max-height: 300px;
+}
+footer .footer-link-group > ul > li:first-child {
+  padding-top: 40px;
+}
+footer .footer-link-group > ul > li:last-child {
+  padding-bottom: 20px;
 }
 footer .footer-link-group > ul > li > a {
   color: #494f50;

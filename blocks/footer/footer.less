@@ -48,16 +48,26 @@ footer {
 
 		>ul {
 			margin: unset;
-			padding: 40px 0 20px 20px;
 			list-style: none;
-			display: none;
+			box-sizing: border-box;
+			max-height: 0;
 			background-color: @dotcoza-color-neutrals-grey-background;
+			transition: all ease-in-out .5s;
+			overflow: hidden;
 
 			&.appear {
-				display: block;
+				max-height: 300px;
 			}
 
 			>li {
+				&:first-child {
+					padding-top: 40px;
+				}
+
+				&:last-child {
+					padding-bottom: 20px;
+				}
+
 				>a {
 					color: @color_2;
 					font-family: @font_family_2;
