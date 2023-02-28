@@ -118,6 +118,16 @@ h6 {
 	color: @color_2;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: @font-weight-bold;
+	font-family: @font-family-primary;
+}
+
 h1 {
 	font-size: var(--heading-font-size-xxl);
 }
@@ -171,7 +181,8 @@ pre {
 }
 
 strong {
-	font-family: var(--strong-font-family);
+	font-family: @font-family-primary;
+	font-weight: @font-weight-bold;
 
 	a.button {
 		&:any-link {
@@ -532,7 +543,6 @@ main .home-banner.section {
 
 	h1 {
 		color: #17252e;
-		font-family: "Nedbank Sans Bold";
 		font-size: 24px;
 		line-height: 28px;
 		margin: 0 0 16px 0;
