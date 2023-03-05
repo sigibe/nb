@@ -14,8 +14,8 @@ function update(fieldset) {
         if (el.tagName === 'FIELDSET' && el.dataset.repeatable === 'true') {
           queue.push(el);
         } else if (el.tagName !== 'FIELDSET') {
-          const label = el.closest(`.form-${el.dataset.name}`)?.querySelector('label');
-          if (label?.dataset.for === el.dataset.name || label?.htmlFor === el.dataset.name) {
+          const label = el.closest('.field-wrapper')?.querySelector(`[data-for=${el.dataset.name}], [for=${el.dataset.name}]`);
+          if (label) {
             label.dataset.for = label.dataset.for || el.dataset.name;
             label.htmlFor = el.id;
           }
@@ -52,7 +52,7 @@ function createButton(fd) {
 
 function createItem(fieldset, removable = true) {
   const item = document.createElement('fieldset');
-  item.innerHTML = fieldset.elements['#template'];
+  item.append(fieldset.elements['#template'].content.cloneNode(true));
   if (removable) item.querySelector('legend').append(createButton({ Label: 'Remove', Name: fieldset.name }));
   return item;
 }
@@ -61,18 +61,20 @@ export default function decorateFieldsets(form, fieldsets) {
   form.querySelectorAll('fieldset').forEach((fieldsetEl) => {
     const fields = form.querySelectorAll(fieldsets[fieldsetEl.name]);
     if (fields.length) {
-      fields[0].insertAdjacentElement('beforebegin', fieldsetEl);
-      fieldsetEl.append(...fields);
       if (fieldsetEl.dataset.repeatable === 'true') {
         const legend = fieldsetEl.querySelector('legend');
         legend.dataset.textTemplate = legend.textContent;
-        fieldsetEl.elements['#template'] = fieldsetEl.innerHTML;
+        fieldsetEl.elements['#template'] = document.createElement('template');
+        fieldsetEl.elements['#template'].content.append(legend, ...fields);
         fieldsetEl.elements['#add'] = createButton({ Label: 'Add', Name: fieldsetEl.name });
         fieldsetEl.replaceChildren(fieldsetEl.elements['#add']);
         for (let i = 1; i <= Number(fieldsetEl.min || 0) || 0; i += 1) {
           fieldsetEl.insertBefore(createItem(fieldsetEl, false), fieldsetEl.elements['#add']);
         }
         update(fieldsetEl);
+      } else {
+        fields[0].insertAdjacentElement('beforebegin', fieldsetEl);
+        fieldsetEl.append(...fields);
       }
     } else {
       console.log(`unable to decorate fieldset. No field ${fieldsets[fieldsetEl.name]} found`); // eslint-disable-line no-console
