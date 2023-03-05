@@ -6,6 +6,7 @@ import decorateFieldsets from './fieldsets.js';
 import { applyRuleEngine } from '../rules/index.js';
 import decorateValidations from './validations.js';
 import { nameToId } from '../form.js';
+import decorateSelect from './select.js';
 
 function getSelector(fieldName) {
   let selector = fieldName;
@@ -68,5 +69,7 @@ export default async function decorateRepaymentsCalculator(formTag, { form, frag
 
   decorateValidations(formTag);
   decorateLayout(formTag, groups);
+  decorateSelect(formTag);
+
   applyRuleEngine(form, fragments, formTag);
 }

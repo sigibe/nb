@@ -297,15 +297,13 @@ function extractFragments(data) {
     .flatMap((rules) => rules.map(getFragmentName).filter((x) => x)));
 }
 
-async function fetchForm(formURL) {
-  // get the main form
-  const jsonData = await fetchData(formURL);
+async function fetchForm(pathname, search) {
+  const jsonData = await fetchData(pathname + search); // get the main form
   const fragments = [...extractFragments(jsonData)];
 
   const fragmentData = (await Promise.all(fragments.map(async (fragName) => {
     const paramName = fragName.replace(/^helix-/, '');
-    const url = `${formURL}?sheet=${paramName}`;
-    return [fragName, await fetchForm(url)];
+    return [fragName, await fetchForm(pathname, `?sheet=${paramName}`)];
   }))).reduce((finalData, [fragmentName, fragment]) => ({
     [fragmentName]: fragment.formData,
     ...fragment.fragmentsData,
@@ -324,7 +322,7 @@ function mergeFormWithFragments(form, fragments) {
 
 async function createForm(formURL, config) {
   const { pathname, search } = new URL(formURL);
-  const { formData, fragmentsData } = await fetchForm(pathname + search);
+  const { formData, fragmentsData } = await fetchForm(pathname, search);
   const data = mergeFormWithFragments(formData, fragmentsData);
   const form = document.createElement('form');
   const id = config?.id?.trim();
@@ -369,7 +367,7 @@ async function createForm(formURL, config) {
 }
 
 export default async function decorate(block) {
-  const form = block.querySelector('a[href$=".json"]');
+  const form = block.querySelector('a[href*=".json"]');
   const config = readBlockConfig(block);
   if (form) {
     block.replaceChildren(await createForm(form.href, config));

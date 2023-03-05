@@ -1,6 +1,4 @@
-import {
-  readBlockConfig,
-} from '../../scripts/scripts.js';
+import { readBlockConfig } from '../../scripts/scripts.js';
 
 function togglePanel(tab, bShow) {
   tab.setAttribute('aria-selected', bShow);
@@ -39,7 +37,7 @@ function createTabPanel(initCount, id) {
 let initCount = 0;
 export default function decorate(block) {
   const tabList = block.querySelector('ol');
-  const config = readBlockConfig(block);
+  const config = readBlockConfig(block); // eslint-disable-line no-unused-vars
   tabList.setAttribute('role', 'tablist');
   const tabPanelContainer = document.createElement('div');
   tabPanelContainer.className = 'tab-panel-container';
