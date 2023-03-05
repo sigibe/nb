@@ -33,9 +33,42 @@ fieldset .form-radio-wrapper label,
 fieldset .form-checkbox-wrapper label {
   margin-bottom: 12px;
 }
+fieldset[data-repeatable="true"] legend {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+}
+fieldset[data-repeatable="true"] button.fieldset-Add,
+fieldset[data-repeatable="true"] button.fieldset-Remove {
+  margin: unset;
+  padding: unset;
+  text-align: left;
+  background-color: unset;
+  color: unset;
+  display: inline-flex;
+  width: fit-content;
+  height: fit-content;
+  column-gap: 16px;
+  align-items: flex-start;
+}
+fieldset[data-repeatable="true"] .fieldset-Remove::before {
+  content: 'Remove';
+}
+fieldset[data-repeatable="true"] .fieldset-Remove::after {
+  content: url(/icons/minus.svg);
+}
+fieldset[data-repeatable="true"] .fieldset-Add::before {
+  content: url(/icons/plus.svg);
+}
+fieldset[data-repeatable="true"] .fieldset-Add::after {
+  content: 'Add';
+}
+fieldset[data-repeatable="true"][data-maxxed="true"] .fieldset-Add {
+  display: none;
+}
 input,
-textarea,
-select {
+textarea {
   display: block;
   font-size: 16px;
   line-height: 24px;
@@ -50,8 +83,7 @@ select {
   margin-bottom: 16px;
 }
 input:focus,
-textarea:focus,
-select:focus {
+textarea:focus {
   border-color: #006341;
 }
 output {
@@ -63,6 +95,9 @@ output {
   margin-bottom: 16px;
   margin-top: 0;
   padding: 0;
+}
+output:empty {
+  display: none;
 }
 label,
 legend {
@@ -76,6 +111,10 @@ legend {
 label a:any-link,
 legend a:any-link {
   margin-left: unset;
+}
+label:empty,
+legend:empty {
+  display: none;
 }
 .field-description {
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -397,6 +436,16 @@ input[type="range"]:focus::-webkit-slider-thumb {
 }
 .repayments-calculator-section .Input .form-radio-wrapper {
   margin-bottom: 0;
+}
+.repayments-calculator-section .Input .fieldset-Add.loanFieldSet-Add::after {
+  content: 'Add another loan';
+}
+.repayments-calculator-section .Input .fieldset-Add.extraCashFieldSet-Add::after {
+  content: 'Get extra cash';
+}
+.repayments-calculator-section .Input .form-extraCashDetails legend {
+  font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
+  font-weight: 700;
 }
 .repayments-calculator-section .Output {
   margin-bottom: 24px;

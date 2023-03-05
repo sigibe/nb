@@ -52,6 +52,8 @@ const groups = {
 
 const fieldsets = {
   insuranceOptionFieldSet: ['insuranceOption'].map(getSelector),
+  loanFieldSet: ['loanType', 'loanAmount'].map(getSelector),
+  extraCashFieldSet: ['extraCashHeading', 'extraCash'].map(getSelector),
 };
 
 export default async function decorateRepaymentsCalculator(formTag, { form, fragments }) {
@@ -65,7 +67,7 @@ export default async function decorateRepaymentsCalculator(formTag, { form, frag
   const termField = formTag.querySelector('.form-term');
   decorateTermField(termField);
 
-  decorateFieldsets(fieldsets, formTag);
+  decorateFieldsets(formTag, fieldsets);
 
   decorateValidations(formTag);
   decorateLayout(formTag, groups);
