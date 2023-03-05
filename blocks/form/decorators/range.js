@@ -58,8 +58,10 @@ export function createRange(input, values) {
   return div;
 }
 
-export default function decorateRange(block) {
-  const input = block.querySelector('input');
-  const rangeDiv = createRange(input);
-  block.replaceChild(rangeDiv, input);
+export default function decorateRange(formTag) {
+  formTag.querySelectorAll('.form-range-wrapper').forEach((block) => {
+    const input = block.querySelector('input');
+    const rangeDiv = createRange(input);
+    block.replaceChild(rangeDiv, input);
+  });
 }
