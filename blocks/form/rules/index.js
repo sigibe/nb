@@ -11,41 +11,39 @@ export function getRules(fd) {
 }
 
 function extractRules(data) {
-  return data
-    .reduce(({ fieldIdMap, rules }, fd, index) => {
-      const currentRules = getRules(fd);
-      return {
-        fieldIdMap: {
-          ...fieldIdMap,
-          [index + 2]: fd.Id,
-        },
-        rules: currentRules.length ? rules.concat([[fd.Id, currentRules]]) : rules,
-      };
-    }, { fieldIdMap: {}, rules: [] });
+  return data.reduce(({ fieldNameMap, rules }, fd, index) => {
+    const currentRules = getRules(fd);
+    fieldNameMap[index + 2] = fd.Name;
+    return {
+      fieldNameMap,
+      rules: currentRules.length ? rules.concat([{
+        name: fd.Name, id: fd.Id, rules: currentRules,
+      }]) : rules,
+    };
+  }, { fieldNameMap: {}, rules: [] });
 }
 
 export async function applyRuleEngine(form, fragments, formTag) {
   try {
     const RuleEngine = (await import('./RuleEngine.js')).default;
     const fragmentData = Object.entries(fragments).reduce((finalData, [fragmentName, data]) => {
-      const { fieldIdMap, rules: fragmentRules } = extractRules(data);
-      finalData.fieldIdMap[fragmentName] = fieldIdMap;
+      const { fieldNameMap, rules: fragmentRules } = extractRules(data);
+      finalData.fieldNameMap[fragmentName] = fieldNameMap;
       finalData.rules[fragmentName] = fragmentRules;
       return finalData;
-    }, { fieldIdMap: {}, rules: {} });
+    }, { fieldNameMap: {}, rules: {} });
 
     const formData = extractRules(form);
-    const fieldIdMap = {
-      'helix-default': formData.fieldIdMap,
-      ...fragmentData.fieldIdMap,
+    const fieldNameMap = {
+      'helix-default': formData.fieldNameMap,
+      ...fragmentData.fieldNameMap,
     };
     const rules = {
       'helix-default': formData.rules,
       ...fragmentData.rules,
     };
 
-    const ruleEngine = new RuleEngine(rules, fieldIdMap, formTag);
-    ruleEngine.enable();
+    new RuleEngine(rules, fieldNameMap, formTag).enable();
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log('unable to apply rules ', e);

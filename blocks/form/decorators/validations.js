@@ -3,6 +3,9 @@ import { createHelpText } from '../form.js';
 export default function decorateValidations(form) {
   form.addEventListener('input', (e) => {
     const input = e.target;
+    if (e.target.type === 'hidden') {
+      return;
+    }
     const wrapper = input.closest('.field-wrapper');
     let helpTextDiv = wrapper.querySelector('.field-description');
     input.checkValidity();

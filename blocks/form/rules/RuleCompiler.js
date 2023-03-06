@@ -5,17 +5,13 @@ function visitor(nameMap, fields) {
     if (n.type === 'Field') {
       const name = n?.name;
       const match = cellNameRegex.exec(name);
-      let field;
-      if (match?.[1]) {
-        field = nameMap[fragmentName][match[1]];
-      }
+      const field = match?.[1] ? nameMap[fragmentName][match[1]] : undefined;
       if (!field) {
-        // eslint-disable-next-line no-console
-        console.log(`Unknown column used in excel formula ${n.name}`);
+        console.error(`Unknown column used in excel formula ${n.name}`); // eslint-disable-line no-console
       }
       n.name = field;
       fields.add(field);
-    } if (n.type === 'Function') {
+    } else if (n.type === 'Function') {
       n.name = n.name.toLowerCase();
     } else if (n.type === 'Subexpression') {
       return visit({

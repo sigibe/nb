@@ -13,12 +13,14 @@ function coerceValue(val) {
 function constructPayload(form) {
   const payload = {};
   [...form.elements].forEach((fe) => {
-    if (fe.type === 'checkbox' || fe.type === 'radio') {
-      if (fe.checked) payload[fe.name] = coerceValue(fe.value);
+    if (fe.type === 'checkbox') {
+      payload[fe.name] = fe.checked ? coerceValue(fe.value) : undefined;
+    } else if (fe.type === 'radio' && fe.checked) {
+      payload[fe.name] = coerceValue(fe.value);
     } else if (fe.tagName === 'OUTPUT') {
-      payload[fe.id] = fe.dataset.value;
-    } else if (fe.id) {
-      payload[fe.id] = coerceValue(fe.value);
+      payload[fe.name] = fe.dataset.value;
+    } else if (fe.name) {
+      payload[fe.name] = coerceValue(fe.value);
     }
   });
   return payload;
@@ -27,34 +29,37 @@ function constructPayload(form) {
 export default class RuleEngine {
   rulesOrder = {};
 
-  constructor(formRules, fieldIdMap, formTag) {
+  constructor(formRules, fieldNameMap, formTag) {
     this.formTag = formTag;
     this.data = constructPayload(formTag);
     this.formula = new Formula();
     const newRules = Object.entries(formRules)
       .flatMap(([fragmentName, fragRules]) => fragRules
-        .map(([fieldId, fieldRules]) => [fieldId, fieldRules
-          .map((rule) => transformRule(rule, fieldIdMap, fragmentName, this.formula)),
+        .map(({ name, rules, id }) => [name, {
+          name,
+          id,
+          rules: rules.map((rule) => transformRule(rule, fieldNameMap, fragmentName, this.formula)),
+        },
         ]));
 
     this.formRules = Object.fromEntries(newRules);
-    this.dependencyTree = newRules.reduce((fields, [fieldId, rules]) => {
-      fields[fieldId] = fields[fieldId] || { deps: {} };
+    this.dependencyTree = newRules.reduce((fields, [fieldName, { rules }]) => {
+      fields[fieldName] = fields[fieldName] || { deps: {} };
       rules.forEach(({ prop, deps }) => {
         deps.forEach((dep) => {
           fields[dep] = fields[dep] || { deps: {} };
           fields[dep].deps[prop] = fields[dep].deps[prop] || [];
-          fields[dep].deps[prop].push(fieldId);
+          fields[dep].deps[prop].push(fieldName);
         });
       });
       return fields;
     }, {});
   }
 
-  listRules(fieldId) {
+  listRules(fieldName) {
     const arr = {};
     let index = 0;
-    const stack = [fieldId];
+    const stack = [fieldName];
     do {
       const el = stack.pop();
       arr[el] = index;
@@ -88,6 +93,7 @@ export default class RuleEngine {
       } else {
         element.value = value;
       }
+      element.dispatchEvent(new Event('input'));
     }
   }
 
@@ -110,25 +116,23 @@ export default class RuleEngine {
       const valid = e.target.checkValidity();
       if (valid) {
         const fieldName = e.target.name;
-        let fieldId = e.target.id;
-        if (e.target.type === 'radio') {
-          fieldId = e.target.name;
-        }
         if (e.target.type === 'checkbox') {
           this.data[fieldName] = e.target.checked ? coerceValue(e.target.value) : undefined;
         } else {
           this.data[fieldName] = coerceValue(e.target.value);
         }
-        if (!this.rulesOrder[fieldId]) {
-          this.rulesOrder[fieldId] = this.listRules(fieldId);
+
+        if (!this.rulesOrder[fieldName]) {
+          this.rulesOrder[fieldName] = this.listRules(fieldName);
         }
-        const rules = this.rulesOrder[fieldId];
-        rules.forEach((fId) => {
-          this.formRules[fId]?.forEach((rule) => {
+        this.rulesOrder[fieldName].forEach((fName) => {
+          const id = this.formRules[fName]?.id;
+          const rules = this.formRules[fName]?.rules;
+          rules.forEach((rule) => {
             const newValue = this.formula.evaluate(rule.ast, this.data);
             const handler = this[`update${rule.prop}`];
             if (handler instanceof Function) {
-              handler.apply(this, [fId, newValue]);
+              handler.apply(this, [id, newValue]);
             }
           });
         });

@@ -548,7 +548,7 @@ input[type="range"] {
 
     &.loanconsolidate-calculator-Output {
       grid-template-areas:
-        "total total"
+        "totalLoanAmount totalLoanAmount"
         "emi emi"
         "saving saving"
         "rate explore"
@@ -626,6 +626,10 @@ input[type="range"] {
 
     .form-rate {
       grid-area: range;
+    }
+
+    .form-totalLoanAmount {
+      grid-area: totalLoanAmount;
     }
 
     .form-saving {
