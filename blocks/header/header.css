@@ -51,29 +51,30 @@ header primary-nav .nav-brand span {
 header primary-nav .nav-tools {
   display: flex;
   flex-grow: 1;
-  max-width: 195px;
+  max-width: 210px;
   font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 14px;
   position: relative;
-  left: -70px;
+  left: -100px;
   cursor: pointer;
 }
-header primary-nav .nav-tools p {
+header primary-nav .nav-tools > div {
   width: 100%;
   display: flex;
   color: #17252e;
   align-items: center;
 }
-header primary-nav .nav-tools p span {
-  flex-basis: 50%;
+header primary-nav .nav-tools > div > span {
   display: flex;
   justify-content: center;
+  padding-left: 20px;
+  padding-right: 5px;
 }
-header primary-nav .nav-tools p span:hover {
+header primary-nav .nav-tools > div > span:hover {
   color: #17252e;
 }
-header primary-nav .nav-tools p:hover {
+header primary-nav .nav-tools > div:hover {
   color: #008533;
 }
 header primary-nav .nav-hamburger {

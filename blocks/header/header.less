@@ -38,7 +38,7 @@ header {
 
 					a {
 						color: @dotcoza-color-commit-grey;
-						
+
 						&:hover {
 							color: @dotcoza-color-greens-default;
 						}
@@ -66,24 +66,25 @@ header {
 		.nav-tools {
 			display: flex;
 			flex-grow: 1;
-			max-width: 195px;
+			max-width: 210px;
 			font-family: @font-family-primary;
 			font-weight: @font-weight-medium;
 			font-size: @font-size-small;
 			position: relative;
-			left: -70px;
+			left: -100px;
 			cursor: pointer;
-			
-			p {
+
+			>div {
 				width: 100%;
 				display: flex;
 				color: @dotcoza-color-commit-grey;
 				align-items: center;
 
-				span {
-					flex-basis: 50%;
+				>span {
 					display: flex;
 					justify-content: center;
+					padding-left: 20px;
+					padding-right: 5px;
 
 					&:hover {
 						color: @dotcoza-color-title-grey;
@@ -291,7 +292,7 @@ header {
 				&.display-none {
 					display: none;
 				}
-		
+
 				&.display-flex {
 					display: flex;
 				}
@@ -302,6 +303,7 @@ header {
 
 				>ul {
 					padding-inline-start: unset;
+
 					>li {
 						font-family: @font-family-primary;
 						font-weight: @font-weight-medium;
@@ -313,6 +315,7 @@ header {
 						&:first-child {
 							display: none;
 						}
+
 						&:not(:first-child) {
 							display: unset;
 						}

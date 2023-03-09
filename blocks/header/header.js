@@ -29,6 +29,27 @@ function decorateNav(respTxt, type) {
     if (section) section.classList.add(`nav-${e}`);
   });
 
+  if (type === 'primary-nav') {
+    const tools = nav.querySelector(':scope > .nav-tools');
+    const search = `
+        <span>Search</span>
+        <img src='/icons/search.svg'></img>
+    `;
+    const searchDiv = document.createElement('div');
+    searchDiv.classList.add('nav-tools-search');
+    searchDiv.innerHTML = search;
+    tools.append(searchDiv);
+
+    const login = `
+        <span>Login</span>
+        <img src='/icons/lock.svg'></img>
+    `;
+    const loginDiv = document.createElement('div');
+    loginDiv.classList.add('nav-tools-login');
+    loginDiv.innerHTML = login;
+    tools.append(loginDiv);
+  }
+
   const navSections = [...nav.children][1];
   if (navSections) {
     navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
@@ -65,7 +86,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // Fetch Primary Nav Content
-  const primaryNav = cfg.primaryNav || `${getRootPath()}/primary-nav`;
+  const primaryNav = cfg.primaryNav || `${getRootPath()}/drafts/primary-nav-satyam`; // TODO Satyam Temp change
   const primaryNavResp = await fetch(`${primaryNav}.plain.html`);
 
   // Fetch Secondary Nav Content
