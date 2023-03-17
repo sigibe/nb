@@ -10,33 +10,30 @@
  * governing permissions and limitations under the License.
  */
 
-const LANG = {
-  EN: 'en',
-  DE: 'de',
-  FR: 'fr',
-  KO: 'ko',
-  ES: 'es',
-  IT: 'it',
-  JP: 'jp',
-  BR: 'br',
-};
+const LANGUAGES = new Set(['en', 'de', 'fr', 'ko', 'es', 'it', 'jp', 'br']);
 
 let language;
 
-export function getLanguage() {
-  if (language) return language;
+export function getLanguageFromPath(pathname, resetCache = false) {
+  if (resetCache) {
+    language = undefined;
+  }
+
+  if (language !== undefined) return language;
+
   language = '';
-  const segs = window.location.pathname.split('/');
-  if (segs && segs.length > 0) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [, value] of Object.entries(LANG)) {
-      if (value === segs[1]) {
-        language = value;
-        break;
-      }
+  const segs = pathname.split('/');
+  if (segs.length > 1) {
+    const l = segs[1];
+    if (LANGUAGES.has(l)) {
+      language = l;
     }
   }
   return language;
+}
+
+export function getLanguage() {
+  return getLanguageFromPath(window.location.pathname);
 }
 
 /**
@@ -700,7 +697,7 @@ function buildHeroBlock(main) {
       elems.push(elem);
     });
     let blockName = 'hero-home';
-    if (getMetadata('hero-type') === '2-col' && window.location.pathname !== '/') {
+    if (getMetadata('hero-type') === '2-col') {
       blockName = 'hero';
     }
     section.append(buildBlock(blockName, { elems }));
