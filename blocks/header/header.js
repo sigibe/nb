@@ -13,6 +13,28 @@ function collapseAllNavSections(sections) {
   });
 }
 
+function injectNavTools(nav) {
+  const tools = nav.querySelector(':scope > .nav-tools');
+  tools.innerHTML = '';
+  const search = `
+      <span>Search</span>
+      <img src='/icons/search.svg'></img>
+  `;
+  const searchDiv = document.createElement('div');
+  searchDiv.classList.add('nav-tools-search');
+  searchDiv.innerHTML = search;
+  tools.append(searchDiv);
+
+  const login = `
+      <span>Login</span>
+      <img src='/icons/lock.svg'></img>
+  `;
+  const loginDiv = document.createElement('div');
+  loginDiv.classList.add('nav-tools-login');
+  loginDiv.innerHTML = login;
+  tools.append(loginDiv);
+}
+
 // Method to decorate nav and primaryNav
 function decorateNav(respTxt, type) {
   const html = respTxt;
@@ -30,24 +52,7 @@ function decorateNav(respTxt, type) {
   });
 
   if (type === 'primary-nav') {
-    const tools = nav.querySelector(':scope > .nav-tools');
-    const search = `
-        <span>Search</span>
-        <img src='/icons/search.svg'></img>
-    `;
-    const searchDiv = document.createElement('div');
-    searchDiv.classList.add('nav-tools-search');
-    searchDiv.innerHTML = search;
-    tools.append(searchDiv);
-
-    const login = `
-        <span>Login</span>
-        <img src='/icons/lock.svg'></img>
-    `;
-    const loginDiv = document.createElement('div');
-    loginDiv.classList.add('nav-tools-login');
-    loginDiv.innerHTML = login;
-    tools.append(loginDiv);
+    injectNavTools(nav);
   }
 
   const navSections = [...nav.children][1];

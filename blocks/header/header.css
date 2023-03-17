@@ -51,12 +51,12 @@ header primary-nav .nav-brand span {
 header primary-nav .nav-tools {
   display: flex;
   flex-grow: 1;
-  max-width: 210px;
+  max-width: 195px;
   font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 14px;
   position: relative;
-  left: -100px;
+  left: -70px;
   cursor: pointer;
 }
 header primary-nav .nav-tools > div {
