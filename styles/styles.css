@@ -77,6 +77,10 @@ body .modal {
   top: 64px;
   position: fixed;
   display: flex;
+  background-color: var(--background-color);
+}
+body .modal.fade {
+  height: 0;
 }
 header {
   height: var(--nav-height);

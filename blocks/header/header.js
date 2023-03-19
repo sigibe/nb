@@ -2,6 +2,12 @@ import {
   readBlockConfig, decorateIcons, makeLinksRelative, getRootPath,
 } from '../../scripts/scripts.js';
 
+import {
+  toggleSearch,
+  loadSearch,
+  toggleHamburger,
+} from './search.js';
+
 /**
  * collapses all open nav sections
  * @param {Element} sections The container element
@@ -27,8 +33,12 @@ function injectNavTool(tools, name, icon, type) {
   }
 
   const div = document.createElement('div');
-  div.classList.add(`nav-tools-${name}`);
+  div.classList.add(`nav-tools-${name.toLowerCase()}`);
   div.innerHTML = tool;
+  if (name === 'Search') {
+    div.addEventListener('click', toggleSearch);
+  }
+
   tools.append(div);
 }
 
@@ -80,6 +90,7 @@ function decorateNav(respTxt, type) {
     const expanded = nav.getAttribute('aria-expanded') === 'true';
     document.body.style.overflowY = expanded ? '' : 'hidden';
     nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    toggleHamburger();
   });
   nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
@@ -134,6 +145,6 @@ export default async function decorate(block) {
       }
     }
   });
-
+  loadSearch();
   block.append(navDiv);
 }
