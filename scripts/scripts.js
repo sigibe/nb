@@ -847,6 +847,31 @@ function buildBannerBlock(main) {
   });
 }
 
+function buildLoginBlock(main) {
+  const loginBlock = document.createElement('div');
+  loginBlock.classList.add('login-overlay');
+  main.prepend(loginBlock);
+
+  fetch(`${window.hlx.codeBasePath}${getRootPath()}/drafts/login.plain.html`).then((resp) => { // todo piyush temp
+    if (resp.status === 200) {
+      const section = main.querySelector('.login-overlay.section');
+      resp.text().then(async (txt) => {
+        const loginDiv = document.createElement('div');
+        loginDiv.innerHTML = txt;
+        const content = [];
+
+        [...loginDiv.children].forEach((item) => {
+          content.push([item]);
+        });
+        const block = buildBlock('login', content);
+        section.append(block);
+        decorateBlock(block);
+        await loadBlock(block);
+      });
+    }
+  });
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -857,6 +882,7 @@ function buildAutoBlocks(main) {
     if (['yes', 'on'].includes(getMetadata('show-banner'))) {
       buildBannerBlock(main);
     }
+    buildLoginBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -877,6 +903,7 @@ export function decorateMain(main) {
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
+
   decorateSections(main);
   decorateBlocks(main);
   decorateAnchor(main);
