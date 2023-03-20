@@ -57,20 +57,23 @@ function decorateNav(respTxt, type) {
     if (e === 'tools') {
       // On Clicking login button we will open overlay
       const loginButton = section.querySelector('p:nth-child(2)');
-      loginButton.addEventListener('click', () => {
-        const loginEle = document.querySelector('.login-overlay');
-        const bodyEle = document.querySelector('body');
-        const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
 
-        if (eleDisplay === 'none') {
-          loginEle.classList.add('modal');
-          window.scrollTo(0, 0); // Scrolling to Top
-          bodyEle.classList.add('overflow-hidden');
-        } else if (loginEle.classList.contains('modal')) {
-          loginEle.classList.remove('modal');
-          bodyEle.classList.remove('overflow-hidden');
-        }
-      });
+      if (loginButton) {
+        loginButton.addEventListener('click', () => {
+          const loginEle = document.querySelector('.login-overlay');
+          const bodyEle = document.querySelector('body');
+          const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
+
+          if (eleDisplay === 'none') {
+            loginEle.classList.add('modal');
+            window.scrollTo(0, 0); // Scrolling to Top
+            bodyEle.classList.add('overflow-hidden');
+          } else if (loginEle.classList.contains('modal')) {
+            loginEle.classList.remove('modal');
+            bodyEle.classList.remove('overflow-hidden');
+          }
+        });
+      }
     }
   });
 

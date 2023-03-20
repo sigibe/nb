@@ -852,7 +852,7 @@ function buildLoginBlock(main) {
   loginBlock.classList.add('login-overlay');
   main.prepend(loginBlock);
 
-  fetch(`${window.hlx.codeBasePath}${getRootPath()}/drafts/login.plain.html`).then((resp) => { // todo piyush temp
+  fetch(`${window.hlx.codeBasePath}${getRootPath()}/login.plain.html`).then((resp) => {
     if (resp.status === 200) {
       const section = main.querySelector('.login-overlay.section');
       resp.text().then(async (txt) => {
