@@ -3,10 +3,9 @@ import {
 } from '../../scripts/scripts.js';
 
 import {
-  toggleSearch,
-  loadSearch,
+  loadNavTools,
   toggleHamburger,
-} from './search.js';
+} from './nav-utils.js';
 
 /**
  * collapses all open nav sections
@@ -35,10 +34,6 @@ function injectNavTool(tools, name, icon, type) {
   const div = document.createElement('div');
   div.classList.add(`nav-tools-${name.toLowerCase()}`);
   div.innerHTML = tool;
-  if (name === 'Search') {
-    div.addEventListener('click', toggleSearch);
-  }
-
   tools.append(div);
 }
 
@@ -104,7 +99,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // Fetch Primary Nav Content
-  const primaryNav = cfg.primaryNav || `${getRootPath()}/drafts/primary-nav-satyam`; // TODO Satyam Temp change
+  const primaryNav = cfg.primaryNav || `${getRootPath()}/primary-nav`;
   const primaryNavResp = await fetch(`${primaryNav}.plain.html`);
 
   // Fetch Secondary Nav Content
@@ -145,6 +140,6 @@ export default async function decorate(block) {
       }
     }
   });
-  loadSearch();
+  loadNavTools();
   block.append(navDiv);
 }
