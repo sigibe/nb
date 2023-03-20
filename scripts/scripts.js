@@ -856,10 +856,10 @@ function buildLoginBlock(main) {
     if (resp.status === 200) {
       const section = main.querySelector('.login-overlay.section');
       resp.text().then(async (txt) => {
-        const loginDiv = document.createElement('div');
+        let loginDiv = document.createElement('div');
         loginDiv.innerHTML = txt;
+        loginDiv = loginDiv.querySelector('div');
         const content = [];
-
         [...loginDiv.children].forEach((item) => {
           content.push([item]);
         });
