@@ -5,6 +5,11 @@ import {
   sampleRUM,
 } from './scripts.js';
 
+import {
+  loadNavTools,
+  toggleHamburger,
+} from '../blocks/header/nav-utils.js';
+
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
 
@@ -181,4 +186,19 @@ function createDigitalData() {
   createDigitalData();
   adobeotmscript.setAttribute('src', 'https://assets.adobedtm.com/6422e0f550a2/017d80491d7e/launch-1e8527b948f6-development.min.js');
   document.head.append(adobeotmscript);
+}());
+
+(function delayedNavTools() {
+  loadNavTools();
+
+  ['primary-nav', 'secondary-nav'].forEach((item) => {
+    const nav = document.querySelector(item);
+    const hamburger = nav.querySelector('.nav-hamburger');
+    hamburger.addEventListener('click', () => {
+      const expanded = nav.getAttribute('aria-expanded') === 'true';
+      document.body.style.overflowY = expanded ? '' : 'hidden';
+      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      toggleHamburger();
+    });
+  });
 }());

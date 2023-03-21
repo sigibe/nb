@@ -1,29 +1,42 @@
-function appendStyles() {
-  [
-    'https://personal.nedbank.co.za/etc.clientlibs/nedbank/clientlibs/clientlib-dependencies.min.css',
-    'https://personal.nedbank.co.za/etc.clientlibs/nedbank/clientlibs/clientlib-base.min.css',
-    'https://personal.nedbank.co.za/etc.clientlibs/nedbank/clientlibs/clientlib-site.min.css',
-    'https://personal.nedbank.co.za/etc.clientlibs/nedbank/components/promotioncards/clientlibs.min.css',
-  ].forEach((item) => {
-    const style = document.createElement('link');
-    style.rel = 'stylesheet';
-    style.href = item;
-    document.head.append(style);
+const NEDBANK_HOST = 'personal.nedbank.co.za';
+const NEDBANK_HOME_PAGE = 'https://personal.nedbank.co.za/home.html';
+
+function appendStyles(doc) {
+  doc.querySelectorAll('link').forEach((item) => {
+    const link = document.createElement('link');
+    if (item.href) {
+      const url = new URL(item.href);
+      if (url.host === document.location.host) {
+        url.host = NEDBANK_HOST;
+        url.port = '';
+        url.protocol = 'https';
+      }
+      link.href = url.href;
+      link.rel = item.rel;
+      link.type = item.type;
+    }
+    document.head.appendChild(link);
+    item.remove();
   });
 }
 
-function appendScripts() {
-  [
-    'https://personal.nedbank.co.za/etc.clientlibs/clientlibs/granite/jquery.min.js',
-    'https://personal.nedbank.co.za/etc.clientlibs/clientlibs/granite/utils.min.js',
-    'https://personal.nedbank.co.za/etc.clientlibs/clientlibs/granite/jquery/granite.min.js',
-    'https://personal.nedbank.co.za/etc.clientlibs/foundation/clientlibs/jquery.min.js',
-    'https://personal.nedbank.co.za/etc.clientlibs/nedbank/components/nedbank-navigation/clientlibs.min.js',
-  ].forEach((item) => {
-    const script = document.createElement('script');
-    script.src = item;
-    script.async = false;
-    document.head.append(script);
+function appendScripts(doc) {
+  doc.querySelectorAll('script').forEach((item) => {
+    let script = document.createElement('script');
+    if (item.src) {
+      const url = new URL(item.src);
+      if (url.host === document.location.host) {
+        url.host = NEDBANK_HOST;
+        url.port = '';
+        url.protocol = 'https';
+      }
+      script.src = url.href;
+      script.async = false;
+    } else {
+      script = item;
+    }
+    document.head.appendChild(script);
+    item.remove();
   });
 }
 
@@ -35,24 +48,24 @@ export function toggleHamburger() {
 }
 
 export async function loadNavTools() {
-  const resp = await fetch('https://personal.nedbank.co.za/home.html');
+  const resp = await fetch(NEDBANK_HOME_PAGE);
   if (resp.ok) {
-    appendStyles();
-    appendScripts();
-
     const fetchedHtml = await resp.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(fetchedHtml, 'text/html');
+    appendStyles(doc);
+    appendScripts(doc);
 
+    await fetch(NEDBANK_HOME_PAGE);
     doc.querySelectorAll('img').forEach((img) => {
       if (img.src) {
-        img.src = `https://personal.nedbank.co.za${new URL(img.src).pathname}`;
+        img.src = `https://${NEDBANK_HOST}/${new URL(img.src).pathname}`;
       }
     });
 
     doc.querySelectorAll('a').forEach((a) => {
       if (a.href) {
-        a.href = `https://personal.nedbank.co.za${new URL(a.href).pathname}`;
+        a.href = `https://${NEDBANK_HOST}/${new URL(a.href).pathname}`;
       }
     });
 
@@ -61,10 +74,23 @@ export async function loadNavTools() {
     hamburgerModal.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
       item.classList.add('displayHide');
     });
-    document.body.appendChild(hamburgerModal);
 
+    document.body.appendChild(hamburgerModal);
     document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
       document.querySelector('.nav-hamburger').click();
     });
   }
 }
+
+// eslint-disable-next-line func-names
+window.debounce = function (b, g) {
+  let d;
+  // eslint-disable-next-line func-names
+  return function () {
+    const h = this;
+    // eslint-disable-next-line prefer-rest-params
+    const f = arguments;
+    clearTimeout(d);
+    d = setTimeout(() => b.apply(h, f), g);
+  };
+};
