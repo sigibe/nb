@@ -65,7 +65,11 @@ export async function loadNavTools() {
 
     doc.querySelectorAll('a').forEach((a) => {
       if (a.href) {
-        a.href = `https://${NEDBANK_HOST}/${new URL(a.href).pathname}`;
+        const { pathname } = new URL(a.href);
+        // Rewrite urls except home page wince its already on Franklin
+        if (!pathname.includes('/content/nedbank/za/en/personal/home')) {
+          a.href = `https://${NEDBANK_HOST}${pathname}`;
+        }
       }
     });
 
@@ -79,18 +83,27 @@ export async function loadNavTools() {
     document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
       document.querySelector('.nav-hamburger').click();
     });
+
+    if (window.screen.width < 1025) {
+      document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.remove('displayHide');
+    } else {
+      document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.add('displayHide');
+    }
   }
 }
 
+// TODO Avoiding clientlib errors for now. Eventually clientlibs need to be fixed.
+(function avoidClientlibErrors() {
 // eslint-disable-next-line func-names
-window.debounce = function (b, g) {
-  let d;
-  // eslint-disable-next-line func-names
-  return function () {
-    const h = this;
-    // eslint-disable-next-line prefer-rest-params
-    const f = arguments;
-    clearTimeout(d);
-    d = setTimeout(() => b.apply(h, f), g);
+  window.debounce = function (b, g) {
+    let d;
+    // eslint-disable-next-line func-names
+    return function () {
+      const h = this;
+      // eslint-disable-next-line prefer-rest-params
+      const f = arguments;
+      clearTimeout(d);
+      d = setTimeout(() => b.apply(h, f), g);
+    };
   };
-};
+}());

@@ -188,8 +188,8 @@ function createDigitalData() {
   document.head.append(adobeotmscript);
 }());
 
-(function delayedNavTools() {
-  loadNavTools();
+(async function delayedNavTools() {
+  await loadNavTools();
 
   ['primary-nav', 'secondary-nav'].forEach((item) => {
     const nav = document.querySelector(item);
