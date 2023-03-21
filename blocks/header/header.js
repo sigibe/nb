@@ -2,11 +2,6 @@ import {
   readBlockConfig, decorateIcons, makeLinksRelative, getRootPath,
 } from '../../scripts/scripts.js';
 
-import {
-  loadNavTools,
-  toggleHamburger,
-} from './nav-utils.js';
-
 /**
  * collapses all open nav sections
  * @param {Element} sections The container element
