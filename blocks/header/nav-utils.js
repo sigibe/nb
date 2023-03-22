@@ -1,22 +1,15 @@
 const NEDBANK_HOST = 'personal.nedbank.co.za';
 const NEDBANK_HOME_PAGE = 'https://personal.nedbank.co.za/home.html';
 
-function appendStyles(doc) {
-  doc.querySelectorAll('link').forEach((item) => {
-    const link = document.createElement('link');
-    if (item.href) {
-      const url = new URL(item.href);
-      if (url.host === document.location.host) {
-        url.host = NEDBANK_HOST;
-        url.port = '';
-        url.protocol = 'https';
-      }
-      link.href = url.href;
-      link.rel = item.rel;
-      link.type = item.type;
-    }
-    document.head.appendChild(link);
-    item.remove();
+function appendStyles() {
+  [
+    '/blocks/header/nb-clientlibs-base.css',
+    '/blocks/header/nb-clientlibs-site.css',
+  ].forEach((item) => {
+    const style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.href = item;
+    document.head.append(style);
   });
 }
 
@@ -45,6 +38,11 @@ export function toggleHamburger() {
   document.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
     item.classList.toggle('displayHide');
   });
+  if (window.screen.width < 1025) {
+    document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.remove('displayHide');
+  } else {
+    document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.add('displayHide');
+  }
 }
 
 export async function loadNavTools() {
@@ -83,18 +81,12 @@ export async function loadNavTools() {
     document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
       document.querySelector('.nav-hamburger').click();
     });
-
-    if (window.screen.width < 1025) {
-      document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.remove('displayHide');
-    } else {
-      document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.add('displayHide');
-    }
   }
 }
 
-// TODO Avoiding clientlib errors for now. Eventually clientlibs need to be fixed.
+// TODO Avoiding clientlib errors for now. Eventually clientlibs logic needs to be ported.
 (function avoidClientlibErrors() {
-// eslint-disable-next-line func-names
+  // eslint-disable-next-line func-names
   window.debounce = function (b, g) {
     let d;
     // eslint-disable-next-line func-names
