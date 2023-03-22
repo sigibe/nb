@@ -44,6 +44,50 @@ fieldset .form-checkbox-wrapper label {
   line-height: 24px;
   font-weight: 400;
 }
+/** repeatable fieldset */
+.form-repeat-wrapper button:not(.field-tooltip-icon) {
+  margin: unset;
+  padding: unset;
+  text-align: left;
+  background-color: unset;
+  color: unset;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  column-gap: 16px;
+  align-items: flex-start;
+}
+.form-repeat-wrapper legend {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.form-repeat-wrapper legend button.item-remove {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
+}
+.form-repeat-wrapper legend button.item-remove i {
+  background-image: url(/icons/minus.svg);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 24px;
+  height: 24px;
+}
+.form-repeat-wrapper button.item-add {
+  display: flex;
+  font-size: 16px;
+  line-height: 24px;
+  padding-bottom: 24px;
+}
+.form-repeat-wrapper button.item-add i {
+  background-image: url(/icons/plus.svg);
+  width: 24px;
+  height: 24px;
+}
 input,
 textarea {
   display: block;
@@ -301,6 +345,66 @@ input[type="range"]:focus::-webkit-slider-thumb {
   left: calc(50% - 7px);
   transform: rotate(180deg);
 }
+/** dropdown styling **/
+.form-select-wrapper {
+  font-size: 16px;
+  font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #17252e;
+  position: relative;
+  display: block;
+}
+.form-select-wrapper label {
+  display: block;
+  margin-bottom: 24px;
+}
+.form-select-wrapper select {
+  display: none;
+}
+.form-select-wrapper .form-select-display {
+  border: 2px solid #78be20;
+  padding: 12px;
+  line-height: 24px;
+}
+.form-select-wrapper .form-select-display:focus {
+  border-color: #006341;
+}
+.form-select-wrapper .form-select-display::after {
+  content: url(/icons/down-arrow.svg);
+  float: right;
+  height: 24px;
+}
+.form-select-wrapper .form-select-dialog {
+  display: none;
+  position: absolute;
+  border: 2px solid #006341;
+  z-index: 1000;
+  background-color: #fff;
+  width: 100%;
+  line-height: 0;
+  box-sizing: border-box;
+  border-top: 2px solid #eeeeee;
+}
+.form-select-wrapper .form-select-dialog > div {
+  padding: 23px 8px 23px 16px;
+}
+.form-select-wrapper .form-select-dialog > div:focus,
+.form-select-wrapper .form-select-dialog > div:hover {
+  background-color: #f8f9fa;
+}
+.form-select-wrapper .form-select-dialog > div[selected] {
+  display: none;
+}
+.form-select-wrapper[expanded] .form-select-dialog {
+  display: block;
+}
+.form-select-wrapper[expanded] .form-select-display {
+  border: 2px solid #006341;
+  border-bottom: unset;
+}
+.form-select-wrapper[expanded] .form-select-display::after {
+  content: url(/icons/up-arrow.svg);
+}
 /** calculator specific style */
 .calculator {
   box-sizing: border-box;
@@ -336,6 +440,28 @@ input[type="range"]:focus::-webkit-slider-thumb {
 }
 .calculator .Input .form-radio-wrapper {
   margin-bottom: 0;
+}
+.calculator .Input .fieldset-Add.loanFieldSet-Add::after {
+  content: 'Add another loan';
+}
+.calculator .Input .fieldset-Add.extraCashFieldSet-Add::after {
+  content: 'Get extra cash';
+}
+.calculator .Input .fieldset-Add span {
+  display: none;
+}
+.calculator .Input .form-extraCashDetails legend {
+  font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+.calculator .Input .form-extraCashDetails p {
+  margin: unset;
+  padding: unset;
+  color: #494f50;
+  font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  padding-bottom: 24px;
 }
 .calculator .Output {
   margin-bottom: 24px;
@@ -447,6 +573,43 @@ input[type="range"]:focus::-webkit-slider-thumb {
 .repayments-calculator .Output {
   grid-template-areas: "emi emi" "total total" "rate explore" "range range";
 }
+/** loan consolidation */
+.loan-consolidation-calculator .Output {
+  grid-template-areas: "total total" "emi emi" "saving saving" "rate explore" "range range";
+}
+.loan-consolidation-calculator .Output .form-totalLoanAmount {
+  grid-area: total;
+}
+.loan-consolidation-calculator .default-content-wrapper:first-child {
+  font-size: 16px;
+  line-height: 24px;
+}
+.loan-consolidation-calculator .Input fieldset {
+  padding-bottom: 48px;
+}
+.loan-consolidation-calculator .Input fieldset .field-wrapper {
+  margin-bottom: 24px;
+}
+.loan-consolidation-calculator .Input fieldset .form-radio-wrapper {
+  margin-bottom: 0;
+}
+.loan-consolidation-calculator .Input fieldset .field-wrapper:last-child {
+  margin-bottom: 0;
+}
+.loan-consolidation-calculator .Input fieldset > .field-description {
+  margin-bottom: 24px;
+}
+.loan-consolidation-calculator .Input .form-repeat-wrapper:nth-child(2) {
+  padding-bottom: 42px;
+}
+.loan-consolidation-calculator .Input .form-repeat-wrapper:nth-child(2) fieldset {
+  margin-top: 48px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+#totalLoanAmount-1::-webkit-slider-thumb {
+  display: none;
+}
 @media (min-width: 768px) {
   .calculator form {
     display: grid;
@@ -481,4 +644,78 @@ input[type="range"]:focus::-webkit-slider-thumb {
   .calculator .buttons {
     flex-direction: row;
   }
+  .modal-dialog {
+    max-width: 1018px;
+    margin: auto;
+  }
+}
+/** summary specific styling */
+.summary-section .default-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  line-height: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+body.modal-show {
+  overflow: hidden;
+}
+.modal {
+  box-sizing: border-box;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+  margin: 0;
+  z-index: 1050;
+  font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
+  background-color: transparent !important;
+  overflow-y: auto;
+}
+.modal .modal-dialog {
+  margin: 1.75rem auto;
+  height: auto;
+}
+.modal .modal-content {
+  position: relative;
+  padding: 75px 75px;
+  background-color: #fff;
+  border-radius: 0.3rem;
+  box-sizing: border-box;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
+}
+.modal .modal-content .columns > div:first-child {
+  font-size: 20px;
+  color: #17252e;
+  line-height: 28px;
+  font-weight: 700;
+}
+.modal .modal-content .columns > div {
+  color: #494f50;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+.modal .modal-content .columns.table > div:not(:first-child) {
+  border-bottom: 1px solid rgba(151, 151, 151, 0.23);
+}
+.modal .modal-content .columns p {
+  margin: unset;
+}
+.modal.show {
+  display: block;
+}
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
 }

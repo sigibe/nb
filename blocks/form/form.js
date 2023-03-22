@@ -134,10 +134,6 @@ function createButton(fd) {
 function createInput(fd) {
   const input = document.createElement('input');
   input.type = fd.Type;
-  const displayFormat = fd['Display Format'];
-  if (displayFormat) {
-    input.dataset.displayFormat = displayFormat;
-  }
   setPlaceholder(input, fd);
   setNumberConstraints(input, fd);
   return input;
@@ -176,9 +172,7 @@ const createSelect = withFieldWrapper((fd) => {
 function createRadio(fd) {
   const wrapper = createFieldWrapper(fd);
   const radio = createInput(fd);
-  if (fd.Selected?.toLowerCase() === 'true') {
-    radio.checked = true;
-  }
+  radio.checked = fd.Selected?.toLowerCase() === 'true';
   wrapper.insertAdjacentElement('afterbegin', radio);
   return wrapper;
 }
@@ -186,12 +180,14 @@ function createRadio(fd) {
 const createOutput = withFieldWrapper((fd) => {
   const output = document.createElement('output');
   output.name = fd.Name;
+  output.id = fd.Id;
   const displayFormat = fd['Display Format'];
   if (displayFormat) {
     output.dataset.displayFormat = displayFormat;
   }
   const formatFn = formatFns[displayFormat] || ((x) => x);
   output.innerText = formatFn(fd.Value);
+  output.dataset.value = fd.Value;
   return output;
 });
 
@@ -204,31 +200,36 @@ function createCurrency(fd) {
   currencyEl.className = 'currency-symbol';
   currencyEl.innerText = currencySymbol; // todo :read from css
   widgetWrapper.append(currencyEl);
-  widgetWrapper.append(createInput({
+  const input = createInput({
     ...fd,
     Type: 'number',
-  }));
+  });
+  input.dataset.displayFormat = 'currency';
+  input.dataset.type = 'currency';
+  widgetWrapper.append(input);
   wrapper.append(widgetWrapper);
   return wrapper;
 }
 
-function createHidden(fd) {
+function createHidden() {
   const input = document.createElement('input');
   input.type = 'hidden';
-  input.id = fd.Id;
-  input.name = fd.Name;
-  input.value = fd.Value;
   return input;
 }
 
 function createFieldset(fd) {
   const wrapper = createFieldWrapper(fd, 'fieldset');
   wrapper.name = fd.Name;
+  wrapper.id = fd.Id;
   wrapper.replaceChildren(createLegend(fd));
+  if (fd.Repeatable && fd.Repeatable.toLowerCase() === 'true') {
+    wrapper.dataset.repeatable = true;
+    setNumberConstraints(wrapper, fd);
+  }
   return wrapper;
 }
 
-const getId = (function getId() {
+export const nameToId = (function getId() {
   const ids = {};
   return (name) => {
     ids[name] = ids[name] || 0;
@@ -271,25 +272,26 @@ async function fetchData(url) {
   const json = await resp.json();
   return json.data.map((fd) => ({
     ...fd,
-    Id: fd.Id || getId(fd.Name),
+    Id: fd.Id || nameToId(fd.Name),
   }));
 }
 
-async function fetchForm(pathname) {
+async function fetchForm(formURL, searchParam) {
   // get the main form
-  const jsonData = await fetchData(pathname);
+  const jsonData = await fetchData(formURL + searchParam);
   return jsonData;
 }
 
-async function createForm(formURL, id) {
-  const { pathname } = new URL(formURL);
-  const data = await fetchForm(pathname);
+async function createForm(formURL, config) {
+  const { pathname, search } = new URL(formURL);
+  const data = await fetchForm(pathname, search || '');
   const form = document.createElement('form');
+  const id = config?.id?.trim();
   form.id = id;
   const fields = data
     .map((fd) => ({ fd, el: renderField(fd) }));
   fields.forEach(({ fd, el }) => {
-    const input = el.querySelector('input,text-area,select');
+    const input = el.tagName === 'INPUT' ? el : el.querySelector('input,text-area,select');
     if (fd.Mandatory && fd.Mandatory.toLowerCase() === 'true') {
       input.setAttribute('required', 'required');
     }
@@ -300,6 +302,13 @@ async function createForm(formURL, id) {
       if (fd.Description) {
         input.setAttribute('aria-describedby', `${fd.Id}-description`);
         input.dataset.description = fd.Description;
+      }
+      if (fd.Disabled === 'true') {
+        input.setAttribute('disabled', 'disabled');
+      }
+      const displayFormat = fd['Display Format'];
+      if (displayFormat) {
+        input.dataset.displayFormat = displayFormat;
       }
     }
   });
@@ -322,10 +331,11 @@ async function createForm(formURL, id) {
 }
 
 export default async function decorate(block) {
-  const form = block.querySelector('a[href$=".json"]');
-  const config = readBlockConfig(block);
-  const id = config?.id?.trim();
-  if (form) {
-    block.replaceChildren(await createForm(form.href, id));
+  const anchor = block.querySelector('a');
+  const url = anchor.href;
+  const isForm = /\.json(?:\?sheet=.+)?$/.test(url);
+  if (isForm) {
+    const config = readBlockConfig(block);
+    block.replaceChildren(await createForm(url, config));
   }
 }

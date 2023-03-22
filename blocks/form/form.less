@@ -50,6 +50,59 @@ fieldset {
       font-weight: @font-weight-regular;
     }
   }
+
+}
+
+/** repeatable fieldset */
+.form-repeat-wrapper {
+
+  button:not(.field-tooltip-icon) {
+    .unset();
+    text-align: left;
+    background-color: unset;
+    color: unset;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    column-gap: 16px;
+    align-items: flex-start;
+  }
+
+  legend {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: baseline;
+
+    button.item-remove {
+      display: flex;
+      flex-direction: row-reverse;
+      font-size: @font-size-base;
+      line-height: @font-lineheight-base;
+      font-family: @font-family-primary;
+
+      i {
+        background-image: @minus-icon;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  button.item-add {
+    display: flex;
+    font-size: @font-size-base;
+    line-height: @font-lineheight-base;
+    padding-bottom: @spacing-06;
+
+    i {
+      background-image: @plus-icon;
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 
 input,
@@ -356,6 +409,81 @@ input[type="range"] {
   }
 }
 
+/** dropdown styling **/
+.form-select-wrapper {
+  font-size: @font-size-base;
+  font-family: @font-family-secondary;
+  font-weight: @font-weight-regular;
+  color: @dotcoza-color-title-grey;
+  position: relative;
+  display: block;
+
+  label {
+    display: block;
+    margin-bottom: @spacing-06;
+  }
+
+  select {
+    display: none;
+  }
+
+  .form-select-display {
+    border: 2px solid @dotcoza-color-greens-bright;
+    padding: @input-padding;
+    line-height: @font-lineheight-base;
+
+    &:focus {
+      border-color: @dotcoza-color-greens-darkgreen;
+    }
+
+    &::after {
+      content: @down-arrow-icon;
+      float: right;
+      height: @font-lineheight-base;
+    }
+  }
+
+  .form-select-dialog {
+    display: none;
+    position: absolute;
+    border: 2px solid @dotcoza-color-greens-darkgreen;
+    z-index: 1000;
+    background-color: #fff;
+    width: 100%;
+    line-height: 0;
+    box-sizing: border-box;
+    border-top: 2px solid #eeeeee;
+
+    >div {
+      padding: 23px 8px 23px 16px;
+
+      &:focus,
+      &:hover {
+        background-color: #f8f9fa;
+      }
+
+      &[selected] {
+        display: none;
+      }
+    }
+  }
+
+  &[expanded] {
+    .form-select-dialog {
+      display: block;
+    }
+
+    .form-select-display {
+      border: 2px solid @dotcoza-color-greens-darkgreen;
+      border-bottom: unset;
+
+      &::after {
+        content: @up-arrow-icon;
+      }
+    }
+  }
+}
+
 /** calculator specific style */
 .calculator {
   box-sizing: border-box;
@@ -396,6 +524,36 @@ input[type="range"] {
 
     .form-radio-wrapper {
       margin-bottom: 0;
+    }
+
+    .fieldset-Add {
+      &.loanFieldSet-Add::after {
+        content: 'Add another loan';
+      }
+
+      &.extraCashFieldSet-Add::after {
+        content: 'Get extra cash';
+      }
+
+      span {
+        display: none;
+      }
+    }
+
+    .form-extraCashDetails {
+      legend {
+        font-family: @font-family-primary;
+        font-weight: @font-weight-bold;
+      }
+
+      p {
+        .unset();
+        color: @field-description-color;
+        font-family: @font-family-secondary;
+        font-size: @font-paragraph-small;
+        line-height: @font-lineheight-small;
+        padding-bottom: 24px;
+      }
     }
   }
 
@@ -537,6 +695,65 @@ input[type="range"] {
     "range range";
 }
 
+
+/** loan consolidation */
+.loan-consolidation-calculator {
+  .Output {
+    grid-template-areas:
+      "total total"
+      "emi emi"
+      "saving saving"
+      "rate explore"
+      "range range";
+
+    .form-totalLoanAmount {
+      grid-area: total;
+    }
+  }
+
+  .default-content-wrapper:first-child {
+    font-size: @font-size-base;
+    line-height: @font-lineheight-base;
+  }
+
+  .Input {
+    fieldset {
+      padding-bottom: @spacing-09;
+
+      .field-wrapper {
+        margin-bottom: @spacing-06;
+      }
+
+      .form-radio-wrapper {
+        margin-bottom: 0;
+      }
+
+      .field-wrapper:last-child {
+        margin-bottom: 0;
+      }
+
+      >.field-description {
+        margin-bottom: @spacing-06;
+      }
+    }
+  }
+
+  .Input .form-repeat-wrapper:nth-child(2) {
+    padding-bottom: 42px;
+
+    fieldset {
+      margin-top: @spacing-09;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+#totalLoanAmount-1::-webkit-slider-thumb {
+  display: none;
+}
+
 @media (@width_768) {
   .calculator {
     form {
@@ -567,4 +784,90 @@ input[type="range"] {
       flex-direction: row;
     }
   }
+
+  .modal-dialog {
+    max-width: 1018px;
+    margin: auto;
+  }
+}
+
+/** summary specific styling */
+.summary-section .default-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  line-height: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body.modal-show {
+  overflow: hidden;
+}
+
+.modal {
+  box-sizing: border-box;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+  margin: 0;
+  z-index: 1050;
+  font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
+  background-color: transparent !important;
+  overflow-y: auto;
+
+  .modal-dialog {
+    margin: 1.75rem auto;
+    height: auto;
+  }
+
+  .modal-content {
+    position: relative;
+    padding: 75px 75px;
+    background-color: #fff;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 18%);
+
+    .columns>div:first-child {
+      font-size: 20px;
+      color: #17252e;
+      line-height: 28px;
+      font-weight: 700;
+    }
+
+    .columns>div {
+      color: #494f50;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0;
+    }
+
+    .columns.table>div:not(:first-child) {
+      border-bottom: 1px solid rgba(151, 151, 151, 0.23);
+    }
+
+    .columns p {
+      margin: unset;
+    }
+  }
+
+  &.show {
+    display: block;
+  }
+}
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
 }

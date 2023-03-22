@@ -1,12 +1,11 @@
-export default function decorateFieldsets(fieldsets, form) {
+export default function decorateFieldsets(form, fieldsets) {
   form.querySelectorAll('fieldset').forEach((fieldsetEl) => {
     const fields = form.querySelectorAll(fieldsets[fieldsetEl.name]);
     if (fields.length) {
-      fields[0].insertAdjacentElement('beforebegin', fieldsetEl);
+      fields.forEach((f) => f.setAttribute('data-fieldset', fieldsetEl.id));
       fieldsetEl.append(...fields);
     } else {
-      // eslint-disable-next-line no-console
-      console.log(`unable to decorate fieldset. No field ${fieldsets[fieldsetEl.name]} found`);
+      console.log(`unable to decorate fieldset.No field ${fieldsets[fieldsetEl.name]} found`); // eslint-disable-line no-console
     }
   });
 }
