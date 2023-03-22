@@ -315,7 +315,7 @@ async function createForm(formURL, config) {
   form.append(...fields.map(({ el }) => el));
   try {
     const formDecorator = await import('./decorators/index.js');
-    formDecorator.default(form);
+    formDecorator.default(form, config);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log('no custom decorator found. default renditions will be used.');
