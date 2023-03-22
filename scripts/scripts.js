@@ -817,6 +817,15 @@ function loadFooter(footer) {
   loadBlock(footerBlock);
 }
 
+function buildLoginBlock(main) {
+  const loginSection = document.createElement('div');
+  loginSection.classList.add('login-overlay');
+  const loginBlock = buildBlock('login', '');
+  loginSection.append(loginBlock);
+  main.prepend(loginSection);
+  decorateBlock(loginBlock);
+}
+
 function buildBannerBlock(main) {
   const placeholder = document.createElement('div');
   placeholder.classList.add('banner-placeholder');
@@ -842,31 +851,6 @@ function buildBannerBlock(main) {
         await loadBlock(block);
         block.style.display = 'flex';
         decorateIcons(block);
-      });
-    }
-  });
-}
-
-function buildLoginBlock(main) {
-  const loginBlock = document.createElement('div');
-  loginBlock.classList.add('login-overlay');
-  main.prepend(loginBlock);
-
-  fetch(`${window.hlx.codeBasePath}${getRootPath()}/login.plain.html`).then((resp) => {
-    if (resp.status === 200) {
-      const section = main.querySelector('.login-overlay.section');
-      resp.text().then(async (txt) => {
-        let loginDiv = document.createElement('div');
-        loginDiv.innerHTML = txt;
-        loginDiv = loginDiv.querySelector('div');
-        const content = [];
-        [...loginDiv.children].forEach((item) => {
-          content.push([item]);
-        });
-        const block = buildBlock('login', content);
-        section.append(block);
-        decorateBlock(block);
-        await loadBlock(block);
       });
     }
   });

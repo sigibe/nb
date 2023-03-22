@@ -68,7 +68,7 @@
   flex-direction: column;
   flex-wrap: wrap;
 }
-.login-overlay .login.block .login-modal-header {
+.login-overlay .login.block .login-header {
   display: flex;
   padding: 9px 20px 32px 20px;
   justify-content: right;
@@ -76,17 +76,17 @@
   line-height: 24px;
   height: 50px;
 }
-.login-overlay .login.block .login-modal-header p {
+.login-overlay .login.block .login-header p {
   cursor: pointer;
   margin: 0;
 }
-.login-overlay .login.block .login-modal-main {
+.login-overlay .login.block .login-main {
   margin: 0 22px;
 }
-.login-overlay .login.block .login-modal-main .button-container {
+.login-overlay .login.block .login-main .button-container {
   margin-bottom: 0;
 }
-.login-overlay .login.block .login-modal-main .button-container a {
+.login-overlay .login.block .login-main .button-container a {
   max-width: 300px;
   background-color: #17252e;
   border: 0px solid #17252e !important;
@@ -98,15 +98,15 @@
   line-height: 24px;
   height: 56px;
 }
-.login-overlay .login.block .login-modal-main .login-content > div {
+.login-overlay .login.block .login-main > div {
   display: flex;
   flex-direction: column-reverse;
   flex-wrap: wrap;
 }
-.login-overlay .login.block .login-modal-main .login-content > div > div:first-child {
+.login-overlay .login.block .login-main > div > div:first-child {
   margin: 32px 0 64px 0;
 }
-.login-overlay .login.block .login-modal-main .login-content > div > div:first-child h1 {
+.login-overlay .login.block .login-main > div > div:first-child h1 {
   margin-top: 0px;
 }
 @media (min-width: 576px) {
@@ -120,11 +120,11 @@
     font-size: 18px;
     line-height: 26px;
   }
-  .login-overlay .login.block .login-modal-main .button-container a {
+  .login-overlay .login.block .login-main .button-container a {
     font-size: 18px;
     line-height: 26px;
   }
-  .login-overlay .login.block .login-modal-main .login-content > div > div:first-child {
+  .login-overlay .login.block .login-main > div > div:first-child {
     margin-bottom: 100px;
   }
 }
@@ -136,9 +136,6 @@
   }
 }
 @media (min-width: 1025px) {
-  .login-overlay {
-    display: none;
-  }
   .login-overlay * > h1 {
     margin-bottom: 36px;
   }
@@ -157,27 +154,27 @@
     margin: 0 30px 0 0;
     font-size: 18px;
   }
-  .login-overlay .login.block .login-modal-header {
+  .login-overlay .login.block .login-header {
     padding: 40px 89px 15px;
     height: 42px;
   }
-  .login-overlay .login.block .login-modal-main {
+  .login-overlay .login.block .login-main {
     margin: 8px 7.37% 32px 7.37% !important;
   }
-  .login-overlay .login.block .login-modal-main .button-container {
+  .login-overlay .login.block .login-main .button-container {
     margin-top: 48px;
   }
-  .login-overlay .login.block .login-modal-main .login-content > div {
+  .login-overlay .login.block .login-main > div {
     flex-direction: row;
     flex-wrap: unset;
   }
-  .login-overlay .login.block .login-modal-main .login-content > div > div:first-child {
+  .login-overlay .login.block .login-main > div > div:first-child {
     width: 41.666667%;
     border-right: 1px solid #94999c;
     padding-right: 65px;
     margin: 0;
   }
-  .login-overlay .login.block .login-modal-main .login-content > div > div:last-child {
+  .login-overlay .login.block .login-main > div > div:last-child {
     flex: 0 0 58.333333%;
     padding-left: 65px;
     padding-right: 15px;
@@ -185,10 +182,10 @@
     flex-shrink: 1;
     margin: 0;
   }
-  .login-overlay .login.block .login-modal-main .login-content > div > div:last-child h1 {
+  .login-overlay .login.block .login-main > div > div:last-child h1 {
     margin-bottom: 28px;
   }
-  .login-overlay .login.block .login-modal-main .login-content > div > div:last-child p {
+  .login-overlay .login.block .login-main > div > div:last-child p {
     margin-top: 0;
     margin-bottom: 0;
   }

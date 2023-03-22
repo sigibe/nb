@@ -1,25 +1,24 @@
 import {
-  decorateIcons, makeLinksRelative, decorateButtons,
+  decorateIcons, makeLinksRelative, decorateButtons, getRootPath,
 } from '../../scripts/scripts.js';
 
-export default function decorate(block) {
-  makeLinksRelative(block);
-  decorateIcons(block);
-  decorateButtons(block);
-  const internalDivs = block.children;
+export default async function decorate(block) {
+  const resp = await fetch(`${getRootPath()}/login.plain.html`);
+  if (resp && resp.status === 200) {
+    const txt = await resp.text();
+    block.innerHTML = txt;
 
-  if (internalDivs && internalDivs.length === 2) {
-    internalDivs[0].classList.add('login-modal-header');
-    internalDivs[1].classList.add('login-modal-main');
-    const overLayClose = internalDivs[0].querySelector('p');
+    const loginHeader = document.createElement('div');
+    loginHeader.classList.add('login-header');
+    const loginHeaderPara = block.querySelector('div p');
+    loginHeader.appendChild(loginHeaderPara);
 
-    if (overLayClose) {
-      overLayClose.addEventListener('click', () => {
-        const loginEle = document.querySelector('.login-overlay');
-        const mainEle = document.querySelector('body');
-        loginEle.classList.remove('modal');
-        mainEle.classList.remove('overflow-hidden');
-      });
-    }
+    const loginMain = block.querySelector('.login-main');
+    const loginParent = block.querySelector('div');
+    loginParent.insertBefore(loginHeader, loginMain);
+
+    makeLinksRelative(block);
+    decorateIcons(block);
+    decorateButtons(block);
   }
 }

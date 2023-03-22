@@ -17,12 +17,12 @@ autocomment();
     }
 
     *>li {
-		list-style: none;
+        list-style: none;
         padding: 18px 0;
         font-weight: @font-weight-medium;
-        border-bottom: 1px solid #94999c;
+        border-bottom: 1px solid @dotcoza-color-neutrals-grey-disabled;
         font-size: @font-size-base;
-
+        
         a {
             &:hover {
                 color: @dotcoza-color-greens-default;
@@ -69,7 +69,7 @@ autocomment();
         font-size: @font-size-small;
         line-height: @font-lineheight-small;
         font-family: @font-family-secondary;
-        margin: 16px 0 32px 0;
+        margin: @spacing-05 0 @spacing-07 0;
         align-items: center;
         display: flex;
     }
@@ -80,9 +80,9 @@ autocomment();
             flex-direction: column;
             flex-wrap: wrap;
 
-            .login-modal-header {
+            .login-header {
                 display: flex;
-                padding: 9px 20px 32px 20px;
+                padding: 9px 20px @spacing-07 20px;
                 justify-content: right;
                 font-size: @font-size-base;
                 line-height: @font-lineheight-base;
@@ -94,7 +94,7 @@ autocomment();
                 }
             }
 
-            .login-modal-main {
+            .login-main {
                 margin: 0 22px;
                 
                 .button-container {
@@ -113,18 +113,16 @@ autocomment();
                     }
                 }
 
-                .login-content {
-                    > div {
-                        display: flex;
-                        flex-direction: column-reverse;
-                        flex-wrap: wrap;
+                > div {
+                    display: flex;
+                    flex-direction: column-reverse;
+                    flex-wrap: wrap;
 
-                        > div:first-child {
-                            margin: 32px 0 64px 0;
+                    > div:first-child {
+                        margin: @spacing-07 0 @spacing-10 0;
 
-                            h1 {
-                                margin-top: 0px;
-                            }
+                        h1 {
+                            margin-top: 0px;
                         }
                     }
                 }
@@ -139,7 +137,7 @@ autocomment();
             font-size: @font-size-base;
             line-height: @font-lineheight-base;
             font-family: @font-family-secondary;
-            margin-bottom: 32px;
+            margin-bottom: @spacing-07;
         }
 
         *>a {
@@ -149,7 +147,7 @@ autocomment();
 
         .login {
             &.block {
-                .login-modal-main {
+                .login-main {
                     .button-container {
                         a {
                             font-size: @font-size-medium;
@@ -157,11 +155,9 @@ autocomment();
                         }
                     }
 
-                    .login-content {
-                        > div {
-                            > div:first-child {
-                                margin-bottom: 100px;
-                            }
+                    > div {
+                        > div:first-child {
+                            margin-bottom: 100px;
                         }
                     }
                 }
@@ -182,8 +178,6 @@ autocomment();
 
 @media (@width_1025) {
     .login-overlay {
-        display: none;
-
         *>h1 {
             margin-bottom: 36px;
         }
@@ -197,57 +191,55 @@ autocomment();
             display: flex;
             height: 250px;
             flex-wrap: wrap;
-            margin-top: 64px;
+            margin-top: @spacing-10;
         }
 
         *>li {
-            padding: 16px 0;
+            padding: @spacing-05 0;
             margin: 0 30px 0 0;
             font-size: @font-size-medium;
         }
 
         .login {
             &.block {
-                .login-modal-header {
+                .login-header {
                     padding: 40px 89px 15px;
                     height: 42px;
                 }
     
-                .login-modal-main {
-                    margin: 8px 7.37% 32px 7.37% !important;
+                .login-main {
+                    margin: 8px 7.37% @spacing-07 7.37% !important;
 
                     .button-container {
                         margin-top: 48px;
                     }
     
-                    .login-content {
-                        > div {
-                            flex-direction: row;
-                            flex-wrap: unset;
-    
-                            > div:first-child {
-                                width: 41.666667%;;
-                                border-right: 1px solid #94999c;
-                                padding-right: 65px;
-                                margin: 0;
+                    > div {
+                        flex-direction: row;
+                        flex-wrap: unset;
+
+                        > div:first-child {
+                            width: 41.666667%;;
+                            border-right: 1px solid @dotcoza-color-neutrals-grey-disabled;
+                            padding-right: 65px;
+                            margin: 0;
+                        }
+
+                        > div:last-child {
+                            flex: 0 0 58.333333%;
+                            padding-left: 65px;
+                            padding-right: 15px;
+                            flex-grow: 1;
+                            flex-shrink: 1;
+                            margin: 0;
+
+                            h1 {
+                                margin-bottom: 28px;
                             }
-    
-                            > div:last-child {
-                                flex: 0 0 58.333333%;
-                                padding-left: 65px;
-                                padding-right: 15px;
-                                flex-grow: 1;
-                                flex-shrink: 1;
-                                margin: 0;
-    
-                                h1 {
-                                    margin-bottom: 28px;
-                                }
-    
-                                p {
-                                    margin-top: 0;
-                                    margin-bottom: 0;
-                                }
+
+                            p {
+                                margin-top: 0;
+                                margin-bottom: 0;
                             }
                         }
                     }
