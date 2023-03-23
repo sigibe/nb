@@ -44,6 +44,27 @@ function injectNavTools(nav, type) {
   injectNavTool(tools, 'Login', 'lock', type);
 }
 
+function addLoginEventListener(nav) {
+  const loginButton = nav.querySelector('.nav-tools-Login');
+
+  if (loginButton) {
+    loginButton.addEventListener('click', () => {
+      const loginEle = document.querySelector('.login-overlay');
+      const bodyEle = document.querySelector('body');
+      const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
+
+      if (eleDisplay === 'none') {
+        loginEle.classList.add('modal');
+        window.scrollTo(0, 0); // Scrolling to Top
+        bodyEle.classList.add('overflow-hidden');
+      } else if (loginEle.classList.contains('modal')) {
+        loginEle.classList.remove('modal');
+        bodyEle.classList.remove('overflow-hidden');
+      }
+    });
+  }
+}
+
 // Method to decorate nav and primaryNav
 function decorateNav(respTxt, type) {
   const html = respTxt;
@@ -81,6 +102,8 @@ function decorateNav(respTxt, type) {
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
+
+  addLoginEventListener(nav);
   nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
   decorateIcons(nav);
