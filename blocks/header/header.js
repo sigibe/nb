@@ -154,5 +154,7 @@ export default async function decorate(block) {
     }
   });
   block.append(navDiv);
-  delayedNavTools();
+
+  // Delayed load to reduct TBT impact
+  setTimeout(delayedNavTools, 1000);
 }
