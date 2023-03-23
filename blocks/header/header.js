@@ -2,6 +2,11 @@ import {
   readBlockConfig, decorateIcons, makeLinksRelative, getRootPath,
 } from '../../scripts/scripts.js';
 
+import {
+  loadNavTools,
+  toggleHamburger,
+} from './nav-utils.js';
+
 /**
  * collapses all open nav sections
  * @param {Element} sections The container element
@@ -83,6 +88,25 @@ function decorateNav(respTxt, type) {
   return nav;
 }
 
+async function delayedNavTools() {
+  await loadNavTools();
+
+  ['primary-nav', 'secondary-nav'].forEach((item) => {
+    const nav = document.querySelector(item);
+    const hamburger = nav.querySelector('.nav-hamburger');
+    hamburger.addEventListener('click', () => {
+      const expanded = nav.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        document.body.classList.remove('overflowY-hidden');
+      } else {
+        document.body.classList.add('overflowY-hidden');
+      }
+      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      toggleHamburger();
+    });
+  });
+}
+
 export default async function decorate(block) {
   const cfg = readBlockConfig(block);
   block.textContent = '';
@@ -130,4 +154,5 @@ export default async function decorate(block) {
     }
   });
   block.append(navDiv);
+  delayedNavTools();
 }

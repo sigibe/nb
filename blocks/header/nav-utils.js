@@ -1,5 +1,5 @@
 const NEDBANK_HOST = 'personal.nedbank.co.za';
-const NEDBANK_HOME_PAGE = 'https://personal.nedbank.co.za/home.html';
+const NEDBANK_HOME_PAGE = `https://${NEDBANK_HOST}/home.html`;
 
 function appendStyles() {
   [
@@ -54,7 +54,6 @@ export async function loadNavTools() {
     appendStyles(doc);
     appendScripts(doc);
 
-    await fetch(NEDBANK_HOME_PAGE);
     doc.querySelectorAll('img').forEach((img) => {
       if (img.src) {
         img.src = `https://${NEDBANK_HOST}/${new URL(img.src).pathname}`;
