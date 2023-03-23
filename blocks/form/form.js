@@ -276,15 +276,36 @@ async function fetchData(url) {
   }));
 }
 
-async function fetchForm(formURL, searchParam) {
+async function fetchForm(formURL, searchParam, fragments) {
   // get the main form
   const jsonData = await fetchData(formURL + searchParam);
-  return jsonData;
+  const fragmentData = (await Promise.all(fragments.map(async (fragName) => {
+    const paramName = fragName.replace(/^helix-/, '');
+    try {
+      const data = await fetchForm(formURL, `?sheet=${paramName}`, []);
+      return [fragName, data];
+    } catch (e) {
+      return [fragName, { formData: [], fragmentsData: {} }];
+    }
+  }))).reduce((finalData, [fragmentName, fragment]) => ({
+    [fragmentName]: fragment.formData,
+    ...fragment.fragmentsData,
+    ...finalData,
+  }), {});
+  return {
+    formData: jsonData,
+    fragmentsData: fragmentData,
+  };
+}
+
+function mergeFormWithFragments(form, fragments) {
+  return [...form, ...(Object.values(fragments).flat())];
 }
 
 async function createForm(formURL, config) {
   const { pathname, search } = new URL(formURL);
-  const data = await fetchForm(pathname, search || '');
+  const { formData, fragmentsData } = await fetchForm(pathname, search || '', ['helix-constants']);
+  const data = mergeFormWithFragments(formData, fragmentsData);
   const form = document.createElement('form');
   const id = config?.id?.trim();
   form.id = id;
