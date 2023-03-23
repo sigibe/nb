@@ -1,6 +1,12 @@
 import {
-  readBlockConfig, decorateIcons, decorateSections, getRootPath,
+  readBlockConfig, decorateIcons, decorateSections, getRootPath, fetchDataAttributesAnchor,
 } from '../../scripts/scripts.js';
+
+export function decorateAnchor(element) {
+  element.querySelectorAll('a').forEach((a) => {
+    fetchDataAttributesAnchor(a);
+  });
+}
 
 function decorateFooterLinks(footer) {
   let footerLinkGroup = [];
@@ -64,6 +70,8 @@ function decorateFooterSocial(footer) {
   if (parent) {
     parent.appendChild(footerSocialDiv);
   }
+
+  decorateAnchor(footerSocialDiv);
 }
 /**
  * loads and decorates the footer
@@ -74,7 +82,7 @@ export default async function decorate(block) {
   const cfg = readBlockConfig(block);
   block.textContent = '';
 
-  const footerPath = cfg.footer || `${getRootPath()}/footer`;
+  const footerPath = cfg.footer || `${getRootPath()}/drafts/piyush/footer`; // todo piyush remove this after approval
   const resp = await fetch(`${footerPath}.plain.html`);
   const html = await resp.text();
   const footer = document.createElement('div');

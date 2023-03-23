@@ -38,7 +38,6 @@
   --section-left-right-padding: 105px;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
 }
 :root .light {
   --background-color: #ffffff;
