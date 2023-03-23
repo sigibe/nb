@@ -29,6 +29,6 @@ export default async function decorate(block) {
     makeLinksRelative(block);
     decorateIcons(block);
     decorateButtons(block);
-    decorateAnchor(block, 'header');
+    decorateAnchor(block, 'header'); // Sending header as type to remain in sync with actual site
   }
 }
