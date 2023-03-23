@@ -269,11 +269,16 @@ function renderField(fd) {
 
 async function fetchData(url) {
   const resp = await fetch(url);
-  const json = await resp.json();
-  return json.data.map((fd) => ({
-    ...fd,
-    Id: fd.Id || nameToId(fd.Name),
-  }));
+  if (resp.ok) {
+    const json = await resp.json();
+    return json.data.map((fd) => ({
+      ...fd,
+      Id: fd.Id || nameToId(fd.Name),
+    }));
+  }
+  // eslint-disable-next-line no-console
+  console.log(`unable to fetch form data from ${url}`);
+  return [];
 }
 
 async function fetchForm(formURL, searchParam) {
