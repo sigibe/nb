@@ -137,7 +137,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // Fetch Primary Nav Content
-  const primaryNav = cfg.primaryNav || `${getRootPath()}/primary-nav`;
+  const primaryNav = cfg.primaryNav || `${getRootPath()}/drafts/primary-nav-satyam`; // TODO Satyam Temp change
   const primaryNavResp = await fetch(`${primaryNav}.plain.html`);
 
   // Fetch Secondary Nav Content
