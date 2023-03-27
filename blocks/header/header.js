@@ -5,6 +5,7 @@ import {
 import {
   loadNavTools,
   toggleHamburger,
+  toggleSearch
 } from './nav-utils.js';
 
 /**
@@ -55,11 +56,11 @@ function addLoginEventListener(nav) {
       const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
 
       if (eleDisplay === 'none') {
-        loginEle.classList.add('modal');
+        loginEle.classList.add('frk-modal');
         window.scrollTo(0, 0); // Scrolling to Top
         bodyEle.classList.add('overflow-hidden');
-      } else if (loginEle.classList.contains('modal')) {
-        loginEle.classList.remove('modal');
+      } else if (loginEle.classList.contains('frk-modal')) {
+        loginEle.classList.remove('frk-modal');
         bodyEle.classList.remove('overflow-hidden');
       }
     });
@@ -129,6 +130,11 @@ async function delayedNavTools() {
       nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       toggleHamburger();
     });
+
+    const querySearch = nav.querySelector('.nav-tools-search');
+    querySearch.addEventListener('click', () => {
+      toggleSearch();
+    });
   });
 }
 
@@ -137,7 +143,7 @@ export default async function decorate(block) {
   block.textContent = '';
 
   // Fetch Primary Nav Content
-  const primaryNav = cfg.primaryNav || `${getRootPath()}/drafts/primary-nav-satyam`; // TODO Satyam Temp change
+  const primaryNav = cfg.primaryNav || `${getRootPath()}/primary-nav`;
   const primaryNavResp = await fetch(`${primaryNav}.plain.html`);
 
   // Fetch Secondary Nav Content

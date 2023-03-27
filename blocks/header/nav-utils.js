@@ -45,6 +45,12 @@ export function toggleHamburger() {
   }
 }
 
+export function toggleSearch() {
+  document.getElementById('querySearchModal').classList.toggle('show');
+  document.getElementById('querySearchModal').classList.toggle('appear');
+  document.body.classList.toggle('overflowY-hidden');
+}
+
 export async function loadNavTools() {
   const resp = await fetch(NEDBANK_HOME_PAGE);
   if (resp.ok) {
@@ -79,6 +85,12 @@ export async function loadNavTools() {
     document.body.appendChild(hamburgerModal);
     document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
       document.querySelector('.nav-hamburger').click();
+    });
+
+    const querySearchModal = doc.querySelector('#querySearchModal');
+    document.body.appendChild(querySearchModal);
+    document.querySelector('.nbd-qs-close').addEventListener('click', () => {
+      document.querySelector('.nav-tools-search').click();
     });
   }
 }
