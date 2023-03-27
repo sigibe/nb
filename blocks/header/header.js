@@ -5,7 +5,7 @@ import {
 import {
   loadNavTools,
   toggleHamburger,
-  toggleSearch
+  toggleSearch,
 } from './nav-utils.js';
 
 /**
