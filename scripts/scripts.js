@@ -740,6 +740,26 @@ async function waitForLCP() {
 }
 
 /**
+ * This Function unhides certain sections
+ */
+function unhideSections() {
+  const classes = ['banner-container'];
+
+  classes.forEach((item) => {
+    const section = document.querySelector(`.${item}`);
+    if (section && section.classList) {
+      if (item === 'banner-container') {
+        if (!getCookieValue('oldSitePopUpCookies')) {
+          section.classList.add('appear');
+        }
+      } else {
+        section.classList.add('appear');
+      }
+    }
+  });
+}
+
+/**
  * Decorates the page.
  */
 async function loadPage(doc) {
@@ -749,6 +769,8 @@ async function loadPage(doc) {
   await loadLazy(doc);
   // eslint-disable-next-line no-use-before-define
   loadDelayed(doc);
+
+  unhideSections(doc); // To Unhide Certain sections like banner
 }
 
 export function initHlx() {
@@ -829,10 +851,8 @@ function buildLoginBlock(main) {
 function buildBannerBlock(main) {
   const placeholder = document.createElement('div');
   placeholder.classList.add('banner-placeholder');
-  if (!getCookieValue('oldSitePopUpCookies')) {
-    placeholder.classList.add('appear');
-  }
   main.prepend(placeholder);
+
   fetch(`${window.hlx.codeBasePath}${getRootPath()}/banner.plain.html`).then((resp) => {
     if (resp.status === 200) {
       const section = main.querySelector('.banner-placeholder.section');
