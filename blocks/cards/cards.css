@@ -605,6 +605,10 @@
   .home-services.cards-container .cards > ul > li .cards-image > span {
     display: flex;
   }
+  div.promotion-banner h2 strong {
+    margin-left: -24px;
+    font-size: 32px;
+  }
 }
 div.switchcard h3 {
   font-weight: 400;
@@ -614,10 +618,6 @@ div.switchcard h3 {
 div.switchcard h3 + p {
   font-size: 16px;
   line-height: 24px;
-}
-div.promotion-banner h2 strong {
-  margin-left: -24px;
-  font-size: 32px;
 }
 div.promotion-banner a {
   font-size: 18px;
