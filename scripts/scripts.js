@@ -770,7 +770,7 @@ async function loadPage(doc) {
   // eslint-disable-next-line no-use-before-define
   loadDelayed(doc);
 
-  unhideSections(doc); // To Unhide Certain sections like banner
+  unhideSections(); // To Unhide Certain sections like banner
 }
 
 export function initHlx() {
