@@ -5943,54 +5943,6 @@
 @media only screen and (max-width: 1023px) {
   #external-markup .nbd-hamburger-menu-wrapper {
     padding: 0;
-<<<<<<< Updated upstream
-}
-
-@media screen and (min-width: 1441px) {
-    .ng-container {
-        max-width: 1228px;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-}
-
-@media only screen and (min-width: 1025px) and (max-width: 1440px) {
-    .ng-container {
-        max-width: 1260px;
-        margin: 0 106px;
-        padding: 0;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .ng-container {
-        max-width: 748px;
-        margin: 0 22px;
-        padding: 0;
-    }
-}
-
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-    .ng-container {
-        max-width: 1260px;
-        margin: 0 22px;
-        padding: 0;
-    }
-}
-
-@media screen and (max-width: 320px) {
-    .ng-container {
-        max-width: 300px;
-        margin: 0 18px;
-        padding: 0;
-    }
-}
-
-.nbd-hamburger-menu-desk .card-body,
-.nbd-hamburger-menu-desk .card-title {
-    margin-top: unset;
-}
-=======
     top: 48px;
   }
   #external-markup .nbd-hamburger-menu-desk {
@@ -30986,4 +30938,3 @@
 #external-markup textarea {
   font: inherit;
 }
->>>>>>> Stashed changes

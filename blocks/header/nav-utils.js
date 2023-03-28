@@ -70,25 +70,19 @@ export async function loadNavTools() {
       }
     });
 
+    const externalMarkup = document.createElement('div');
+    externalMarkup.id = 'external-markup';
+    document.body.appendChild(externalMarkup);
+
     const hamburgerModal = doc.querySelector('.nbd-hamburger-menu-wrapper');
     hamburgerModal.classList.add('displayHide');
     hamburgerModal.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
       item.classList.add('displayHide');
     });
 
-    const externalMarkup = document.createElement('div');
-    externalMarkup.id = 'external-markup';
-    document.body.appendChild(externalMarkup);
-
     externalMarkup.appendChild(hamburgerModal);
     document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
       document.querySelector('.nav-hamburger').click();
-    });
-
-    const querySearchModal = doc.querySelector('#querySearchModal');
-    externalMarkup.appendChild(querySearchModal);
-    document.querySelector('.nbd-qs-close').addEventListener('click', () => {
-      document.querySelector('.nav-tools-search').click();
     });
   }
 }
