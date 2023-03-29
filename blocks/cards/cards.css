@@ -23,7 +23,6 @@
 .section.cards-container.switchcard h2 {
   font-size: 32px;
   margin-top: 20px;
-  margin-left: 32px;
   margin-bottom: -30px;
 }
 /* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
@@ -208,8 +207,8 @@
   background-color: var(--overlay-background-color);
 }
 .home-services.cards-container > div:first-child > h1 {
-  font-size: 24px;
-  margin: 0px auto 32px auto;
+  font-size: 20px;
+  margin: 70px auto 32px auto;
 }
 .home-services.cards-container a .icon {
   margin-left: 0;
@@ -624,6 +623,9 @@ div.promotion-banner a {
   font-weight: 700;
 }
 @media (min-width: 1025px) {
+  div.switchcard h2 > strong {
+    margin-left: 32px;
+  }
   div.switchcard h3 {
     line-height: 40px;
     font-size: 32px;
