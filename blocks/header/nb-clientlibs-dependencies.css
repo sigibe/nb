@@ -1,263 +1,10 @@
 #external-markup {
   /*!
-     * Bootstrap v4.5.2 (https://getbootstrap.com/)
-     * Copyright 2011-2020 The Bootstrap Authors
-     * Copyright 2011-2020 Twitter, Inc.
-     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-     */
-}
-#external-markup .cmp-accordion__header {
-  margin: 0;
-}
-#external-markup .cmp-accordion__button {
-  display: block;
-  width: 100%;
-  text-align: left;
-}
-#external-markup .cmp-accordion__panel--hidden {
-  display: none;
-}
-#external-markup .cmp-accordion__panel--expanded {
-  display: block;
-}
-#external-markup .cmp-tabs__tablist {
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  list-style: none;
-}
-#external-markup .cmp-tabs__tab {
-  box-sizing: border-box;
-  border-bottom: 1px solid transparent;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-#external-markup .cmp-tabs__tab--active {
-  border-color: inherit;
-}
-#external-markup .cmp-tabs__tabpanel {
-  display: none;
-}
-#external-markup .cmp-tabs__tabpanel--active {
-  display: block;
-}
-#external-markup .cmp-carousel__content {
-  position: relative;
-}
-#external-markup .cmp-carousel__item {
-  display: none;
-}
-#external-markup .cmp-carousel__item--active {
-  display: block;
-}
-#external-markup .cmp-carousel__action {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-#external-markup .cmp-carousel__indicators {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-#external-markup .cmp-carousel__indicator {
-  position: relative;
-  flex: 0 1 auto;
-  width: 10px;
-  height: 10px;
-  margin: 0 7px;
-  border-radius: 50%;
-  font-size: 0;
-  text-indent: -3000px;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-#external-markup .cmp-carousel__indicator--active {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-#external-markup .cmp-image__image {
-  width: 100%;
-}
-#external-markup .cmp-breadcrumb {
-  display: inline-block;
-  list-style: none;
-  padding: 0;
-}
-#external-markup .cmp-breadcrumb__item {
-  display: inline-block;
-  vertical-align: top;
-}
-#external-markup .cmp-search {
-  position: relative;
-}
-#external-markup .cmp-search__field {
-  position: relative;
-  height: 2rem;
-}
-#external-markup .cmp-search__input {
-  padding-left: 2rem;
-  padding-right: 2rem;
-  height: 100%;
-  width: 100%;
-}
-#external-markup .cmp-search__icon {
-  display: block;
-  position: absolute;
-  left: 0.5rem;
-  top: 0.5rem;
-  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTE1MnB4IiBoZWlnaHQ9IjExNTJweCIgdmlld0JveD0iMCAwIDExNTIgMTE1MiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTE1MiAxMTUyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGQ9Ik02NzIsMEM0MDYuOTAzLDAsMTkyLDIxNC45MDMsMTkyLDQ4MGMwLDk1LjcsMjguMDExLDE4NC44NTUsNzYuMjc1LDI1OS43MjVDMTgxLjY0Niw4MjYuMzU0LDQ4LjA3NSw5NTkuOTI1LDM2LDk3Mg0KCWMtMTgsMTgtMzYsMzYtMzYsNzJzMTgsNTQsMzYsNzJzMzYuMDEyLDM2LDcyLDM2czU0LTE4LDcyLTM2YzEyLjA3NS0xMi4wNzUsMTQ1LjY0Ni0xNDUuNjQ2LDIzMi4yNzUtMjMyLjI3NQ0KCUM0ODcuMTQ0LDkzMS45ODgsNTc2LjMsOTYwLDY3Miw5NjBjMjY1LjA5NywwLDQ4MC0yMTQuOTAzLDQ4MC00ODBDMTE1MiwyMTQuOTAzLDkzNy4wOTcsMCw2NzIsMHogTTY3Miw4MTYNCgljLTE4NS41NjgsMC0zMzYtMTUwLjQzMy0zMzYtMzM2YzAtMTg1LjU2OCwxNTAuNDMyLTMzNiwzMzYtMzM2YzE4NS41NjcsMCwzMzYsMTUwLjQzMiwzMzYsMzM2QzEwMDgsNjY1LjU2Nyw4NTcuNTY3LDgxNiw2NzIsODE2eiINCgkvPg0KPC9zdmc+DQo=");
-  background-size: contain;
-  width: 1rem;
-  height: 1rem;
-  pointer-events: none;
-}
-#external-markup .cmp-search__loading-indicator {
-  display: none;
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  border: 3px solid #ccc;
-  border-top-color: #333;
-  border-radius: 50%;
-  width: 1rem;
-  height: 1rem;
-  animation: cmp-search__loading-indicator-spin 2s linear infinite;
-}
-@keyframes cmp-search__loading-indicator-spin {
-  0 {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-#external-markup .cmp-search__clear {
-  display: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-}
-#external-markup .cmp-search__clear-icon {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTE1MnB4IiBoZWlnaHQ9IjExNTJweCIgdmlld0JveD0iMCAwIDExNTIgMTE1MiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTE1MiAxMTUyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGlkPSJYTUxJRF85XyIgZD0iTTgyLjYsOTM3LjJsMzYyLTM2Mkw4NCwyMTQuOGMtMTQuMS0xNC4xLTE0LjEtMzYuOSwwLTUxbDgxLjItODEuMmMxNC4xLTE0LjEsMzYuOS0xNC4xLDUxLDBsMzYwLjUsMzYwLjUNCglMOTM3LjIsODIuNmMxNC4xLTE0LjEsMzYuOS0xNC4xLDUxLDBsODEuMiw4MS4yYzE0LjEsMTQuMSwxNC4xLDM2LjksMCw1MUw3MDguOSw1NzUuM2wzNjAuNSwzNjAuNWMxNC4xLDE0LjEsMTQuMSwzNi45LDAsNTENCglsLTgxLjIsODEuMmMtMTQuMSwxNC4xLTM2LjksMTQuMS01MSwwTDU3Ni43LDcwNy41bC0zNjIsMzYyYy0xNC4xLDE0LjEtMzYuOSwxNC4xLTUxLDBsLTgxLjItODEuMg0KCUM2OC41LDk3NC4yLDY4LjUsOTUxLjMsODIuNiw5MzcuMnoiLz4NCjwvc3ZnPg0K");
-  background-size: contain;
-  width: 1rem;
-  height: 1rem;
-}
-#external-markup .cmp-search__results {
-  display: none;
-  overflow-y: auto;
-  min-width: 100%;
-  max-height: 10rem;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 999999;
-  border: 1px solid #ccc;
-  background: #fff;
-}
-#external-markup .cmp-search__item {
-  display: block;
-}
-#external-markup .cmp-search__item--is-focused {
-  background-color: #ccc;
-}
-@font-face {
-  font-family: "Libre Franklin";
-  src: url(clientlib-base/resources/fonts/LibreFranklin-wght.ttf), url(clientlib-base/resources/fonts/LibreFranklin-Regular.ttf), url(clientlib-base/resources/fonts/LibreFranklin-Regular.woff2);
-}
-@font-face {
-  font-family: "Nedbank Sans Regular";
-  src: url(clientlib-base/resources/fonts/NedbankSans-Regular.otf), url(clientlib-base/resources/fonts/NedbankSans-Regular.woff);
-}
-@font-face {
-  font-family: "Nedbank Sans RegularItalic";
-  src: url(clientlib-base/resources/fonts/NedbankSans-RegularItalic.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans Black";
-  src: url(clientlib-base/resources/fonts/NedbankSans-Black.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans BlackItalic";
-  src: url(clientlib-base/resources/fonts/NedbankSans-BlackItalic.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans Bold";
-  src: url(clientlib-base/resources/fonts/NedbankSans-Bold.otf), url(clientlib-base/resources/fonts/NedbankSans-Bold.woff);
-}
-@font-face {
-  font-family: "Nedbank Sans BoldItalic";
-  src: url(clientlib-base/resources/fonts/NedbankSans-BoldItalic.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans Heavy";
-  src: url(clientlib-base/resources/fonts/NedbankSans-Heavy.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans HeavyItalic";
-  src: url(clientlib-base/resources/fonts/NedbankSans-HeavyItalic.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans Light";
-  src: url(clientlib-base/resources/fonts/NedbankSans-Light.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans LightItalic";
-  src: url(clientlib-base/resources/fonts/NedbankSans-LightItalic.otf);
-}
-@font-face {
-  font-family: "Nedbank Sans Medium";
-  src: url(clientlib-base/resources/fonts/NedbankSans-Medium.otf), url(clientlib-base/resources/fonts/NedbankSans-Medium.woff);
-}
-@font-face {
-  font-family: "Nedbank Sans MediumItalic";
-  src: url(clientlib-base/resources/fonts/NedbankSans-MediumItalic.otf);
-}
-@font-face {
-  font-family: "Open Sans Light";
-  src: url(clientlib-base/resources/fonts/OpenSans-Light.ttf);
-}
-@font-face {
-  font-family: "Open Sans LightItalic";
-  src: url(clientlib-base/resources/fonts/OpenSans-LightItalic.ttf);
-}
-@font-face {
-  font-family: "Open Sans Bold";
-  src: url(clientlib-base/resources/fonts/OpenSans-Bold.ttf);
-}
-@font-face {
-  font-family: "Open Sans BoldItalic";
-  src: url(clientlib-base/resources/fonts/OpenSans-BoldItalic.ttf);
-}
-@font-face {
-  font-family: "Open Sans ExtraBold";
-  src: url(clientlib-base/resources/fonts/OpenSans-ExtraBold.ttf);
-}
-@font-face {
-  font-family: "Open Sans ExtraBoldItalic";
-  src: url(clientlib-base/resources/fonts/OpenSans-ExtraBoldItalic.ttf);
-}
-@font-face {
-  font-family: "Open Sans Italic";
-  src: url(clientlib-base/resources/fonts/OpenSans-Italic.ttf);
-}
-@font-face {
-  font-family: "Open Sans Regular";
-  src: url(clientlib-base/resources/fonts/OpenSans-Regular.ttf);
-}
-@font-face {
-  font-family: "Open Sans SemiBold";
-  src: url(clientlib-base/resources/fonts/OpenSans-SemiBold.ttf);
-}
-@font-face {
-  font-family: "Open Sans SemiBoldItalic";
-  src: url(clientlib-base/resources/fonts/OpenSans-SemiBoldItalic.ttf);
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
 }
 #external-markup :root {
   --blue: #007bff;
@@ -286,7 +33,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-sans-serif: "Helvetica Neue", Arial, sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 #external-markup *,
@@ -314,7 +61,7 @@
 }
 #external-markup body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -2367,7 +2114,7 @@
 #external-markup .was-validated .form-control:valid {
   border-color: #28a745;
   padding-right: calc(1.5em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'viewBox='0088'%3e%3cpathfill='%2328a745'd='M2.36.73L.64.53c-.4-1.04.46-1.41.1-.8l1.11.43.4-3.8c.6-.631.6-.271.2.7l-44.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
@@ -2386,7 +2133,7 @@
 #external-markup .was-validated .custom-select:valid {
   border-color: #28a745;
   padding-right: calc(0.75em + 2.3125rem);
-  background: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='4'height='5'viewBox='0045'%3e%3cpathfill='%23343a40'd='M20L02h4zm05L03h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center / 8px 10px, url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'viewBox='0088'%3e%3cpathfill='%2328a745'd='M2.36.73L.64.53c-.4-1.04.46-1.41.1-.8l1.11.43.4-3.8c.6-.631.6-.271.2.7l-44.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") #fff no-repeat center right 1.75rem/calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center / 8px 10px, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") #fff no-repeat center right 1.75rem/calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 #external-markup .custom-select.is-valid:focus,
 #external-markup .was-validated .custom-select:valid:focus {
@@ -2465,7 +2212,7 @@
 #external-markup .was-validated .form-control:invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='12'height='12'fill='none'stroke='%23dc3545'viewBox='001212'%3e%3ccirclecx='6'cy='6'r='4.5'/%3e%3cpathstroke-linejoin='round'd='M5.83.6h.4L66.5z'/%3e%3ccirclecx='6'cy='8.2'r='.6'fill='%23dc3545'stroke='none'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
@@ -2484,7 +2231,7 @@
 #external-markup .was-validated .custom-select:invalid {
   border-color: #dc3545;
   padding-right: calc(0.75em + 2.3125rem);
-  background: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='4'height='5'viewBox='0045'%3e%3cpathfill='%23343a40'd='M20L02h4zm05L03h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center / 8px 10px, url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='12'height='12'fill='none'stroke='%23dc3545'viewBox='001212'%3e%3ccirclecx='6'cy='6'r='4.5'/%3e%3cpathstroke-linejoin='round'd='M5.83.6h.4L66.5z'/%3e%3ccirclecx='6'cy='8.2'r='.6'fill='%23dc3545'stroke='none'/%3e%3c/svg%3e") #fff no-repeat center right 1.75rem/calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center / 8px 10px, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") #fff no-repeat center right 1.75rem/calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 #external-markup .custom-select.is-invalid:focus,
 #external-markup .was-validated .custom-select:invalid:focus {
@@ -3812,14 +3559,14 @@
   border-radius: 0.25rem;
 }
 #external-markup .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'viewBox='0088'%3e%3cpathfill='%23fff'd='M6.564.75l-3.593.612-1.538-1.55L04.26l2.9742.99L82.193z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
 }
 #external-markup .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
   border-color: #007bff;
   background-color: #007bff;
 }
 #external-markup .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='4'height='4'viewBox='0044'%3e%3cpathstroke='%23fff'd='M02h4'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e");
 }
 #external-markup .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(0, 123, 255, 0.5);
@@ -3831,7 +3578,7 @@
   border-radius: 50%;
 }
 #external-markup .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='12'height='12'viewBox='-4-488'%3e%3ccircler='3'fill='%23fff'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
 #external-markup .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(0, 123, 255, 0.5);
@@ -3879,7 +3626,7 @@
   line-height: 1.5;
   color: #495057;
   vertical-align: middle;
-  background: #fff url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='4'height='5'viewBox='0045'%3e%3cpathfill='%23343a40'd='M20L02h4zm05L03h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center / 8px 10px;
+  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center / 8px 10px;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   -webkit-appearance: none;
@@ -4572,7 +4319,7 @@
   border-color: rgba(0, 0, 0, 0.1);
 }
 #external-markup .navbar-light .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='30'height='30'viewBox='003030'%3e%3cpathstroke='rgba%280,0,0,0.5%29'stroke-linecap='round'stroke-miterlimit='10'stroke-width='2'd='M47h22M415h22M423h22'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 #external-markup .navbar-light .navbar-text {
   color: rgba(0, 0, 0, 0.5);
@@ -4612,7 +4359,7 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 #external-markup .navbar-dark .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'width='30'height='30'viewBox='003030'%3e%3cpathstroke='rgba%28255,255,255,0.5%29'stroke-linecap='round'stroke-miterlimit='10'stroke-width='2'd='M47h22M415h22M423h22'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 #external-markup .navbar-dark .navbar-text {
   color: rgba(255, 255, 255, 0.5);
@@ -4747,8 +4494,8 @@
     margin-left: -15px;
   }
   #external-markup .card-deck .card {
-    -ms-flex: 1 0 0;
-    flex: 1 0 0;
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
     margin-right: 15px;
     margin-bottom: 0;
     margin-left: 15px;
@@ -4765,8 +4512,8 @@
     flex-flow: row wrap;
   }
   #external-markup .card-group > .card {
-    -ms-flex: 1 0 0;
-    flex: 1 0 0;
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
     margin-bottom: 0;
   }
   #external-markup .card-group > .card + .card {
@@ -5864,7 +5611,7 @@
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -5972,7 +5719,7 @@
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6186,7 +5933,7 @@
 #external-markup .carousel-fade .active.carousel-item-right {
   z-index: 0;
   opacity: 0;
-  transition: opacity 0 0.6s;
+  transition: opacity 0s 0.6s;
 }
 @media (prefers-reduced-motion: reduce) {
   #external-markup .carousel-fade .active.carousel-item-left,
@@ -6241,10 +5988,10 @@
   background: no-repeat 50%/100% 100%;
 }
 #external-markup .carousel-control-prev-icon {
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'fill='%23fff'width='8'height='8'viewBox='0088'%3e%3cpathd='M5.250l-44441.5-1.5L4.254l2.5-2.5L5.250z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/%3e%3c/svg%3e");
 }
 #external-markup .carousel-control-next-icon {
-  background-image: url("data:image/svg+xml,%3csvgxmlns='http://www.w3.org/2000/svg'fill='%23fff'width='8'height='8'viewBox='0088'%3e%3cpathd='M2.750l-1.51.5L3.754l-2.52.5L2.758l4-4-4-4z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/%3e%3c/svg%3e");
 }
 #external-markup .carousel-indicators {
   position: absolute;
@@ -6326,7 +6073,7 @@
   border-width: 0.2em;
 }
 @-webkit-keyframes spinner-grow {
-  0 {
+  0% {
     -webkit-transform: scale(0);
     transform: scale(0);
   }
@@ -6337,7 +6084,7 @@
   }
 }
 @keyframes spinner-grow {
-  0 {
+  0% {
     -webkit-transform: scale(0);
     transform: scale(0);
   }
@@ -7569,7 +7316,7 @@
   left: 0;
   z-index: 1030;
 }
-@supports ((position:-webkit-sticky) or(position:sticky)) {
+@supports ((position: -webkit-sticky) or (position:sticky)) {
   #external-markup .sticky-top {
     position: -webkit-sticky;
     position: sticky;

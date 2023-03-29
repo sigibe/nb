@@ -21,7 +21,7 @@ export default async function decorate(block) {
       overLayClose.addEventListener('click', () => {
         const loginEle = document.querySelector('.login-overlay');
         const mainEle = document.querySelector('body');
-        loginEle.classList.remove('frk-modal');
+        loginEle.classList.remove('modal');
         mainEle.classList.remove('overflow-hidden');
       });
     }
