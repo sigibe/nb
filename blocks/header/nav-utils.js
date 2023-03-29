@@ -18,7 +18,11 @@ function appendScripts(doc) {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
-      if (url.host === document.location.host) {
+      if(url.pathname === '/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js') {
+        // url.host = document.location.host;
+        // url.port = document.location.port;
+        url.pathname = '/blocks/header/querysearch/clientlibs.min.js';
+      } else if (url.host === document.location.host) {
         url.host = NEDBANK_HOST;
         url.port = '';
         url.protocol = 'https';
@@ -87,7 +91,7 @@ export async function loadNavTools() {
       document.querySelector('.nav-hamburger').click();
     });
 
-    const querySearchModal = doc.querySelector('#querySearchModal');
+    const querySearchModal = doc.querySelector('.querysearch');
     document.body.appendChild(querySearchModal);
     document.querySelector('.nbd-qs-close').addEventListener('click', () => {
       document.querySelector('.nav-tools-search').click();
