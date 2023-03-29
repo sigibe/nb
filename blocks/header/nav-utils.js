@@ -18,7 +18,7 @@ function appendScripts(doc) {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
-      if(url.pathname === '/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js') {
+      if (url.pathname === '/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js') {
         // url.host = document.location.host;
         // url.port = document.location.port;
         url.pathname = '/blocks/header/querysearch/clientlibs.min.js';
