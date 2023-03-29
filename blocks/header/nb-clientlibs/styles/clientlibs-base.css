@@ -5674,6 +5674,10 @@
   overflow: hidden;
   outline: 0;
 }
+#external-markup .modal.appear {
+  display: block;
+  padding-right: 15px;
+}
 #external-markup .modal-dialog {
   position: relative;
   width: auto;
