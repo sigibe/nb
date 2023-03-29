@@ -156,6 +156,7 @@ pre {
 strong {
   font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
   font-weight: 700;
+  line-height: 40px;
 }
 strong a.button:any-link {
   font-family: var(--strong-font-family);
