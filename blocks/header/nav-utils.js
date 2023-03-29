@@ -3,8 +3,9 @@ const NEDBANK_HOME_PAGE = `https://${NEDBANK_HOST}/home.html`;
 
 function appendStyles() {
   [
-    '/blocks/header/nb-clientlibs-base.css',
-    '/blocks/header/nb-clientlibs-site.css',
+    '/blocks/header/nb-clientlibs/styles/clientlibs-base.css',
+    '/blocks/header/nb-clientlibs/styles/clientlibs-site.css',
+    '/blocks/header/nb-clientlibs/styles/clientlibs-dependencies.css',
   ].forEach((item) => {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
@@ -19,7 +20,7 @@ function appendScripts(doc) {
     if (item.src) {
       const url = new URL(item.src);
       if (url.pathname === '/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js') {
-        url.pathname = '/blocks/header/querysearch/clientlibs.min.js';
+        url.pathname = '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js';
       } else if (url.host === document.location.host) {
         url.host = NEDBANK_HOST;
         url.port = '';
@@ -83,21 +84,25 @@ export async function loadNavTools() {
     document.body.appendChild(externalMarkup);
 
     const hamburgerModal = doc.querySelector('.nbd-hamburger-menu-wrapper');
-    hamburgerModal.classList.add('displayHide');
-    hamburgerModal.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
-      item.classList.add('displayHide');
-    });
+    if (hamburgerModal) {
+      hamburgerModal.classList.add('displayHide');
+      hamburgerModal.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
+        item.classList.add('displayHide');
+      });
 
-    externalMarkup.appendChild(hamburgerModal);
-    document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
-      document.querySelector('.nav-hamburger').click();
-    });
+      externalMarkup.appendChild(hamburgerModal);
+      document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
+        document.querySelector('.nav-hamburger').click();
+      });
+    }
 
     const querySearchModal = doc.querySelector('.querysearch');
-    externalMarkup.appendChild(querySearchModal);
-    document.querySelector('.nbd-qs-close').addEventListener('click', () => {
-      document.querySelector('.nav-tools-search').click();
-    });
+    if (querySearchModal) {
+      externalMarkup.appendChild(querySearchModal);
+      document.querySelector('.nbd-qs-close').addEventListener('click', () => {
+        document.querySelector('.nav-tools-search').click();
+      });
+    }
   }
 }
 
