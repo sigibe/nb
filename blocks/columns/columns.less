@@ -5,15 +5,14 @@ autocomment();
 @import (reference) "../../styles/variables.less";
 
 .section.columns-container {
-  padding-left: 22px;
-  padding-right: 22px;
+  padding-top: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .columns {
   >div {
     .flex(column);
-
-
 
     >div {
       .width-basis(1);
@@ -36,14 +35,21 @@ autocomment();
     >div {
       flex-direction: column;
       align-items: flex-start;
+      padding-bottom: 60px;
 
       >div {
+        >h2 {
+          padding: 0 10px 0 10px;
+          font-size: @font-size-large;
+          line-height: @font-lineheight-large;
+        }
         >p {
           margin: 0;
-          font-size: @font-size-medium;
-          line-height: 28px;
+          font-size: @font-size-base;
+          line-height: @font-lineheight-base;
           font-family: @font-family-secondary;
           color: #494f50;
+          padding: 0 10px 0 10px;
         }
       }
     }
@@ -318,6 +324,11 @@ autocomment();
           &:last-child {
             left: -76px;
             position: relative;
+          }
+
+          >h2 {
+            font-size: @font-size-h2;
+            line-height: @font-lineheight-h2;
           }
 
           >p {
