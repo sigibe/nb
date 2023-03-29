@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable */
 const NEDBANK_HOST = 'personal.nedbank.co.za';
 
 $(document).ready(function () {
