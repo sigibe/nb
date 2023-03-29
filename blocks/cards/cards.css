@@ -606,7 +606,6 @@
     display: flex;
   }
   div.promotion-banner h2 strong {
-    margin-left: -24px;
     font-size: 32px;
   }
 }
