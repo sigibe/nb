@@ -79,6 +79,15 @@
 .login-overlay .login.block .login-header p {
   cursor: pointer;
   margin: 0;
+  width: 100%;
+}
+.login-overlay .login.block .login-header p span:first-child {
+  flex-basis: 90%;
+  margin-left: 0;
+  height: 100%;
+}
+.login-overlay .login.block .login-header p span:first-child svg {
+  margin-top: 6px;
 }
 .login-overlay .login.block .login-main {
   margin: 0 22px;
@@ -157,6 +166,10 @@
   .login-overlay .login.block .login-header {
     padding: 40px 89px 15px;
     height: 42px;
+  }
+  .login-overlay .login.block .login-header p span:first-child {
+    visibility: hidden;
+    flex-basis: 95%;
   }
   .login-overlay .login.block .login-main {
     margin: 8px 7.37% 32px 7.37% !important;
