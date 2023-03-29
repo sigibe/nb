@@ -353,27 +353,27 @@
   transition: transform 900ms;
 }
 #external-markup .up-right-arrow-btn {
-  background-image: url('../../../icons/button/diagonal-arrow-green.svg');
+  background-image: url('/icons/button/diagonal-arrow-green.svg');
   width: 18px;
   height: 14px;
 }
 #external-markup .down-arrow-btn {
-  background-image: url('../../../icons/button/down-arrow-green.svg');
+  background-image: url('/icons/button/down-arrow-green.svg');
   width: 14px;
 }
 #external-markup .right-arrow-btn {
-  background-image: url('../../../icons/button/right-arrow-green.svg');
+  background-image: url('/icons/button/right-arrow-green.svg');
   width: 23px;
   height: 14px;
 }
 #external-markup .transfer-arrow-btn {
-  background-image: url('../../../icons/Transfer.svg');
+  background-image: url('/icons/Transfer.svg');
   width: 18px;
   height: 20px;
   display: inline-flex;
 }
 #external-markup .back-arrow-btn {
-  background-image: url('../../../icons/button/back-arrow-btn.svg');
+  background-image: url('/icons/button/back-arrow-btn.svg');
   width: 23px;
   height: 14px;
 }
@@ -1924,7 +1924,7 @@
   }
 }
 #external-markup .charcoal-down-arrow-btn {
-  background-image: url('../../../icons/button/down-arrow-charcoal.svg');
+  background-image: url('/icons/button/down-arrow-charcoal.svg');
   width: 14px;
   position: relative;
   top: 2px;
@@ -2113,13 +2113,13 @@
   color: #ffffff;
 }
 #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary .up-right-arrow-btn {
-  background-image: url('../../../icons/button/diagonal-arrow-white.svg');
+  background-image: url('/icons/button/diagonal-arrow-white.svg');
 }
 #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary .down-arrow-btn {
-  background-image: url('../../../icons/button/down-arrow-white.svg');
+  background-image: url('/icons/button/down-arrow-white.svg');
 }
 #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary .right-arrow-btn {
-  background-image: url('../../../icons/button/right-arrow-white.svg');
+  background-image: url('/icons/button/right-arrow-white.svg');
 }
 @media only screen and (max-width: 576px) {
   #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme {
@@ -2132,13 +2132,13 @@
     color: #008533;
   }
   #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary .up-right-arrow-btn {
-    background-image: url('../../../icons/button/diagonal-arrow-green.svg');
+    background-image: url('/icons/button/diagonal-arrow-green.svg');
   }
   #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary .down-arrow-btn {
-    background-image: url('../../../icons/button/down-arrow-green.svg');
+    background-image: url('/icons/button/down-arrow-green.svg');
   }
   #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary .right-arrow-btn {
-    background-image: url('../../../icons/button/right-arrow-green.svg');
+    background-image: url('/icons/button/right-arrow-green.svg');
   }
   #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-banner-content .nbd-banner-details {
     color: #17252e;
@@ -2271,13 +2271,13 @@
   color: #17252e;
 }
 #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary .up-right-arrow-btn {
-  background-image: url('../../../icons/button/diagonal-arrow-charcoal.svg');
+  background-image: url('/icons/button/diagonal-arrow-charcoal.svg');
 }
 #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary .down-arrow-btn {
-  background-image: url('../../../icons/button/down-arrow-charcoal.svg');
+  background-image: url('/icons/button/down-arrow-charcoal.svg');
 }
 #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary .right-arrow-btn {
-  background-image: url('../../../icons/button/right-arrow-charcoal.svg');
+  background-image: url('/icons/button/right-arrow-charcoal.svg');
 }
 @media only screen and (max-width: 576px) {
   #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme {
@@ -2290,13 +2290,13 @@
     color: #008533;
   }
   #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary .up-right-arrow-btn {
-    background-image: url('../../../icons/button/diagonal-arrow-green.svg');
+    background-image: url('/icons/button/diagonal-arrow-green.svg');
   }
   #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary .down-arrow-btn {
-    background-image: url('../../../icons/button/down-arrow-green.svg');
+    background-image: url('/icons/button/down-arrow-green.svg');
   }
   #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary .right-arrow-btn {
-    background-image: url('../../../icons/button/right-arrow-green.svg');
+    background-image: url('/icons/button/right-arrow-green.svg');
   }
 }
 @media only screen and (min-width: 576px) {
@@ -2423,7 +2423,7 @@
   transform: translateY(8px);
 }
 #external-markup .landing-banner-container .nbd-banner-content a .charcoal-down-arrow-btn {
-  background-image: url('../../../icons/button/down-arrow-charcoal.svg');
+  background-image: url('/icons/button/down-arrow-charcoal.svg');
   width: 14px;
   position: relative;
   top: 2px;
@@ -3105,7 +3105,7 @@
 }
 #external-markup .illustrationcardwrapper .ng-container .card.nb-card .card-body .icon-wrapper {
   display: flex;
-  background-image: url('../../../icons/backgroundshape.svg');
+  background-image: url('/icons/backgroundshape.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80px 80px;
@@ -3203,7 +3203,7 @@
   padding: 10px 0 20px 0;
 }
 #external-markup .illustrationcardwrapper .ng-container .card.nb-card .card-body .description ul li {
-  background: url('../../../icons/right-tick.svg') no-repeat 0 5px;
+  background: url('/icons/right-tick.svg') no-repeat 0 5px;
   list-style: none;
   vertical-align: middle;
   padding: 0 0 10px 35px;
@@ -3461,7 +3461,7 @@
   padding: 10px 0 20px 0;
 }
 #external-markup .splitwrapper .ng-container .card.nb-card .card-body .subcard .description ul li {
-  background: url('../../../icons/right-tick.svg') no-repeat 0 5px;
+  background: url('/icons/right-tick.svg') no-repeat 0 5px;
   list-style: none;
   vertical-align: middle;
   padding: 0 0 10px 35px;
@@ -3525,7 +3525,7 @@
   height: 24px;
   width: 24px;
   display: block;
-  background-image: url('../../../icons/down_arrow_f.svg');
+  background-image: url('/icons/down_arrow_f.svg');
   /* position: absolute;
                                           right: 20px; */
   position: absolute;
@@ -3538,7 +3538,7 @@
   height: 24px;
   width: 24px;
   display: block;
-  background-image: url('../../../icons/down_arrow_f.svg');
+  background-image: url('/icons/down_arrow_f.svg');
   position: absolute;
   top: inherit;
   right: 20px;
@@ -3549,7 +3549,7 @@
   height: 24px;
   width: 24px;
   display: block;
-  background-image: url('../../../icons/up_arrow_f.svg');
+  background-image: url('/icons/up_arrow_f.svg');
   position: absolute;
   top: inherit;
   right: 20px;
@@ -3823,7 +3823,7 @@
   height: 24px;
   width: 24px;
   display: block;
-  background-image: url('../../../icons/down_arrow_f.svg');
+  background-image: url('/icons/down_arrow_f.svg');
   position: absolute;
   top: inherit;
   right: 20px;
@@ -3834,7 +3834,7 @@
   height: 24px;
   width: 24px;
   display: block;
-  background-image: url('../../../icons/up_arrow_f.svg');
+  background-image: url('/icons/up_arrow_f.svg');
   position: absolute;
   top: inherit;
   right: 20px;
@@ -4157,7 +4157,7 @@
   margin: 0 23px 0 0;
   display: inline-block;
   background-repeat: no-repeat;
-  background-image: url('../../../icons/right-tick.svg');
+  background-image: url('/icons/right-tick.svg');
 }
 #external-markup .nbd-vac-container .nbd-card-benefit-info p {
   margin-bottom: 16px;
@@ -5283,7 +5283,7 @@
   }
   #external-markup .nbd-hamburger-menu-back .nbd-left-arrow {
     display: inline-block;
-    background-image: url('../../../icons/back_white_Arrow.svg');
+    background-image: url('/icons/back_white_Arrow.svg');
     height: 13px;
     width: 22px;
     margin: 5px 8px 0px 18px;
@@ -5360,7 +5360,7 @@
   }
   #external-markup .nbd-icon-white-arrow {
     display: block;
-    background-image: url('../../../icons/arrow-white.svg');
+    background-image: url('/icons/arrow-white.svg');
     height: 13px;
     width: 24px;
     margin: 5px 0px 0px 14px;
@@ -5428,13 +5428,13 @@
     padding: 0px 0px 18px 0px;
   }
   #external-markup .right-half-arrow {
-    background-image: url('../../../icons/right_half_arrow.svg');
+    background-image: url('/icons/right_half_arrow.svg');
     width: 24px;
     height: 24px;
     display: block;
   }
   #external-markup .right-half-small-arrow {
-    background-image: url('../../../icons/right_half_small_arrow.svg');
+    background-image: url('/icons/right_half_small_arrow.svg');
     width: 24px;
     height: 24px;
     display: block;
@@ -5628,7 +5628,7 @@
   #external-markup .lock-icon {
     height: 24px;
     width: 24px;
-    background-image: url('../../../icons/Signin.svg');
+    background-image: url('/icons/Signin.svg');
     border: none;
     outline: none;
     display: block;
@@ -5637,7 +5637,7 @@
     outline: none;
     border: none;
     display: inline-block;
-    background-image: url('../../../icons/lock-icon-green.svg');
+    background-image: url('/icons/lock-icon-green.svg');
   }
   #external-markup .nbd-navbar-desktop-wrapper .navbar-nav.m-r-92 .nav-item.dropdown:hover .nav-link {
     color: #008533;
@@ -5646,7 +5646,7 @@
     visibility: visible;
   }
   #external-markup .m-r-92 .diagonal-arrow-black {
-    background-image: url('../../../icons/diagonal-arrow-black.svg');
+    background-image: url('/icons/diagonal-arrow-black.svg');
     width: 24px;
     height: 24px;
     visibility: hidden;
@@ -5850,14 +5850,14 @@
   #external-markup .nbd-hamburger-menu-levelOne .nbd-menu-item-arrow {
     float: right;
     display: none;
-    background-image: url('../../../icons/Hover_right_arrow_02.svg');
+    background-image: url('/icons/Hover_right_arrow_02.svg');
     width: 33px;
     height: 15px;
   }
   #external-markup .nbd-hamburger-menu-levelOne .nbd-menu-item-arrow-green {
     margin: auto;
     display: block;
-    background-image: url('../../../icons/Hover_right_arrow_01.svg');
+    background-image: url('/icons/Hover_right_arrow_01.svg');
     width: 24px;
     height: 15px;
   }
@@ -5963,7 +5963,7 @@
     height: 24px;
     width: 24px;
     margin-right: 4px;
-    background-image: url('../../../icons/white-lock.svg');
+    background-image: url('/icons/white-lock.svg');
     border: none;
     outline: none;
     display: block;
@@ -6100,7 +6100,7 @@
     margin-right: 10px;
   }
   #external-markup .nbd-hamburger-menu-mob .right-half-small-arrow {
-    background-image: url('../../../icons/right_half_arrow_mb.svg');
+    background-image: url('/icons/right_half_arrow_mb.svg');
     width: 24px;
     height: 24px;
     display: block;
@@ -6108,7 +6108,7 @@
     float: right;
   }
   #external-markup .nbd-hamburger-menu-mob .diagonal-arrow {
-    background-image: url('../../../icons/diagonal-arrow-white.svg');
+    background-image: url('/icons/diagonal-arrow-white.svg');
     width: 24px;
     height: 24px;
     display: block;
@@ -6308,7 +6308,7 @@
   }
   #external-markup .nbd-hamburger-menu-mob .nbd-left-arrow {
     display: block;
-    background-image: url('../../../icons/back_white_Arrow.svg');
+    background-image: url('/icons/back_white_Arrow.svg');
     height: 13px;
     width: 22px;
     margin: 5px 8px 0px 18px;
@@ -7096,7 +7096,7 @@
 }
 #external-markup .nbd-qs-container #nbd-qs-nav .nbd-qs-nav-right #pagination-container ul li .nbd-qs-previmg,
 #external-markup .nbd-qs-container .qs-top .nbd-qs-nav-right #pagination-container ul li .nbd-qs-previmg {
-  background-image: url('../../../icons/prev-arrow-green.svg');
+  background-image: url('/icons/prev-arrow-green.svg');
   background-repeat: no-repeat;
   display: inline-block;
   width: 24px;
@@ -7104,7 +7104,7 @@
 }
 #external-markup .nbd-qs-container #nbd-qs-nav .nbd-qs-nav-right #pagination-container ul li.disabled .nbd-qs-nextimg,
 #external-markup .nbd-qs-container .qs-top .nbd-qs-nav-right #pagination-container ul li.disabled .nbd-qs-nextimg {
-  background-image: url('../../../icons/nextarrow-grey.svg');
+  background-image: url('/icons/nextarrow-grey.svg');
   background-repeat: no-repeat;
   display: inline-block;
   width: 24px;
@@ -7112,7 +7112,7 @@
 }
 #external-markup .nbd-qs-container #nbd-qs-nav .nbd-qs-nav-right #pagination-container ul li .nbd-qs-nextimg,
 #external-markup .nbd-qs-container .qs-top .nbd-qs-nav-right #pagination-container ul li .nbd-qs-nextimg {
-  background-image: url('../../../icons/next-arrow.svg');
+  background-image: url('/icons/next-arrow.svg');
   background-repeat: no-repeat;
   display: inline-block;
   width: 24px;
@@ -7120,7 +7120,7 @@
 }
 #external-markup .nbd-qs-container #nbd-qs-nav .nbd-qs-nav-right #pagination-container ul li.disabled .nbd-qs-previmg,
 #external-markup .nbd-qs-container .qs-top .nbd-qs-nav-right #pagination-container ul li.disabled .nbd-qs-previmg {
-  background-image: url('../../../icons/prev-arrow.svg');
+  background-image: url('/icons/prev-arrow.svg');
   background-repeat: no-repeat;
   display: inline-block;
   width: 24px;
@@ -7301,10 +7301,10 @@
   display: inline-block;
   outline: none;
   background-color: none !important;
-  background-image: url('../../../icons/thin-0151_plus_final.svg');
+  background-image: url('/icons/thin-0151_plus_final.svg');
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button.nbd-qsfilter-plus:hover {
-  background-image: url('../../../icons/qsfilter-plus-active.svg');
+  background-image: url('/icons/qsfilter-plus-active.svg');
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button.nbd-qsfilter-minus {
   height: 42px;
@@ -7313,10 +7313,10 @@
   display: inline-block;
   outline: none;
   background-color: none !important;
-  background-image: url('../../../icons/thin-0151_minus_final.svg');
+  background-image: url('/icons/thin-0151_minus_final.svg');
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button.nbd-qsfilter-minus:hover {
-  background-image: url('../../../icons/qsfilter-minus-active.svg');
+  background-image: url('/icons/qsfilter-minus-active.svg');
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button.nbd-qsfilter-active {
   color: #ffffff;
@@ -7401,18 +7401,18 @@
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
   #external-markup .nbd-qsfilter-plus {
-    background-image: url('../../../icons/thin-plus.svg');
+    background-image: url('/icons/thin-plus.svg');
   }
   #external-markup .nbd-qsfilter-minus {
-    background-image: url('../../../icons/thin-minus.svg');
+    background-image: url('/icons/thin-minus.svg');
   }
 }
 @-moz-document url-prefix() {
   #external-markup .nbd-qsfilter-plus {
-    background-image: url('../../../icons/qsfilter-plus-non-active.svg');
+    background-image: url('/icons/qsfilter-plus-non-active.svg');
   }
   #external-markup .nbd-qsfilter-minus {
-    background-image: url('../../../icons/qsfilter-minus-non-active.svg');
+    background-image: url('/icons/qsfilter-minus-non-active.svg');
   }
 }
 #external-markup .nbd-search {
@@ -7628,7 +7628,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
 }
 #external-markup .nbd-search .nbd-no-search-result {
   color: #494f50;
@@ -9843,7 +9843,7 @@
   }
 }
 #external-markup .nbd-show-more-icon {
-  background-image: url('../../../icons/plus_add_new.svg');
+  background-image: url('/icons/plus_add_new.svg');
   background-size: 32px 32px;
   display: block;
   height: 32px;
@@ -10001,7 +10001,7 @@
 }
 #external-markup .nbd-icon-arrow {
   display: block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   height: 13px;
   width: 24px;
   margin: 5px 0px 0px 10px;
@@ -10012,7 +10012,7 @@
   transform: translateX(8px);
   margin-left: 20px;
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-play-btn-card .nbd-article-card-heading {
   margin-bottom: 33px;
@@ -10046,7 +10046,7 @@
 }
 #external-markup .nbd-icon-watch-clock {
   display: inline-block;
-  background-image: url('../../../icons/time_watch_clock.svg');
+  background-image: url('/icons/time_watch_clock.svg');
   height: 14px;
   width: 14px;
   position: relative;
@@ -10187,7 +10187,7 @@
 }
 #external-markup .nbd-icon-arrow {
   display: block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   height: 13px;
   width: 26px;
   margin-right: 5px 0 0 0;
@@ -10198,7 +10198,7 @@
   transform: translateX(8px);
   margin-right: 0px;
   width: 24px;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
 }
 #external-markup .nbd-time-card-time {
   color: #949c9e;
@@ -10225,7 +10225,7 @@
 }
 #external-markup .nbd-icon-watch-clock {
   display: inline-block;
-  background-image: url('../../../icons/time_watch_clock.svg');
+  background-image: url('/icons/time_watch_clock.svg');
   height: 13px;
   width: 13px;
   position: relative;
@@ -10430,7 +10430,7 @@
 }
 #external-markup .nbd-icon-arrow {
   display: block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   height: 13px;
   width: 24px;
   margin: 5px 0px 0px 10px;
@@ -10438,7 +10438,7 @@
 #external-markup .nbd-article-card-Link a:hover .nbd-icon-arrow {
   margin-left: 20px;
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-play-btn-card .nbd-article-card-heading {
   margin-bottom: 33px;
@@ -10472,7 +10472,7 @@
 }
 #external-markup .nbd-icon-watch-clock {
   display: inline-block;
-  background-image: url('../../../icons/time_watch_clock.svg');
+  background-image: url('/icons/time_watch_clock.svg');
   height: 14px;
   width: 14px;
   position: relative;
@@ -10513,7 +10513,7 @@
   }
 }
 #external-markup .nbd-show-more-icon {
-  background-image: url('../../../icons/plus_add_new_green.svg');
+  background-image: url('/icons/plus_add_new_green.svg');
   background-size: 32px 32px;
   display: block;
   height: 32px;
@@ -10543,7 +10543,7 @@
 }
 #external-markup .card-deck .article-bg-green .nbd-icon-arrow {
   display: block;
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
   height: 13px;
   width: 24px;
   margin: 5px 0px 0px 10px;
@@ -10552,7 +10552,7 @@
 #external-markup .card-deck .article-bg-green .nbd-article-card-Link a:hover .nbd-icon-arrow {
   margin-left: 20px;
   width: 34px;
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
 }
 #external-markup .nbd-article-post-card-content p {
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -10788,7 +10788,7 @@
   }
   #external-markup .nbd-icon-arrow {
     display: block;
-    background-image: url('../../../icons/arrow.svg');
+    background-image: url('/icons/arrow.svg');
     height: 14px;
     width: 24px;
     margin: 5px 0px 0px 10px;
@@ -10799,11 +10799,11 @@
     transform: translateX(8px);
     margin-left: 20px;
     width: 34px;
-    background-image: url('../../../icons/arrow-hover.svg');
+    background-image: url('/icons/arrow-hover.svg');
   }
   #external-markup .card-deck .article-bg-green .nbd-icon-arrow {
     display: block;
-    background-image: url('../../../icons/arrow-white.svg');
+    background-image: url('/icons/arrow-white.svg');
     height: 14px;
     width: 24px;
     margin: 5px 0px 0px 10px;
@@ -10814,7 +10814,7 @@
     transform: translateX(8px);
     margin-left: 20px;
     width: 34px;
-    background-image: url('../../../icons/Whitehoverarrow.svg');
+    background-image: url('/icons/Whitehoverarrow.svg');
   }
   #external-markup .nbd-play-btn-card .nbd-article-post-card-heading {
     margin-bottom: 33px;
@@ -10848,7 +10848,7 @@
   }
   #external-markup .nbd-icon-watch-clock {
     display: inline-block;
-    background-image: url('../../../icons/time_watch_clock.svg');
+    background-image: url('/icons/time_watch_clock.svg');
     height: 14px;
     width: 14px;
     position: relative;
@@ -10868,7 +10868,7 @@
     margin-bottom: 52px;
   }
   #external-markup .nbd-show-more-icon {
-    background-image: url('../../../icons/plus_add_new_green.svg');
+    background-image: url('/icons/plus_add_new_green.svg');
     background-size: 32px 32px;
     display: block;
     height: 32px;
@@ -11010,7 +11010,7 @@
 }
 #external-markup .nbd-icon-watch-clock {
   display: inline-block;
-  background-image: url('../../../icons/time_watch_clock.svg');
+  background-image: url('/icons/time_watch_clock.svg');
   height: 13px;
   width: 13px;
   position: relative;
@@ -11194,14 +11194,14 @@
   margin-right: 0px;
   width: 34px;
   background-repeat: no-repeat;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-related-posts-wrapper .nbd-article-post-card:hover .nbd-icon-arrow {
   transform: translateX(8px);
   margin-right: 0px;
   width: 34px;
   background-repeat: no-repeat;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-related-posts-wrapper .swiper-slide {
   flex: 1 0 0%;
@@ -11236,10 +11236,10 @@
   cursor: auto !important;
 }
 #external-markup .nbd-related-posts-wrapper .swiper-button-disabled .nbd-arrow-back-left {
-  background-image: url('../../../icons/arrow_back_left_deactive.svg');
+  background-image: url('/icons/arrow_back_left_deactive.svg');
 }
 #external-markup .nbd-related-posts-wrapper .swiper-button-disabled .nbd-arrow-next-right {
-  background-image: url('../../../icons/arrow_next_right_deactive.svg');
+  background-image: url('/icons/arrow_next_right_deactive.svg');
 }
 #external-markup .nbd-related-posts-wrapper .swiper-pagination-bullet-active {
   background: #008533 !important;
@@ -11263,13 +11263,13 @@
   padding: 0px !important;
 }
 #external-markup .nbd-related-posts-wrapper .nbd-arrow-back-left {
-  background-image: url('../../../icons/arrow_back_left_active.svg');
+  background-image: url('/icons/arrow_back_left_active.svg');
   display: none;
   height: 35px;
   width: 40px;
 }
 #external-markup .nbd-related-posts-wrapper .nbd-arrow-next-right {
-  background-image: url('../../../icons/arrow_next_right_active.svg');
+  background-image: url('/icons/arrow_next_right_active.svg');
   display: none;
   height: 35px;
   width: 40px;
@@ -11291,7 +11291,7 @@
   margin-left: 20px;
   width: 34px;
   background-repeat: no-repeat;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-related-posts-wrapper .nbd-article-card-img img {
   height: 180px;
@@ -11326,7 +11326,7 @@
   margin-left: 20px;
   width: 34px;
   background-repeat: no-repeat;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-related-posts-wrapper .nbd-article-card-Link .nbd-play-btn {
   height: 40.38px;
@@ -11337,7 +11337,7 @@
 }
 #external-markup .nbd-related-posts-wrapper .nbd-icon-arrow {
   display: block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   height: 13px;
   width: 24px;
   margin: 5px 0px 0px 10px;
@@ -11351,7 +11351,7 @@
 }
 #external-markup .nbd-related-posts-wrapper .nbd-icon-watch-clock {
   display: inline-block;
-  background-image: url('../../../icons/time_watch_clock.svg');
+  background-image: url('/icons/time_watch_clock.svg');
   height: 14px;
   width: 14px;
   position: relative;
@@ -11384,7 +11384,7 @@
   }
 }
 #external-markup .nbd-related-posts-wrapper .nbd-show-more-icon {
-  background-image: url('../../../icons/plus_add_new.svg');
+  background-image: url('/icons/plus_add_new.svg');
   background-size: 32px 32px;
   display: block;
   height: 32px;
@@ -11571,7 +11571,7 @@
     margin-left: 20px;
     width: 34px;
     background-repeat: no-repeat;
-    background-image: url('../../../icons/arrow-hover.svg');
+    background-image: url('/icons/arrow-hover.svg');
   }
   #external-markup .nbd-related-posts-wrapper .nbd-article-post-card-Link .nbd-play-btn {
     height: 40.38px;
@@ -11582,7 +11582,7 @@
   }
   #external-markup .nbd-related-posts-wrapper .nbd-icon-arrow {
     display: block;
-    background-image: url('../../../icons/arrow.svg');
+    background-image: url('/icons/arrow.svg');
     height: 14px;
     width: 24px;
     margin: 5px 0px 0px 10px;
@@ -11593,7 +11593,7 @@
   }
   #external-markup .nbd-related-posts-wrapper .nbd-icon-watch-clock {
     display: inline-block;
-    background-image: url('../../../icons/time_watch_clock.svg');
+    background-image: url('/icons/time_watch_clock.svg');
     height: 14px;
     width: 14px;
     position: relative;
@@ -11622,7 +11622,7 @@
     cursor: pointer;
   }
   #external-markup .nbd-related-posts-wrapper .nbd-show-more-icon {
-    background-image: url('../../../icons/plus_add_new.svg');
+    background-image: url('/icons/plus_add_new.svg');
     background-size: 32px 32px;
     display: block;
     height: 32px;
@@ -11696,12 +11696,12 @@
   height: 13px;
   width: 24px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
   transition: transform 900ms;
 }
 #external-markup .channel .bg-charcoal .card-link:hover .icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
   transform: translateX(8px);
 }
 #external-markup .channel .bg-charcoal .card-text {
@@ -11727,12 +11727,12 @@
   height: 13px;
   width: 24px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
   transition: transform 900ms;
 }
 #external-markup .channel .bg-green .card-link:hover .icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
   transform: translateX(8px);
 }
 #external-markup .channel .bg-green .card-text {
@@ -11799,12 +11799,12 @@
   height: 13px;
   width: 24px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .channel .bg-white .card-link:hover .icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-green-hover.svg');
+  background-image: url('/icons/arrow-green-hover.svg');
   transform: translateX(8px);
 }
 #external-markup .channel .bg-white .card-text a {
@@ -11941,7 +11941,7 @@
 #external-markup .eligibility-info .icon-wrapper {
   padding: 11px 12px;
   margin-bottom: 16px;
-  background-image: url('../../../icons/backgroundshape.svg');
+  background-image: url('/icons/backgroundshape.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 48px 47px;
@@ -12014,12 +12014,12 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
 }
 #external-markup .eligibility-info .icon-arrow:hover {
   width: 34px;
   margin-left: 20px;
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
 }
 #external-markup .eligibility-info a:hover {
   color: #ffffff;
@@ -12191,17 +12191,17 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   transition: transform 900ms;
 }
 #external-markup .nb-intro-card .nb-card-link:hover .icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nb-intro-card:hover .icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nb-card {
@@ -12500,7 +12500,7 @@
   height: 62px;
   width: 60px;
   margin: 0px 0px 16px 0px;
-  background-image: url('../../../icons/intercept_bg.svg');
+  background-image: url('/icons/intercept_bg.svg');
   background-repeat: no-repeat;
   background-size: contain;
   text-align: center;
@@ -12547,12 +12547,12 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-intercept-card-link:hover .nbd-icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-intercept-card .nbd-icon-down-arrow {
@@ -12560,12 +12560,12 @@
   width: 14px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/button/down-arrow-green.svg');
+  background-image: url('/icons/button/down-arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-intercept-card-link:hover .nbd-icon-down-arrow {
   width: 14px;
-  background-image: url('../../../icons/button/down-arrow-green.svg');
+  background-image: url('/icons/button/down-arrow-green.svg');
   transform: translateY(10px);
 }
 #external-markup .nbd-intercept-card-link:hover {
@@ -12746,7 +12746,7 @@
   box-shadow: 0px 25px 20px -15px rgba(0, 0, 0, 0.1);
 }
 #external-markup .ng-container-application .nbd-step-card-img {
-  background-image: url('../../../icons/backgroundshape.svg');
+  background-image: url('/icons/backgroundshape.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80px 82px;
@@ -13149,12 +13149,12 @@
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-card-container .nbd-switchcard-card .card-footer .nbd-switchcard-link .nbd-switchcard-card-link:hover .nbd-icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-card-container .nbd-switchcard-card .card-footer .nbd-switchcard-link .nbd-switchcard-card-link:hover .nbd-icon-down-arrow {
   width: 14px;
-  background-image: url('../../../icons/button/down-arrow-green.svg');
+  background-image: url('/icons/button/down-arrow-green.svg');
   transform: translateY(10px);
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-card-container .nbd-switchcard-card .card-footer .nbd-switchcard-link .nbd-switchcard-card-link:hover .nbd-icon-diagonal-arrow {
@@ -13165,7 +13165,7 @@
   width: 14px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/button/down-arrow-green.svg');
+  background-image: url('/icons/button/down-arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-card-container .nbd-switchcard-card .card-footer .nbd-switchcard-link .nbd-switchcard-card-link .nbd-icon-diagonal-arrow {
@@ -13173,7 +13173,7 @@
   width: 18px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/button/diagonal-arrow-green.svg');
+  background-image: url('/icons/button/diagonal-arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-card-container .nbd-switchcard-card .card-footer .nbd-switchcard-link .nbd-switchcard-card-link .nbd-icon-arrow {
@@ -13181,7 +13181,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-onecard-bg {
@@ -13450,7 +13450,7 @@
 #external-markup .nbd-vcard-container .nbd-vcard-body .nbd-vcard-header .nbd-intercept-img-bg {
   height: 62px;
   width: 60px;
-  background-image: url('../../../icons/intercept_bg.svg');
+  background-image: url('/icons/intercept_bg.svg');
   background-repeat: no-repeat;
   background-size: contain;
   text-align: center;
@@ -13865,12 +13865,12 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-multilink-container .nb-multi-link-card .nb-card-link:hover .icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-multilink-container .nb-multi-link-card .multi-links:not(:last-child) {
@@ -14078,7 +14078,7 @@
   width: 24px;
   margin: 0 16px 22px 0;
   display: inline-block;
-  background-image: url('../../../icons/tick_icon.svg');
+  background-image: url('/icons/tick_icon.svg');
 }
 #external-markup .whychoose-container .doc-text .listtext {
   flex-direction: row;
@@ -14409,14 +14409,14 @@
   padding: 12px 0;
 }
 #external-markup .faq-container .faq-item .cmp-accordion__button span.cmp-accordion__icon {
-  background-image: url('../../../icons/down_arrow_01.svg');
+  background-image: url('/icons/down_arrow_01.svg');
   height: 19px;
   width: 30px;
   display: inline-block;
   margin-top: 0;
 }
 #external-markup .faq-container .faq-item .cmp-accordion__button--expanded span.cmp-accordion__icon {
-  background-image: url('../../../icons/up_arrow_01.svg');
+  background-image: url('/icons/up_arrow_01.svg');
   height: 19px;
   width: 30px;
   display: inline-block;
@@ -15045,14 +15045,14 @@
 }
 #external-markup .bond-repayment-container .down-arrow {
   display: inline-block;
-  background-image: url('../../../icons/up_arrow_cr.svg');
+  background-image: url('/icons/up_arrow_cr.svg');
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
   float: right;
 }
 #external-markup .bond-repayment-container .collapsed .down-arrow {
-  background-image: url('../../../icons/down_arrow_cr.svg');
+  background-image: url('/icons/down_arrow_cr.svg');
 }
 #external-markup .bond-repayment-container .nbd-btn-secondary:focus {
   border: 2px solid #008533;
@@ -15500,7 +15500,7 @@
   }
 }
 #external-markup .ndb-spinner .spinner {
-  background-image: url('../../../icons/spinner.svg');
+  background-image: url('/icons/spinner.svg');
   background-repeat: no-repeat;
   background-position: right;
   background-size: 35px;
@@ -15649,7 +15649,7 @@
   margin: 0px;
 }
 #external-markup .nbd-cmb-container .nbd-down-arrow {
-  background-image: url('../../../icons/down_arrow.svg');
+  background-image: url('/icons/down_arrow.svg');
   display: block;
   width: 22px;
   height: 22px;
@@ -15658,7 +15658,7 @@
   right: 20px;
 }
 #external-markup .nbd-cmb-container .nbd-cmb-dropdown.show .nbd-down-arrow {
-  background-image: url('../../../icons/up_arrow.svg');
+  background-image: url('/icons/up_arrow.svg');
   margin-top: 5px;
 }
 #external-markup .nbd-cmb-container a.nbd-btn {
@@ -15691,7 +15691,7 @@
   box-shadow: 0px 0px 40px 15px rgba(0, 0, 0, 0.1);
 }
 #external-markup .nbd-cmb-container .nbd-card-img {
-  background-image: url('../../../icons/backgroundshape.svg');
+  background-image: url('/icons/backgroundshape.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80px 82px;
@@ -15749,7 +15749,7 @@
   box-shadow: 0px 25px 20px -15px rgba(0, 0, 0, 0.1);
 }
 #external-markup .nbd-cmb-container .nbd-call-us-card .nbd-call-us-card-img {
-  background-image: url('../../../icons/backgroundshape.svg');
+  background-image: url('/icons/backgroundshape.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 59px 61px;
@@ -16378,7 +16378,7 @@
   content: none;
 }
 #external-markup .nbd-down-arrow {
-  background-image: url('../../../icons/down_arrow.svg');
+  background-image: url('/icons/down_arrow.svg');
   display: block;
   width: 22px;
   height: 22px;
@@ -16387,7 +16387,7 @@
   right: 20px;
 }
 #external-markup .nbd-contact-us-dropdown.show .nbd-down-arrow {
-  background-image: url('../../../icons/up_arrow.svg');
+  background-image: url('/icons/up_arrow.svg');
   margin-top: 5px;
 }
 #external-markup .nbd-contact-us-dropdown .btn span {
@@ -16477,7 +16477,7 @@
   margin-right: 12px;
 }
 #external-markup .nbd-card-img {
-  background-image: url('../../../icons/path_5.svg');
+  background-image: url('/icons/path_5.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80px 82px;
@@ -16551,14 +16551,14 @@
 }
 #external-markup .nbd-icon-arrow {
   display: block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   height: 17px;
   width: 24px;
 }
 #external-markup .nbd-card-Link a:hover .nbd-icon-arrow {
   margin-left: 20px;
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-contact-card:after {
   content: "";
@@ -16600,7 +16600,7 @@
   box-shadow: 0px 0px 40px 15px rgba(0, 0, 0, 0.1);
 }
 #external-markup .nbd-call-us-card .nbd-call-us-card-img {
-  background-image: url('../../../icons/path_5.svg');
+  background-image: url('/icons/path_5.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 59px 61px;
@@ -16768,7 +16768,7 @@
     box-shadow: 0px 0px 40px 15px rgba(0, 0, 0, 0.1);
   }
   #external-markup .nbd-call-us-card .nbd-call-us-card-img {
-    background-image: url('../../../icons/path_5.svg');
+    background-image: url('/icons/path_5.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 47px 48px;
@@ -17058,11 +17058,11 @@
   visibility: hidden;
 }
 #external-markup .nbd-contact-container .article-bg-charcoal .nbd-card-Link a .nbd-icon-arrow {
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
   display: none !important;
 }
 #external-markup .nbd-contact-container .article-bg-charcoal .nbd-card-Link a:hover .nbd-icon-arrow {
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
 }
 #external-markup .nbd-contact-container .nbd-contact-card {
   box-sizing: border-box;
@@ -17078,7 +17078,7 @@
   text-align: center;
 }
 #external-markup .nbd-contact-container .nbd-contact-card .nbd-card-img {
-  background-image: url('../../../icons/backgroundshape.svg');
+  background-image: url('/icons/backgroundshape.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 48px 47px;
@@ -17157,7 +17157,7 @@
 }
 #external-markup .nbd-contact-container .nbd-contact-card .nbd-card-Link a .nbd-icon-arrow {
   display: block;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
   height: 13px;
   width: 24px;
 }
@@ -17165,7 +17165,7 @@
   margin-left: 20px;
   width: 34px;
   height: 14px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-contact-container .nbd-contact-card .nbd-card-Link.card-footer {
   border-radius: 0px;
@@ -17336,14 +17336,14 @@
   height: 23px;
   width: 22px;
   display: inline-block;
-  background: url('../../../icons/cross_hairs.svg');
+  background: url('/icons/cross_hairs.svg');
   margin: 0px 9px 0px 0px;
   position: relative;
   top: 4px;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-locator-search .search-grp::before {
   content: "";
-  background-image: url('../../../icons/search_small.svg');
+  background-image: url('/icons/search_small.svg');
   width: 24px;
   height: 24px;
   display: inline-block;
@@ -17352,7 +17352,7 @@
   margin: 16px 8px 16px 16px;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-locator-search .search-grp .nbd-clear-search {
-  background-image: url('../../../icons/close_small.svg');
+  background-image: url('/icons/close_small.svg');
   width: 24px;
   height: 24px;
   display: inline-block;
@@ -17440,7 +17440,7 @@
   cursor: pointer;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-search-result .nbd-search-result-item .nbd-search-heading .nbd-half-right-arrow-icon {
-  background-image: url('../../../icons/arrow_right.svg');
+  background-image: url('/icons/arrow_right.svg');
   width: 24px;
   height: 24px;
   display: flex;
@@ -17580,7 +17580,7 @@
   height: 56px;
   width: 56px;
   display: inline-block;
-  background: url('../../../icons/back-to.svg');
+  background: url('/icons/back-to.svg');
   margin: 0px 0px 24px -18px;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info h3 {
@@ -17632,19 +17632,19 @@
   height: 24px;
   width: 24px;
   display: inline-block;
-  background: url('../../../icons/branch-icon.svg');
+  background: url('/icons/branch-icon.svg');
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .icon .nbd-branch-contact-icon {
-  background: url('../../../icons/branch-contact-icon.svg');
+  background: url('/icons/branch-contact-icon.svg');
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .icon .nbd-branch-time-icon {
-  background: url('../../../icons/branch-weekdays-icon.svg');
+  background: url('/icons/branch-weekdays-icon.svg');
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .icon .nbd-branch-service-time-icon {
   height: 23px;
   width: 22px;
   display: inline-block;
-  background: url('../../../icons/branch-service-time-icon.png');
+  background: url('/icons/branch-service-time-icon.png');
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info {
   color: #17252e;
@@ -17718,7 +17718,7 @@
   height: 23px;
   width: 22px;
   display: inline-block;
-  background: url('../../../icons/refresh-icon.svg');
+  background: url('/icons/refresh-icon.svg');
   top: 5px;
   position: relative;
 }
@@ -17774,14 +17774,14 @@
   height: 23px;
   width: 22px;
   display: inline-block;
-  background: url('../../../icons/refresh-icon.svg');
+  background: url('/icons/refresh-icon.svg');
   top: 5px;
   position: relative;
   margin-left: 21px;
 }
 #external-markup .nbd-branch-locator .nbd-left-arrow {
   display: inline-block;
-  background-image: url('../../../icons/back_white_Arrow.svg');
+  background-image: url('/icons/back_white_Arrow.svg');
   height: 13px;
   width: 22px;
   top: -45px;
@@ -17792,7 +17792,7 @@
   height: 23px;
   width: 22px;
   display: inline-block;
-  background: url('../../../icons/get_directions.svg');
+  background: url('/icons/get_directions.svg');
   vertical-align: bottom;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-map {
@@ -18170,7 +18170,7 @@
   display: block;
 }
 #external-markup .nbd-account-filter-bg .nbd-form-group .nbd-question-tooltip-icon {
-  background-image: url('../../../icons/tooltipon.svg');
+  background-image: url('/icons/tooltipon.svg');
 }
 #external-markup .nbd-account-filter-bg .nbd-form-group .radio-wrapper {
   position: relative;
@@ -18260,10 +18260,10 @@
   background-repeat: no-repeat;
 }
 #external-markup .nbd-account-filter-bg .nbd-card-fee-details .nbd-question-tooltip-icon {
-  background-image: url('../../../icons/tooltipon.svg');
+  background-image: url('/icons/tooltipon.svg');
 }
 #external-markup .nbd-account-filter-bg .nbd-card-info .nbd-question-tooltip-icon {
-  background-image: url('../../../icons/icon-info.svg');
+  background-image: url('/icons/icon-info.svg');
 }
 @media only screen and (min-width: 576px) {
   #external-markup .nbd-account-filter-bg .nbd-account-filter-header .nbd-account-filter-heading {
@@ -18420,7 +18420,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/button/right-arrow-green.svg');
+  background-image: url('/icons/button/right-arrow-green.svg');
   transition: transform 900ms;
 }
 @media only screen and (min-width: 576px) {
@@ -18556,23 +18556,23 @@
   background-color: none !important;
 }
 #external-markup .nbd-filter-plus {
-  background-image: url('../../../icons/thin-0151_plus_final.svg');
+  background-image: url('/icons/thin-0151_plus_final.svg');
 }
 #external-markup .nbd-filter-plus:hover {
-  background-image: url('../../../icons/filter-plus-active.svg');
+  background-image: url('/icons/filter-plus-active.svg');
 }
 #external-markup .nbd-filter-minus {
-  background-image: url('../../../icons/thin-0151_minus_final.svg');
+  background-image: url('/icons/thin-0151_minus_final.svg');
 }
 #external-markup .nbd-filter-minus:hover {
-  background-image: url('../../../icons/filter-minus-active.svg');
+  background-image: url('/icons/filter-minus-active.svg');
 }
 @-moz-document url-prefix() {
   #external-markup .nbd-filter-plus {
-    background-image: url('../../../icons/filter-plus-non-active.svg');
+    background-image: url('/icons/filter-plus-non-active.svg');
   }
   #external-markup .nbd-filter-minus {
-    background-image: url('../../../icons/filter-minus-non-active.svg');
+    background-image: url('/icons/filter-minus-non-active.svg');
   }
 }
 @media only screen and (min-width: 576px) {
@@ -18591,10 +18591,10 @@
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
   #external-markup .nbd-filter-plus {
-    background-image: url('../../../icons/thin-plus.svg');
+    background-image: url('/icons/thin-plus.svg');
   }
   #external-markup .nbd-filter-minus {
-    background-image: url('../../../icons/thin-minus.svg');
+    background-image: url('/icons/thin-minus.svg');
   }
 }
 #external-markup .filter-background-class {
@@ -18683,23 +18683,23 @@
   background-color: none !important;
 }
 #external-markup .nbd-filter-plus {
-  background-image: url('../../../icons/thin-0151_plus_final.svg');
+  background-image: url('/icons/thin-0151_plus_final.svg');
 }
 #external-markup .nbd-filter-plus:hover {
-  background-image: url('../../../icons/filter-plus-active.svg');
+  background-image: url('/icons/filter-plus-active.svg');
 }
 #external-markup .nbd-filter-minus {
-  background-image: url('../../../icons/thin-0151_minus_final.svg');
+  background-image: url('/icons/thin-0151_minus_final.svg');
 }
 #external-markup .nbd-filter-minus:hover {
-  background-image: url('../../../icons/filter-minus-active.svg');
+  background-image: url('/icons/filter-minus-active.svg');
 }
 @-moz-document url-prefix() {
   #external-markup .nbd-filter-plus {
-    background-image: url('../../../icons/filter-plus-non-active.svg');
+    background-image: url('/icons/filter-plus-non-active.svg');
   }
   #external-markup .nbd-filter-minus {
-    background-image: url('../../../icons/filter-minus-non-active.svg');
+    background-image: url('/icons/filter-minus-non-active.svg');
   }
 }
 @media only screen and (min-width: 576px) {
@@ -18718,10 +18718,10 @@
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
   #external-markup .nbd-filter-plus {
-    background-image: url('../../../icons/thin-plus.svg');
+    background-image: url('/icons/thin-plus.svg');
   }
   #external-markup .nbd-filter-minus {
-    background-image: url('../../../icons/thin-minus.svg');
+    background-image: url('/icons/thin-minus.svg');
   }
 }
 #external-markup .nbd-wiz-full-bg {
@@ -18911,7 +18911,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/button/right-arrow-green.svg');
+  background-image: url('/icons/button/right-arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-wiz-content .nbd-wiz-active-card {
@@ -19390,7 +19390,7 @@
 #external-markup .eligibility .icon-wrapper {
   padding: 11px 12px;
   margin-bottom: 16px;
-  background-image: url('../../../icons/backgroundshape.svg');
+  background-image: url('/icons/backgroundshape.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 48px 47px;
@@ -19465,13 +19465,13 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
   transition: transform 900ms;
 }
 #external-markup .eligibility .card-link:hover .ar-icon-arrow {
   transform: translateX(8px);
   width: 34px;
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
 }
 #external-markup .eligibility .card-link {
   color: #ffffff;
@@ -20048,12 +20048,12 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-money-app-content a:hover .nbd-icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-money-app-content .nbd-app-stores-icon {
@@ -20070,13 +20070,13 @@
   background-repeat: no-repeat, repeat;
 }
 #external-markup .nbd-money-app-content .nbd-app-stores-icon .nbd-app-gallery {
-  background-image: url('../../../icons/app-gallery-mob.svg');
+  background-image: url('/icons/app-gallery-mob.svg');
 }
 #external-markup .nbd-money-app-content .nbd-app-stores-icon .nbd-apple {
-  background-image: url('../../../icons/app-store-sm.svg');
+  background-image: url('/icons/app-store-sm.svg');
 }
 #external-markup .nbd-money-app-content .nbd-app-stores-icon .nbd-android {
-  background-image: url('../../../icons/play-store-sm.svg');
+  background-image: url('/icons/play-store-sm.svg');
 }
 #external-markup .nbd-money-app-content .nbd-moneyappQr {
   display: none;
@@ -20156,13 +20156,13 @@
     margin-right: 3px;
   }
   #external-markup .nbd-money-app-content .nbd-app-stores-icon .nbd-app-gallery {
-    background-image: url('../../../icons/app-gallery.svg');
+    background-image: url('/icons/app-gallery.svg');
   }
   #external-markup .nbd-money-app-content .nbd-app-stores-icon .nbd-apple {
-    background-image: url('../../../icons/app-store.svg');
+    background-image: url('/icons/app-store.svg');
   }
   #external-markup .nbd-money-app-content .nbd-app-stores-icon .nbd-android {
-    background-image: url('../../../icons/play-store.svg');
+    background-image: url('/icons/play-store.svg');
   }
   #external-markup .nbd-money-app-content .nbd-moneyappQr {
     display: flex;
@@ -20816,7 +20816,7 @@
   color: #494f50;
 }
 #external-markup .nbd-save-and-invest-filter .nbd-form-group .nbd-question-tooltip-icon {
-  background-image: url('../../../icons/tooltipon.svg');
+  background-image: url('/icons/tooltipon.svg');
 }
 #external-markup .nbd-save-and-invest-filter .tooltip {
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -20856,10 +20856,10 @@
   background-repeat: no-repeat;
 }
 #external-markup .nbd-save-and-invest-filter .nbd-card-fee-details .nbd-question-tooltip-icon {
-  background-image: url('../../../icons/tooltipon.svg');
+  background-image: url('/icons/tooltipon.svg');
 }
 #external-markup .nbd-save-and-invest-filter .nbd-card-info .nbd-question-tooltip-icon {
-  background-image: url('../../../icons/icon-info.svg');
+  background-image: url('/icons/icon-info.svg');
 }
 #external-markup .nbd-save-and-invest-filter .nbd-account-filter-form {
   margin-bottom: 48px;
@@ -21321,7 +21321,7 @@
 }
 #external-markup .nbd-comparison-table-wapper .nbd-tooltip-icon,
 #external-markup .save-invest-calc-wrapper .nbd-tooltip-icon {
-  background-image: url('../../../icons/tooltipon.svg');
+  background-image: url('/icons/tooltipon.svg');
 }
 #external-markup .nbd-comparison-table-wapper .backgroundcolor-2,
 #external-markup .save-invest-calc-wrapper .backgroundcolor-2 {
@@ -21687,7 +21687,7 @@
   content: none;
 }
 #external-markup .save-invest-calc-wrapper .nbd-down-arrow {
-  background-image: url('../../../icons/down_arrow.svg');
+  background-image: url('/icons/down_arrow.svg');
   display: block;
   width: 22px;
   height: 22px;
@@ -21702,13 +21702,13 @@
   margin-top: 0px;
 }
 #external-markup .save-invest-calc-wrapper .card-header a:not(.collapsed) .nbd-accordian-down-arrow {
-  background-image: url('../../../icons/up_arrowgreen.svg');
+  background-image: url('/icons/up_arrowgreen.svg');
 }
 #external-markup .save-invest-calc-wrapper .card-header a.collapsed .nbd-accordian-down-arrow {
-  background-image: url('../../../icons/down_arrow_green.svg');
+  background-image: url('/icons/down_arrow_green.svg');
 }
 #external-markup .save-invest-calc-wrapper .nbd-saveinvesthelpmechoose-dropdown.show .nbd-down-arrow {
-  background-image: url('../../../icons/up_arrow.svg');
+  background-image: url('/icons/up_arrow.svg');
   margin-top: 5px;
 }
 #external-markup .save-invest-calc-wrapper .nbd-saveinvesthelpmechoose-dropdown .btn span {
@@ -22523,14 +22523,14 @@
 }
 #external-markup .nbd-affordability-container .down-arrow {
   display: inline-block;
-  background-image: url('../../../icons/up_arrow_cr.svg');
+  background-image: url('/icons/up_arrow_cr.svg');
   background-repeat: no-repeat;
   height: 21px;
   width: 25px;
   float: right;
 }
 #external-markup .nbd-affordability-container .collapsed .down-arrow {
-  background-image: url('../../../icons/down_arrow_cr.svg');
+  background-image: url('/icons/down_arrow_cr.svg');
 }
 #external-markup .nbd-affordability-container .change-rate-wrapper {
   padding: 0;
@@ -23458,13 +23458,13 @@
   padding: 14px 10px;
   border: 2px solid #bbbbbb;
   cursor: pointer;
-  background-image: url('../../../icons/down_arrow.svg');
+  background-image: url('/icons/down_arrow.svg');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 25px 25px;
 }
 #external-markup .customdropdown .custom-dropdown .select-selected.select-arrow-active {
-  background-image: url('../../../icons/up_arrow.svg');
+  background-image: url('/icons/up_arrow.svg');
   background-position: right 10px top 15px;
   border: 2px solid #008533 !important;
 }
@@ -23609,13 +23609,13 @@
   padding: 14px 10px;
   border: 2px solid #bbb;
   cursor: pointer;
-  background-image: url('../../../icons/down_arrow.svg');
+  background-image: url('/icons/down_arrow.svg');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 25px 25px;
 }
 #external-markup .nbd-generic-form .formcontainer .select-selected.select-arrow-active {
-  background-image: url('../../../icons/up_arrow.svg');
+  background-image: url('/icons/up_arrow.svg');
   background-position: right 10px top 15px;
   border: 2px solid #008533 !important;
 }
@@ -23811,7 +23811,7 @@
   background-color: #fafafa;
 }
 #external-markup .formv2container .ndb-spinner .spinner {
-  background-image: url('../../../icons/spinner.svg');
+  background-image: url('/icons/spinner.svg');
   background-repeat: no-repeat;
   background-position: right;
   background-size: 35px;
@@ -25140,7 +25140,7 @@
   height: 40px;
   margin-top: 10px;
   display: inline-block;
-  background-image: url('../../../icons/button/pdf-icon.svg');
+  background-image: url('/icons/button/pdf-icon.svg');
 }
 #external-markup .list-container .nb-row .list-left .list-left-part2 {
   padding-left: 16px;
@@ -25200,7 +25200,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/button/diagonal-arrow-green.svg');
+  background-image: url('/icons/button/diagonal-arrow-green.svg');
   transition: transform 900ms;
 }
 @media only screen and (min-width: 576px) {
@@ -25465,20 +25465,20 @@
   width: 24px;
   outline: none;
   transition: transform 900ms;
-  background-image: url('../../../icons/arrow.svg');
+  background-image: url('/icons/arrow.svg');
 }
 #external-markup .nbd-legal-links-content ul li:hover .nbd-arrow-broad {
   transform: translateX(8px);
   margin-right: 0px;
   width: 34px;
-  background-image: url('../../../icons/arrow-hover.svg');
+  background-image: url('/icons/arrow-hover.svg');
 }
 #external-markup .nbd-legal-links-content .back-arrow {
   display: block;
   height: 13px;
   width: 22px;
   margin: 5px 10px 0px 0px;
-  background-image: url('../../../icons/back-arrow.svg');
+  background-image: url('/icons/back-arrow.svg');
 }
 #external-markup .nbd-legal-links-content .back-link {
   margin: 0px 0px 16.5px 0px;
@@ -25486,7 +25486,7 @@
 #external-markup .nbd-legal-links-content .back-link .back:hover .back-arrow {
   margin: 5px 8px 0px -10px;
   width: 34px;
-  background-image: url('../../../icons/Lefthoverarrow.svg');
+  background-image: url('/icons/Lefthoverarrow.svg');
 }
 #external-markup .nbd-legal-links-content .back {
   color: #008533;
@@ -25758,7 +25758,7 @@
   }
 }
 #external-markup .nbd-show-more-icon {
-  background-image: url('../../../icons/plus_add_new_green.svg');
+  background-image: url('/icons/plus_add_new_green.svg');
   background-size: 32px 32px;
   display: block;
   height: 32px;
@@ -25951,11 +25951,11 @@
   border-radius: 0px;
 }
 #external-markup .leftnav-container .nbd-cmb-dropdown.show .nbd-down-arrow {
-  background-image: url('../../../icons/up_arrow.svg');
+  background-image: url('/icons/up_arrow.svg');
   margin-top: 5px;
 }
 #external-markup .leftnav-container .nbd-down-arrow {
-  background-image: url('../../../icons/down_arrow.svg');
+  background-image: url('/icons/down_arrow.svg');
   display: block;
   width: 22px;
   height: 22px;
@@ -26030,7 +26030,7 @@
   margin: 0 -22px;
 }
 #external-markup .leftnav-container .nbd-cmb-dropdown.show .nbd-down-arrow {
-  background-image: url('../../../icons/up_arrow.svg');
+  background-image: url('/icons/up_arrow.svg');
   margin-top: 5px;
 }
 #external-markup .leftnav-container .nbd-cmb-dropdown .dropdown-menu.show {
@@ -26636,14 +26636,14 @@
 }
 #external-markup .repayment-container .down-arrow {
   display: inline-block;
-  background-image: url('../../../icons/up_arrow_cr.svg');
+  background-image: url('/icons/up_arrow_cr.svg');
   background-repeat: no-repeat;
   height: 21px;
   width: 25px;
   float: right;
 }
 #external-markup .repayment-container .collapsed .down-arrow {
-  background-image: url('../../../icons/down_arrow_cr.svg');
+  background-image: url('/icons/down_arrow_cr.svg');
 }
 #external-markup .repayment-container .change-rate-wrapper {
   padding: 0;
@@ -27240,10 +27240,10 @@
   border: none !important;
 }
 #external-markup .nbd-tft-mobile-view .nbd-tft-card-header .nbd-tft-down-arrow {
-  content: url('../../../icons/arrow-down-grey.svg');
+  content: url('/icons/arrow-down-grey.svg');
 }
 #external-markup .nbd-tft-mobile-view .nbd-tft-card-header .nbd-tft-up-arrow {
-  content: url('../../../icons/arrow-up-grey.svg');
+  content: url('/icons/arrow-up-grey.svg');
 }
 @media only screen and (min-width: 768px) {
   #external-markup .nbd-tft-mobile-view .nbd-tft-margin {
@@ -27986,7 +27986,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-credit-card-banner-content a:hover .nbd-icon-arrow,
@@ -28305,14 +28305,14 @@
   width: 24px;
   margin: 0px 16px 22px 0px;
   display: inline-block;
-  background-image: url('../../../icons/tick_icon.svg');
+  background-image: url('/icons/tick_icon.svg');
 }
 #external-markup .nbd-saveinvest-sub-benifits .nbd-icon-tick-green {
   height: 24px;
   width: 24px;
   margin: 0px 16px 22px 0px;
   display: inline-block;
-  background-image: url('../../../icons/tick_icon.svg');
+  background-image: url('/icons/tick_icon.svg');
 }
 #external-markup .nbd-saveinvest-benifits .nbd-card-benefit-info p {
   max-width: none;
@@ -28371,12 +28371,12 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-terms-and-cond-link a:hover .nbd-icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-green-hover.svg');
+  background-image: url('/icons/arrow-green-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-card-category {
@@ -28725,14 +28725,14 @@
 }
 #external-markup .consolidated-container .down-arrow {
   display: inline-block;
-  background-image: url('../../../icons/up_arrow_cr.svg');
+  background-image: url('/icons/up_arrow_cr.svg');
   background-repeat: no-repeat;
   height: 21px;
   width: 25px;
   float: right;
 }
 #external-markup .consolidated-container .collapsed .down-arrow {
-  background-image: url('../../../icons/down_arrow_cr.svg');
+  background-image: url('/icons/down_arrow_cr.svg');
 }
 #external-markup .consolidated-container .change-rate-wrapper {
   padding: 0;
@@ -29094,7 +29094,7 @@
   display: none;
 }
 #external-markup .consolidated-container .nbd-col-dropdown .nbd-down-arrow {
-  background-image: url('../../../icons/arrow-down-grey.svg');
+  background-image: url('/icons/arrow-down-grey.svg');
   display: block;
   width: 24px;
   height: 24px;
@@ -29104,7 +29104,7 @@
   margin-top: -3px;
 }
 #external-markup .consolidated-container .nbd-col-dropdown.show .nbd-down-arrow {
-  background-image: url('../../../icons/arrow-up-grey.svg');
+  background-image: url('/icons/arrow-up-grey.svg');
   margin-top: 4px;
 }
 #external-markup .consolidated-container .nbd-col-dropdown .btn span {
@@ -29723,7 +29723,7 @@
   }
 }
 #external-markup .nbd-ccf-row-container .nbd-ccf-footer .nbd-icon-arrow {
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   height: 14px;
   width: 24px;
   transition: transform 900ms;
@@ -29732,7 +29732,7 @@
   vertical-align: middle;
 }
 #external-markup .nbd-ccf-row-container .nbd-ccf-footer .nbd-ccf-find-more:hover .nbd-icon-arrow {
-  background-image: url('../../../icons/arrow-green-hover.svg');
+  background-image: url('/icons/arrow-green-hover.svg');
   width: 34px;
   transform: translateX(10px);
   display: inline-block;
@@ -29964,14 +29964,14 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-white.svg');
+  background-image: url('/icons/arrow-white.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-stp-container .nbd-stp-scantopay .nbd-stp-link a:hover .icon-arrow {
   margin-left: 20px;
   width: 34px;
   height: 14px;
-  background-image: url('../../../icons/Whitehoverarrow.svg');
+  background-image: url('/icons/Whitehoverarrow.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-stp-container .nbd-stp-new-sub-description {
@@ -30268,7 +30268,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-credit-card-banner-content a:hover .nbd-icon-arrow,
@@ -30578,7 +30578,7 @@
   width: 24px;
   margin: 0px 16px 22px 0px;
   display: inline-block;
-  background-image: url('../../../icons/tick_icon.svg');
+  background-image: url('/icons/tick_icon.svg');
 }
 #external-markup .nbd-saveinvest-benifits .nbd-saveinvest-sub-benifits {
   display: flex;
@@ -30588,7 +30588,7 @@
   width: 24px;
   margin: 0px 16px 22px 0px;
   display: inline-block;
-  background-image: url('../../../icons/tick_icon.svg');
+  background-image: url('/icons/tick_icon.svg');
 }
 #external-markup .nbd-saveinvest-benifits .nbd-card-benefit-info p {
   max-width: none;
@@ -30644,7 +30644,7 @@
 }
 #external-markup .nbd-terms-and-cond-link a:hover .nbd-icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-green-hover.svg');
+  background-image: url('/icons/arrow-green-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-terms-and-cond-link .nbd-icon-arrow {
@@ -30652,7 +30652,7 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-card-category {
@@ -30847,12 +30847,12 @@
   width: 24px;
   margin-left: 10px;
   display: inline-block;
-  background-image: url('../../../icons/arrow-green.svg');
+  background-image: url('/icons/arrow-green.svg');
   transition: transform 900ms;
 }
 #external-markup .nbd-cc-linkCard a:hover .nbd-icon-arrow {
   width: 34px;
-  background-image: url('../../../icons/arrow-green-hover.svg');
+  background-image: url('/icons/arrow-green-hover.svg');
   transform: translateX(10px);
 }
 #external-markup .nbd-cc-heading {
