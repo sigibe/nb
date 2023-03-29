@@ -3,7 +3,7 @@ import {
 } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const resp = await fetch(`${getRootPath()}/drafts/piyush/login.plain.html`);
+  const resp = await fetch(`${getRootPath()}/login.plain.html`);
   if (resp && resp.status === 200) {
     const txt = await resp.text();
     block.innerHTML = txt;
