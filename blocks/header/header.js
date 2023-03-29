@@ -5,6 +5,7 @@ import {
 import {
   loadNavTools,
   toggleHamburger,
+  toggleSearch,
 } from './nav-utils.js';
 
 /**
@@ -128,6 +129,11 @@ async function delayedNavTools() {
       }
       nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       toggleHamburger();
+    });
+
+    const querySearch = nav.querySelector('.nav-tools-search');
+    querySearch.addEventListener('click', () => {
+      toggleSearch();
     });
   });
 }

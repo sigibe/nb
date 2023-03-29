@@ -36,9 +36,6 @@ footer .footer-link-groups {
   justify-content: center;
   flex-direction: column;
 }
-footer .footer-link-group {
-  margin-bottom: 48px;
-}
 footer .footer-link-group h5 {
   border: 1px solid #e5edec;
   margin: unset;
@@ -109,6 +106,7 @@ footer .icon-nedbank-caps svg {
   }
   footer .footer-links .footer-link-groups .footer-link-group {
     padding-left: 20px;
+    margin-bottom: 48px;
   }
   footer .footer-links .footer-link-groups .footer-link-group h5 {
     border: none;

@@ -18,8 +18,9 @@ main {
 		}
 		p {
 			margin: unset;
+			padding-right: 20px;
 			font-size: 16px;
-			line-height: 24px;
+			line-height: 28px;
 			color: @color_1;
 			font-family: @font_family_1;
 			letter-spacing: 0;
@@ -30,6 +31,7 @@ main {
 				line-height: 24px;
 				color: @color_2;
 				font-family: @font_family_2;
+				margin-left: 0;
 			}
 
 			&>span {
@@ -37,6 +39,16 @@ main {
 					float:right;
 					cursor: pointer;
 				}
+			}
+		}
+	}
+}
+
+@media (@width_576) {
+	main {
+		.banner {
+			p > a {
+				margin-left: 10px;
 			}
 		}
 	}
