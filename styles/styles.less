@@ -499,7 +499,7 @@ main {
 
 		&.back-to-top {
 			margin-top: 32px;
-			padding: 80px 120px 40px 15px;
+			padding: 80px 32px 40px 15px;
 
 			p {
 				margin: 0;
@@ -526,7 +526,7 @@ main {
 
 				:where(h1, h2, h3, p) {
 					color: @color_6;
-					text-align: center;
+					text-align: left;
 				}
 			}
 
@@ -574,16 +574,16 @@ main .home-banner.section {
 
 	h1 {
 		color: #17252e;
-		font-size: 24px;
-		line-height: 28px;
+		font-size: @font-size-h2;
+		line-height: 36px;
 		margin: 0 0 16px 0;
 	}
 
 	p {
 		color: #494f50;
 		font-family: "Open Sans Regular";
-		font-size: 16px;
-		line-height: 24px;
+		font-size: @font-size-large;
+		line-height: @font-lineheight-large;
 		margin: unset;
 	}
 }
@@ -599,6 +599,12 @@ main .home-banner.section {
 
 		>.section {
 			&.switchcard {
+				.default-content-wrapper {
+					:where(h1, h2, h3, p) {
+						text-align: center;
+					}
+				}
+
 				a.button {
 					&:any-link {
 						height: 56px;
@@ -710,6 +716,9 @@ main .home-banner.section {
 				padding: 0;
 			}
 
+			&.back-to-top {
+				padding-right: 120px;
+			}
 
 			&.switchcard {
 				padding: 0;
