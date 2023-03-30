@@ -434,12 +434,13 @@ hr {
   border-bottom: 1px solid var(--overlay-background-color);
 }
 main .home-banner.section {
-  background: #f2f9f5;
   padding: 24px 10px 0 10px;
 }
 main .home-banner.section .default-content-wrapper {
-  background-color: #fff;
+  background-color: #fafafa;
+  box-shadow: 0 26px 40px -12px lightgray;
   padding: 24px;
+  margin-bottom: 40px;
   letter-spacing: 0;
 }
 main .home-banner.section h1 {
