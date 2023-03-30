@@ -362,8 +362,8 @@
   width: 14px;
 }
 #external-markup .right-arrow-btn {
-  background-image: url('../../../icons/button/right-arrow-green.svg');
-  width: 23px;
+  background-image: url('../../icons/arrow.svg');
+  width: 26px;
   height: 14px;
 }
 #external-markup .transfer-arrow-btn {
