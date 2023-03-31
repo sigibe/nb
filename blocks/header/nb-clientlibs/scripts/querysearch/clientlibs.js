@@ -42,11 +42,11 @@ $(document).ready(function () {
                     for (var b = "", f = "", d = 0; d < c.length; d++) {
                         title = CreateMark(c[d].title, a);
                         displayClass = d > l - 1 ? "d-none" : "";
-                        b = b + "\x3cp class\x3d'nbd-qs-dropdowndata " + displayClass + "'\x3e\x3ca href\x3d'" + c[d].path + "' class\x3d'nbd-qs-page-anchor'\x3e" + title + "\x3c/a\x3e\x3c/p\x3e";
-                        var e = "tags" in c[d] ? c[d].tags : "";
+                        b = b + "\x3cp class\x3d'nbd-qs-dropdowndata " + displayClass + "'\x3e\x3ca href\x3d'" + `https://${NEDBANK_HOST}${c[d].path}` + "' class\x3d'nbd-qs-page-anchor'\x3e" + title + "\x3c/a\x3e\x3c/p\x3e";
+                        var e = "tags"in c[d] ? c[d].tags : "";
                         pageDesc = void 0 === c[d].description || " " === c[d].description || "" === c[d].description ? "" : c[d].description;
                         navTitle = void 0 === c[d].navTitle || " " === c[d].navTitle || "" === c[d].navTitle ? c[d].title : c[d].navTitle;
-                        f = "" != e ? f + "\x3cdiv class\x3d'nbd-qs-pagedata nbd-qsfilter' data-qstag\x3d'" + e + "' \x3e\x3ca class\x3d'stretched-link' href\x3d'" + c[d].path + "'\x3e" + title + "\x3c/a\x3e\x3cp\x3e" + pageDesc + "\x3c/p\x3e \x3cspan\x3e" + navTitle + "\x3c/span\x3e\x3c/div\x3e" : f + "\x3cdiv class\x3d'nbd-qs-pagedata nbd-qsfilter' \x3e\x3ca class\x3d'stretched-link' href\x3d'" + c[d].path + "'\x3e" + title + "\x3c/a\x3e\x3cp\x3e" + pageDesc + "\x3c/p\x3e \x3cspan\x3e" + navTitle + "\x3c/span\x3e\x3c/div\x3e"
+                        f = "" != e ? f + "\x3cdiv class\x3d'nbd-qs-pagedata nbd-qsfilter' data-qstag\x3d'" + e + "' \x3e\x3ca class\x3d'stretched-link' href\x3d'" + `https://${NEDBANK_HOST}${c[d].path}` + "'\x3e" + title + "\x3c/a\x3e\x3cp\x3e" + pageDesc + "\x3c/p\x3e \x3cspan\x3e" + navTitle + "\x3c/span\x3e\x3c/div\x3e" : f + "\x3cdiv class\x3d'nbd-qs-pagedata nbd-qsfilter' \x3e\x3ca class\x3d'stretched-link' href\x3d'" + `https://${NEDBANK_HOST}${c[d].path}` + "'\x3e" + title + "\x3c/a\x3e\x3cp\x3e" + pageDesc + "\x3c/p\x3e \x3cspan\x3e" + navTitle + "\x3c/span\x3e\x3c/div\x3e"
                     }
                     $(".nbd-qs-pagination-result").html(f);
                     resultwrap = b + '\x3cdiv class\x3d"nbd-tertiary-outer"\x3e\x3ca class\x3d"nbd-btn-tertiary nbd-qs-btnlinks nbd-qs-seeall"\x3e' + $("#qs_ctatext").val() + '\x3cem class\x3d"tertiary-btn-icon right-arrow-btn"\x3e\x3c/em\x3e\x3c/a\x3e\x3c/div\x3e';

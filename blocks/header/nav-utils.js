@@ -98,6 +98,7 @@ export async function loadNavTools() {
 
     const querySearchModal = doc.querySelector('.querysearch');
     if (querySearchModal) {
+      querySearchModal.classList.add('modal-open');
       externalMarkup.appendChild(querySearchModal);
       document.querySelector('.nbd-qs-close').addEventListener('click', () => {
         document.querySelector('.nav-tools-search').click();
