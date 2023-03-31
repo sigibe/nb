@@ -91,7 +91,7 @@ body .modal.fade {
   height: 0;
 }
 header {
-  height: var(--nav-height);
+  height: 50px;
 }
 h1,
 h2,

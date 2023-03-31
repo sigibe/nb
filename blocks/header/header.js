@@ -20,18 +20,10 @@ function collapseAllNavSections(sections) {
 }
 
 function injectNavTool(tools, name, icon, type) {
-  let tool;
-  if (type === 'primary-nav') {
-    tool = `<a title=${name}>
+  const tool = `<a title=${name}>
     <span>${name}</span>
     <img src='/icons/${icon}.svg'></img>
     </a>`;
-  } else {
-    tool = `<a title=${name}>
-    <span style='display:none'>${name}</span>
-    <img src='/icons/${icon}.svg'></img>
-    </a>`;
-  }
 
   const div = document.createElement('div');
   div.classList.add(`nav-tools-${name.toLowerCase()}`);

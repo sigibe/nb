@@ -1,8 +1,8 @@
 header .nav-hamburger {
   cursor: pointer;
   background: url('/icons/green-hamburger.svg');
-  width: 64px;
-  height: 64px;
+  width: 50px;
+  height: 50px;
 }
 header * > li {
   list-style: none;
@@ -90,7 +90,7 @@ header primary-nav .nav-hamburger {
 header secondary-nav {
   display: flex;
   justify-content: space-between;
-  height: var(--nav-height);
+  height: 50px;
   align-items: center;
   position: fixed;
   z-index: 1;
@@ -107,9 +107,15 @@ header secondary-nav a:any-link {
 header secondary-nav .nav-brand {
   margin-left: 20px;
 }
+header secondary-nav .nav-brand svg {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
 header secondary-nav .nav-sections {
   flex-grow: 1;
   font-size: 14px;
+  display: none;
 }
 header secondary-nav .nav-sections > ul > li.nav-drop {
   position: relative;
@@ -197,10 +203,17 @@ header secondary-nav .nav-sections ul {
 header secondary-nav .nav-tools {
   display: flex;
   font-size: 14px;
+  font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  position: absolute;
+  right: 54px;
   cursor: pointer;
 }
 header secondary-nav .nav-tools img {
   padding: 0 10px;
+}
+header secondary-nav .nav-tools div > a {
+  display: flex;
 }
 header .nav-brand {
   grid-area: brand;
@@ -217,7 +230,12 @@ header .sticky {
   header primary-nav {
     display: flex;
   }
+  header primary-nav .nav-hamburger {
+    width: 64px;
+    height: 64px;
+  }
   header secondary-nav {
+    height: var(--nav-height);
     padding-left: 160px;
     padding-right: 50px;
     display: flex;
@@ -230,6 +248,7 @@ header .sticky {
   header secondary-nav .nav-tools {
     display: none;
     flex-grow: 1;
+    padding-right: 28px;
   }
   header secondary-nav .nav-tools.display-none {
     display: none;
@@ -238,11 +257,18 @@ header .sticky {
     display: flex;
     justify-content: space-evenly;
   }
+  header secondary-nav .nav-tools.display-flex a {
+    padding-left: 20px;
+  }
+  header secondary-nav .nav-tools.display-flex span {
+    display: none;
+  }
   header secondary-nav .nav-tools img {
     padding: unset;
   }
   header secondary-nav .nav-sections {
     flex-basis: 80%;
+    display: flex;
   }
   header secondary-nav .nav-sections > ul {
     padding-inline-start: unset;
