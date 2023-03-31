@@ -19,7 +19,7 @@ function collapseAllNavSections(sections) {
   });
 }
 
-function injectNavTool(tools, name, icon, type) {
+function injectNavTool(tools, name, icon) {
   const tool = `<a title=${name}>
     <span>${name}</span>
     <img src='/icons/${icon}.svg'></img>
