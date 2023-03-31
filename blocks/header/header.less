@@ -6,6 +6,11 @@ header {
 		background: url('/icons/green-hamburger.svg');
 		width: 64px;
 		height: 64px;
+		display: none;
+
+		&.appear {
+			display: block;
+		}
 	}
 
 	*>li {
@@ -101,12 +106,26 @@ header {
 					color: @dotcoza-color-greens-default;
 				}
 			}
+
+			.nav-tools-search {
+				display: none;
+
+				&.appear {
+					display: flex;
+				}
+			}
+
 		}
 
 		.nav-hamburger {
 			position: fixed;
 			z-index: 99;
 			right: 0;
+			display: none;
+
+			&.appear {
+				display: block;
+			}
 		}
 	}
 
@@ -249,6 +268,14 @@ header {
 			img {
 				padding: 0 10px;
 			}
+
+			.nav-tools-search {
+				display: none;
+
+				&.appear {
+					display: flex;
+				}
+			}
 		}
 
 	}
@@ -269,6 +296,12 @@ header {
 
 @media (@width_1025) {
 	header {
+		.nav-hamburger {
+			&.appear {
+				display: none;
+			}
+		}
+
 		primary-nav {
 			display: flex;
 		}
