@@ -199,6 +199,9 @@ header secondary-nav .nav-tools {
   font-size: 14px;
   cursor: pointer;
 }
+header secondary-nav .nav-tools .nav-tools-login {
+  margin-right: 10px;
+}
 header secondary-nav .nav-tools img {
   padding: 0 10px;
 }
@@ -217,6 +220,29 @@ header .sticky {
   header primary-nav {
     display: flex;
   }
+  header primary-nav .nav-tools img {
+    transition: top 0.5s ease 0s;
+    top: 0;
+    position: relative;
+  }
+  header primary-nav .nav-tools.visible {
+    top: 0;
+    left: calc(100% - 160px);
+    right: 82px;
+    z-index: 100;
+    position: fixed;
+    justify-content: space-evenly;
+  }
+  header primary-nav .nav-tools.visible > div {
+    margin-right: 31px;
+  }
+  header primary-nav .nav-tools.visible img {
+    top: 16px;
+    margin-top: 6px;
+  }
+  header primary-nav .nav-tools.visible span {
+    display: none;
+  }
   header secondary-nav {
     padding-left: 160px;
     padding-right: 50px;
@@ -229,17 +255,6 @@ header .sticky {
   }
   header secondary-nav .nav-tools {
     display: none;
-    flex-grow: 1;
-  }
-  header secondary-nav .nav-tools.display-none {
-    display: none;
-  }
-  header secondary-nav .nav-tools.display-flex {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  header secondary-nav .nav-tools img {
-    padding: unset;
   }
   header secondary-nav .nav-sections {
     flex-basis: 80%;

@@ -170,20 +170,23 @@ export default async function decorate(block) {
     if (window.screen.width >= 1025) {
       const element = document.querySelector('secondary-nav');
       if (element) {
-        const section = document.querySelector('secondary-nav .nav-tools');
+        const section = document.querySelector('primary-nav .nav-tools');
 
         if (document.documentElement.scrollTop >= element.offsetHeight) {
           element.classList.add('sticky');
+          section.classList.add('visible');
           section.classList.add('display-flex');
           section.classList.remove('display-none');
         } else {
           element.classList.remove('sticky');
           section.classList.remove('display-flex');
+          section.classList.remove('visible');
           section.classList.add('display-none');
         }
       }
     }
   });
+
   block.append(navDiv);
 
   // Delayed load to reduct TBT impact
