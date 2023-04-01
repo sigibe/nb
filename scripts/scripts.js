@@ -304,42 +304,73 @@ export function readBlockConfig(block) {
 }
 
 /**
+ * Decorates Section in a Container Element.
+ * @param {Element} $section The container element
+ */
+export function decorateSection(section) {
+  const wrappers = [];
+  let defaultContent = false;
+  [...section.children].forEach((e) => {
+    if (e.tagName === 'DIV' || !defaultContent) {
+      const wrapper = document.createElement('div');
+      wrappers.push(wrapper);
+      defaultContent = e.tagName !== 'DIV';
+      if (defaultContent) wrapper.classList.add('default-content-wrapper');
+    }
+    wrappers[wrappers.length - 1].append(e);
+  });
+  wrappers.forEach((wrapper) => section.append(wrapper));
+  section.classList.add('section');
+  section.setAttribute('data-section-status', 'initialized');
+
+  /* process section metadata */
+  const sectionMeta = section.querySelector('div.section-metadata');
+
+  if (sectionMeta) {
+    const meta = readBlockConfig(sectionMeta);
+    const keys = Object.keys(meta);
+    keys.forEach((key) => {
+      if (key === 'style') {
+        const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
+        styles.forEach((style) => section.classList.add(style));
+      } else section.dataset[key] = meta[key];
+    });
+
+    sectionMeta.parentNode.remove();
+  }
+}
+
+/**
  * Decorates all sections in a container element.
  * @param {Element} $main The container element
  */
 export function decorateSections($main) {
   $main.querySelectorAll(':scope > div').forEach((section) => {
-    const wrappers = [];
-    let defaultContent = false;
-    [...section.children].forEach((e) => {
-      if (e.tagName === 'DIV' || !defaultContent) {
-        const wrapper = document.createElement('div');
-        wrappers.push(wrapper);
-        defaultContent = e.tagName !== 'DIV';
-        if (defaultContent) wrapper.classList.add('default-content-wrapper');
-      }
-      wrappers[wrappers.length - 1].append(e);
-    });
-    wrappers.forEach((wrapper) => section.append(wrapper));
-    section.classList.add('section');
-    section.setAttribute('data-section-status', 'initialized');
-
-    /* process section metadata */
-    const sectionMeta = section.querySelector('div.section-metadata');
-
-    if (sectionMeta) {
-      const meta = readBlockConfig(sectionMeta);
-      const keys = Object.keys(meta);
-      keys.forEach((key) => {
-        if (key === 'style') {
-          const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
-          styles.forEach((style) => section.classList.add(style));
-        } else section.dataset[key] = meta[key];
-      });
-
-      sectionMeta.parentNode.remove();
-    }
+    decorateSection(section);
   });
+}
+
+/**
+ * Updates Section Status in a Container Element.
+ * @param {Element} section The container element
+ */
+export function updateSectionStatus(section) {
+  const status = section.getAttribute('data-section-status');
+
+  if (status !== 'loaded') {
+    const loadingBlock = section.querySelector('.block[data-block-status="initialized"], .block[data-block-status="loading"]');
+    let newStatus = 'loading';
+    if (loadingBlock) {
+      section.setAttribute('data-section-status', newStatus);
+    } else {
+      newStatus = 'loaded';
+      section.setAttribute('data-section-status', newStatus);
+    }
+
+    return newStatus;
+  }
+
+  return null;
 }
 
 /**
@@ -350,15 +381,9 @@ export function updateSectionsStatus(main) {
   const sections = [...main.querySelectorAll(':scope > div.section')];
   for (let i = 0; i < sections.length; i += 1) {
     const section = sections[i];
-    const status = section.getAttribute('data-section-status');
-    if (status !== 'loaded') {
-      const loadingBlock = section.querySelector('.block[data-block-status="initialized"], .block[data-block-status="loading"]');
-      if (loadingBlock) {
-        section.setAttribute('data-section-status', 'loading');
-        break;
-      } else {
-        section.setAttribute('data-section-status', 'loaded');
-      }
+    const newStatus = updateSectionStatus(section);
+    if (newStatus && newStatus === 'loading') {
+      break;
     }
   }
 }
@@ -826,34 +851,38 @@ function buildLoginBlock(main) {
   decorateBlock(loginBlock);
 }
 
-function buildBannerBlock(main) {
-  const placeholder = document.createElement('div');
-  placeholder.classList.add('banner-placeholder');
+/**
+ * Build Banner Block
+ * @param {*} main
+ */
+async function buildBannerBlock(main) {
   if (!getCookieValue('oldSitePopUpCookies')) {
-    placeholder.classList.add('appear');
-  }
-  main.prepend(placeholder);
-  fetch(`${window.hlx.codeBasePath}${getRootPath()}/banner.plain.html`).then((resp) => {
-    if (resp.status === 200) {
+    const placeholder = document.createElement('div');
+    placeholder.classList.add('banner-placeholder');
+    main.prepend(placeholder);
+    decorateSection(placeholder);
+    const resp = await fetch(`${window.hlx.codeBasePath}${getRootPath()}/banner.plain.html`);
+
+    if (resp && resp.status === 200) {
       const section = main.querySelector('.banner-placeholder.section');
-      resp.text().then(async (txt) => {
-        let bannerDiv = document.createElement('div');
-        bannerDiv.innerHTML = txt;
-        bannerDiv = bannerDiv.querySelector('div');
-        const content = [];
-        [...bannerDiv.children].forEach((item) => {
-          content.push([item]);
-        });
-        const block = buildBlock('banner', content);
-        block.style.display = 'none';
-        section.append(block);
-        decorateBlock(block);
-        await loadBlock(block);
-        block.style.display = 'flex';
-        decorateIcons(block);
+      const txt = await resp.text();
+
+      let bannerDiv = document.createElement('div');
+      bannerDiv.innerHTML = txt;
+      bannerDiv = bannerDiv.querySelector('div');
+      const content = [];
+      [...bannerDiv.children].forEach((item) => {
+        content.push([item]);
       });
+      const block = buildBlock('banner', content);
+      section.append(block);
+      decorateBlock(block);
+      await loadBlock(block);
+      decorateIcons(block);
     }
-  });
+
+    updateSectionStatus(placeholder);
+  }
 }
 
 /**
@@ -863,9 +892,6 @@ function buildBannerBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
-    if (['yes', 'on'].includes(getMetadata('show-banner'))) {
-      buildBannerBlock(main);
-    }
     buildLoginBlock(main);
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -915,6 +941,11 @@ async function loadLazy(doc) {
   const { hash } = window.location;
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
+
+  if (['yes', 'on'].includes(getMetadata('show-banner'))) {
+    // Loading Banner in Lazy mode
+    await buildBannerBlock(main);
+  }
 
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));

@@ -8,7 +8,7 @@ function setCookie(name, value, timeInMillis, path) {
 
 function handleCloseButtonClick() {
   const banner = document.querySelector('.banner-placeholder');
-  banner.classList.remove('appear');
+  banner.classList.add('hide');
   document.cookie = 'oldSitePopUpCookies=true';
   setCookie('oldSitePopUpCookies', true, 86400000, '/');
 }

@@ -1,10 +1,9 @@
 main .banner-placeholder {
   padding-right: 35px;
   background-color: #eeeeee;
-  display: none;
 }
-main .banner-placeholder.appear {
-  display: flex;
+main .banner-placeholder.hide {
+  display: none;
 }
 main .banner {
   align-items: center;
