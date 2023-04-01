@@ -419,7 +419,6 @@ main .section.switchcard a.button:any-link {
 main .banner-placeholder {
   height: var(--banner-height);
   display: flex;
-  background-color: #fafafa;
   box-sizing: border-box;
   padding: 16px 2rem;
 }
