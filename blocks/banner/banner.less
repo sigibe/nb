@@ -1,14 +1,26 @@
 @import (reference) "./banner_variables.less";
 
 main {
+	.banner-placeholder {
+		padding-right: 35px;
+		background-color: @dotcoza-color-neutrals-grey-divider;
+		display: none;
+		&.appear {
+			display: flex;
+		}
+	}
 	.banner {
-		display: flex;
 		align-items: center;
+		width: 100%;
 
+		div {
+			width: 100%;
+		}
 		p {
 			margin: unset;
+			padding-right: 20px;
 			font-size: 16px;
-			line-height: 24px;
+			line-height: 28px;
 			color: @color_1;
 			font-family: @font_family_1;
 			letter-spacing: 0;
@@ -19,7 +31,33 @@ main {
 				line-height: 24px;
 				color: @color_2;
 				font-family: @font_family_2;
+				margin-left: 0;
 			}
+
+			&>span {
+				&:last-child {
+					float:right;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+
+@media (@width_576) {
+	main {
+		.banner {
+			p > a {
+				margin-left: 10px;
+			}
+		}
+	}
+}
+
+@media (@width_1025) {
+	main {
+		.banner-placeholder {
+			padding-left: 150px;
 		}
 	}
 }

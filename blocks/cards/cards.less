@@ -21,7 +21,15 @@ autocomment();
     .width-basis();
   }
 
+  &.switchcard {
+    h2  {
+      font-size: @font-size-h2;
+      margin-top: 20px;
+      margin-bottom: -30px;
+    }
+  }
 }
+
 
 /* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
 .cards {
@@ -50,7 +58,6 @@ autocomment();
     height: 62px;
     width: 60px;
     align-self: center;
-    background-image: url(/icons/intercept_bg.svg);
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
     transform: rotate(270deg);
     background-size: contain;
@@ -81,6 +88,7 @@ autocomment();
     >p {
       font-size: 14px;
       line-height: 20px;
+      color: @dotcoza-color-body-grey;
 
       &:has(.icon) {
         font-size: 18px;
@@ -106,7 +114,7 @@ autocomment();
         }
       }
 
-      >a+.icon {
+      >a + .icon {
         margin-left: 10px;
       }
     }
@@ -141,8 +149,6 @@ autocomment();
       margin-top: 0;
       margin-bottom: 0;
       transform: none;
-      width: 48px;
-      height: 48px;
     }
 
     .cards-body {
@@ -177,22 +183,20 @@ autocomment();
       font-size: 24px;
       line-height: 32px;
       margin-top: 24px;
-      margin-bottom: 14px;
+      margin-bottom: @spacing-03;
       margin-left: 0px;
       margin-right: 0px;
     }
 
     >p {
-      font-size: 20px;
-      line-height: 28px;
+      font-size: @font-size-medium;
+      line-height: @font-lineheight-medium;
       margin-bottom: 24px;
 
       >a {
         margin-left: 0;
         margin-right: 0;
       }
-
-      ;
     }
   }
 }
@@ -240,12 +244,17 @@ autocomment();
 /* home services */
 .home-services.cards-container {
   padding-bottom: 32px;
-  background-color: var(--overlay-background-color);
 
   >div:first-child {
     >h1 {
-      font-size: 24px;
-      margin: 0px auto 32px auto;
+      font-size: @font-size-large;
+      margin: 24px auto 32px auto;
+    }
+  }
+
+  a {
+    .icon {
+      margin-left: 0;
     }
   }
 
@@ -253,7 +262,7 @@ autocomment();
     li {
       &:hover {
         :where(p, a.button) {
-          >.icon-arrow {
+          .icon-arrow {
             transition: transform 900ms;
             transform: translateX(8px);
           }
@@ -396,9 +405,10 @@ autocomment();
 
       >p:first-child,
       > :where(h2, h3)+p {
-        font-size: 18px;
-        line-height: 28px;
-        margin-top: 14px;
+        font-size: @font-size-base;
+        color: @dotcoza-color-body-grey;
+        line-height: @font-lineheight-base;
+        margin-top: @spacing-03;
       }
     }
   }
@@ -635,13 +645,15 @@ autocomment();
     }
 
     li {
-      padding: 48px 32px 48px 32px;
+      padding: 48px 30px 24px 32px;
+      margin-right: -10px;
     }
 
     .cards-body {
       >h2 {
         +p {
           font-size: 20px;
+          margin-bottom: @spacing-07;
         }
       }
     }
@@ -769,6 +781,21 @@ autocomment();
     li {
       flex-basis: 0;
     }
+
+    .cards-body {
+      >h2 {
+        +p {
+          flex-basis: 50%;
+        }
+      }
+    }
+
+    .cards-image {
+      img {
+        height: 220px;
+        width: 374px;
+      }
+    }
   }
 
   .home-help.cards-container {
@@ -803,9 +830,90 @@ autocomment();
       }
     }
   }
+
+  .section {
+    &.narrow {
+      &.cards-container {
+        >div {
+          &.text-wrapper {
+            >div {
+              &.text {
+                padding-top: @spacing-13;
+                padding-bottom: @spacing-10;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .home-services.cards-container {
+    .cards {
+      >ul {
+        >li {
+          .cards-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            >span {
+              display: flex;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  div.promotion-banner {
+    h2 {
+      strong {
+        font-size: @font-size-h2;
+      }
+    }
+  }
 }
 
-@media (@width_1441) {
+
+div.switchcard h3 {
+  font-weight: @font-weight-regular;
+  line-height: @font-lineheight-h3;
+  font-size: @font-size-h3;
+
+  + p {
+    font-size: @font-paragraph-base;
+    line-height: @font-lineheight-base;
+  }
+}
+
+div.promotion-banner {
+  // This is part of the 'See all' link to the right of 'Promotions'
+  a {
+    font-size: @font-size-medium;
+    font-weight: @font-weight-bold;
+  }
+}
+
+@media(@width_1025) {
+  div.switchcard {
+    h2 > strong {
+      margin-left: @spacing-07;
+    }
+
+    h3 {
+      line-height: @font-lineheight-h2;
+      font-size: @font-size-h2;
+
+      + p {
+        font-size: @font-size-large;
+        line-height: @font-lineheight-large;
+      }
+    }
+  }
+}
+
+@media (@width_1440) {
   .home-services.cards-container {
     padding-left: calc(~'(100% - 1228px)/2');
     padding-right: calc(~'(100% - 1228px)/2');

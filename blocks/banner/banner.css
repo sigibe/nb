@@ -1,11 +1,23 @@
-main .banner {
+main .banner-placeholder {
+  padding-right: 35px;
+  background-color: #eeeeee;
+  display: none;
+}
+main .banner-placeholder.appear {
   display: flex;
+}
+main .banner {
   align-items: center;
+  width: 100%;
+}
+main .banner div {
+  width: 100%;
 }
 main .banner p {
   margin: unset;
+  padding-right: 20px;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 28px;
   color: #333;
   font-family: "Open Sans Regular";
   letter-spacing: 0;
@@ -16,4 +28,19 @@ main .banner p > a {
   line-height: 24px;
   color: #008533;
   font-family: "Open Sans Semibold";
+  margin-left: 0;
+}
+main .banner p > span:last-child {
+  float: right;
+  cursor: pointer;
+}
+@media (min-width: 576px) {
+  main .banner p > a {
+    margin-left: 10px;
+  }
+}
+@media (min-width: 1025px) {
+  main .banner-placeholder {
+    padding-left: 150px;
+  }
 }

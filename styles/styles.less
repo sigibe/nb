@@ -32,6 +32,7 @@ autocomment();
 	size-adjust: 105.41%;
 	ascent-override: 105%;
 	src: local("Arial");
+	font-display: swap;
 }
 
 :root {
@@ -60,6 +61,8 @@ autocomment();
 	--nav-height: 64px;
 	--banner-height: 100px;
 	--section-left-right-padding: 105px;
+	-webkit-font-smoothing: antialiased;
+	scroll-behavior: smooth;
 }
 
 :root .light {
@@ -78,6 +81,10 @@ autocomment();
 	--heading-text-color: @dotcoza-color-neutrals-white;
 }
 
+*,::after,::before {
+    box-sizing: border-box
+}
+
 body {
 	font-size: var(--body-font-size-m);
 	margin: 0;
@@ -87,8 +94,33 @@ body {
 	background-color: @background_color_1;
 	display: none;
 
+	svg {
+		pointer-events: none;
+	}
+
 	&.appear {
 		display: unset;
+	}
+
+	&.overflow-hidden {
+		overflow: hidden;
+	}
+
+	&.overflowY-hidden {
+		overflow-y: hidden;
+	}
+
+	.modal {
+		width: 100%;
+		height: 100%;
+		z-index: 1050;
+		top: 0px;
+		position: fixed;
+		display: block;
+
+		&.fade {
+			height: 0;
+		}
 	}
 }
 
@@ -102,13 +134,25 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: 500;
-	line-height: 1.2;
+
+	font-family: @font-family-primary;
+	font-weight: @font-weight-bold;
+	line-height: @font-lineheight-medium;
+	letter-spacing: @letter-spacing-base;
 	margin-top: 1em;
 	margin-bottom: 0.5em;
 	scroll-margin: calc(var(--nav-height) + 1em);
-	font-family: var(--heading-font-family);
 	color: @color_2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: @font-weight-bold;
+	font-family: @font-family-primary;
 }
 
 h1 {
@@ -128,7 +172,7 @@ h4 {
 }
 
 h5 {
-	font-size: var(--heading-font-size-s);
+	font-size: @font-size-medium;
 }
 
 h6 {
@@ -164,7 +208,8 @@ pre {
 }
 
 strong {
-	font-family: var(--strong-font-family);
+	font-family: @font-family-primary;
+	font-weight: @font-weight-bold;
 
 	a.button {
 		&:any-link {
@@ -188,6 +233,10 @@ a {
 
 	&:hover {
 		color: @color_4;
+	}
+
+	.icon {
+		margin-left: 10px;
 	}
 }
 
@@ -347,7 +396,7 @@ main {
 
 		p {
 			&:hover {
-				>.icon-diagonal-arrow {
+				.icon-diagonal-arrow {
 					transition: transform 900ms;
 					transform: translate(6px, -5px)
 				}
@@ -450,7 +499,7 @@ main {
 
 		&.back-to-top {
 			margin-top: 32px;
-			padding: 40px 35px 40px 15px;
+			padding: 80px 32px 40px 15px;
 
 			p {
 				margin: 0;
@@ -462,6 +511,7 @@ main {
 				padding: 0;
 				background-color: transparent;
 				border: none;
+				width: unset;
 			}
 		}
 
@@ -476,7 +526,7 @@ main {
 
 				:where(h1, h2, h3, p) {
 					color: @color_6;
-					text-align: center;
+					text-align: left;
 				}
 			}
 
@@ -513,28 +563,29 @@ hr {
 }
 
 main .home-banner.section {
-	background: #f2f9f5;
 	padding: 24px 10px 0 10px;
 
 	.default-content-wrapper {
-		background-color: #fff;
+		background-color: @dotcoza-color-neutrals-grey-background;
+		box-shadow: 0 26px 40px -12px lightgray;
+
 		padding: 24px;
+		margin-bottom: @spacing-08;
 		letter-spacing: 0;
 	}
 
 	h1 {
 		color: #17252e;
-		font-family: "Nedbank Sans Bold";
-		font-size: 24px;
-		line-height: 28px;
+		font-size: @font-size-h2;
+		line-height: 36px;
 		margin: 0 0 16px 0;
 	}
 
 	p {
 		color: #494f50;
 		font-family: "Open Sans Regular";
-		font-size: 16px;
-		line-height: 24px;
+		font-size: @font-size-large;
+		line-height: @font-lineheight-large;
 		margin: unset;
 	}
 }
@@ -550,6 +601,12 @@ main .home-banner.section {
 
 		>.section {
 			&.switchcard {
+				.default-content-wrapper {
+					:where(h1, h2, h3, p) {
+						text-align: center;
+					}
+				}
+
 				a.button {
 					&:any-link {
 						height: 56px;
@@ -633,11 +690,21 @@ main .home-banner.section {
 }
 
 @media (@width_1025) {
+	body {
+		.modal {
+			top: @spacing-10;
+		}
+	}
+
 	main .home-banner.section {
 		.default-content-wrapper {
 			margin: 0 105px;
 			padding: 64px 105px;
 		}
+	}
+
+	header {
+		height: 128px;
 	}
 }
 
@@ -651,15 +718,19 @@ main .home-banner.section {
 				padding: 0;
 			}
 
+			&.back-to-top {
+				padding-right: 120px;
+			}
 
 			&.switchcard {
 				padding: 0;
 				background-color: var(--highlight-background-color);
 				display: grid;
-				grid-template-columns: 0.7fr 1fr 1fr 0.25fr 1fr 0.7fr;
+				grid-template-columns: 0.55fr 1fr 1fr 0.35fr 1fr 0.7fr;
 				grid-template-areas:
 					". a a a a ."
 					". b b . d .";
+				margin-top: 104px;
 
 				>.text-wrapper {
 					grid-area: a;
@@ -681,7 +752,7 @@ main .home-banner.section {
 				}
 
 				>div {
-					&:nth-last-child(2) {
+					&:nth-last-child(1) {
 						//Should be last child once is fixed
 						grid-area: d;
 					}
