@@ -22,7 +22,7 @@ export default async function decorate(block) {
 
   if (resp && resp.status === 200) {
     const section = document.querySelector('.banner-placeholder.section');
-    section.style['background-color'] = '#eeeeee';
+    section.classList.add('grey-bg-color');
     const txt = await resp.text();
     const bannerDiv = document.createElement('div');
     const bannerChildDiv = document.createElement('div');

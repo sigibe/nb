@@ -4,6 +4,9 @@ main .banner-placeholder {
 main .banner-placeholder.hide {
   display: none;
 }
+main .banner-placeholder.grey-bg-color {
+  background-color: #eeeeee;
+}
 main .banner {
   align-items: center;
   width: 100%;
