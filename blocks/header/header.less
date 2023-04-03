@@ -258,6 +258,10 @@ header {
 
 			cursor: pointer;
 
+			.nav-tools-login {
+				margin-right: 10px;
+			}
+
 			img {
 				padding: 0 10px;
 			}
@@ -291,6 +295,36 @@ header {
 			.nav-hamburger {
 				width: 64px;
 				height: 64px;
+			}
+
+			.nav-tools {
+				img {
+					transition: top 0.5s ease 0s;
+					top: 0;
+					position: relative;
+				}
+
+				&.visible {
+					top: 0;
+					left: calc(100% - 160px);
+					right: 82px;
+					z-index: 100;
+					position: fixed;
+					justify-content: space-evenly;
+
+					>div {
+						margin-right: 31px;
+					}
+
+					img {
+						top: 16px;
+						margin-top: 6px;
+					}
+
+					span {
+						display: none;
+					}
+				}
 			}
 		}
 

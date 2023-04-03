@@ -209,6 +209,9 @@ header secondary-nav .nav-tools {
   right: 54px;
   cursor: pointer;
 }
+header secondary-nav .nav-tools .nav-tools-login {
+  margin-right: 10px;
+}
 header secondary-nav .nav-tools img {
   padding: 0 10px;
 }
@@ -233,6 +236,29 @@ header .sticky {
   header primary-nav .nav-hamburger {
     width: 64px;
     height: 64px;
+  }
+  header primary-nav .nav-tools img {
+    transition: top 0.5s ease 0s;
+    top: 0;
+    position: relative;
+  }
+  header primary-nav .nav-tools.visible {
+    top: 0;
+    left: calc(100% - 160px);
+    right: 82px;
+    z-index: 100;
+    position: fixed;
+    justify-content: space-evenly;
+  }
+  header primary-nav .nav-tools.visible > div {
+    margin-right: 31px;
+  }
+  header primary-nav .nav-tools.visible img {
+    top: 16px;
+    margin-top: 6px;
+  }
+  header primary-nav .nav-tools.visible span {
+    display: none;
   }
   header secondary-nav {
     height: var(--nav-height);

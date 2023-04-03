@@ -49,6 +49,9 @@ export function toggleHamburger() {
 }
 
 export function toggleSearch() {
+  if (document.getElementById('querySearchModal').style) {
+    document.getElementById('querySearchModal').removeAttribute('style');
+  }
   document.getElementById('querySearchModal').classList.toggle('show');
   document.getElementById('querySearchModal').classList.toggle('appear');
   document.body.classList.toggle('overflowY-hidden');
@@ -72,7 +75,7 @@ export async function loadNavTools() {
     doc.querySelectorAll('a').forEach((a) => {
       if (a.href) {
         const { pathname } = new URL(a.href);
-        // Rewrite urls except home page wince its already on Franklin
+        // Rewrite urls except home page since its already on Franklin
         if (!pathname.includes('/content/nedbank/za/en/personal/home')) {
           a.href = `https://${NEDBANK_HOST}${pathname}`;
         }
@@ -98,6 +101,7 @@ export async function loadNavTools() {
 
     const querySearchModal = doc.querySelector('.querysearch');
     if (querySearchModal) {
+      doc.getElementById('querySearchModal').style.display = 'none';
       querySearchModal.classList.add('modal-open');
       externalMarkup.appendChild(querySearchModal);
       document.querySelector('.nbd-qs-close').addEventListener('click', () => {
