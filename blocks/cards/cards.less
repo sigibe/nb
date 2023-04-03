@@ -78,14 +78,14 @@ autocomment();
     flex-grow: 1;
     align-items: center;
 
-    >h3 {
+    h3 {
       margin-left: 14px;
       margin-right: 14px;
       font-size: 18px;
       line-height: 24px;
     }
 
-    >p {
+    p {
       font-size: 14px;
       line-height: 20px;
       color: @dotcoza-color-body-grey;
@@ -116,6 +116,15 @@ autocomment();
 
       >a + .icon {
         margin-left: 10px;
+      }
+    }
+
+    >.cards-content {
+      flex-grow: 1;
+      text-align: left;
+      p {
+        margin-left: 14px;
+        margin-right: 14px;
       }
     }
   }
@@ -630,11 +639,8 @@ autocomment();
     .cards-body {
       .flex(column);
 
-      >h3 {
-        flex-grow: 0;
-        margin: 24px 0 0 0;
-        font-size: 22px;
-        line-height: 28px;
+      >.cards-content {
+        text-align: center;
       }
     }
   }

@@ -74,26 +74,26 @@
   flex-grow: 1;
   align-items: center;
 }
-.cards .cards-body > h3 {
+.cards .cards-body h3 {
   margin-left: 14px;
   margin-right: 14px;
   font-size: 18px;
   line-height: 24px;
 }
-.cards .cards-body > p {
+.cards .cards-body p {
   font-size: 14px;
   line-height: 20px;
   color: #494f50;
 }
-.cards .cards-body > p:has(.icon) {
+.cards .cards-body p:has(.icon) {
   font-size: 18px;
   line-height: 24px;
   font-family: "Open Sans Semibold";
 }
-.cards .cards-body > p.button-container {
+.cards .cards-body p.button-container {
   line-height: 24px;
 }
-.cards .cards-body > p.button-container > a {
+.cards .cards-body p.button-container > a {
   margin: unset;
   padding: unset;
   cursor: pointer;
@@ -103,11 +103,19 @@
   font-family: "Open Sans Bold";
   color: #008533;
 }
-.cards .cards-body > p.button-container > a:has(.icon) {
+.cards .cards-body p.button-container > a:has(.icon) {
   overflow: visible;
 }
-.cards .cards-body > p > a + .icon {
+.cards .cards-body p > a + .icon {
   margin-left: 10px;
+}
+.cards .cards-body > .cards-content {
+  flex-grow: 1;
+  text-align: left;
+}
+.cards .cards-body > .cards-content p {
+  margin-left: 14px;
+  margin-right: 14px;
 }
 /* cards.large -> when space is less, items will shift but content of items will remain vertical  */
 .cards.large > ul {
@@ -471,11 +479,8 @@
     box-sizing: border-box;
     flex-direction: column;
   }
-  .cards .cards-body > h3 {
-    flex-grow: 0;
-    margin: 24px 0 0 0;
-    font-size: 22px;
-    line-height: 28px;
+  .cards .cards-body > .cards-content {
+    text-align: center;
   }
   .cards.large > ul {
     gap: 15px 35px;
