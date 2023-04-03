@@ -661,7 +661,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
 body.modal-show {
   overflow: hidden;
 }
-.modal {
+main .modal {
   box-sizing: border-box;
   display: none;
   position: fixed;
@@ -676,11 +676,11 @@ body.modal-show {
   background-color: transparent !important;
   overflow-y: auto;
 }
-.modal .modal-dialog {
+main .modal .modal-dialog {
   margin: 1.75rem auto;
   height: auto;
 }
-.modal .modal-content {
+main .modal .modal-content {
   position: relative;
   padding: 75px 75px;
   background-color: #fff;
@@ -688,25 +688,25 @@ body.modal-show {
   box-sizing: border-box;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
 }
-.modal .modal-content .columns > div:first-child {
+main .modal .modal-content .columns > div:first-child {
   font-size: 20px;
   color: #17252e;
   line-height: 28px;
   font-weight: 700;
 }
-.modal .modal-content .columns > div {
+main .modal .modal-content .columns > div {
   color: #494f50;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
 }
-.modal .modal-content .columns.table > div:not(:first-child) {
+main .modal .modal-content .columns.table > div:not(:first-child) {
   border-bottom: 1px solid rgba(151, 151, 151, 0.23);
 }
-.modal .modal-content .columns p {
+main .modal .modal-content .columns p {
   margin: unset;
 }
-.modal.show {
+main .modal.show {
   display: block;
 }
 #modal-overlay {
