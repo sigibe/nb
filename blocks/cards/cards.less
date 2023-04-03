@@ -22,7 +22,7 @@ autocomment();
   }
 
   &.switchcard {
-    h2  {
+    h2 {
       font-size: @font-size-h2;
       margin-top: 20px;
       margin-bottom: -30px;
@@ -114,7 +114,7 @@ autocomment();
         }
       }
 
-      >a + .icon {
+      >a+.icon {
         margin-left: 10px;
       }
     }
@@ -122,6 +122,7 @@ autocomment();
     >.cards-content {
       flex-grow: 1;
       text-align: left;
+
       p {
         margin-left: 14px;
         margin-right: 14px;
@@ -639,6 +640,13 @@ autocomment();
     .cards-body {
       .flex(column);
 
+      h3 {
+        flex-grow: 0;
+        margin: 24px 0 0 0;
+        font-size: 22px;
+        line-height: 28px;
+      }
+
       >.cards-content {
         text-align: center;
       }
@@ -887,13 +895,14 @@ div.switchcard h3 {
   line-height: @font-lineheight-h3;
   font-size: @font-size-h3;
 
-  + p {
+  +p {
     font-size: @font-paragraph-base;
     line-height: @font-lineheight-base;
   }
 }
 
 div.promotion-banner {
+
   // This is part of the 'See all' link to the right of 'Promotions'
   a {
     font-size: @font-size-medium;
@@ -903,7 +912,7 @@ div.promotion-banner {
 
 @media(@width_1025) {
   div.switchcard {
-    h2 > strong {
+    h2>strong {
       margin-left: @spacing-07;
     }
 
@@ -911,7 +920,7 @@ div.promotion-banner {
       line-height: @font-lineheight-h2;
       font-size: @font-size-h2;
 
-      + p {
+      +p {
         font-size: @font-size-large;
         line-height: @font-lineheight-large;
       }
