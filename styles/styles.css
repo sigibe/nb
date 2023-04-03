@@ -37,7 +37,6 @@
   --banner-height: 100px;
   --section-left-right-padding: 105px;
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
 }
 :root .light {
   --background-color: #ffffff;
@@ -52,6 +51,11 @@
   --highlight-background-color: #008533;
   --text-color: #ffffff;
   --heading-text-color: #ffffff;
+}
+*,
+::after,
+::before {
+  box-sizing: border-box;
 }
 body {
   font-size: var(--body-font-size-m);
@@ -71,6 +75,9 @@ body.appear {
 body.overflow-hidden {
   overflow: hidden;
 }
+body.overflowY-hidden {
+  overflow-y: hidden;
+}
 body .modal {
   width: 100%;
   height: 100%;
@@ -78,6 +85,9 @@ body .modal {
   top: 0px;
   position: fixed;
   display: block;
+}
+body .modal.fade {
+  height: 0;
 }
 header {
   height: var(--nav-height);
@@ -373,7 +383,7 @@ main .section.readytoapply > .default-content-wrapper {
 }
 main .section.back-to-top {
   margin-top: 32px;
-  padding: 40px 35px 40px 15px;
+  padding: 80px 32px 40px 15px;
 }
 main .section.back-to-top p {
   margin: 0;
@@ -398,7 +408,7 @@ main .section.switchcard .default-content-wrapper {
 main .section.switchcard > .text-wrapper :where(h1, h2, h3, p),
 main .section.switchcard .default-content-wrapper :where(h1, h2, h3, p) {
   color: white;
-  text-align: center;
+  text-align: left;
 }
 main .section.switchcard a.button:any-link {
   width: 100%;
@@ -423,31 +433,35 @@ hr {
   border-bottom: 1px solid var(--overlay-background-color);
 }
 main .home-banner.section {
-  background: #f2f9f5;
   padding: 24px 10px 0 10px;
 }
 main .home-banner.section .default-content-wrapper {
-  background-color: #fff;
+  background-color: #fafafa;
+  box-shadow: 0 26px 40px -12px lightgray;
   padding: 24px;
+  margin-bottom: 40px;
   letter-spacing: 0;
 }
 main .home-banner.section h1 {
   color: #17252e;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 32px;
+  line-height: 36px;
   margin: 0 0 16px 0;
 }
 main .home-banner.section p {
   color: #494f50;
   font-family: "Open Sans Regular";
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 28px;
   margin: unset;
 }
 @media (min-width: 576px) {
   main a.button:any-link {
     height: 56px;
     width: 283px;
+  }
+  main > .section.switchcard .default-content-wrapper :where(h1, h2, h3, p) {
+    text-align: center;
   }
   main > .section.switchcard a.button:any-link {
     height: 56px;
@@ -528,11 +542,14 @@ main .home-banner.section p {
     margin: auto;
     padding: 0;
   }
+  main .section.back-to-top {
+    padding-right: 120px;
+  }
   main .section.switchcard {
     padding: 0;
     background-color: var(--highlight-background-color);
     display: grid;
-    grid-template-columns: 0.7fr 1fr 1fr 0.25fr 1fr 0.7fr;
+    grid-template-columns: 0.55fr 1fr 1fr 0.35fr 1fr 0.7fr;
     grid-template-areas: ". a a a a ." ". b b . d .";
     margin-top: 104px;
   }

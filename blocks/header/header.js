@@ -1,6 +1,12 @@
 import {
-  readBlockConfig, decorateIcons, makeLinksRelative, getRootPath,
+  readBlockConfig, decorateIcons, makeLinksRelative, getRootPath, decorateAnchor,
 } from '../../scripts/scripts.js';
+
+import {
+  loadNavTools,
+  toggleHamburger,
+  toggleSearch,
+} from './nav-utils.js';
 
 /**
  * collapses all open nav sections
@@ -16,18 +22,19 @@ function collapseAllNavSections(sections) {
 function injectNavTool(tools, name, icon, type) {
   let tool;
   if (type === 'primary-nav') {
-    tool = `
+    tool = `<a title=${name}>
     <span>${name}</span>
     <img src='/icons/${icon}.svg'></img>
-`;
+    </a>`;
   } else {
-    tool = `
+    tool = `<a title=${name}>
+    <span style='display:none'>${name}</span>
     <img src='/icons/${icon}.svg'></img>
-`;
+    </a>`;
   }
 
   const div = document.createElement('div');
-  div.classList.add(`nav-tools-${name}`);
+  div.classList.add(`nav-tools-${name.toLowerCase()}`);
   div.innerHTML = tool;
   tools.append(div);
 }
@@ -40,7 +47,7 @@ function injectNavTools(nav, type) {
 }
 
 function addLoginEventListener(nav) {
-  const loginButton = nav.querySelector('.nav-tools-Login');
+  const loginButton = nav.querySelector('.nav-tools-login');
 
   if (loginButton) {
     loginButton.addEventListener('click', () => {
@@ -77,6 +84,7 @@ function decorateNav(respTxt, type) {
   });
 
   injectNavTools(nav, type);
+  decorateAnchor(nav, 'header');
 
   const navSections = [...nav.children][1];
   if (navSections) {
@@ -97,11 +105,6 @@ function decorateNav(respTxt, type) {
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
-  hamburger.addEventListener('click', () => {
-    const expanded = nav.getAttribute('aria-expanded') === 'true';
-    document.body.style.overflowY = expanded ? '' : 'hidden';
-    nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  });
 
   addLoginEventListener(nav);
   nav.append(hamburger);
@@ -109,6 +112,30 @@ function decorateNav(respTxt, type) {
   decorateIcons(nav);
 
   return nav;
+}
+
+async function delayedNavTools() {
+  await loadNavTools();
+
+  ['primary-nav', 'secondary-nav'].forEach((item) => {
+    const nav = document.querySelector(item);
+    const hamburger = nav.querySelector('.nav-hamburger');
+    hamburger.addEventListener('click', () => {
+      const expanded = nav.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        document.body.classList.remove('overflowY-hidden');
+      } else {
+        document.body.classList.add('overflowY-hidden');
+      }
+      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      toggleHamburger();
+    });
+
+    const querySearch = nav.querySelector('.nav-tools-search');
+    querySearch.addEventListener('click', () => {
+      toggleSearch();
+    });
+  });
 }
 
 export default async function decorate(block) {
@@ -143,15 +170,17 @@ export default async function decorate(block) {
     if (window.screen.width >= 1025) {
       const element = document.querySelector('secondary-nav');
       if (element) {
-        const section = document.querySelector('secondary-nav .nav-tools');
+        const section = document.querySelector('primary-nav .nav-tools');
 
         if (document.documentElement.scrollTop >= element.offsetHeight) {
           element.classList.add('sticky');
+          section.classList.add('visible');
           section.classList.add('display-flex');
           section.classList.remove('display-none');
         } else {
           element.classList.remove('sticky');
           section.classList.remove('display-flex');
+          section.classList.remove('visible');
           section.classList.add('display-none');
         }
       }
@@ -159,4 +188,7 @@ export default async function decorate(block) {
   });
 
   block.append(navDiv);
+
+  // Delayed load to reduct TBT impact
+  setTimeout(delayedNavTools, 3000);
 }

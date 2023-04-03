@@ -80,7 +80,13 @@ header {
 				color: @dotcoza-color-commit-grey;
 				align-items: center;
 
-				>span {
+				a {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
+				span {
 					display: flex;
 					justify-content: center;
 					padding-left: 20px;
@@ -180,22 +186,28 @@ header {
 					>ul {
 						display: none;
 						position: relative;
-
+						padding-inline-start: 0;
+						min-width: 14em;
 
 						&:any-link {
 							font-size: var(--body-font-size-m);
 						}
 
 						>li {
-							font-size: 18px;
-							padding: 20px 0;
+							color: @dotcoza-color-body-grey;
+							font-size: @font-size-base;
+							line-height: @font-lineheight-base;
+							padding: 16px 20px 16px 32px;
 
 							&:hover {
-								background-color: #f1f6f5;
+								color: @dotcoza-color-title-grey;
+								background-color: @dotcoza-color-neutrals-grey-background;
 							}
 
 							&:first-child {
-								font-family: @font_family_2;
+								font-family: @font-family-primary;
+								font-weight: @font-weight-bold;
+								padding-top: @spacing-06;
 
 								&:hover {
 									background-color: @background_color_1;
@@ -234,6 +246,10 @@ header {
 			font-size: @font-size-small;
 			cursor: pointer;
 
+			.nav-tools-login {
+				margin-right: 10px;
+			}
+
 			img {
 				padding: 0 10px;
 			}
@@ -259,6 +275,36 @@ header {
 	header {
 		primary-nav {
 			display: flex;
+
+			.nav-tools {
+				img {
+					transition: top 0.5s ease 0s;
+					top: 0;
+					position: relative;
+				}
+	
+				&.visible {
+					top: 0;
+					left: calc(100% - 160px);
+					right: 82px;
+					z-index: 100;
+					position: fixed;
+					justify-content: space-evenly;
+
+					>div {
+						margin-right: 31px;
+					}
+
+					img {
+						top: 16px;
+						margin-top: 6px;
+					}
+
+					span {
+						display: none;
+					}
+				}
+			}
 		}
 
 		secondary-nav {
@@ -274,20 +320,6 @@ header {
 
 			.nav-tools {
 				display: none;
-				flex-grow: 1;
-
-				&.display-none {
-					display: none;
-				}
-
-				&.display-flex {
-					display: flex;
-					justify-content: space-evenly;
-				}
-
-				img {
-					padding: unset;
-				}
 			}
 
 			.nav-sections {
@@ -304,10 +336,10 @@ header {
 						margin-right: @spacing-06;
 						font-size: @font-size-base;
 
-						&[aria-expanded='false'] {
+						& {
 							&::before {
 								content: ' ';
-								border: @spacing-01 solid @nav-lines-menu;
+								border: @spacing-01 solid transparent;
 								display: block;
 								transform: translateY(43px);
 							}
@@ -319,6 +351,11 @@ header {
 								border: @spacing-01 solid @dotcoza-color-greens-default;
 								display: block;
 								transform: translateY(43px);
+							}
+							>a {
+								&::after {
+									transform: rotate(180deg);
+								}
 							}
 						}
 

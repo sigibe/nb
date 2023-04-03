@@ -63,7 +63,6 @@ autocomment();
 	--section-left-right-padding: 105px;
 	-webkit-font-smoothing: antialiased;
 	scroll-behavior: smooth;
-	-webkit-font-smoothing: antialiased;
 }
 
 :root .light {
@@ -80,6 +79,10 @@ autocomment();
 	--highlight-background-color: @dotcoza-color-greens-default;
 	--text-color: @dotcoza-color-neutrals-white;
 	--heading-text-color: @dotcoza-color-neutrals-white;
+}
+
+*,::after,::before {
+    box-sizing: border-box
 }
 
 body {
@@ -103,6 +106,10 @@ body {
 		overflow: hidden;
 	}
 
+	&.overflowY-hidden {
+		overflow-y: hidden;
+	}
+
 	.modal {
 		width: 100%;
 		height: 100%;
@@ -110,7 +117,11 @@ body {
 		top: 0px;
 		position: fixed;
 		display: block;
-    }
+
+		&.fade {
+			height: 0;
+		}
+	}
 }
 
 header {
@@ -488,7 +499,7 @@ main {
 
 		&.back-to-top {
 			margin-top: 32px;
-			padding: 40px 35px 40px 15px;
+			padding: 80px 32px 40px 15px;
 
 			p {
 				margin: 0;
@@ -515,7 +526,7 @@ main {
 
 				:where(h1, h2, h3, p) {
 					color: @color_6;
-					text-align: center;
+					text-align: left;
 				}
 			}
 
@@ -552,27 +563,29 @@ hr {
 }
 
 main .home-banner.section {
-	background: #f2f9f5;
 	padding: 24px 10px 0 10px;
 
 	.default-content-wrapper {
-		background-color: #fff;
+		background-color: @dotcoza-color-neutrals-grey-background;
+		box-shadow: 0 26px 40px -12px lightgray;
+
 		padding: 24px;
+		margin-bottom: @spacing-08;
 		letter-spacing: 0;
 	}
 
 	h1 {
 		color: #17252e;
-		font-size: 24px;
-		line-height: 28px;
+		font-size: @font-size-h2;
+		line-height: 36px;
 		margin: 0 0 16px 0;
 	}
 
 	p {
 		color: #494f50;
 		font-family: "Open Sans Regular";
-		font-size: 16px;
-		line-height: 24px;
+		font-size: @font-size-large;
+		line-height: @font-lineheight-large;
 		margin: unset;
 	}
 }
@@ -588,6 +601,12 @@ main .home-banner.section {
 
 		>.section {
 			&.switchcard {
+				.default-content-wrapper {
+					:where(h1, h2, h3, p) {
+						text-align: center;
+					}
+				}
+
 				a.button {
 					&:any-link {
 						height: 56px;
@@ -699,12 +718,15 @@ main .home-banner.section {
 				padding: 0;
 			}
 
+			&.back-to-top {
+				padding-right: 120px;
+			}
 
 			&.switchcard {
 				padding: 0;
 				background-color: var(--highlight-background-color);
 				display: grid;
-				grid-template-columns: 0.7fr 1fr 1fr 0.25fr 1fr 0.7fr;
+				grid-template-columns: 0.55fr 1fr 1fr 0.35fr 1fr 0.7fr;
 				grid-template-areas:
 					". a a a a ."
 					". b b . d .";

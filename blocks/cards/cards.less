@@ -21,7 +21,15 @@ autocomment();
     .width-basis();
   }
 
+  &.switchcard {
+    h2  {
+      font-size: @font-size-h2;
+      margin-top: 20px;
+      margin-bottom: -30px;
+    }
+  }
 }
+
 
 /* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
 .cards {
@@ -80,6 +88,7 @@ autocomment();
     >p {
       font-size: 14px;
       line-height: 20px;
+      color: @dotcoza-color-body-grey;
 
       &:has(.icon) {
         font-size: 18px;
@@ -140,8 +149,6 @@ autocomment();
       margin-top: 0;
       margin-bottom: 0;
       transform: none;
-      width: 48px;
-      height: 48px;
     }
 
     .cards-body {
@@ -182,8 +189,8 @@ autocomment();
     }
 
     >p {
-      font-size: 20px;
-      line-height: 28px;
+      font-size: @font-size-medium;
+      line-height: @font-lineheight-medium;
       margin-bottom: 24px;
 
       >a {
@@ -237,12 +244,11 @@ autocomment();
 /* home services */
 .home-services.cards-container {
   padding-bottom: 32px;
-  background-color: var(--overlay-background-color);
 
   >div:first-child {
     >h1 {
-      font-size: 24px;
-      margin: 0px auto 32px auto;
+      font-size: @font-size-large;
+      margin: 24px auto 32px auto;
     }
   }
 
@@ -399,8 +405,9 @@ autocomment();
 
       >p:first-child,
       > :where(h2, h3)+p {
-        font-size: 18px;
-        line-height: 28px;
+        font-size: @font-size-base;
+        color: @dotcoza-color-body-grey;
+        line-height: @font-lineheight-base;
         margin-top: @spacing-03;
       }
     }
@@ -638,7 +645,8 @@ autocomment();
     }
 
     li {
-      padding: 48px 32px 48px 32px;
+      padding: 48px 30px 24px 32px;
+      margin-right: -10px;
     }
 
     .cards-body {
@@ -857,7 +865,16 @@ autocomment();
       }
     }
   }
+
+  div.promotion-banner {
+    h2 {
+      strong {
+        font-size: @font-size-h2;
+      }
+    }
+  }
 }
+
 
 div.switchcard h3 {
   font-weight: @font-weight-regular;
@@ -871,14 +888,6 @@ div.switchcard h3 {
 }
 
 div.promotion-banner {
-  h2 {
-    strong {
-      margin-left: -@spacing-06;
-      font-size: @font-size-h2;
-    }
-
-  }
-
   // This is part of the 'See all' link to the right of 'Promotions'
   a {
     font-size: @font-size-medium;
@@ -887,13 +896,19 @@ div.promotion-banner {
 }
 
 @media(@width_1025) {
-  div.switchcard h3 {
-    line-height: @font-lineheight-h2;
-    font-size: @font-size-h2;
+  div.switchcard {
+    h2 > strong {
+      margin-left: @spacing-07;
+    }
 
-    + p {
-      font-size: @font-size-large;
-      line-height: @font-lineheight-large;
+    h3 {
+      line-height: @font-lineheight-h2;
+      font-size: @font-size-h2;
+
+      + p {
+        font-size: @font-size-large;
+        line-height: @font-lineheight-large;
+      }
     }
   }
 }

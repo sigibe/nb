@@ -91,6 +91,17 @@ autocomment();
                 p {
                     cursor: pointer;
                     margin: 0;
+                    width: 100%;
+
+                    span:first-child {
+                        flex-basis: 90%;
+                        margin-left: 0;
+                        height: 100%;
+
+                        svg {
+                            margin-top: 6px;
+                        }
+                    }
                 }
             }
 
@@ -205,6 +216,13 @@ autocomment();
                 .login-header {
                     padding: 40px 89px 15px;
                     height: 42px;
+
+                    p {
+                        span:first-child {
+                            visibility: hidden;
+                            flex-basis: 95%;
+                        }
+                    }
                 }
     
                 .login-main {
@@ -221,7 +239,7 @@ autocomment();
                         > div:first-child {
                             width: 41.666667%;;
                             border-right: 1px solid @dotcoza-color-neutrals-grey-disabled;
-                            padding-right: 65px;
+                            padding-right: 56px;
                             margin: 0;
                         }
 
