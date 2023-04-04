@@ -31,7 +31,7 @@ export default async function decorateRepaymentsCalculator(form) {
     decorateRange(block);
   });
 
-  const termField = form.querySelector('.form-term input');
+  const termField = form.querySelector('.form-term');
   decorateTermField(termField);
 
   decorateFieldsets(form, fieldsets);
