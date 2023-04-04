@@ -1,17 +1,12 @@
 const NEDBANK_HOST = 'personal.nedbank.co.za';
 const NEDBANK_HOME_PAGE = `https://${NEDBANK_HOST}/home.html`;
-const EXCLUDED_SCRIPTS_PATHNAME = ['/6422e0f550a2/017d80491d7e/launch-1e8527b948f6-development.min.js'];
 const REPLACE_SCRIPTS = new Map([
   ['/etc.clientlibs/clientlibs/granite/jquery/granite.min.js', {
-    host: window.location.host,
-    port: window.location.port,
-    pathname: '/blocks/header/nb-clientlibs/scripts/granite/jquery/granite.js'
+    pathname: '/blocks/header/nb-clientlibs/scripts/granite/jquery/granite.js',
   }],
   ['/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js', {
-    host: window.location.host,
-    port: window.location.port,
-    pathname: '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js'
-  }]
+    pathname: '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js',
+  }],
 ]);
 
 function appendStyles() {
@@ -28,31 +23,27 @@ function appendStyles() {
 }
 
 function appendScripts(doc) {
-    let scriptItems = doc.querySelectorAll('script');
-    for(let item of scriptItems) {
-      let script = document.createElement('script');
-      if (item.src) {
-        const url = new URL(item.src);
-        if(EXCLUDED_SCRIPTS_PATHNAME.includes(url.pathname)) {
-          continue;
-        } else if(REPLACE_SCRIPTS.has(url.pathname)) {
-          let details = REPLACE_SCRIPTS.get(url.pathname);
-          url.host = details.host;
-          url.port = details.port;
-          url.pathname = details.pathname;
-        } else if (url.host === document.location.host) {
-          url.host = NEDBANK_HOST;
-          url.port = '';
-          url.protocol = 'https';
-        }
-        script.src = url.href;
-        script.async = false;
-      } else {
-        script = item;
+  const scriptItems = doc.querySelectorAll('script');
+  scriptItems.forEach((item) => {
+    let script = document.createElement('script');
+    if (item.src) {
+      const url = new URL(item.src);
+      if (REPLACE_SCRIPTS.has(url.pathname)) {
+        const details = REPLACE_SCRIPTS.get(url.pathname);
+        url.pathname = details.pathname;
+      } else if (url.host === document.location.host) {
+        url.host = NEDBANK_HOST;
+        url.port = '';
+        url.protocol = 'https';
       }
-      document.head.appendChild(script);
-      item.remove();
-  }
+      script.src = url.href;
+      script.async = false;
+    } else {
+      script = item;
+    }
+    document.head.appendChild(script);
+    item.remove();
+  });
 }
 
 export function toggleHamburger() {
