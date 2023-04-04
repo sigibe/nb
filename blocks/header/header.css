@@ -3,6 +3,10 @@ header .nav-hamburger {
   background: url('/icons/green-hamburger.svg');
   width: 50px;
   height: 50px;
+  display: none;
+}
+header .nav-hamburger.appear {
+  display: block;
 }
 header * > li {
   list-style: none;
@@ -82,10 +86,20 @@ header primary-nav .nav-tools > div span:hover {
 header primary-nav .nav-tools > div:hover {
   color: #008533;
 }
+header primary-nav .nav-tools .nav-tools-search {
+  display: none;
+}
+header primary-nav .nav-tools .nav-tools-search.appear {
+  display: flex;
+}
 header primary-nav .nav-hamburger {
   position: fixed;
   z-index: 99;
   right: 0;
+  display: none;
+}
+header primary-nav .nav-hamburger.appear {
+  display: block;
 }
 header secondary-nav {
   display: flex;
@@ -215,6 +229,12 @@ header secondary-nav .nav-tools .nav-tools-login {
 header secondary-nav .nav-tools img {
   padding: 0 10px;
 }
+header secondary-nav .nav-tools .nav-tools-search {
+  display: none;
+}
+header secondary-nav .nav-tools .nav-tools-search.appear {
+  display: flex;
+}
 header secondary-nav .nav-tools div > a {
   display: flex;
 }
@@ -230,6 +250,9 @@ header .sticky {
   top: 0;
 }
 @media (min-width: 1025px) {
+  header .nav-hamburger.appear {
+    display: none;
+  }
   header primary-nav {
     display: flex;
   }
