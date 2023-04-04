@@ -1,5 +1,13 @@
 const NEDBANK_HOST = 'personal.nedbank.co.za';
 const NEDBANK_HOME_PAGE = `https://${NEDBANK_HOST}/home.html`;
+const REPLACE_SCRIPTS = new Map([
+  ['/etc.clientlibs/clientlibs/granite/jquery/granite.min.js', {
+    pathname: '/blocks/header/nb-clientlibs/scripts/granite/jquery/granite.js',
+  }],
+  ['/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js', {
+    pathname: '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js',
+  }],
+]);
 
 function appendStyles() {
   [
@@ -15,12 +23,14 @@ function appendStyles() {
 }
 
 function appendScripts(doc) {
-  doc.querySelectorAll('script').forEach((item) => {
+  const scriptItems = doc.querySelectorAll('script');
+  scriptItems.forEach((item) => {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
-      if (url.pathname === '/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js') {
-        url.pathname = '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js';
+      if (REPLACE_SCRIPTS.has(url.pathname)) {
+        const details = REPLACE_SCRIPTS.get(url.pathname);
+        url.pathname = details.pathname;
       } else if (url.host === document.location.host) {
         url.host = NEDBANK_HOST;
         url.port = '';
