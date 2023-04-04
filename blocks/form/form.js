@@ -224,6 +224,7 @@ function createFieldset(fd) {
   wrapper.replaceChildren(createLegend(fd));
   if (fd.Repeatable && fd.Repeatable.toLowerCase() === 'true') {
     wrapper.dataset.repeatable = true;
+    wrapper.dataset.addLabel = fd['Add Button Label'];
     setNumberConstraints(wrapper, fd);
   }
   return wrapper;

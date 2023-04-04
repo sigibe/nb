@@ -41,11 +41,7 @@ function decorateComponents(formTag) {
 export default async function decorateRepaymentsCalculator(formTag) {
   decorateLayout(formTag, groups);
   decorateFieldsets(formTag, fieldsets);
-  decorateRepeatable(formTag, {
-    extraCashFieldSet: {
-      add: 'Get extra cash',
-    },
-  });
+  decorateRepeatable(formTag);
   decorateComponents(formTag);
 
   decorateValidations(formTag);
