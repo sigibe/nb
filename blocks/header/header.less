@@ -166,7 +166,9 @@ header {
 
 			>ul {
 				>li.nav-drop {
+					height: var(--nav-height);
 					position: relative;
+					padding-top: 16px;
 
 					&:first-child {
 						font-family: @nav-heading-first-child-font-family;
@@ -179,7 +181,6 @@ header {
 					&:not(:first-child) {
 						display: none;
 					}
-
 					position: relative;
 					font-size: 18px;
 					margin: 0;
@@ -442,6 +443,8 @@ header {
 						}
 
 						&:not(:first-child) {
+							height: var(--nav-height);
+							padding-top: 16px;
 							display: unset;
 						}
 

@@ -132,7 +132,9 @@ header secondary-nav .nav-sections {
   display: none;
 }
 header secondary-nav .nav-sections > ul > li.nav-drop {
+  height: var(--nav-height);
   position: relative;
+  padding-top: 16px;
 }
 header secondary-nav .nav-sections > ul > li.nav-drop:first-child {
   font-family: 'Libre Franklin', Arial, Helvetica, sans-serif;
@@ -349,6 +351,8 @@ header .sticky {
     display: none;
   }
   header secondary-nav .nav-sections > ul > li:not(:first-child) {
+    height: var(--nav-height);
+    padding-top: 16px;
     display: unset;
   }
   header secondary-nav .nav-sections > ul > li > a::after {
