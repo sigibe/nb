@@ -1,26 +1,5 @@
 import formatFns from '../formatting.js';
 
-function render(html) {
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  return div.children[0];
-}
-
-function modal() {
-  return `<div class= "modal-dialog">
-    <div class="modal-content">
-      </div>
-    </div>
-    `;
-}
-
-function decorateModal(block) {
-  block.classList.add('modal');
-  const modalContent = [...block.children];
-  block.append(render(modal()));
-  block.querySelector('.modal-content').append(...[...modalContent]);
-}
-
 function getFormattedValue(input) {
   const format = input.dataset.displayFormat;
   if (input.tagName === 'OUTPUT') {
@@ -30,15 +9,16 @@ function getFormattedValue(input) {
   return formatFn(input.value);
 }
 
-function handleModal(block, form) {
-  const btn = form.querySelector('.form-summary button');
-  const modalOverlay = document.createElement('div');
-  modalOverlay.id = 'modal-overlay';
+function handleModal(block, btn) {
+  const modalOverlay = document.getElementById('modal-overlay');
 
   btn.addEventListener('click', (event) => {
     event.preventDefault();
+    const { form } = btn;
     block.classList.add('show');
-    document.body.append(modalOverlay);
+    if (modalOverlay) {
+      modalOverlay.classList.add('appear');
+    }
     document.body.classList.add('modal-show');
     [...block.querySelectorAll('[data-form-placeholder]')].forEach((span) => {
       const fieldName = span.getAttribute('data-form-placeholder');
@@ -50,13 +30,14 @@ function handleModal(block, form) {
 
   block.addEventListener('click', () => {
     block.classList.remove('show');
-    modalOverlay.remove();
+    if (modalOverlay) {
+      modalOverlay.classList.remove('appear');
+    }
     document.body.classList.remove('modal-show');
   });
 }
 
 export default function decorateSummary(form, block) {
-  decorateModal(block);
   [...block.querySelectorAll('em')].forEach((em) => {
     const fieldName = em.innerText.trim().match(/^\{([^}]+)\}/)?.[1];
     const el = document.createElement('span');
@@ -64,5 +45,5 @@ export default function decorateSummary(form, block) {
     el.setAttribute('data-form-placeholder', fieldName);
     em.replaceWith(el);
   });
-  handleModal(block, form);
+  handleModal(block, form.querySelector('.form-summary button'));
 }

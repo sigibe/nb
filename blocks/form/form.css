@@ -413,6 +413,11 @@ input[type="range"]:focus::-webkit-slider-thumb {
   border-radius: 20px;
   padding: 48px 0;
   margin: 0 auto 48px;
+  padding-left: var(--section-left-right-padding);
+  padding-right: var(--section-left-right-padding);
+}
+.calculator h4 {
+  display: none;
 }
 .calculator > :first-child {
   font-size: 20px;
@@ -422,7 +427,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   color: #494f50;
 }
-.calculator > :last-child p {
+.calculator > .disclaimer {
   width: 100%;
   color: #494f50;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -570,39 +575,39 @@ input[type="range"]:focus::-webkit-slider-thumb {
   border: 2px solid #17252e;
 }
 /** repayments calculator */
-.repayments-calculator .Output {
+#repayments-calculator-form .Output {
   grid-template-areas: "emi emi" "total total" "rate explore" "range range";
 }
 /** loan consolidation */
-.loan-consolidation-calculator .Output {
+#loan-consolidation-calculator-form .Output {
   grid-template-areas: "total total" "emi emi" "saving saving" "rate explore" "range range";
 }
-.loan-consolidation-calculator .Output .form-totalLoanAmount {
+#loan-consolidation-calculator-form .Output .form-totalLoanAmount {
   grid-area: total;
 }
-.loan-consolidation-calculator .default-content-wrapper:first-child {
+#loan-consolidation-calculator-form .default-content-wrapper:first-child {
   font-size: 16px;
   line-height: 24px;
 }
-.loan-consolidation-calculator .Input fieldset {
+#loan-consolidation-calculator-form .Input fieldset {
   padding-bottom: 48px;
 }
-.loan-consolidation-calculator .Input fieldset .field-wrapper {
+#loan-consolidation-calculator-form .Input fieldset .field-wrapper {
   margin-bottom: 24px;
 }
-.loan-consolidation-calculator .Input fieldset .form-radio-wrapper {
+#loan-consolidation-calculator-form .Input fieldset .form-radio-wrapper {
   margin-bottom: 0;
 }
-.loan-consolidation-calculator .Input fieldset .field-wrapper:last-child {
+#loan-consolidation-calculator-form .Input fieldset .field-wrapper:last-child {
   margin-bottom: 0;
 }
-.loan-consolidation-calculator .Input fieldset > .field-description {
+#loan-consolidation-calculator-form .Input fieldset > .field-description {
   margin-bottom: 24px;
 }
-.loan-consolidation-calculator .Input .form-repeat-wrapper:nth-child(2) {
+#loan-consolidation-calculator-form .Input .form-repeat-wrapper:nth-child(2) {
   padding-bottom: 42px;
 }
-.loan-consolidation-calculator .Input .form-repeat-wrapper:nth-child(2) fieldset {
+#loan-consolidation-calculator-form .Input .form-repeat-wrapper:nth-child(2) fieldset {
   margin-top: 48px;
   padding-bottom: 0;
   margin-bottom: 0;
@@ -710,6 +715,7 @@ main .modal.show {
   display: block;
 }
 #modal-overlay {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -718,4 +724,7 @@ main .modal.show {
   height: 100vh;
   background-color: #000;
   opacity: 0.5;
+}
+#modal-overlay.appear {
+  display: block;
 }

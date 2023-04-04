@@ -492,6 +492,12 @@ input[type="range"] {
   border-radius: 20px;
   padding: @spacing-09 0;
   margin: 0 auto @spacing-09;
+  padding-left: var(--section-left-right-padding);
+  padding-right: var(--section-left-right-padding);
+
+  h4 {
+    display: none;
+  }
 
   > :first-child {
     font-size: @font-size-large;
@@ -502,7 +508,7 @@ input[type="range"] {
     color: @dotcoza-color-body-grey;
   }
 
-  > :last-child p {
+  >.disclaimer {
     width: 100%;
     color: @dotcoza-color-body-grey;
     font-family: @font-family-secondary;
@@ -687,7 +693,7 @@ input[type="range"] {
 }
 
 /** repayments calculator */
-.repayments-calculator .Output {
+#repayments-calculator-form .Output {
   grid-template-areas:
     "emi emi"
     "total total"
@@ -697,7 +703,7 @@ input[type="range"] {
 
 
 /** loan consolidation */
-.loan-consolidation-calculator {
+#loan-consolidation-calculator-form {
   .Output {
     grid-template-areas:
       "total total"
@@ -862,6 +868,7 @@ main .modal {
 }
 
 #modal-overlay {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -870,4 +877,8 @@ main .modal {
   height: 100vh;
   background-color: #000;
   opacity: 0.5;
+
+  &.appear {
+    display: block;
+  }
 }
