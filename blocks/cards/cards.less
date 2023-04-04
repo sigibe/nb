@@ -78,14 +78,14 @@ autocomment();
     flex-grow: 1;
     align-items: center;
 
-    >h3 {
+    h3 {
       margin-left: 14px;
       margin-right: 14px;
       font-size: 18px;
       line-height: 24px;
     }
 
-    >p {
+    p {
       font-size: 14px;
       line-height: 20px;
       color: @dotcoza-color-body-grey;
@@ -114,8 +114,18 @@ autocomment();
         }
       }
 
-      >a + .icon {
+      >a+.icon {
         margin-left: 10px;
+      }
+    }
+
+    >.cards-content {
+      flex-grow: 1;
+      text-align: left;
+
+      p {
+        margin-left: 14px;
+        margin-right: 14px;
       }
     }
   }
@@ -630,11 +640,15 @@ autocomment();
     .cards-body {
       .flex(column);
 
-      >h3 {
+      h3 {
         flex-grow: 0;
         margin: 24px 0 0 0;
         font-size: 22px;
         line-height: 28px;
+      }
+
+      >.cards-content {
+        text-align: center;
       }
     }
   }
@@ -675,7 +689,7 @@ autocomment();
       }
 
       .cards-body {
-        >h3 {
+        h3 {
           +p {
             font-size: 16px;
             line-height: 24px;
@@ -881,13 +895,14 @@ div.switchcard h3 {
   line-height: @font-lineheight-h3;
   font-size: @font-size-h3;
 
-  + p {
+  +p {
     font-size: @font-paragraph-base;
     line-height: @font-lineheight-base;
   }
 }
 
 div.promotion-banner {
+
   // This is part of the 'See all' link to the right of 'Promotions'
   a {
     font-size: @font-size-medium;
@@ -905,7 +920,7 @@ div.promotion-banner {
       line-height: @font-lineheight-h2;
       font-size: @font-size-h2;
 
-      + p {
+      +p {
         font-size: @font-size-large;
         line-height: @font-lineheight-large;
       }
