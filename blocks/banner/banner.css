@@ -1,10 +1,11 @@
 main .banner-placeholder {
   padding-right: 35px;
-  background-color: #eeeeee;
+}
+main .banner-placeholder.hide {
   display: none;
 }
-main .banner-placeholder.appear {
-  display: flex;
+main .banner-placeholder.grey-bg-color {
+  background-color: #eeeeee;
 }
 main .banner {
   align-items: center;

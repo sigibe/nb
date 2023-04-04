@@ -20,6 +20,7 @@
 }
 .columns img {
   width: 100%;
+  box-shadow: 0 14px 20px -12px lightgray;
 }
 .columns.backdrop {
   background-color: #F9FBFB;
@@ -35,16 +36,16 @@
 }
 .columns.backdrop > div > div > h2 {
   padding: 0 10px 0 10px;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 24px;
+  line-height: 32px;
 }
 .columns.backdrop > div > div > p {
   margin: 0;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 26px;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   color: #494f50;
-  padding: 0 10px 0 10px;
+  padding: 0 10px 10px 10px;
 }
 .columns.lazy-river > div:nth-child(odd) {
   display: flex;
