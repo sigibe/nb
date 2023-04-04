@@ -8,8 +8,7 @@
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  padding-left: 22px;
-  padding-right: 22px;
+  padding: 0 22px 0 22px;
   text-align: center;
 }
 .section.cards-container > div:first-child :where(ul, li, h1, h2, h3, h4, h5, h6, p) {
@@ -20,10 +19,27 @@
   flex-basis: calc(100%/1);
   max-width: calc(100%/1);
 }
+.section.cards-container div.cards-wrapper {
+  margin-bottom: 26px;
+}
 .section.cards-container.switchcard h2 {
-  font-size: 40px;
-  margin-top: 20px;
+  margin-top: -15px;
   margin-bottom: -30px;
+}
+.section.cards-container.switchcard h3 {
+  margin-top: 16px;
+  font-size: 20px;
+  line-height: 28px;
+}
+.section.cards-container.switchcard .default-content-wrapper > h3 {
+  margin-top: 40px;
+}
+.section.cards-container.switchcard .cards-body > p {
+  font-size: 16px;
+  line-height: 24px;
+}
+.section.cards-container.switchcard .text-wrapper {
+  padding-bottom: 0px;
 }
 /* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
 .cards :where(ul, li, h1, h2, h3, h4, h5, h6, p) {
@@ -632,6 +648,9 @@ div.promotion-banner a {
   font-weight: 700;
 }
 @media (min-width: 1025px) {
+  div.switchcard div.text-wrapper {
+    margin: 32px 0 30px 0;
+  }
   div.switchcard h2 > strong {
     margin-left: 2px;
   }
@@ -640,6 +659,22 @@ div.promotion-banner a {
     font-size: 32px;
   }
   div.switchcard h3 + p {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  div.section.cards-container.switchcard h3 {
+    line-height: 32px;
+    font-size: 24px;
+  }
+  div.section.cards-container.switchcard .cards-body p {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  div.section.cards-container.switchcard div.default-content-wrapper h3 {
+    line-height: 40px;
+    font-size: 32px;
+  }
+  div.section.cards-container.switchcard div.default-content-wrapper p {
     font-size: 20px;
     line-height: 28px;
   }
