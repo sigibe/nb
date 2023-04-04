@@ -4,8 +4,8 @@ header {
 	.nav-hamburger {
 		cursor: pointer;
 		background: url('/icons/green-hamburger.svg');
-		width: 64px;
-		height: 64px;
+		width: @spacing-15;
+		height: @spacing-15;
 		display: none;
 
 		&.appear {
@@ -132,7 +132,7 @@ header {
 	secondary-nav {
 		display: flex;
 		justify-content: space-between;
-		height: var(--nav-height);
+		height: @spacing-15;
 		align-items: center;
 		position: fixed;
 		z-index: 1;
@@ -151,11 +151,18 @@ header {
 
 		.nav-brand {
 			margin-left: 20px;
+
+			svg {
+				display: block;
+				width: 32px;
+				height: 32px;
+			}
 		}
 
 		.nav-sections {
 			flex-grow: 1;
 			font-size: @font-size-small;
+			display: none;
 
 			>ul {
 				>li.nav-drop {
@@ -263,7 +270,16 @@ header {
 		.nav-tools {
 			display: flex;
 			font-size: @font-size-small;
+			font-family: @font-family-primary;
+			font-weight: @font-weight-medium;
+			position: absolute;
+			right: 54px;
+
 			cursor: pointer;
+
+			.nav-tools-login {
+				margin-right: 10px;
+			}
 
 			img {
 				padding: 0 10px;
@@ -275,6 +291,9 @@ header {
 				&.appear {
 					display: flex;
 				}
+			}
+			div > a {
+				display: flex;
 			}
 		}
 
@@ -304,9 +323,45 @@ header {
 
 		primary-nav {
 			display: flex;
+
+			.nav-hamburger {
+				width: 64px;
+				height: 64px;
+			}
+
+			.nav-tools {
+				img {
+					transition: top 0.5s ease 0s;
+					top: 0;
+					position: relative;
+				}
+
+				&.visible {
+					top: 0;
+					left: calc(100% - 160px);
+					right: 82px;
+					z-index: 100;
+					position: fixed;
+					justify-content: space-evenly;
+
+					>div {
+						margin-right: 31px;
+					}
+
+					img {
+						top: 16px;
+						margin-top: 6px;
+					}
+
+					span {
+						display: none;
+					}
+				}
+			}
 		}
 
 		secondary-nav {
+			height: var(--nav-height);
 			padding-left: 160px;
 			padding-right: 50px;
 			display: flex;
@@ -320,6 +375,7 @@ header {
 			.nav-tools {
 				display: none;
 				flex-grow: 1;
+				padding-right: 28px;
 
 				&.display-none {
 					display: none;
@@ -328,6 +384,14 @@ header {
 				&.display-flex {
 					display: flex;
 					justify-content: space-evenly;
+
+					a {
+						padding-left: 20px
+					}
+
+					span {
+						display: none;
+					}
 				}
 
 				img {
@@ -337,6 +401,7 @@ header {
 
 			.nav-sections {
 				flex-basis: 80%;
+				display: flex;
 
 				>ul {
 					padding-inline-start: unset;

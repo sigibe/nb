@@ -10,6 +10,8 @@ main .hero-home {
 }
 main .hero-home img {
   width: 100vw;
+  object-fit: cover;
+  height: 180px;
 }
 main .hero-home > div > div > p:first-child {
   margin: 0px;
