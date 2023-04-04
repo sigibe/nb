@@ -342,10 +342,6 @@ export function decorateSections($main) {
   });
 }
 
-/**
- * Updates all section status in a container element.
- * @param {Element} main The container element
- */
 export function updateSectionsStatus(main) {
   const sections = [...main.querySelectorAll(':scope > div.section')];
   for (let i = 0; i < sections.length; i += 1) {
@@ -826,34 +822,31 @@ function buildLoginBlock(main) {
   decorateBlock(loginBlock);
 }
 
-function buildBannerBlock(main) {
-  const placeholder = document.createElement('div');
-  placeholder.classList.add('banner-placeholder');
+/**
+ * Build Banner Section
+ * @param {*} main
+ */
+function buildBanner(main) {
   if (!getCookieValue('oldSitePopUpCookies')) {
-    placeholder.classList.add('appear');
+    const placeholder = document.createElement('div');
+    placeholder.classList.add('banner-placeholder');
+    main.prepend(placeholder);
   }
-  main.prepend(placeholder);
-  fetch(`${window.hlx.codeBasePath}${getRootPath()}/banner.plain.html`).then((resp) => {
-    if (resp.status === 200) {
-      const section = main.querySelector('.banner-placeholder.section');
-      resp.text().then(async (txt) => {
-        let bannerDiv = document.createElement('div');
-        bannerDiv.innerHTML = txt;
-        bannerDiv = bannerDiv.querySelector('div');
-        const content = [];
-        [...bannerDiv.children].forEach((item) => {
-          content.push([item]);
-        });
-        const block = buildBlock('banner', content);
-        block.style.display = 'none';
-        section.append(block);
-        decorateBlock(block);
-        await loadBlock(block);
-        block.style.display = 'flex';
-        decorateIcons(block);
-      });
-    }
-  });
+}
+
+/**
+ * Build Banner Block
+ * @param {*} main
+ */
+async function buildBannerBlock(main) {
+  const bannerSection = main.querySelector('.banner-placeholder.section');
+  if (bannerSection) {
+    const bannerBlock = buildBlock('banner', '');
+    bannerSection.append(bannerBlock);
+    main.prepend(bannerSection);
+    decorateBlock(bannerBlock);
+    await loadBlock(bannerBlock);
+  }
 }
 
 /**
@@ -863,10 +856,10 @@ function buildBannerBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
-    if (['yes', 'on'].includes(getMetadata('show-banner'))) {
-      buildBannerBlock(main);
-    }
     buildLoginBlock(main);
+    if (['yes', 'on'].includes(getMetadata('show-banner'))) {
+      buildBanner(main);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -915,6 +908,8 @@ async function loadLazy(doc) {
   const { hash } = window.location;
   const element = hash ? main.querySelector(hash) : false;
   if (hash && element) element.scrollIntoView();
+
+  await buildBannerBlock(main);
 
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
