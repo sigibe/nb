@@ -21,7 +21,7 @@
   max-width: calc(100%/1);
 }
 .section.cards-container.switchcard h2 {
-  font-size: 32px;
+  font-size: 38px;
   margin-top: 20px;
   margin-bottom: -30px;
 }
@@ -604,7 +604,7 @@
     display: flex;
   }
   div.promotion-banner h2 strong {
-    font-size: 32px;
+    font-size: 38px;
   }
 }
 div.switchcard h3 {
@@ -622,11 +622,11 @@ div.promotion-banner a {
 }
 @media (min-width: 1025px) {
   div.switchcard h2 > strong {
-    margin-left: 32px;
+    margin-left: 2px;
   }
   div.switchcard h3 {
     line-height: 40px;
-    font-size: 32px;
+    font-size: 38px;
   }
   div.switchcard h3 + p {
     font-size: 20px;
