@@ -26,6 +26,7 @@ main .hero-home > div > div > h1 {
   height: auto;
   box-sizing: border-box;
   line-height: 40px;
+  animation: moveUp 1s ease-in-out;
 }
 @media (min-width: 900px) {
   main .hero-home > div > div > h1 {
