@@ -561,8 +561,20 @@ hr {
 	border-bottom: 1px solid var(--overlay-background-color);
 }
 
+@keyframes moveUp {
+	from {
+	  transform: translateY(30%);
+	}
+	to {
+	  transform: translateY(0);
+	  opacity: 1;
+	}
+}
+
 main .home-banner.section {
 	padding: 24px 10px 0 10px;
+	animation: moveUp 2s ease-in-out 0.5s forwards;
+	opacity: 0;
 
 	.default-content-wrapper {
 		background-color: @dotcoza-color-neutrals-grey-background;
