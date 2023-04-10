@@ -39,13 +39,16 @@
   font-size: 24px;
   line-height: 32px;
 }
-.columns.backdrop > div > div > p {
+.columns.backdrop > div > div > ul > li {
   margin: 0;
   font-size: 16px;
   line-height: 26px;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   color: #494f50;
-  padding: 0 10px 10px 10px;
+  padding: 0 10px 10px 14px;
+}
+.columns.backdrop > div > div > ul > li::marker {
+  font-size: 13px;
 }
 .columns.lazy-river > div:nth-child(odd) {
   display: flex;
@@ -194,7 +197,7 @@
   .columns.backdrop > div {
     align-items: flex-start;
   }
-  .columns.backdrop > div > div > p {
+  .columns.backdrop > div > div > ul > li {
     margin: 0;
     font-size: 18px;
     line-height: 28px;
@@ -242,7 +245,7 @@
     font-size: 32px;
     line-height: 40px;
   }
-  .columns.backdrop > div > div > p {
+  .columns.backdrop > div > div > ul > li {
     position: relative;
   }
 }
