@@ -10,6 +10,11 @@ const REPLACE_SCRIPTS = new Map([
   }],
 ]);
 
+const IGNORE_SCRIPTS = new Set([
+  '/etc.clientlibs/nedbank/components/nedbank-navigation/clientlibs.min.js', // adds tooltip
+  '/etc.clientlibs/nedbank/components/socialshare/clientlibs.min.js',
+  '/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js']); // this is not loaded in the actual site
+
 function appendStyles() {
   [
     '/blocks/header/nb-clientlibs/styles/clientlibs-base.css',
@@ -29,7 +34,9 @@ function appendScripts(doc) {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
-      if (REPLACE_SCRIPTS.has(url.pathname)) {
+      if (IGNORE_SCRIPTS.has(url.pathname)) {
+        script = null;
+      } else if (REPLACE_SCRIPTS.has(url.pathname)) {
         const details = REPLACE_SCRIPTS.get(url.pathname);
         url.pathname = details.pathname;
       } else if (url.host === document.location.host) {
@@ -37,12 +44,16 @@ function appendScripts(doc) {
         url.port = '';
         url.protocol = 'https';
       }
-      script.src = url.href;
-      script.async = false;
+      if (script) {
+        script.src = url.href;
+        script.async = false;
+      }
     } else {
       script = item;
     }
-    document.head.appendChild(script);
+    if (script) {
+      document.head.appendChild(script);
+    }
     item.remove();
   });
 }
