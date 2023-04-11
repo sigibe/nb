@@ -39,13 +39,13 @@ main .hero-home > div > div > h1 {
     left: 0;
     padding: 64px 0 0 22px;
   }
-}
-@media (min-width: 1025px) {
   main .hero-home img {
     width: 100vw;
     height: 500px;
     object-fit: cover;
   }
+}
+@media (min-width: 1025px) {
   main .hero-home > div > div > h1 {
     padding: 98px 0 0 105px;
     font-size: 64px;
