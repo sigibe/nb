@@ -1,5 +1,6 @@
+import { getMetadata } from '../../scripts/scripts.js';
+
 const NEDBANK_HOST = 'personal.nedbank.co.za';
-const NEDBANK_HOME_PAGE = `https://${NEDBANK_HOST}/home.html`;
 const REPLACE_SCRIPTS = new Map([
   ['/etc.clientlibs/clientlibs/granite/jquery/granite.min.js', {
     pathname: '/blocks/header/nb-clientlibs/scripts/granite/jquery/granite.js',
@@ -68,7 +69,7 @@ export function toggleSearch() {
 }
 
 export async function loadNavTools() {
-  const resp = await fetch(NEDBANK_HOME_PAGE);
+  const resp = await fetch(getMetadata('nav'));
   if (resp.ok) {
     const fetchedHtml = await resp.text();
     const parser = new DOMParser();
