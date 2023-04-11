@@ -22,7 +22,7 @@ function collapseAllNavSections(sections) {
 function injectNavTool(tools, name, icon) {
   const tool = `<a title=${name}>
     <span>${name}</span>
-    <img src='/icons/${icon}.svg'></img>
+    <img alt='${icon}' src='/icons/${icon}.svg'></img>
     </a>`;
 
   const div = document.createElement('div');
