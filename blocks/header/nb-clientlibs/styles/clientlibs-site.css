@@ -5992,6 +5992,7 @@
     position: fixed;
     top: 0;
     filter: brightness(0.8);
+    display: flex;
   }
   #external-markup .nbd-hamburger-menu-mob .nbd-logo {
     height: 32px;
@@ -6311,7 +6312,7 @@
     background-image: url('/icons/back_white_Arrow.svg');
     height: 13px;
     width: 22px;
-    margin: 5px 8px 0px 18px;
+    margin: 5px 8px 0px 0px;
     transition: transform 900ms;
   }
   #external-markup .nbd-hamburger-menu-mob .nbd-hamburger-menu-back:hover .nbd-left-arrow {

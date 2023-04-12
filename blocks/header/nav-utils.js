@@ -52,8 +52,14 @@ export function toggleHamburger() {
   document.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
     item.classList.toggle('displayHide');
   });
+
+  const desktopWrapper = document.querySelector('.nbd-navbar-desktop-wrapper');
   if (window.innerWidth < 1025) {
     document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.remove('displayHide');
+    if (desktopWrapper) {
+      desktopWrapper.classList.toggle('displayHide');
+      desktopWrapper.querySelector('.nbd-hamburger-inner-top-bar').classList.remove('displayHide');
+    }
   } else {
     document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.add('displayHide');
   }
@@ -100,6 +106,18 @@ export async function loadNavTools() {
     document.body.appendChild(externalMarkup);
 
     const hamburgerModal = doc.querySelector('.nbd-hamburger-menu-wrapper');
+    const hamburgerNavWrapper = doc.querySelector('.nbd-navbar-desktop-wrapper');
+
+    if (window.screen.width < 1025 && hamburgerNavWrapper) {
+      // Adding navWrapper only in case of width less than 1025px
+      hamburgerNavWrapper.classList.add('displayHide');
+      const backButton = doc.querySelector('.nbd-navbar-desktop-wrapper .nbd-hamburger-menu-back');
+      if (backButton) {
+        backButton.style.display = "none";
+      }
+      externalMarkup.appendChild(hamburgerNavWrapper);
+    }
+
     if (hamburgerModal) {
       hamburgerModal.classList.add('displayHide');
       hamburgerModal.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
