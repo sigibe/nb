@@ -113,7 +113,7 @@ export async function loadNavTools() {
       hamburgerNavWrapper.classList.add('displayHide');
       const backButton = doc.querySelector('.nbd-navbar-desktop-wrapper .nbd-hamburger-menu-back');
       if (backButton) {
-        backButton.style.display = "none";
+        backButton.style.display = 'none';
       }
       externalMarkup.appendChild(hamburgerNavWrapper);
     }
