@@ -56,6 +56,8 @@ function addLoginEventListener(nav) {
         loginEle.classList.add('modal');
         window.scrollTo(0, 0); // Scrolling to Top
         bodyEle.classList.add('overflow-hidden');
+        bodyEle.classList.remove('overflowY-hidden');
+        document.querySelector('#querySearchModal').classList.remove('show', 'appear');
       } else if (loginEle.classList.contains('modal')) {
         loginEle.classList.remove('modal');
         bodyEle.classList.remove('overflow-hidden');
@@ -124,6 +126,9 @@ async function delayedNavTools() {
         document.body.classList.remove('overflowY-hidden');
       } else {
         document.body.classList.add('overflowY-hidden');
+        document.querySelector('#querySearchModal').classList.remove('show', 'appear');
+        document.querySelector('.login-overlay').classList.remove('modal');
+        document.body.classList.remove('overflow-hidden');
       }
       nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       toggleHamburger();
