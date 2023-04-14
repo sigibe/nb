@@ -65,6 +65,8 @@ export function toggleSearch() {
   }
   document.getElementById('querySearchModal').classList.toggle('show');
   document.getElementById('querySearchModal').classList.toggle('appear');
+  document.querySelector('.login-overlay').classList.remove('modal');
+  document.body.classList.remove('overflow-hidden');
   document.body.classList.toggle('overflowY-hidden');
 }
 
