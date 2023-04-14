@@ -52,7 +52,7 @@ export function toggleHamburger() {
   document.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
     item.classList.toggle('displayHide');
   });
-  if (window.screen.width < 1025) {
+  if (window.innerWidth < 1025) {
     document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.remove('displayHide');
   } else {
     document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.add('displayHide');
