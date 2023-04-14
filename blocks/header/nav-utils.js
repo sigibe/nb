@@ -89,7 +89,7 @@ export async function loadNavTools() {
       if (a.href) {
         const { pathname } = new URL(a.href);
         // Rewrite urls except home page since its already on Franklin
-        if (!pathname.includes('/content/nedbank/za/en/personal/home')) {
+        if (pathname !== '/') {
           a.href = `https://${NEDBANK_HOST}${pathname}`;
         }
       }
