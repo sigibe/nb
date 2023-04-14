@@ -18,6 +18,10 @@ footer {
 		padding-left: 20px;
 	}
 
+	.footer.block a {
+		color: @color_2;
+	}
+
 	.footer-social-items {
 		display: flex;
 		justify-content: space-between;
@@ -52,7 +56,7 @@ footer {
 
 	.footer-link-group {
 		h5 {
-			border: 1px solid #e5edec;
+			border-bottom: 1px solid #e5edec;
 			margin: unset;
 			padding: 20px 0 20px 20px;
 
@@ -94,7 +98,6 @@ footer {
 				}
 
 				>a {
-					color: @color_2;
 					font-family: @font_family_2;
 					font-size: @font-size-small;
 					letter-spacing: 0;
@@ -108,6 +111,10 @@ footer {
 		svg {
 			width: 100px;
 		}
+	}
+
+	div.footer-social {
+		border: none;
 	}
 }
 
@@ -171,6 +178,7 @@ footer {
 
 							>a {
 								font-size: @font-size-base;
+								line-height: @font-lineheight-h3;
 							}
 						}
 					}

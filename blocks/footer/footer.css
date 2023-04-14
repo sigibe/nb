@@ -13,6 +13,9 @@ footer .section h5 {
 footer .footer-social h2 {
   padding-left: 20px;
 }
+footer .footer.block a {
+  color: #494f50;
+}
 footer .footer-social-items {
   display: flex;
   justify-content: space-between;
@@ -40,7 +43,7 @@ footer .footer-link-groups {
   flex-direction: column;
 }
 footer .footer-link-group h5 {
-  border: 1px solid #e5edec;
+  border-bottom: 1px solid #e5edec;
   margin: unset;
   padding: 20px 0 20px 20px;
 }
@@ -75,7 +78,6 @@ footer .footer-link-group > ul > li:last-child {
   padding-bottom: 20px;
 }
 footer .footer-link-group > ul > li > a {
-  color: #494f50;
   font-family: "Open Sans Regular";
   font-size: 14px;
   letter-spacing: 0;
@@ -83,6 +85,9 @@ footer .footer-link-group > ul > li > a {
 }
 footer .icon-nedbank-caps svg {
   width: 100px;
+}
+footer div.footer-social {
+  border: none;
 }
 @media (min-width: 991px) {
   footer .section .default-content-wrapper {
@@ -134,5 +139,6 @@ footer .icon-nedbank-caps svg {
   }
   footer .footer-links .footer-link-groups .footer-link-group > ul > li > a {
     font-size: 16px;
+    line-height: 32px;
   }
 }
