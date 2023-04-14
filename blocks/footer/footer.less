@@ -18,8 +18,20 @@ footer {
 		padding-left: 20px;
 	}
 
-	.footer.block a {
-		color: @color_2;
+	.footer.block {
+		a {
+		    color: @color_2;
+		}
+
+		div.default-content-wrapper > p {
+			display: flex;
+			flex-direction: column;
+
+			a {
+				margin-top: 20px;
+				margin-left: 0px;
+			}
+		}
 	}
 
 	.footer-social-items {
@@ -123,6 +135,17 @@ footer {
 		.section {
 			.default-content-wrapper {
 				padding: 0 90px;
+			}
+		}
+
+		.footer.block {
+			div.default-content-wrapper > p {
+				display: block;
+
+				a {
+					font-size: @font-size-base;
+					margin-left: 40px;
+				}
 			}
 		}
 

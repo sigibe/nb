@@ -16,6 +16,14 @@ footer .footer-social h2 {
 footer .footer.block a {
   color: #494f50;
 }
+footer .footer.block div.default-content-wrapper > p {
+  display: flex;
+  flex-direction: column;
+}
+footer .footer.block div.default-content-wrapper > p a {
+  margin-top: 20px;
+  margin-left: 0px;
+}
 footer .footer-social-items {
   display: flex;
   justify-content: space-between;
@@ -92,6 +100,13 @@ footer div.footer-social {
 @media (min-width: 991px) {
   footer .section .default-content-wrapper {
     padding: 0 90px;
+  }
+  footer .footer.block div.default-content-wrapper > p {
+    display: block;
+  }
+  footer .footer.block div.default-content-wrapper > p a {
+    font-size: 16px;
+    margin-left: 40px;
   }
   footer .footer-social-items {
     flex-direction: row;
