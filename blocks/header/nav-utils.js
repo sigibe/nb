@@ -63,7 +63,7 @@ export function toggleHamburger() {
   document.querySelectorAll('.nbd-hamburger-menu-desk').forEach((item) => {
     item.classList.toggle('displayHide');
   });
-  if (window.screen.width < 1025) {
+  if (window.innerWidth < 1025) {
     document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.remove('displayHide');
   } else {
     document.querySelector('.nbd-hamburger-menu-mob > .nbd-hm-l1-wrapper').classList.add('displayHide');
@@ -76,6 +76,8 @@ export function toggleSearch() {
   }
   document.getElementById('querySearchModal').classList.toggle('show');
   document.getElementById('querySearchModal').classList.toggle('appear');
+  document.querySelector('.login-overlay').classList.remove('modal');
+  document.body.classList.remove('overflow-hidden');
   document.body.classList.toggle('overflowY-hidden');
 }
 
@@ -98,7 +100,7 @@ export async function loadNavTools() {
       if (a.href) {
         const { pathname } = new URL(a.href);
         // Rewrite urls except home page since its already on Franklin
-        if (!pathname.includes('/content/nedbank/za/en/personal/home')) {
+        if (pathname !== '/') {
           a.href = `https://${NEDBANK_HOST}${pathname}`;
         }
       }

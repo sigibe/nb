@@ -75,7 +75,7 @@ function createDigitalData() {
   const templatePath = getMetadata('template-path');
   const templatePathSplit = templatePath ? templatePath.split('/') : [];
   const templateName = templatePathSplit.length ? templatePathSplit[templatePathSplit.length - 1] : '';
-  const pagePath = window.location.pathname || '';
+  const pagePath = getMetadata('path') || '';
   const pagePathSplit = pagePath.split('/');
 
   const language = getLanguage() || 'en';
