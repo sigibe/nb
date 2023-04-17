@@ -31,14 +31,15 @@ function appendStyles() {
 }
 
 function appendScripts(doc) {
-  const scriptItems = doc.querySelectorAll('script');
-  scriptItems.forEach((item) => {
+  const scriptItems = [...doc.querySelectorAll('script')];
+  // eslint-disable-next-line arrow-body-style
+  scriptItems.filter((item) => {
+    return !item.src || !(IGNORE_SCRIPTS.has(new URL(item.src).pathname));
+  }).forEach((item) => {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
-      if (IGNORE_SCRIPTS.has(url.pathname)) {
-        script = null;
-      } else if (REPLACE_SCRIPTS.has(url.pathname)) {
+      if (REPLACE_SCRIPTS.has(url.pathname)) {
         const details = REPLACE_SCRIPTS.get(url.pathname);
         url.pathname = details.pathname;
       } else if (url.host === document.location.host) {
@@ -46,16 +47,12 @@ function appendScripts(doc) {
         url.port = '';
         url.protocol = 'https';
       }
-      if (script) {
-        script.src = url.href;
-        script.async = false;
-      }
+      script.src = url.href;
+      script.async = false;
     } else {
       script = item;
     }
-    if (script) {
-      document.head.appendChild(script);
-    }
+    document.head.appendChild(script);
     item.remove();
   });
 }
