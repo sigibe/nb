@@ -8,12 +8,14 @@ const REPLACE_SCRIPTS = new Map([
   ['/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js', {
     pathname: '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js',
   }],
+  ['/etc.clientlibs/nedbank/components/nedbank-navigation/clientlibs.min.js', {
+    pathname: '/blocks/header/nb-clientlibs/scripts/navigation/clientlibs.js',
+  }],
 ]);
-
 const IGNORE_SCRIPTS = new Set([
-  '/etc.clientlibs/nedbank/components/nedbank-navigation/clientlibs.min.js', // adds tooltip
   '/etc.clientlibs/nedbank/components/socialshare/clientlibs.min.js',
-  '/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js']); // this is not loaded in the actual site
+  '/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js',
+]);
 
 function appendStyles() {
   [
