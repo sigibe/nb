@@ -12,6 +12,7 @@
     /* Color Code Variables */
     /* Variables */
     a {
+        all: unset;
         color: #008533;
     }
 
@@ -5330,6 +5331,7 @@
             -o-transition: position 5s;
             transition: all 0.5s ease;
             scroll-behavior: smooth;
+            display: none;
         }
 
         .nbd-navbar-desktop-wrapper .navbar {
@@ -6935,6 +6937,7 @@
             position: fixed;
             top: 0;
             filter: brightness(0.8);
+            display: flex;
         }
 
         .nbd-hamburger-menu-mob .nbd-logo {
@@ -7000,6 +7003,7 @@
             list-style: none;
             cursor: pointer;
             border-top: 1px solid #779087;
+            display: flex;
         }
 
         .nbd-hamburger-menu-mob .nbd-hm-l1-link:last-child {
@@ -7021,6 +7025,7 @@
             font-weight: 500;
             text-decoration: none;
             outline: none;
+            width: 100%;
         }
 
         .nbd-hamburger-menu-mob ul.mobprimarysubitem {
@@ -7264,6 +7269,10 @@
             list-style: none;
             cursor: pointer;
             color: #ffffff;
+            line-height: 1.5;
+            font-size: 1pc;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 400;
         }
 
         .nbd-hamburger-menu-mob .nbd-hm-l2-link a,
@@ -7298,10 +7307,6 @@
             width: 22px;
             margin: 5px 8px 0px 18px;
             transition: transform 900ms;
-        }
-
-        .nbd-hamburger-menu-mob .nbd-hamburger-menu-back:hover .nbd-left-arrow {
-            transform: translateX(-8px);
         }
 
         .nbd-hamburger-menu-mob .navbar-nav {

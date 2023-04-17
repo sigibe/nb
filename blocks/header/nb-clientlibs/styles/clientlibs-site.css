@@ -210,6 +210,7 @@
   --nav-head-container-bg-color: #fafafa;
 }
 #external-markup a {
+  all: unset;
   color: #008533;
 }
 #external-markup a:hover {
@@ -4610,6 +4611,7 @@
     -o-transition: position 5s;
     transition: all 0.5s ease;
     scroll-behavior: smooth;
+    display: none;
   }
   #external-markup .nbd-navbar-desktop-wrapper .navbar {
     flex-flow: wrap;
@@ -5992,6 +5994,7 @@
     position: fixed;
     top: 0;
     filter: brightness(0.8);
+    display: flex;
   }
   #external-markup .nbd-hamburger-menu-mob .nbd-logo {
     height: 32px;
@@ -6048,6 +6051,7 @@
     list-style: none;
     cursor: pointer;
     border-top: 1px solid #779087;
+    display: flex;
   }
   #external-markup .nbd-hamburger-menu-mob .nbd-hm-l1-link:last-child {
     border-bottom: 1px solid #779087;
@@ -6066,6 +6070,7 @@
     font-weight: 500;
     text-decoration: none;
     outline: none;
+    width: 100%;
   }
   #external-markup .nbd-hamburger-menu-mob ul.mobprimarysubitem {
     margin: 25px 18px;
@@ -6282,6 +6287,10 @@
     list-style: none;
     cursor: pointer;
     color: #ffffff;
+    line-height: 1.5;
+    font-size: 1pc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
   }
   #external-markup .nbd-hamburger-menu-mob .nbd-hm-l2-link a,
   #external-markup .nbd-hamburger-menu-mob .nbd-hm-l3-link a,
@@ -6313,9 +6322,6 @@
     width: 22px;
     margin: 5px 8px 0px 18px;
     transition: transform 900ms;
-  }
-  #external-markup .nbd-hamburger-menu-mob .nbd-hamburger-menu-back:hover .nbd-left-arrow {
-    transform: translateX(-8px);
   }
   #external-markup .nbd-hamburger-menu-mob .navbar-nav {
     display: inline-flex;
