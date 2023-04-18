@@ -8,7 +8,13 @@ const REPLACE_SCRIPTS = new Map([
   ['/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js', {
     pathname: '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js',
   }],
+  [
+    '/etc.clientlibs/nedbank/components/nedbank-navigation/clientlibs.min.js', {
+      pathname: '/blocks/header/nb-clientlibs/scripts/nedbank-navigation/clientlibs.js'
+  }],
 ]);
+const IGNORE_SCRIPTS = ['/etc.clientlibs/nedbank/components/socialshare/clientlibs.min.js',
+'/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js'];
 
 function appendStyles() {
   [
@@ -25,11 +31,13 @@ function appendStyles() {
 
 function appendScripts(doc) {
   const scriptItems = doc.querySelectorAll('script');
-  scriptItems.forEach((item) => {
+  for(let item of scriptItems) {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
-      if (REPLACE_SCRIPTS.has(url.pathname)) {
+      if(IGNORE_SCRIPTS.indexOf(url.pathname) !== -1) {
+        continue;
+      } else if (REPLACE_SCRIPTS.has(url.pathname)) {
         const details = REPLACE_SCRIPTS.get(url.pathname);
         url.pathname = details.pathname;
       } else if (url.host === document.location.host) {
@@ -44,7 +52,7 @@ function appendScripts(doc) {
     }
     document.head.appendChild(script);
     item.remove();
-  });
+  };
 }
 
 export function toggleHamburger() {
