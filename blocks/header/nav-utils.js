@@ -12,8 +12,8 @@ const REPLACE_SCRIPTS = new Map([
 
 function appendStyles() {
   [
-    '/blocks/header/nb-clientlibs/styles/clientlibs-base.css',
     '/blocks/header/nb-clientlibs/styles/clientlibs-dependencies.css',
+    '/blocks/header/nb-clientlibs/styles/clientlibs-base.css',
     '/blocks/header/nb-clientlibs/styles/clientlibs-site.css',
   ].forEach((item) => {
     const style = document.createElement('link');
