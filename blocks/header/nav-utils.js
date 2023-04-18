@@ -10,11 +10,11 @@ const REPLACE_SCRIPTS = new Map([
   }],
   [
     '/etc.clientlibs/nedbank/components/nedbank-navigation/clientlibs.min.js', {
-      pathname: '/blocks/header/nb-clientlibs/scripts/nedbank-navigation/clientlibs.js'
-  }],
+      pathname: '/blocks/header/nb-clientlibs/scripts/nedbank-navigation/clientlibs.js',
+    }],
 ]);
 const IGNORE_SCRIPTS = ['/etc.clientlibs/nedbank/components/socialshare/clientlibs.min.js',
-'/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js'];
+  '/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js'];
 
 function appendStyles() {
   [
@@ -31,28 +31,29 @@ function appendStyles() {
 
 function appendScripts(doc) {
   const scriptItems = doc.querySelectorAll('script');
-  for(let item of scriptItems) {
+  scriptItems.forEach((item) => {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
-      if(IGNORE_SCRIPTS.indexOf(url.pathname) !== -1) {
-        continue;
-      } else if (REPLACE_SCRIPTS.has(url.pathname)) {
-        const details = REPLACE_SCRIPTS.get(url.pathname);
-        url.pathname = details.pathname;
-      } else if (url.host === document.location.host) {
-        url.host = NEDBANK_HOST;
-        url.port = '';
-        url.protocol = 'https';
+      if (IGNORE_SCRIPTS.indexOf(url.pathname) === -1) {
+        if (REPLACE_SCRIPTS.has(url.pathname)) {
+          const details = REPLACE_SCRIPTS.get(url.pathname);
+          url.pathname = details.pathname;
+        } else if (url.host === document.location.host) {
+          url.host = NEDBANK_HOST;
+          url.port = '';
+          url.protocol = 'https';
+        }
+        script.src = url.href;
+        script.async = false;
+        document.head.appendChild(script);
       }
-      script.src = url.href;
-      script.async = false;
     } else {
       script = item;
+      document.head.appendChild(script);
     }
-    document.head.appendChild(script);
     item.remove();
-  };
+  });
 }
 
 export function toggleHamburger() {
