@@ -211,7 +211,6 @@
 }
 #external-markup a {
   all: unset;
-  cursor: pointer;
   color: #008533;
 }
 #external-markup a:hover {
