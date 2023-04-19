@@ -10,19 +10,6 @@ const REPLACE_SCRIPTS = new Map([
   }],
 ]);
 
-function appendStyles() {
-  [
-    '/blocks/header/nb-clientlibs/styles/clientlibs-dependencies.css',
-    '/blocks/header/nb-clientlibs/styles/clientlibs-base.css',
-    '/blocks/header/nb-clientlibs/styles/clientlibs-site.css',
-  ].forEach((item) => {
-    const style = document.createElement('link');
-    style.rel = 'stylesheet';
-    style.href = item;
-    document.head.append(style);
-  });
-}
-
 function appendScripts(doc) {
   const scriptItems = doc.querySelectorAll('script');
   scriptItems.forEach((item) => {
@@ -89,7 +76,6 @@ export async function loadNavTools() {
     const fetchedHtml = await resp.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(fetchedHtml, 'text/html');
-    appendStyles(doc);
     appendScripts(doc);
 
     doc.querySelectorAll('img').forEach((img) => {
