@@ -10,6 +10,14 @@ const REPLACE_SCRIPTS = new Map([
   }],
 ]);
 
+function cssLoaded() {
+  const externalMarkup = document.getElementById('external-markup');
+
+  if (externalMarkup) {
+    externalMarkup.classList.remove('display-none');
+  }
+}
+
 function appendStyles() {
   [
     '/blocks/header/nb-clientlibs/styles/clientlibs-dependencies.css',
@@ -19,6 +27,20 @@ function appendStyles() {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = item;
+
+    if (item === '/blocks/header/nb-clientlibs/styles/clientlibs-site.css') {
+      // clientlibs-site.css is the largest css, so enabling external markup on its complete loading
+      style.onload = () => {
+        cssLoaded();
+      };
+      style.onreadystatechange = () => {
+        // This will fire multiple times until css gets loaded
+        const { readyState } = this;
+        if (['loaded', 'complete'].indexOf(readyState) !== -1) {
+          style.onload();
+        }
+      };
+    }
     document.head.append(style);
   });
 }
@@ -89,7 +111,6 @@ export async function loadNavTools() {
     const fetchedHtml = await resp.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(fetchedHtml, 'text/html');
-    appendStyles(doc);
     appendScripts(doc);
 
     doc.querySelectorAll('img').forEach((img) => {
@@ -110,6 +131,7 @@ export async function loadNavTools() {
 
     const externalMarkup = document.createElement('div');
     externalMarkup.id = 'external-markup';
+    externalMarkup.classList.add('display-none');
     document.body.appendChild(externalMarkup);
 
     const hamburgerModal = doc.querySelector('.nbd-hamburger-menu-wrapper');
@@ -141,6 +163,8 @@ export async function loadNavTools() {
         document.querySelector('.nav-tools-search').click();
       });
     }
+
+    appendStyles(doc);
   }
 }
 
