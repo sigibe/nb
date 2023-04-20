@@ -16,6 +16,20 @@ function cssLoaded() {
   if (externalMarkup) {
     externalMarkup.classList.remove('hide');
   }
+
+  ['primary-nav', 'secondary-nav'].forEach((item) => {
+    const nav = document.querySelector(item);
+    const hamburger = nav.querySelector('.nav-hamburger');
+
+    if (hamburger) {
+      hamburger.classList.add('appear');
+    }
+
+    const querySearch = nav.querySelector('.nav-tools-search');
+    if (querySearch) {
+      querySearch.classList.add('appear');
+    }
+  });
 }
 
 function appendStyles() {
@@ -32,13 +46,6 @@ function appendStyles() {
       // clientlibs-site.css is the largest css, so enabling external markup on its complete loading
       style.onload = () => {
         cssLoaded();
-      };
-      style.onreadystatechange = () => {
-        // This will fire multiple times until css gets loaded
-        const { readyState } = this;
-        if (['loaded', 'complete'].indexOf(readyState) !== -1) {
-          style.onload();
-        }
       };
     }
     document.head.append(style);
