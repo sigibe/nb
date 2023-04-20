@@ -17,6 +17,28 @@ const IGNORE_SCRIPTS = new Set([
   '/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js',
 ]);
 
+function cssLoaded() {
+  const externalMarkup = document.getElementById('external-markup');
+
+  if (externalMarkup) {
+    externalMarkup.classList.remove('hide');
+  }
+
+  ['primary-nav', 'secondary-nav'].forEach((item) => {
+    const nav = document.querySelector(item);
+    const hamburger = nav.querySelector('.nav-hamburger');
+
+    if (hamburger) {
+      hamburger.classList.add('appear');
+    }
+
+    const querySearch = nav.querySelector('.nav-tools-search');
+    if (querySearch) {
+      querySearch.classList.add('appear');
+    }
+  });
+}
+
 function appendStyles() {
   [
     '/blocks/header/nb-clientlibs/styles/clientlibs-dependencies.css',
@@ -26,6 +48,13 @@ function appendStyles() {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = item;
+
+    if (item === '/blocks/header/nb-clientlibs/styles/clientlibs-site.css') {
+      // clientlibs-site.css is the largest css, so enabling external markup on its complete loading
+      style.onload = () => {
+        cssLoaded();
+      };
+    }
     document.head.append(style);
   });
 }
@@ -99,7 +128,6 @@ export async function loadNavTools() {
     const fetchedHtml = await resp.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(fetchedHtml, 'text/html');
-    appendStyles(doc);
     appendScripts(doc);
 
     doc.querySelectorAll('img').forEach((img) => {
@@ -120,6 +148,7 @@ export async function loadNavTools() {
 
     const externalMarkup = document.createElement('div');
     externalMarkup.id = 'external-markup';
+    externalMarkup.classList.add('hide');
     document.body.appendChild(externalMarkup);
 
     const hamburgerModal = doc.querySelector('.nbd-hamburger-menu-wrapper');
@@ -151,6 +180,8 @@ export async function loadNavTools() {
         document.querySelector('.nav-tools-search').click();
       });
     }
+
+    appendStyles(doc);
   }
 }
 

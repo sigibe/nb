@@ -119,7 +119,6 @@ async function delayedNavTools() {
   ['primary-nav', 'secondary-nav'].forEach((item) => {
     const nav = document.querySelector(item);
     const hamburger = nav.querySelector('.nav-hamburger');
-    hamburger.classList.add('appear');
     hamburger.addEventListener('click', () => {
       const expanded = nav.getAttribute('aria-expanded') === 'true';
       if (expanded) {
@@ -135,7 +134,6 @@ async function delayedNavTools() {
     });
 
     const querySearch = nav.querySelector('.nav-tools-search');
-    querySearch.classList.add('appear');
     querySearch.addEventListener('click', () => {
       toggleSearch();
     });
