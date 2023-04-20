@@ -57,7 +57,9 @@ function addLoginEventListener(nav) {
         window.scrollTo(0, 0); // Scrolling to Top
         bodyEle.classList.add('overflow-hidden');
         bodyEle.classList.remove('overflowY-hidden');
-        document.querySelector('#querySearchModal').classList.remove('show', 'appear');
+        if (document.querySelector('#querySearchModal')) {
+          document.querySelector('#querySearchModal').classList.remove('show', 'appear');
+        }
       } else if (loginEle.classList.contains('modal')) {
         loginEle.classList.remove('modal');
         bodyEle.classList.remove('overflow-hidden');
@@ -194,5 +196,5 @@ export default async function decorate(block) {
   block.append(navDiv);
 
   // Delayed load to reduct TBT impact
-  setTimeout(delayedNavTools, 3000);
+  // setTimeout(delayedNavTools, 3000);
 }
