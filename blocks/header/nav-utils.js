@@ -8,6 +8,13 @@ const REPLACE_SCRIPTS = new Map([
   ['/etc.clientlibs/nedbank/components/querysearch/clientlibs.min.js', {
     pathname: '/blocks/header/nb-clientlibs/scripts/querysearch/clientlibs.js',
   }],
+  ['/etc.clientlibs/nedbank/components/nedbank-navigation/clientlibs.min.js', {
+    pathname: '/blocks/header/nb-clientlibs/scripts/navigation/clientlibs.js',
+  }],
+]);
+const IGNORE_SCRIPTS = new Set([
+  '/etc.clientlibs/nedbank/components/socialshare/clientlibs.min.js',
+  '/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js',
 ]);
 
 function appendStyles() {
@@ -24,8 +31,11 @@ function appendStyles() {
 }
 
 function appendScripts(doc) {
-  const scriptItems = doc.querySelectorAll('script');
-  scriptItems.forEach((item) => {
+  const scriptItems = [...doc.querySelectorAll('script')];
+  // eslint-disable-next-line arrow-body-style
+  scriptItems.filter((item) => {
+    return !item.src || !(IGNORE_SCRIPTS.has(new URL(item.src).pathname));
+  }).forEach((item) => {
     let script = document.createElement('script');
     if (item.src) {
       const url = new URL(item.src);
