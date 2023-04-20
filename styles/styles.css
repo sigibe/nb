@@ -85,7 +85,7 @@ body .modal {
 body .modal.fade {
   height: 0;
 }
-body .display-none {
+body .hide {
   display: none;
 }
 header {

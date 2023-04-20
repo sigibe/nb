@@ -14,7 +14,7 @@ function cssLoaded() {
   const externalMarkup = document.getElementById('external-markup');
 
   if (externalMarkup) {
-    externalMarkup.classList.remove('display-none');
+    externalMarkup.classList.remove('hide');
   }
 }
 
@@ -131,7 +131,7 @@ export async function loadNavTools() {
 
     const externalMarkup = document.createElement('div');
     externalMarkup.id = 'external-markup';
-    externalMarkup.classList.add('display-none');
+    externalMarkup.classList.add('hide');
     document.body.appendChild(externalMarkup);
 
     const hamburgerModal = doc.querySelector('.nbd-hamburger-menu-wrapper');
