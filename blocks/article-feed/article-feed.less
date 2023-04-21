@@ -2,10 +2,7 @@
 autocomment();
 @import (reference) '../../styles/variables.less';
 
-.fixed-center-section {}
-
-main .fixed-center-section,
-main .article-feed-container {
+main .article-feed-container>div {
   max-width: 748px;
   margin: 0 22px;
   padding: 0;
@@ -13,8 +10,7 @@ main .article-feed-container {
 
 @media (@width_768) and (max-width:1024px) {
 
-  main .fixed-center-section,
-  main .article-feed-container {
+  main .article-feed-container>div {
     max-width: 1260px;
     padding: 0;
   }
@@ -23,20 +19,16 @@ main .article-feed-container {
 
 @media only screen and (@width_1025) and (max-width: 1440px) {
 
-  main .fixed-center-section,
-  main .article-feed-container {
+  main .article-feed-container>div {
     max-width: 1260px;
     margin: 0 106px;
     padding: 0;
   }
-
-
 }
 
 @media (@width_1440) {
 
-  main .fixed-center-section,
-  main .article-feed-container {
+  main .article-feed-container>div {
     max-width: 1228px;
     margin: auto;
     padding: 0;
@@ -45,11 +37,46 @@ main .article-feed-container {
 }
 
 
-.article-feed-container {
-  >div {
-    max-width: unset;
-  }
+main .article-feed-container {
+  background-color: @dotcoza-color-neutrals-grey-background;
+  padding-bottom: @spacing-08;
 
+  >.default-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-top: @spacing-11;
+    padding-bottom: @spacing-09;
+
+    >* {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
+    h2 {
+      font-size: @font-size-h2;
+      line-height: @font-lineheight-h2;
+      font-weight: @font-weight-regular;
+      margin: 0;
+    }
+
+    p {
+      margin: 0
+    }
+
+    a {
+      font-size: @font-paragraph-medium;
+      font-weight: @font-weight-bold;
+      line-height: @font-lineheight-medium;
+
+      +.icon {
+        transition: transform 900ms;
+      }
+
+      &:hover+.icon {
+        transform: translateX(8px) scale(1.2);
+      }
+    }
+  }
 }
 
 .article-feed.appear {

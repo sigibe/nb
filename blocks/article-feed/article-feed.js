@@ -2,7 +2,10 @@ import {
   readBlockConfig,
   fetchPlaceholders,
   createOptimizedPicture,
+  formatLocalCardDate,
 } from '../../scripts/scripts.js';
+
+const BASE_URL = 'https://personal.nedbank.co.za';
 
 export function buildArticleCard(article, type = 'article', eager = false) {
   const {
@@ -11,19 +14,20 @@ export function buildArticleCard(article, type = 'article', eager = false) {
   } = article;
 
   const path = article.path.split('.')[0];
-
+  const url = new URL(path, BASE_URL);
   const picture = createOptimizedPicture(image, title, eager, [{ width: '750' }]);
   const pictureTag = picture.outerHTML;
   const card = document.createElement('a');
   card.className = `${type}-card`;
-  card.href = path;
+  card.href = url.href;
+  const formattedDate = formatLocalCardDate(date);
 
   card.innerHTML = `<div class="${type}-card-image">
       ${pictureTag}
     </div>
     <div class="${type}-card-body">
       <p class="${type}-card-author">By ${author}</p>
-      <p class="${type}-card-date">Published ${date} in ${category}</p>
+      <p class="${type}-card-date">Published ${formattedDate} in ${category}</p>
       <h3>${title}</h3>
       <p class="${type}-card-description">${description}</p>
       <div class="${type}-card-footer">

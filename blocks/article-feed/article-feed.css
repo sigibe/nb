@@ -3,37 +3,64 @@
  * To change the css, change the same named .less file.
  * After changing .less file, run 'npm run lessc' from terminal to autogenerate .css file.
  */
-main .fixed-center-section,
-main .article-feed-container {
+main .article-feed-container > div {
   max-width: 748px;
   margin: 0 22px;
   padding: 0;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  main .fixed-center-section,
-  main .article-feed-container {
+  main .article-feed-container > div {
     max-width: 1260px;
     padding: 0;
   }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1440px) {
-  main .fixed-center-section,
-  main .article-feed-container {
+  main .article-feed-container > div {
     max-width: 1260px;
     margin: 0 106px;
     padding: 0;
   }
 }
 @media (min-width: 1440px) {
-  main .fixed-center-section,
-  main .article-feed-container {
+  main .article-feed-container > div {
     max-width: 1228px;
     margin: auto;
     padding: 0;
   }
 }
-.article-feed-container > div {
-  max-width: unset;
+main .article-feed-container {
+  background-color: #fafafa;
+  padding-bottom: 40px;
+}
+main .article-feed-container > .default-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 80px;
+  padding-bottom: 48px;
+}
+main .article-feed-container > .default-content-wrapper > * {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+main .article-feed-container > .default-content-wrapper h2 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 400;
+  margin: 0;
+}
+main .article-feed-container > .default-content-wrapper p {
+  margin: 0;
+}
+main .article-feed-container > .default-content-wrapper a {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+main .article-feed-container > .default-content-wrapper a + .icon {
+  transition: transform 900ms;
+}
+main .article-feed-container > .default-content-wrapper a:hover + .icon {
+  transform: translateX(8px) scale(1.2);
 }
 .article-feed.appear {
   visibility: unset;
