@@ -39,7 +39,7 @@ export function buildArticleCard(article, type = 'article', eager = false) {
 }
 
 export async function fetchBlogArticleIndex() {
-  const pageSize = 500;
+  const pageSize = 10;
   window.blogIndex = window.blogIndex || {
     data: [],
     byPath: {},
