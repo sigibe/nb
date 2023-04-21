@@ -74,7 +74,7 @@ body.overflow-hidden {
 body.overflowY-hidden {
   overflow-y: hidden;
 }
-body .frk-modal {
+body .modal {
   width: 100%;
   height: 100%;
   z-index: 1050;
@@ -82,11 +82,14 @@ body .frk-modal {
   position: fixed;
   display: block;
 }
-body .frk-modal.fade {
+body .modal.fade {
   height: 0;
 }
+body .hide {
+  display: none;
+}
 header {
-  height: var(--nav-height);
+  height: 50px;
 }
 h1,
 h2,
@@ -379,7 +382,7 @@ main .section.readytoapply > .default-content-wrapper {
 }
 main .section.back-to-top {
   margin-top: 32px;
-  padding: 80px 120px 40px 15px;
+  padding: 80px 32px 40px 15px;
 }
 main .section.back-to-top p {
   margin: 0;
@@ -404,7 +407,7 @@ main .section.switchcard .default-content-wrapper {
 main .section.switchcard > .text-wrapper :where(h1, h2, h3, p),
 main .section.switchcard .default-content-wrapper :where(h1, h2, h3, p) {
   color: white;
-  text-align: center;
+  text-align: left;
 }
 main .section.switchcard a.button:any-link {
   width: 100%;
@@ -414,7 +417,6 @@ main .section.switchcard a.button:any-link {
 main .banner-placeholder {
   height: var(--banner-height);
   display: flex;
-  background-color: #fafafa;
   box-sizing: border-box;
   padding: 16px 2rem;
 }
@@ -428,32 +430,47 @@ hr {
   border: 0;
   border-bottom: 1px solid var(--overlay-background-color);
 }
+@keyframes moveUp {
+  from {
+    transform: translateY(30%);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 main .home-banner.section {
-  background: #f2f9f5;
   padding: 24px 10px 0 10px;
+  animation: moveUp 2s ease-in-out 0.5s forwards;
+  opacity: 0;
 }
 main .home-banner.section .default-content-wrapper {
-  background-color: #fff;
+  background-color: #fafafa;
+  box-shadow: 0 26px 40px -12px lightgray;
   padding: 24px;
+  margin-bottom: 40px;
   letter-spacing: 0;
 }
 main .home-banner.section h1 {
   color: #17252e;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 32px;
+  line-height: 36px;
   margin: 0 0 16px 0;
 }
 main .home-banner.section p {
   color: #494f50;
   font-family: "Open Sans Regular";
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 28px;
   margin: unset;
 }
 @media (min-width: 576px) {
   main a.button:any-link {
     height: 56px;
     width: 283px;
+  }
+  main > .section.switchcard .default-content-wrapper :where(h1, h2, h3, p) {
+    text-align: center;
   }
   main > .section.switchcard a.button:any-link {
     height: 56px;
@@ -517,7 +534,7 @@ main .home-banner.section p {
   }
 }
 @media (min-width: 1025px) {
-  body .frk-modal {
+  body .modal {
     top: 64px;
   }
   main .home-banner.section .default-content-wrapper {
@@ -534,8 +551,11 @@ main .home-banner.section p {
     margin: auto;
     padding: 0;
   }
+  main .section.back-to-top {
+    padding-right: 120px;
+  }
   main .section.switchcard {
-    padding: 0;
+    padding: 0 0 32px 0;
     background-color: var(--highlight-background-color);
     display: grid;
     grid-template-columns: 0.55fr 1fr 1fr 0.35fr 1fr 0.7fr;

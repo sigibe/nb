@@ -12,6 +12,15 @@ export default function decorate(block, blockName) {
     const li = document.createElement('li');
     li.innerHTML = row.innerHTML;
     applyClasses([...li.children], ['image', 'body']);
+    if (block.classList.contains('pointer')) {
+      const cardContent = document.createElement('div');
+      cardContent.classList.add('cards-content');
+      const cardsBody = li.querySelector('.cards-body');
+      cardsBody.querySelectorAll(':scope>:not(:last-child)').forEach((item) => {
+        cardContent.appendChild(item);
+      });
+      cardsBody.prepend(cardContent);
+    }
     ul.append(li);
   });
   block.textContent = '';

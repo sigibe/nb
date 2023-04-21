@@ -5,6 +5,7 @@ import {
 import {
   loadNavTools,
   toggleHamburger,
+  toggleSearch,
 } from './nav-utils.js';
 
 /**
@@ -18,29 +19,26 @@ function collapseAllNavSections(sections) {
   });
 }
 
-function injectNavTool(tools, name, icon, type) {
-  let tool;
-  if (type === 'primary-nav') {
-    tool = `<a title=${name}>
+function injectNavTool(tools, name, icon) {
+  const tool = `<a title=${name}>
     <span>${name}</span>
-    <img src='/icons/${icon}.svg'></img>
+    <img alt='${icon}' src='/icons/${icon}.svg'></img>
     </a>`;
-  } else {
-    tool = `<a title=${name}>
-    <span style='display:none'>${name}</span>
-    <img src='/icons/${icon}.svg'></img>
-    </a>`;
-  }
 
   const div = document.createElement('div');
   div.classList.add(`nav-tools-${name.toLowerCase()}`);
   div.innerHTML = tool;
-  tools.append(div);
+
+  const wrapperDiv = document.createElement('div');
+  wrapperDiv.classList.add('nav-tool-wrapper');
+  wrapperDiv.appendChild(div);
+  tools.append(wrapperDiv);
 }
 
 function injectNavTools(nav, type) {
   const tools = nav.querySelector(':scope > .nav-tools');
   tools.innerHTML = '';
+
   injectNavTool(tools, 'Search', 'search', type);
   injectNavTool(tools, 'Login', 'lock', type);
 }
@@ -55,11 +53,13 @@ function addLoginEventListener(nav) {
       const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
 
       if (eleDisplay === 'none') {
-        loginEle.classList.add('frk-modal');
+        loginEle.classList.add('modal');
         window.scrollTo(0, 0); // Scrolling to Top
         bodyEle.classList.add('overflow-hidden');
-      } else if (loginEle.classList.contains('frk-modal')) {
-        loginEle.classList.remove('frk-modal');
+        bodyEle.classList.remove('overflowY-hidden');
+        document.querySelector('#querySearchModal').classList.remove('show', 'appear');
+      } else if (loginEle.classList.contains('modal')) {
+        loginEle.classList.remove('modal');
         bodyEle.classList.remove('overflow-hidden');
       }
     });
@@ -125,9 +125,17 @@ async function delayedNavTools() {
         document.body.classList.remove('overflowY-hidden');
       } else {
         document.body.classList.add('overflowY-hidden');
+        document.querySelector('#querySearchModal').classList.remove('show', 'appear');
+        document.querySelector('.login-overlay').classList.remove('modal');
+        document.body.classList.remove('overflow-hidden');
       }
       nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       toggleHamburger();
+    });
+
+    const querySearch = nav.querySelector('.nav-tools-search');
+    querySearch.addEventListener('click', () => {
+      toggleSearch();
     });
   });
 }
@@ -164,20 +172,23 @@ export default async function decorate(block) {
     if (window.screen.width >= 1025) {
       const element = document.querySelector('secondary-nav');
       if (element) {
-        const section = document.querySelector('secondary-nav .nav-tools');
+        const section = document.querySelector('primary-nav .nav-tools');
 
         if (document.documentElement.scrollTop >= element.offsetHeight) {
           element.classList.add('sticky');
+          section.classList.add('visible');
           section.classList.add('display-flex');
           section.classList.remove('display-none');
         } else {
           element.classList.remove('sticky');
           section.classList.remove('display-flex');
+          section.classList.remove('visible');
           section.classList.add('display-none');
         }
       }
     }
   });
+
   block.append(navDiv);
 
   // Delayed load to reduct TBT impact

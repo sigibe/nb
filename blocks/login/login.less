@@ -11,8 +11,9 @@ autocomment();
 
     *>h1 {
         margin-bottom: 0.5rem;
+        margin-top: @spacing-07;
         font-family: @font-family-primary;
-        font-size: @font-size-h2;
+        font-size: @font-size-h3;
         line-height: 36px;
     }
 
@@ -20,7 +21,7 @@ autocomment();
         list-style: none;
         padding: 18px 0;
         font-weight: @font-weight-medium;
-        border-bottom: 1px solid @dotcoza-color-neutrals-grey-disabled;
+        border-bottom: 1px solid #E5EDEC;
         font-size: @font-size-base;
         
         a {
@@ -37,7 +38,7 @@ autocomment();
 
     *>span {
         display: flex;
-        align-self: flex-end;
+        align-items: center;
         margin-left: 8px;
     }
 
@@ -59,14 +60,14 @@ autocomment();
         width: 100%;
         color: @dotcoza-color-title-grey;
         align-items: center;
-        font-size: @font-size-base;
+        font-size: @font-size-medium;
         line-height: @font-lineheight-base;
         display: flex;
         justify-content: space-between;
     }
 
     *>p {
-        font-size: @font-size-small;
+        font-size: @font-size-base;
         line-height: @font-lineheight-small;
         font-family: @font-family-secondary;
         margin: @spacing-05 0 @spacing-07 0;
@@ -91,11 +92,30 @@ autocomment();
                 p {
                     cursor: pointer;
                     margin: 0;
+                    width: 100%;
+
+                    span:first-child {
+                        flex-basis: 90%;
+                        margin-left: 0;
+                        height: 100%;
+
+                        svg {
+                            width: 32px;
+                            height: 32px;
+                        }
+                    }
+
+                    span:last-child {
+                        svg {
+                            height: 42px;
+                            width: 42px;
+                        }
+                    }
                 }
             }
 
             .login-main {
-                margin: 0 22px;
+                margin: 0 18px;
                 
                 .button-container {
                     margin-bottom: 0;
@@ -134,20 +154,20 @@ autocomment();
 @media (@width_576) {
     .login-overlay {
         *>p {
-            font-size: @font-size-base;
             line-height: @font-lineheight-base;
             font-family: @font-family-secondary;
             margin-bottom: @spacing-07;
         }
 
         *>a {
-            font-size: @font-size-medium;
             line-height: @font-lineheight-medium;
         }
 
         .login {
             &.block {
                 .login-main {
+                    margin: 0 22px;
+
                     .button-container {
                         a {
                             font-size: @font-size-medium;
@@ -169,16 +189,16 @@ autocomment();
 @media (@width_768) {
     .login-overlay {
         *>h1 {
-            margin-top: 0;
             font-size: @font-size-h1;
             line-height: @font-lineheight-h1;
-        }    
+        }
     }
 }
 
 @media (@width_1025) {
     .login-overlay {
         *>h1 {
+            margin-top: 0;
             margin-bottom: 36px;
         }
 
@@ -205,6 +225,13 @@ autocomment();
                 .login-header {
                     padding: 40px 89px 15px;
                     height: 42px;
+
+                    p {
+                        span:first-child {
+                            visibility: hidden;
+                            flex-basis: 95%;
+                        }
+                    }
                 }
     
                 .login-main {

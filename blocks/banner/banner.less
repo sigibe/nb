@@ -3,10 +3,12 @@
 main {
 	.banner-placeholder {
 		padding-right: 35px;
-		background-color: @dotcoza-color-neutrals-grey-divider;
-		display: none;
-		&.appear {
-			display: flex;
+		&.hide {
+			display: none;
+		}
+
+		&.grey-bg-color {
+			background-color: @dotcoza-color-neutrals-grey-divider;
 		}
 	}
 	.banner {
@@ -18,8 +20,9 @@ main {
 		}
 		p {
 			margin: unset;
+			padding-right: 20px;
 			font-size: 16px;
-			line-height: 24px;
+			line-height: 28px;
 			color: @color_1;
 			font-family: @font_family_1;
 			letter-spacing: 0;
@@ -28,8 +31,9 @@ main {
 				font-size: 18px;
 				letter-spacing: 0;
 				line-height: 24px;
-				color: @color_2;
+				color: #006627;
 				font-family: @font_family_2;
+				margin-left: 0;
 			}
 
 			&>span {
@@ -37,6 +41,16 @@ main {
 					float:right;
 					cursor: pointer;
 				}
+			}
+		}
+	}
+}
+
+@media (@width_576) {
+	main {
+		.banner {
+			p > a {
+				margin-left: 10px;
 			}
 		}
 	}

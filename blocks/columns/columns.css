@@ -4,8 +4,9 @@
  * After changing .less file, run 'npm run lessc' from terminal to autogenerate .css file.
  */
 .section.columns-container {
-  padding-left: 22px;
-  padding-right: 22px;
+  padding-top: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .columns > div {
   display: flex;
@@ -19,6 +20,7 @@
 }
 .columns img {
   width: 100%;
+  box-shadow: 0 14px 20px -12px lightgray;
 }
 .columns.backdrop {
   background-color: #F9FBFB;
@@ -30,13 +32,23 @@
 .columns.backdrop > div {
   flex-direction: column;
   align-items: flex-start;
+  padding-bottom: 60px;
 }
-.columns.backdrop > div > div > p {
+.columns.backdrop > div > div > h2 {
+  padding: 0 10px 0 10px;
+  font-size: 24px;
+  line-height: 32px;
+}
+.columns.backdrop > div > div > ul > li {
   margin: 0;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 26px;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   color: #494f50;
+  padding: 0 10px 10px 14px;
+}
+.columns.backdrop > div > div > ul > li::marker {
+  font-size: 13px;
 }
 .columns.lazy-river > div:nth-child(odd) {
   display: flex;
@@ -185,7 +197,7 @@
   .columns.backdrop > div {
     align-items: flex-start;
   }
-  .columns.backdrop > div > div > p {
+  .columns.backdrop > div > div > ul > li {
     margin: 0;
     font-size: 18px;
     line-height: 28px;
@@ -229,7 +241,11 @@
     left: -76px;
     position: relative;
   }
-  .columns.backdrop > div > div > p {
+  .columns.backdrop > div > div > h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .columns.backdrop > div > div > ul > li {
     position: relative;
   }
 }

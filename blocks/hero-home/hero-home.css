@@ -10,6 +10,8 @@ main .hero-home {
 }
 main .hero-home img {
   width: 100vw;
+  object-fit: cover;
+  height: 180px;
 }
 main .hero-home > div > div > p:first-child {
   margin: 0px;
@@ -23,6 +25,8 @@ main .hero-home > div > div > h1 {
   padding: 24px 18px 40px 18px;
   height: auto;
   box-sizing: border-box;
+  line-height: 40px;
+  animation: moveUp 1s ease-in-out;
 }
 @media (min-width: 900px) {
   main .hero-home > div > div > h1 {
@@ -35,16 +39,17 @@ main .hero-home > div > div > h1 {
     left: 0;
     padding: 64px 0 0 22px;
   }
+  main .hero-home img {
+    height: 346px;
+  }
 }
 @media (min-width: 1025px) {
-  main .hero-home img {
-    width: 100vw;
-    height: 500px;
-    object-fit: cover;
-  }
   main .hero-home > div > div > h1 {
     padding: 98px 0 0 105px;
     font-size: 64px;
     line-height: 72px;
+  }
+  main .hero-home img {
+    height: 500px;
   }
 }

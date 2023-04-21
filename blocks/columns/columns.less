@@ -5,15 +5,14 @@ autocomment();
 @import (reference) "../../styles/variables.less";
 
 .section.columns-container {
-  padding-left: 22px;
-  padding-right: 22px;
+  padding-top: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .columns {
   >div {
     .flex(column);
-
-
 
     >div {
       .width-basis(1);
@@ -23,6 +22,7 @@ autocomment();
 
   img {
     width: 100%;
+    box-shadow: 0 14px 20px -12px lightgray;
   }
 
   &.backdrop {
@@ -36,14 +36,26 @@ autocomment();
     >div {
       flex-direction: column;
       align-items: flex-start;
+      padding-bottom: 60px;
 
       >div {
-        >p {
-          margin: 0;
-          font-size: @font-size-medium;
-          line-height: 28px;
-          font-family: @font-family-secondary;
-          color: #494f50;
+        >h2 {
+          padding: 0 10px 0 10px;
+          font-size: @font-size-h3;
+          line-height: @font-lineheight-h3;
+        }
+        >ul { 
+          >li {
+            margin: 0;
+            font-size: @font-size-base;
+            line-height: @font-lineheight-medium;
+            font-family: @font-family-secondary;
+            color: #494f50;
+            padding: 0 10px 10px 14px;
+          }
+          >li::marker {
+            font-size: 13px;
+          }
         }
       }
     }
@@ -241,7 +253,7 @@ autocomment();
         align-items: flex-start;
 
         >div {
-          >p {
+          >ul > li {
             margin: 0;
             font-size: @font-size-medium;
             line-height: 28px;
@@ -320,7 +332,12 @@ autocomment();
             position: relative;
           }
 
-          >p {
+          >h2 {
+            font-size: @font-size-h2;
+            line-height: @font-lineheight-h2;
+          }
+
+          >ul > li {
             position: relative;
           }
         }

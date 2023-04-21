@@ -13,6 +13,17 @@ footer .section h5 {
 footer .footer-social h2 {
   padding-left: 20px;
 }
+footer .footer.block a {
+  color: #494f50;
+}
+footer .footer.block div.default-content-wrapper > p {
+  display: flex;
+  flex-direction: column;
+}
+footer .footer.block div.default-content-wrapper > p a {
+  margin-top: 20px;
+  margin-left: 0px;
+}
 footer .footer-social-items {
   display: flex;
   justify-content: space-between;
@@ -26,6 +37,9 @@ footer .footer-social-items .icon {
   margin-right: 24px;
   opacity: 0.5;
 }
+footer .footer-social-items .icon:hover {
+  opacity: 1;
+}
 footer .footer-social-items p {
   margin-block-start: 0px;
   font-size: 14px;
@@ -36,11 +50,8 @@ footer .footer-link-groups {
   justify-content: center;
   flex-direction: column;
 }
-footer .footer-link-group {
-  margin-bottom: 48px;
-}
 footer .footer-link-group h5 {
-  border: 1px solid #e5edec;
+  border-bottom: 1px solid #e5edec;
   margin: unset;
   padding: 20px 0 20px 20px;
 }
@@ -75,7 +86,6 @@ footer .footer-link-group > ul > li:last-child {
   padding-bottom: 20px;
 }
 footer .footer-link-group > ul > li > a {
-  color: #494f50;
   font-family: "Open Sans Regular";
   font-size: 14px;
   letter-spacing: 0;
@@ -84,9 +94,19 @@ footer .footer-link-group > ul > li > a {
 footer .icon-nedbank-caps svg {
   width: 100px;
 }
+footer div.footer-social {
+  border: none;
+}
 @media (min-width: 991px) {
   footer .section .default-content-wrapper {
     padding: 0 90px;
+  }
+  footer .footer.block div.default-content-wrapper > p {
+    display: block;
+  }
+  footer .footer.block div.default-content-wrapper > p a {
+    font-size: 16px;
+    margin-left: 40px;
   }
   footer .footer-social-items {
     flex-direction: row;
@@ -109,6 +129,7 @@ footer .icon-nedbank-caps svg {
   }
   footer .footer-links .footer-link-groups .footer-link-group {
     padding-left: 20px;
+    margin-bottom: 48px;
   }
   footer .footer-links .footer-link-groups .footer-link-group h5 {
     border: none;
@@ -133,5 +154,6 @@ footer .icon-nedbank-caps svg {
   }
   footer .footer-links .footer-link-groups .footer-link-group > ul > li > a {
     font-size: 16px;
+    line-height: 32px;
   }
 }

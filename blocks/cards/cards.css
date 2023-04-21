@@ -8,8 +8,7 @@
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  padding-left: 22px;
-  padding-right: 22px;
+  padding: 0 22px 0 22px;
   text-align: center;
 }
 .section.cards-container > div:first-child :where(ul, li, h1, h2, h3, h4, h5, h6, p) {
@@ -20,11 +19,27 @@
   flex-basis: calc(100%/1);
   max-width: calc(100%/1);
 }
+.section.cards-container div.cards-wrapper {
+  margin-bottom: 26px;
+}
 .section.cards-container.switchcard h2 {
-  font-size: 32px;
-  margin-top: 20px;
-  margin-left: 32px;
+  margin-top: -15px;
   margin-bottom: -30px;
+}
+.section.cards-container.switchcard h3 {
+  margin-top: 16px;
+  font-size: 20px;
+  line-height: 28px;
+}
+.section.cards-container.switchcard .default-content-wrapper > h3 {
+  margin-top: 40px;
+}
+.section.cards-container.switchcard .cards-body > p {
+  font-size: 16px;
+  line-height: 24px;
+}
+.section.cards-container.switchcard .text-wrapper {
+  padding-bottom: 0px;
 }
 /* cards -> when space is less, items will shift accordingly and content of items will be placed horizontal */
 .cards :where(ul, li, h1, h2, h3, h4, h5, h6, p) {
@@ -75,26 +90,26 @@
   flex-grow: 1;
   align-items: center;
 }
-.cards .cards-body > h3 {
+.cards .cards-body h3 {
   margin-left: 14px;
   margin-right: 14px;
   font-size: 18px;
   line-height: 24px;
 }
-.cards .cards-body > p {
+.cards .cards-body p {
   font-size: 14px;
   line-height: 20px;
   color: #494f50;
 }
-.cards .cards-body > p:has(.icon) {
+.cards .cards-body p:has(.icon) {
   font-size: 18px;
   line-height: 24px;
   font-family: "Open Sans Semibold";
 }
-.cards .cards-body > p.button-container {
+.cards .cards-body p.button-container {
   line-height: 24px;
 }
-.cards .cards-body > p.button-container > a {
+.cards .cards-body p.button-container > a {
   margin: unset;
   padding: unset;
   cursor: pointer;
@@ -104,11 +119,19 @@
   font-family: "Open Sans Bold";
   color: #008533;
 }
-.cards .cards-body > p.button-container > a:has(.icon) {
+.cards .cards-body p.button-container > a:has(.icon) {
   overflow: visible;
 }
-.cards .cards-body > p > a + .icon {
+.cards .cards-body p > a + .icon {
   margin-left: 10px;
+}
+.cards .cards-body > .cards-content {
+  flex-grow: 1;
+  text-align: left;
+}
+.cards .cards-body > .cards-content p {
+  margin-left: 14px;
+  margin-right: 14px;
 }
 /* cards.large -> when space is less, items will shift but content of items will remain vertical  */
 .cards.large > ul {
@@ -205,11 +228,10 @@
 /* home services */
 .home-services.cards-container {
   padding-bottom: 32px;
-  background-color: var(--overlay-background-color);
 }
 .home-services.cards-container > div:first-child > h1 {
-  font-size: 24px;
-  margin: 0px auto 32px auto;
+  font-size: 20px;
+  margin: 24px auto 32px auto;
 }
 .home-services.cards-container a .icon {
   margin-left: 0;
@@ -473,11 +495,14 @@
     box-sizing: border-box;
     flex-direction: column;
   }
-  .cards .cards-body > h3 {
+  .cards .cards-body h3 {
     flex-grow: 0;
     margin: 24px 0 0 0;
     font-size: 22px;
     line-height: 28px;
+  }
+  .cards .cards-body > .cards-content {
+    text-align: center;
   }
   .cards.large > ul {
     gap: 15px 35px;
@@ -500,7 +525,7 @@
     min-width: 180px;
     max-width: 225px;
   }
-  .home-services.cards-container .cards .cards-body > h3 + p {
+  .home-services.cards-container .cards .cards-body h3 + p {
     font-size: 16px;
     line-height: 24px;
     margin: 8px 0 24px 0;
@@ -605,6 +630,9 @@
   .home-services.cards-container .cards > ul > li .cards-image > span {
     display: flex;
   }
+  div.promotion-banner h2 strong {
+    font-size: 32px;
+  }
 }
 div.switchcard h3 {
   font-weight: 400;
@@ -615,20 +643,38 @@ div.switchcard h3 + p {
   font-size: 16px;
   line-height: 24px;
 }
-div.promotion-banner h2 strong {
-  margin-left: -24px;
-  font-size: 32px;
-}
 div.promotion-banner a {
   font-size: 18px;
   font-weight: 700;
 }
 @media (min-width: 1025px) {
+  div.switchcard div.text-wrapper {
+    margin: 32px 0 30px 0;
+  }
+  div.switchcard h2 > strong {
+    margin-left: 2px;
+  }
   div.switchcard h3 {
     line-height: 40px;
     font-size: 32px;
   }
   div.switchcard h3 + p {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  div.section.cards-container.switchcard h3 {
+    line-height: 32px;
+    font-size: 24px;
+  }
+  div.section.cards-container.switchcard .cards-body p {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  div.section.cards-container.switchcard div.default-content-wrapper h3 {
+    line-height: 40px;
+    font-size: 32px;
+  }
+  div.section.cards-container.switchcard div.default-content-wrapper p {
     font-size: 20px;
     line-height: 28px;
   }
