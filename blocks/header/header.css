@@ -199,7 +199,7 @@ header secondary-nav .nav-sections > ul > li > ul > li:first-child:hover {
   background-color: var(--background-color);
 }
 header secondary-nav .nav-sections > ul > li[aria-expanded='true'] ul {
-  margin: unset;
+  margin-top: 26px;
   display: block;
   position: absolute;
   width: 200px;
@@ -208,7 +208,6 @@ header secondary-nav .nav-sections > ul > li[aria-expanded='true'] ul {
   background-color: var(--background-color);
   box-shadow: 3px 3px 16px 0 rgba(0, 0, 0, 0.12);
   border: 0;
-  margin-top: 17px;
 }
 header secondary-nav .nav-sections ul {
   display: flex;
@@ -342,7 +341,7 @@ header .sticky {
     content: ' ';
     border: 2px solid #008533;
     display: block;
-    transform: translateY(43px);
+    transform: translateY(50px);
   }
   header secondary-nav .nav-sections > ul > li[aria-expanded='true'] > a::after {
     transform: rotate(180deg);
