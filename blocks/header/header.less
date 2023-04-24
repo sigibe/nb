@@ -246,7 +246,7 @@ header {
 
 				>li[aria-expanded='true'] {
 					ul {
-						margin: unset;
+						margin-top: 20px;
 						display: block;
 						position: absolute;
 						width: 200px;
@@ -255,7 +255,6 @@ header {
 						background-color: @background_color_1;
 						box-shadow: 3px 3px 16px 0 rgb(0 0 0 / 12%);
 						border: 0;
-						margin-top: 17px;
 					}
 				}
 			}
@@ -429,7 +428,7 @@ header {
 								content: ' ';
 								border: @spacing-01 solid @dotcoza-color-greens-default;
 								display: block;
-								transform: translateY(43px);
+								transform: translateY(45px);
 							}
 							>a {
 								&::after {
@@ -444,7 +443,7 @@ header {
 
 						&:not(:first-child) {
 							height: var(--nav-height);
-							padding-top: 16px;
+							padding-top: calc(var(--nav-height) / 2);
 							display: unset;
 						}
 
