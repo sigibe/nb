@@ -199,7 +199,7 @@ header secondary-nav .nav-sections > ul > li > ul > li:first-child:hover {
   background-color: var(--background-color);
 }
 header secondary-nav .nav-sections > ul > li[aria-expanded='true'] ul {
-  margin-top: 26px;
+  margin-top: 20px;
   display: block;
   position: absolute;
   width: 200px;
@@ -341,7 +341,7 @@ header .sticky {
     content: ' ';
     border: 2px solid #008533;
     display: block;
-    transform: translateY(50px);
+    transform: translateY(45px);
   }
   header secondary-nav .nav-sections > ul > li[aria-expanded='true'] > a::after {
     transform: rotate(180deg);
@@ -351,7 +351,7 @@ header .sticky {
   }
   header secondary-nav .nav-sections > ul > li:not(:first-child) {
     height: var(--nav-height);
-    padding-top: 16px;
+    padding-top: calc(var(--nav-height) / 2);
     display: unset;
   }
   header secondary-nav .nav-sections > ul > li > a::after {
