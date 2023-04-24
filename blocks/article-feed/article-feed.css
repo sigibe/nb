@@ -119,11 +119,11 @@ main .article-feed-container > .default-content-wrapper a:hover + .icon {
   color: #494f50;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  font-size: 14px;
+  line-height: 22px;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-bottom: 25px;
-  font-size: 14px;
-  line-height: 22px;
 }
 .article-card-body .article-card-date {
   margin-bottom: 24px;
