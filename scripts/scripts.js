@@ -927,3 +927,25 @@ function loadDelayed() {
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
 }
+
+/**
+ * Formats the article date for the card using the date locale
+ * matching the content displayed.
+ * @param {number} date The date to format
+ * @returns {string} The formatted card date
+ */
+export function formatLocalCardDate(date) {
+  // number case, coming from Excel
+  // 1/1/1900 is day 1 in Excel, so:
+  // - add this
+  // - add days between 1/1/1900 and 1/1/1970
+  // - add one more day for Excel's leap year bug
+  const jsDate = new Date(Math.round((date - (1 + 25567 + 1)) * 86400 * 1000));
+  const dateLocale = 'en-ZA';
+
+  return new Date(jsDate).toLocaleDateString(dateLocale, {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+}
