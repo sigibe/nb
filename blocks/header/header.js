@@ -43,28 +43,30 @@ function injectNavTools(nav, type) {
   injectNavTool(tools, 'Login', 'lock', type);
 }
 
+function showLoginModal() {
+  const loginEle = document.querySelector('.login-overlay');
+  const bodyEle = document.querySelector('body');
+  const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
+
+  if (eleDisplay === 'none') {
+    loginEle.classList.add('modal');
+    window.scrollTo(0, 0); // Scrolling to Top
+    bodyEle.classList.add('overflow-hidden');
+    bodyEle.classList.remove('overflowY-hidden');
+    if (document.getElementById('querySearchModal')) {
+      document.getElementById('querySearchModal').classList.remove('show', 'appear');
+    }
+  } else if (loginEle.classList.contains('modal')) {
+    loginEle.classList.remove('modal');
+    bodyEle.classList.remove('overflow-hidden');
+  }
+}
+
 function addLoginEventListener(nav) {
   const loginButton = nav.querySelector('.nav-tools-login');
 
   if (loginButton) {
-    loginButton.addEventListener('click', () => {
-      const loginEle = document.querySelector('.login-overlay');
-      const bodyEle = document.querySelector('body');
-      const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
-
-      if (eleDisplay === 'none') {
-        loginEle.classList.add('modal');
-        window.scrollTo(0, 0); // Scrolling to Top
-        bodyEle.classList.add('overflow-hidden');
-        bodyEle.classList.remove('overflowY-hidden');
-        if (document.getElementById('querySearchModal')) {
-          document.getElementById('querySearchModal').classList.remove('show', 'appear');
-        }
-      } else if (loginEle.classList.contains('modal')) {
-        loginEle.classList.remove('modal');
-        bodyEle.classList.remove('overflow-hidden');
-      }
-    });
+    loginButton.addEventListener('click', showLoginModal);
   }
 }
 
@@ -115,8 +117,20 @@ function decorateNav(respTxt, type) {
   return nav;
 }
 
+function configureHamburgerLoginBtn() {
+  const loginButton = document.querySelector('.nbd-hamburger-menu-wrapper .nbd-hamburger-menu-mob [data-target="#logincomp"]');
+  if (loginButton) {
+    // this attributes adds a click handler which disables any click events
+    // on this particular button
+    loginButton.removeAttribute('data-toggle');
+    loginButton.addEventListener('click', showLoginModal);
+  }
+}
+
 async function delayedNavTools() {
-  await loadNavTools();
+  await loadNavTools(showLoginModal);
+
+  configureHamburgerLoginBtn();
 
   ['primary-nav', 'secondary-nav'].forEach((item) => {
     const nav = document.querySelector(item);
