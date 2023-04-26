@@ -11,13 +11,13 @@
   font-display: swap;
 }
 :root {
-  --link-color: #008533;
-  --link-hover-color: #008533;
+  --link-color: #006125;
+  --link-hover-color: #006125;
   --background-color: #ffffff;
   --background-color-grey: #f9fbfb;
   --background-color-black: #000000;
   --overlay-background-color: #f2f9f5;
-  --highlight-background-color: #008533;
+  --highlight-background-color: #006125;
   --text-color: #17252e;
   --heading-text-color: #17252e;
   --body-font-family: 'Open Sans Regular', 'Open Sans-fallback';
@@ -42,14 +42,14 @@
 :root .light {
   --background-color: #ffffff;
   --background-color-banner: #fafafa;
-  --highlight-background-color: #008533;
+  --highlight-background-color: #006125;
   --text-color: #17252e;
   --heading-text-color: #17252e;
 }
 :root .dark {
   --background-color: #000000;
   --background-color-banner: #494f50;
-  --highlight-background-color: #008533;
+  --highlight-background-color: #006125;
   --text-color: #ffffff;
   --heading-text-color: #ffffff;
 }

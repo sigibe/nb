@@ -220,7 +220,7 @@ main .article-feed-container > .default-content-wrapper a:hover + .icon {
   cursor: pointer;
 }
 .article-feed .pagination-bullet.active {
-  background: #008533;
+  background: #006125;
   width: 26px;
   border-radius: 35px;
   opacity: 1;
