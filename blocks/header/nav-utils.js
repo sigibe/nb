@@ -122,7 +122,17 @@ export function toggleSearch() {
   document.body.classList.toggle('overflowY-hidden');
 }
 
-export async function loadNavTools() {
+function configureHamburgerLoginBtn(loginAction) {
+  const loginButton = document.querySelector('.nbd-hamburger-menu-wrapper .nbd-hamburger-menu-mob [data-target="#logincomp"]');
+  if (loginButton) {
+    // this attributes adds a click handler which disables any click events
+    // on this particular button
+    loginButton.removeAttribute('data-toggle');
+    loginButton.addEventListener('click', loginAction);
+  }
+}
+
+export async function loadNavTools(loginAction) {
   const resp = await fetch(getMetadata('nav'));
   if (resp.ok) {
     const fetchedHtml = await resp.text();
@@ -180,6 +190,8 @@ export async function loadNavTools() {
         document.querySelector('.nav-tools-search').click();
       });
     }
+
+    configureHamburgerLoginBtn(loginAction);
 
     appendStyles(doc);
   }

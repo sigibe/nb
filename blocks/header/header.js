@@ -117,20 +117,8 @@ function decorateNav(respTxt, type) {
   return nav;
 }
 
-function configureHamburgerLoginBtn() {
-  const loginButton = document.querySelector('.nbd-hamburger-menu-wrapper .nbd-hamburger-menu-mob [data-target="#logincomp"]');
-  if (loginButton) {
-    // this attributes adds a click handler which disables any click events
-    // on this particular button
-    loginButton.removeAttribute('data-toggle');
-    loginButton.addEventListener('click', showLoginModal);
-  }
-}
-
 async function delayedNavTools() {
-  await loadNavTools();
-
-  configureHamburgerLoginBtn();
+  await loadNavTools(showLoginModal);
 
   ['primary-nav', 'secondary-nav'].forEach((item) => {
     const nav = document.querySelector(item);
