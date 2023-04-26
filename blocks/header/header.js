@@ -128,7 +128,7 @@ function configureHamburgerLoginBtn() {
 }
 
 async function delayedNavTools() {
-  await loadNavTools(showLoginModal);
+  await loadNavTools();
 
   configureHamburgerLoginBtn();
 
