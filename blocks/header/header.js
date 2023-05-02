@@ -43,30 +43,28 @@ function injectNavTools(nav, type) {
   injectNavTool(tools, 'Login', 'lock', type);
 }
 
-function showLoginModal() {
-  const loginEle = document.querySelector('.login-overlay');
-  const bodyEle = document.querySelector('body');
-  const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
-
-  if (eleDisplay === 'none') {
-    loginEle.classList.add('modal');
-    window.scrollTo(0, 0); // Scrolling to Top
-    bodyEle.classList.add('overflow-hidden');
-    bodyEle.classList.remove('overflowY-hidden');
-    if (document.getElementById('querySearchModal')) {
-      document.getElementById('querySearchModal').classList.remove('show', 'appear');
-    }
-  } else if (loginEle.classList.contains('modal')) {
-    loginEle.classList.remove('modal');
-    bodyEle.classList.remove('overflow-hidden');
-  }
-}
-
 function addLoginEventListener(nav) {
   const loginButton = nav.querySelector('.nav-tools-login');
 
   if (loginButton) {
-    loginButton.addEventListener('click', showLoginModal);
+    loginButton.addEventListener('click', () => {
+      const loginEle = document.querySelector('.login-overlay');
+      const bodyEle = document.querySelector('body');
+      const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
+
+      if (eleDisplay === 'none') {
+        loginEle.classList.add('modal');
+        window.scrollTo(0, 0); // Scrolling to Top
+        bodyEle.classList.add('overflow-hidden');
+        bodyEle.classList.remove('overflowY-hidden');
+        if (document.getElementById('querySearchModal')) {
+          document.getElementById('querySearchModal').classList.remove('show', 'appear');
+        }
+      } else if (loginEle.classList.contains('modal')) {
+        loginEle.classList.remove('modal');
+        bodyEle.classList.remove('overflow-hidden');
+      }
+    });
   }
 }
 
@@ -118,7 +116,7 @@ function decorateNav(respTxt, type) {
 }
 
 async function delayedNavTools() {
-  await loadNavTools(showLoginModal);
+  await loadNavTools();
 
   ['primary-nav', 'secondary-nav'].forEach((item) => {
     const nav = document.querySelector(item);
