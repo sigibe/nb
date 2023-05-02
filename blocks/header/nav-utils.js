@@ -122,6 +122,19 @@ export function toggleSearch() {
   document.body.classList.toggle('overflowY-hidden');
 }
 
+function configureHamburgerLoginBtn() {
+  const loginButton = document.querySelector('.nbd-hamburger-menu-wrapper .nbd-hamburger-menu-mob [data-target="#logincomp"]');
+  const actualLoginButton = document.querySelector('.nav-tools-login');
+  if (loginButton) {
+    // this attributes adds a click handler which disables any click events
+    // on this particular button. Hence removing the attribute
+    loginButton.removeAttribute('data-toggle');
+    loginButton.addEventListener('click', () => {
+      actualLoginButton.click();
+    });
+  }
+}
+
 export async function loadNavTools() {
   const resp = await fetch(getMetadata('nav'));
   if (resp.ok) {
@@ -180,6 +193,8 @@ export async function loadNavTools() {
         document.querySelector('.nav-tools-search').click();
       });
     }
+
+    configureHamburgerLoginBtn();
 
     appendStyles(doc);
   }
