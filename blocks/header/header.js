@@ -44,6 +44,8 @@ function injectNavTools(nav, type) {
 }
 
 function addLoginEventListener(nav) {
+  // if this selector changes, modify the configureHamburgerLoginBtn
+  // function in nav-utils.js as well
   const loginButton = nav.querySelector('.nav-tools-login');
 
   if (loginButton) {
