@@ -127,7 +127,7 @@ function configureHamburgerLoginBtn() {
   const actualLoginButton = document.querySelector('.nav-tools-login');
   if (loginButton) {
     // this attributes adds a click handler which disables any click events
-    // on this particular button
+    // on this particular button. Hence removing the attribute
     loginButton.removeAttribute('data-toggle');
     loginButton.addEventListener('click', () => {
       actualLoginButton.click();
