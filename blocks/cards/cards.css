@@ -243,6 +243,12 @@
 .home-services.cards-container .cards .cards-body > h3 + p {
   flex-grow: 1;
 }
+.home-services.cards-container .cards .cards-body h2 {
+  margin-left: 14px;
+  margin-right: 14px;
+  font-size: 18px;
+  line-height: 24px;
+}
 /* personal nedbank */
 .personal-nedbank.cards-container {
   padding-top: 60px;
@@ -525,10 +531,16 @@
     min-width: 180px;
     max-width: 225px;
   }
-  .home-services.cards-container .cards .cards-body h3 + p {
+  .home-services.cards-container .cards .cards-body h3 + p,
+  .home-services.cards-container .cards .cards-body h2 + p {
     font-size: 16px;
     line-height: 24px;
     margin: 8px 0 24px 0;
+  }
+  .home-services.cards-container .cards .cards-body h2 {
+    font-size: 22px;
+    margin: 24px 0 0 0;
+    line-height: 28px;
   }
   .home-promotions.cards-container .cards.large > ul {
     justify-content: space-evenly;
