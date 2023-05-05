@@ -307,6 +307,13 @@ autocomment();
           flex-grow: 1;
         }
       }
+
+      h2 {
+        margin-left: 14px;
+        margin-right: 14px;
+        font-size: @font-size-medium;
+        line-height: 24px;
+      }
     }
   }
 }
@@ -710,12 +717,18 @@ autocomment();
       }
 
       .cards-body {
-        h3 {
+        h3, h2 {
           +p {
             font-size: 16px;
             line-height: 24px;
             margin: 8px 0 24px 0;
           }
+        }
+
+        h2 {
+          font-size: 22px;
+          margin: 24px 0 0 0;
+          line-height: 28px;
         }
       }
     }
