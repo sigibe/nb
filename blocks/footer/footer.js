@@ -82,7 +82,7 @@ export default async function decorate(block) {
   const cfg = readBlockConfig(block);
   block.textContent = '';
 
-  const footerPath = cfg.footer || `${getRootPath()}/drafts/piyush/footer`;
+  const footerPath = cfg.footer || `${getRootPath()}/footer`;
   const resp = await fetch(`${footerPath}.plain.html`);
   const html = await resp.text();
   const footer = document.createElement('div');
