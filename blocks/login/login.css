@@ -24,7 +24,7 @@
   font-size: 16px;
 }
 .login-overlay * > li a:hover {
-  color: #008533;
+  color: #006125;
 }
 .login-overlay * > li a span:hover {
   transition: transform 900ms;

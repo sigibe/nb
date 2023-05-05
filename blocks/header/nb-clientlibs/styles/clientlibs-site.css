@@ -212,10 +212,10 @@
 #external-markup a {
   all: unset;
   cursor: pointer;
-  color: #008533;
+  color: #006125;
 }
 #external-markup a:hover {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .ng-container {
   margin: 0 106px;
@@ -271,8 +271,8 @@
 }
 #external-markup .nbd-btn-primary {
   color: #ffffff;
-  background-color: #008533;
-  border-color: 2px solid #008533;
+  background-color: #006125;
+  border-color: 2px solid #006125;
 }
 #external-markup .nbd-btn-primary:hover {
   color: #ffffff;
@@ -280,9 +280,9 @@
   border-color: #007237;
 }
 #external-markup .nbd-btn-secondary {
-  color: #008533;
+  color: #006125;
   background-color: #ffffff;
-  border-color: 2px solid #008533;
+  border-color: 2px solid #006125;
 }
 #external-markup .nbd-btn-secondary:hover {
   color: #007237;
@@ -300,7 +300,7 @@
   border-color: #17252e;
 }
 #external-markup .nbd-btn-tertiary {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-btn-border-white,
 #external-markup .nbd-btn-white-theme {
@@ -326,9 +326,9 @@
 }
 #external-markup .nbd-btn-border-green,
 #external-markup .nbd-btn-art-theme {
-  border: 2px solid #008533;
+  border: 2px solid #006125;
   background-color: transparent;
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-btn-border-green:hover,
 #external-markup .nbd-btn-art-theme:hover {
@@ -696,19 +696,19 @@
 }
 #external-markup .nbd-legal-page-wapper .green-text,
 #external-markup .green-text {
-  color: #008533;
+  color: #006125;
 }
 #external-markup a.green-text,
 #external-markup a.green-text:hover,
 #external-markup .green-text a,
 #external-markup .green-text a:hover {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
   cursor: pointer;
 }
 #external-markup .nbd-legal-page-wapper .download-request-for-copy,
 #external-markup .nbd-legal-page-wapper .download-request-for-copy a {
-  color: #008533;
+  color: #006125;
   font-weight: 500;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -897,7 +897,7 @@
 #external-markup .nbd-rte-enc a,
 #external-markup .cmp-text a {
   text-decoration: underline !important;
-  color: #008533 !important;
+  color: #006125 !important;
   word-break: break-word;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -929,7 +929,7 @@
 #external-markup .nbd-rte-enc a:hover,
 #external-markup .cmp-text a:hover {
   text-decoration: underline !important;
-  color: #008533 !important;
+  color: #006125 !important;
 }
 #external-markup .nbd-rte-enc p,
 #external-markup .nbd-rte-enc span {
@@ -1938,7 +1938,7 @@
   justify-content: center;
 }
 #external-markup .nbd-banner-buttons a.nbd-btn-tertiary {
-  color: #008533;
+  color: #006125;
 }
 @media only screen and (min-width: 576px) and (max-width: 1024px) {
   #external-markup .nbd-banner .nbd-btn {
@@ -2131,7 +2131,7 @@
     height: 180px;
   }
   #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary {
-    color: #008533;
+    color: #006125;
   }
   #external-markup .blacktheme-banner-container.nbd-banner-bg-img-black-theme .nbd-btn-tertiary .up-right-arrow-btn {
     background-image: url('/icons/button/diagonal-arrow-green.svg');
@@ -2289,7 +2289,7 @@
     height: 180px;
   }
   #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary {
-    color: #008533;
+    color: #006125;
   }
   #external-markup .whitetheme-banner-container.nbd-banner-bg-img-white-theme .nbd-btn-tertiary .up-right-arrow-btn {
     background-image: url('/icons/button/diagonal-arrow-green.svg');
@@ -2576,7 +2576,7 @@
   box-shadow: 0px 25px 20px -15px rgba(0, 0, 0, 0.1);
 }
 #external-markup .nbd-banner-left-align {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -2604,7 +2604,7 @@
   }
 }
 #external-markup .nbd-banner-left-align:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-banner-left-align:hover .down-arrow-btn {
@@ -3004,7 +3004,7 @@
     display: none;
   }
   #external-markup .link-to-anchor .scrolling-action.active {
-    border-bottom: 2px solid #008533;
+    border-bottom: 2px solid #006125;
   }
 }
 @media only screen and (min-width: 1024px) {
@@ -4532,17 +4532,17 @@
 #external-markup .nbd-navbar-desktop-wrapper .primarynav .navwrapper .navbar-nav li a:hover,
 #external-markup .nbd-navbar-desktop-wrapper .primarynav .navwrapper .navbar-nav li a:active,
 #external-markup .nbd-navbar-desktop-wrapper .primarynav .navwrapper .navbar-nav li a:focus {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-navbar-desktop-wrapper .primarynav .navwrapper .navbar-nav.primarynavitem li a {
   font-weight: 700;
   color: #17252e;
 }
 #external-markup .nbd-navbar-desktop-wrapper .primarynav .navwrapper .navbar-nav.primarynavitem li a:hover {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-navbar-desktop-wrapper .primarynav .navwrapper .navbar-nav.primarynavitem li a.active {
-  color: #008533;
+  color: #006125;
   text-decoration: none;
   background-color: transparent;
 }
@@ -4706,8 +4706,8 @@
   #external-markup .nbd-navbar-desktop-wrapper .navbar-nav .nav-item .nav-link.highlight .nbd-nav-highlight {
     height: 4px;
     width: calc(76%);
-    fill: #008533;
-    background: #008533;
+    fill: #006125;
+    background: #006125;
     display: inline-block;
     position: absolute;
     bottom: 0;
@@ -4716,8 +4716,8 @@
   #external-markup .nbd-navbar-desktop-wrapper .navbar-nav .nav-item.show .nav-link .nbd-nav-highlight {
     height: 4px;
     width: calc(76%);
-    fill: #008533;
-    background: #008533;
+    fill: #006125;
+    background: #006125;
     display: inline-block;
     position: absolute;
     bottom: 0;
@@ -4744,8 +4744,8 @@
   #external-markup .nbd-navbar-desktop-wrapper .navbar-nav .nav-item .nav-link:hover .nbd-nav-highlight {
     height: 4px;
     width: calc(76%);
-    fill: #008533;
-    background: #008533;
+    fill: #006125;
+    background: #006125;
     display: inline-block;
     position: absolute;
     bottom: 0;
@@ -5643,7 +5643,7 @@
     background-image: url('/icons/lock-icon-green.svg');
   }
   #external-markup .nbd-navbar-desktop-wrapper .navbar-nav.m-r-92 .nav-item.dropdown:hover .nav-link {
-    color: #008533;
+    color: #006125;
   }
   #external-markup .m-r-92 .dropdown-item:hover .diagonal-arrow-black {
     visibility: visible;
@@ -6440,7 +6440,7 @@
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-weight: 700;
 }
@@ -6621,7 +6621,7 @@
   line-height: 24px;
   letter-spacing: 0;
   vertical-align: baseline;
-  background-color: #008533;
+  background-color: #006125;
   color: #ffffff;
   width: 100%;
   height: 40px;
@@ -6629,7 +6629,7 @@
   font-weight: 700;
   text-align: center;
   border-radius: 6px;
-  border: 1px solid #008533;
+  border: 1px solid #006125;
   padding: 8px 16px;
 }
 @media only screen and (min-width: 1025px) {
@@ -6762,7 +6762,7 @@
   margin: 16px auto;
 }
 #external-markup .nbd-qs-container .nbd-qs-search .nbd-qs-btnlinks {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-qs-container .nbd-qs-search .nbd-qs-heading {
   color: #17252e;
@@ -6958,8 +6958,8 @@
 }
 #external-markup .nbd-qs-container .nbd-qs-pagination-result .nbd-qs-pagedata:hover a {
   text-decoration: underline;
-  text-decoration-color: #008533;
-  color: #008533;
+  text-decoration-color: #006125;
+  color: #006125;
 }
 #external-markup .nbd-qs-container .nbd-qs-pagination-result .nbd-qs-pagedata:not(:last-child) {
   margin: 0 0 32px 0;
@@ -7265,10 +7265,10 @@
   display: none;
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button {
-  border: 1.5px solid #008533;
+  border: 1.5px solid #006125;
   background-color: #ffffff;
   border-radius: 100px;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -7293,7 +7293,7 @@
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button:hover {
   color: #ffffff;
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button:focus {
   box-shadow: none;
@@ -7327,7 +7327,7 @@
 }
 #external-markup .qsfilters-tags #qsfilterTags .nbd-qsfilter-button.nbd-qsfilter-active {
   color: #ffffff;
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .qsfilters-tags .nbd-qsfilter-title {
   color: #494f50;
@@ -7346,9 +7346,9 @@
 }
 #external-markup .qsfilters-tags .nbd-toggle-qsfilter-button {
   background-color: #ffffff;
-  border: 1px solid #008533;
+  border: 1px solid #006125;
   border-radius: 100px;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -7373,7 +7373,7 @@
 }
 #external-markup .qsfilters-tags .nbd-toggle-qsfilter-button:hover {
   color: #ffffff;
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .qsfilters-tags .nbd-toggle-qsfilter-button:focus {
   box-shadow: none;
@@ -7602,7 +7602,7 @@
   min-width: auto;
 }
 #external-markup .nbd-search .nbd-search-results-warp .nbd-see-all-result {
-  color: #008533;
+  color: #006125;
   font-weight: 500;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -7905,7 +7905,7 @@
 #external-markup .cobl-rtcontent-div a:hover,
 #external-markup .cbproduct-rtcontent-div a:hover {
   display: inline !important;
-  color: #008533 !important;
+  color: #006125 !important;
   text-decoration: underline !important;
   cursor: pointer !important;
 }
@@ -8008,7 +8008,7 @@
 }
 #external-markup .nbd-cobl-anchor {
   margin-top: 32px;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -8034,7 +8034,7 @@
   }
 }
 #external-markup .nbd-cobl-anchor:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-cobl-anchor:hover .right-arrow-btn {
@@ -8422,7 +8422,7 @@
 }
 #external-markup .nbd-cbProduct-anchor {
   margin-top: 30px;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -8435,7 +8435,7 @@
   }
 }
 #external-markup .nbd-cbProduct-anchor:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-cbProduct-anchor:hover .right-arrow-btn {
@@ -8665,7 +8665,7 @@
 }
 #external-markup .nbd-cbVideo-anchor {
   margin-top: 38px;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -8681,7 +8681,7 @@
   justify-content: center;
 }
 #external-markup .nbd-cbVideo-anchor:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-cbVideo-anchor:hover .right-arrow-btn {
@@ -9102,7 +9102,7 @@
   }
 }
 #external-markup .nbd-fnt-container .nbd-fnt-learn {
-  color: #008533;
+  color: #006125;
   font-weight: 500;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -9157,13 +9157,13 @@
   height: 252px;
 }
 #external-markup .nbd-fnt-container .nbd-cobl-anchor {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-fnt-container .nbd-cobl-anchor-left {
   text-align: left;
 }
 #external-markup .nbd-cobl-anchor:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-cobl-anchor:hover .right-arrow-btn {
@@ -9333,7 +9333,7 @@
   }
 }
 #external-markup .nbd-fnt-desktop-img-container .nbd-fnt-learn-desktop {
-  color: #008533;
+  color: #006125;
   font-weight: 500;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -9393,7 +9393,7 @@
   margin: -16px 0px 0px 0px;
 }
 #external-markup .nbd-fnt-desktop-img-container .nbd-cobl-anchor {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-fnt-desktop-img-container .nbd-cobl-anchor-left,
 #external-markup .nbd-fnt-desktop-img-container .nbd-fnt-img-pos-left .nbd-fnt-direction-desktop {
@@ -9403,7 +9403,7 @@
   text-align: right;
 }
 #external-markup .nbd-cobl-anchor:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-cobl-anchor:hover .right-arrow-btn {
@@ -9603,7 +9603,7 @@
   margin-top: 24px;
 }
 #external-markup .nbd-fnt-desktop-bullet-container .nbd-fnt-learn-desktop {
-  color: #008533;
+  color: #006125;
   font-weight: 500;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -9639,7 +9639,7 @@
   max-width: 100%;
 }
 #external-markup .nbd-fnt-desktop-bullet-container .nbd-cobl-anchor {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-fnt-desktop-bullet-container .nbd-cobl-anchor-left,
 #external-markup .nbd-fnt-desktop-bullet-container .nbd-fnt-img-pos-left .nbd-fnt-direction-desktop-bullets {
@@ -9667,7 +9667,7 @@
   height: auto;
 }
 #external-markup .nbd-cobl-anchor:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-cobl-anchor:hover .right-arrow-btn {
@@ -9981,7 +9981,7 @@
   margin-right: auto;
   text-align: center;
   display: inline-flex;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -10146,7 +10146,7 @@
   background-color: rgba(0, 133, 51, 0.05);
 }
 #external-markup .nbd-time-card.highlighted {
-  background-color: #008533;
+  background-color: #006125;
   color: #ffffff;
 }
 #external-markup .nbd-time-card-heading {
@@ -10410,7 +10410,7 @@
   margin-right: auto;
   text-align: center;
   display: inline-flex;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -10511,7 +10511,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  color: #008533;
+  color: #006125;
 }
 @media only screen and (min-width: 1025px) {
   #external-markup .nbd-show-more-container span {
@@ -10536,7 +10536,7 @@
   display: none;
 }
 #external-markup .card-deck .article-bg-green {
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .card-deck .article-bg-green .nbd-time-card-heading h3,
 #external-markup .card-deck .article-bg-green .nbd-time-card-content p {
@@ -10791,7 +10791,7 @@
     margin-right: auto;
     text-align: center;
     display: inline-flex;
-    color: #008533;
+    color: #006125;
   }
   #external-markup .nbd-icon-arrow {
     display: block;
@@ -11177,7 +11177,7 @@
   color: #17252e;
 }
 #external-markup .nbd-related-posts-wrapper a.nbd-see-all-articles {
-  color: #008533;
+  color: #006125;
   display: flex;
   position: absolute;
   top: inherit;
@@ -11249,7 +11249,7 @@
   background-image: url('/icons/arrow_next_right_deactive.svg');
 }
 #external-markup .nbd-related-posts-wrapper .swiper-pagination-bullet-active {
-  background: #008533 !important;
+  background: #006125 !important;
   width: 26px !important;
   border-radius: 35px !important;
 }
@@ -11326,7 +11326,7 @@
   -webkit-box-orient: vertical;
 }
 #external-markup .nbd-related-posts-wrapper .nbd-article-card-Link a {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-related-posts-wrapper .nbd-article-card-Link a:hover .nbd-icon-arrow {
   transform: translateX(8px);
@@ -11571,7 +11571,7 @@
   }
   #external-markup .nbd-related-posts-wrapper .nbd-article-post-card-Link a {
     display: inline-flex;
-    color: #008533;
+    color: #006125;
   }
   #external-markup .nbd-related-posts-wrapper .nbd-article-post-card-Link a:hover .nbd-icon-arrow {
     transform: translateX(8px);
@@ -11724,7 +11724,7 @@
   color: #ffffff;
 }
 #external-markup .channel .bg-green {
-  background-color: #008533;
+  background-color: #006125;
   border: 1px solid #e5edec;
 }
 #external-markup .channel .bg-green .card-body {
@@ -12042,7 +12042,7 @@
   padding-left: 0;
 }
 #external-markup .eligibility-info .bg-green {
-  background-color: #008533;
+  background-color: #006125;
   border: 1px solid #e5edec;
 }
 #external-markup .eligibility-info .bg-green:hover {
@@ -12390,7 +12390,7 @@
   max-width: 100%;
 }
 #external-markup .nbd-cobl-anchor-mini:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 #external-markup .nbd-cobl-anchor-mini:hover .right-arrow-btn {
@@ -12449,7 +12449,7 @@
   }
 }
 #external-markup .intercept .rti-bg-green {
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .intercept .rti-bg-grassgreen {
   background-color: #f2f9f5;
@@ -12524,7 +12524,7 @@
   margin: 0px 0px 16px 0px;
 }
 #external-markup .nbd-intercept-card-link {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -12576,7 +12576,7 @@
   transform: translateY(10px);
 }
 #external-markup .nbd-intercept-card-link:hover {
-  color: #008533;
+  color: #006125;
   cursor: pointer;
 }
 @media only screen and (min-width: 576px) and (max-width: 1024px) {
@@ -13032,7 +13032,7 @@
   }
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-bg {
-  background-color: #008533;
+  background-color: #006125;
   padding: 30px 0px 40px 0px;
   margin: 64px 0 0 0;
 }
@@ -13116,7 +13116,7 @@
   margin-bottom: 15px;
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-card-container .nbd-switchcard-card .card-body .nbd-switchcard-card-email a {
-  color: #008533;
+  color: #006125;
   font-weight: unset;
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-card-container .nbd-switchcard-card .card-footer {
@@ -13133,7 +13133,7 @@
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
-  color: #008533;
+  color: #006125;
   text-decoration: none;
 }
 @media only screen and (min-width: 1025px) {
@@ -13192,7 +13192,7 @@
   transition: transform 900ms;
 }
 #external-markup .nbd-switchcard-container .nbd-switchcard-onecard-bg {
-  background-color: #008533;
+  background-color: #006125;
   padding: 30px 0px 40px 0px;
   margin: 64px 0 0 0;
 }
@@ -13837,7 +13837,7 @@
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
-  color: #008533;
+  color: #006125;
   text-decoration: none;
 }
 @media only screen and (min-width: 1025px) {
@@ -13982,7 +13982,7 @@
   margin: 0px;
 }
 #external-markup .nbd-rta-comp.rta-bg-green {
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .nbd-rta-comp.rta-bg-green .nbd-btn-secondary {
   background-color: #ffffff;
@@ -14037,7 +14037,7 @@
   font-weight: 700;
 }
 #external-markup .whychoose-container .card.nb-card hr {
-  background: linear-gradient(90deg, #006341 0%, #008533 100%);
+  background: linear-gradient(90deg, #006341 0%, #006125 100%);
   margin: 0;
   border: 0;
   height: 7px;
@@ -14146,7 +14146,7 @@
   color: #17252e;
 }
 #external-markup .cmp-tabs__tab--active {
-  border-bottom: 4px solid #008533;
+  border-bottom: 4px solid #006125;
 }
 #external-markup .cmp-tabs__tablist {
   margin-bottom: 0;
@@ -14536,7 +14536,7 @@
   box-shadow: 0px 25px 20px -15px rgba(0, 0, 0, 0.1);
 }
 #external-markup .bondandtransfer-container .result-panel .green-text {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .bondandtransfer-container .result-panel .black-text {
   color: #17252e;
@@ -14634,7 +14634,7 @@
   margin: 6px 0px 6px 0px !important;
 }
 #external-markup .bondandtransfer-container .nbd-btn-secondary:focus {
-  border: 2px solid #008533;
+  border: 2px solid #006125;
   box-shadow: none;
 }
 #external-markup .bondandtransfer-container .nbd-card-amount {
@@ -14912,7 +14912,7 @@
   box-shadow: 0px 25px 20px -15px rgba(0, 0, 0, 0.1);
 }
 #external-markup .bond-repayment-container .result-panel .green-text {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .bond-repayment-container .result-panel .black-text {
   color: #17252e;
@@ -14983,7 +14983,7 @@
 #external-markup .bond-repayment-container .repay-change-rate {
   background-color: transparent;
   border: none;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -15062,7 +15062,7 @@
   background-image: url('/icons/down_arrow_cr.svg');
 }
 #external-markup .bond-repayment-container .nbd-btn-secondary:focus {
-  border: 2px solid #008533;
+  border: 2px solid #006125;
   box-shadow: none;
 }
 #external-markup .bond-repayment-container .nbd-card-amount {
@@ -15216,7 +15216,7 @@
 }
 #external-markup .bond-repayment-container .slider::-ms-fill-upper {
   background-color: #bbbbbb;
-  background: #008533;
+  background: #006125;
   border-radius: 5px;
 }
 #external-markup .bond-repayment-container .slider::-ms-tooltip {
@@ -15363,7 +15363,7 @@
   }
   #external-markup .bond-repayment-container .slider::-webkit-slider-runnable-track {
     -webkit-appearance: none;
-    color: #008533;
+    color: #006125;
     margin-top: -1px;
   }
   #external-markup .bond-repayment-container .slider::-webkit-slider-thumb {
@@ -17398,14 +17398,14 @@
   margin: 0;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-locator-type .nbd-tag-style li {
-  border: 2px solid #008533;
+  border: 2px solid #006125;
   border-radius: 21px;
   background-color: #ffffff;
   text-align: center;
   display: inline-block;
   padding: 10px 18px 10px 16px;
   cursor: pointer;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -17413,7 +17413,7 @@
   margin: 0 2px;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-locator-type .nbd-tag-style .button-align-active {
-  background-color: #008533;
+  background-color: #006125;
   color: #ffffff;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-search-result {
@@ -17553,7 +17553,7 @@
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-branch-locator-tab-mob .tab button.active,
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-branch-locator-tab-mob .tab button:hover {
-  border-bottom: 4px solid #008533;
+  border-bottom: 4px solid #006125;
   padding-bottom: 15px;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-locator-search .nbd-branch-locator-tab-mob .tabcontent {
@@ -17673,15 +17673,15 @@
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info .email,
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info .contact {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info .email a,
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info .contact a {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info .email a:hover,
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info .contact a:hover {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .info-item .info .waiting_time_heading {
   color: #494f50;
@@ -17749,7 +17749,7 @@
 }
 #external-markup .nbd-branch-locator .nbd-branch-locator-detail .nbd-branch-location-info .location-btn {
   border: none;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -18392,7 +18392,7 @@
   }
 }
 #external-markup .choose-container .nbd-way-to-pay-info .info-anchor {
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -18500,7 +18500,7 @@
 #external-markup .filter-background-class .nbd-toggle-filter-button {
   border-radius: 100px;
   text-align: center;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -18525,7 +18525,7 @@
 #external-markup .filter-background-class .nbd-filter-button:hover,
 #external-markup .filter-background-class .nbd-toggle-filter-button:hover {
   color: #ffffff;
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .filter-background-class .nbd-filter-button.focus,
 #external-markup .filter-background-class .nbd-toggle-filter-button.focus,
@@ -18534,13 +18534,13 @@
   box-shadow: none;
 }
 #external-markup .filter-background-class .nbd-filter-button {
-  border: 1.5px solid #008533;
+  border: 1.5px solid #006125;
   margin: 4px;
   height: 42px;
   padding: 10px 16px 14px 16px;
 }
 #external-markup .filter-background-class .nbd-toggle-filter-button {
-  border: 1px solid #008533;
+  border: 1px solid #006125;
   margin: 4px auto;
   display: block;
   padding: 11px 16px;
@@ -18548,7 +18548,7 @@
 #external-markup .filter-background-class .nbd-filter-active,
 #external-markup .filter-background-class .nbd-filter-active2 {
   color: #ffffff;
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .filter-background-class #filterTags {
   display: none;
@@ -18627,7 +18627,7 @@
 #external-markup .filter-background-class .nbd-toggle-filter-button {
   border-radius: 100px;
   text-align: center;
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -18652,7 +18652,7 @@
 #external-markup .filter-background-class .nbd-filter-button:hover,
 #external-markup .filter-background-class .nbd-toggle-filter-button:hover {
   color: #ffffff;
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .filter-background-class .nbd-filter-button.focus,
 #external-markup .filter-background-class .nbd-toggle-filter-button.focus,
@@ -18661,13 +18661,13 @@
   box-shadow: none;
 }
 #external-markup .filter-background-class .nbd-filter-button {
-  border: 1.5px solid #008533;
+  border: 1.5px solid #006125;
   margin: 4px;
   height: 42px;
   padding: 10px 16px 14px 16px;
 }
 #external-markup .filter-background-class .nbd-toggle-filter-button {
-  border: 1px solid #008533;
+  border: 1px solid #006125;
   margin: 4px auto;
   display: block;
   padding: 11px 16px;
@@ -18675,7 +18675,7 @@
 #external-markup .filter-background-class .nbd-filter-active,
 #external-markup .filter-background-class .nbd-filter-active2 {
   color: #ffffff;
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .filter-background-class #filterTags {
   display: none;
@@ -18768,7 +18768,7 @@
   font-weight: 400;
 }
 #external-markup .nbd-wiz-content .nbd-unselect-all {
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -18876,7 +18876,7 @@
   margin: 48px 0px 32px 0px;
 }
 #external-markup .nbd-wiz-content .nbd-wiz-see-all-cards a {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -18922,14 +18922,14 @@
   transition: transform 900ms;
 }
 #external-markup .nbd-wiz-content .nbd-wiz-active-card {
-  border: 1.5px solid #008533 !important;
+  border: 1.5px solid #006125 !important;
   background-color: #f2f9f5 !important;
 }
 #external-markup .nbd-wiz-content .nbd-wiz-active-card object {
   filter: invert(38%) sepia(62%) saturate(3819%) hue-rotate(120deg) brightness(90%) contrast(102%);
 }
 #external-markup .nbd-wiz-content .nbd-wiz-active-card p {
-  color: #008533 !important;
+  color: #006125 !important;
 }
 @media only screen and (min-width: 768px) {
   #external-markup .nbd-wiz-content .nbd-wiz-card-selection-note {
@@ -19545,7 +19545,7 @@
   }
 }
 #external-markup .eligibility .bg-green {
-  background-color: #008533;
+  background-color: #006125;
   border: 1px solid #e5edec;
 }
 #external-markup .eligibility .bg-green:hover {
@@ -20679,7 +20679,7 @@
   background-color: #94cead;
 }
 #external-markup .nbd-stage-intercept-wrapper .progress-bar {
-  background-color: #008533;
+  background-color: #006125;
 }
 #external-markup .nbd-stage-intercept-wrapper .nbd-step-indexer {
   color: #17252e;
@@ -20878,14 +20878,14 @@
 }
 #external-markup .nbd-save-and-invest-filter .nbd-tag-style li {
   box-sizing: border-box;
-  border: 1.5px solid #008533;
+  border: 1.5px solid #006125;
   border-radius: 21px;
   background-color: #ffffff;
   text-align: center;
   display: inline-block;
   padding: 9px 16px;
   cursor: pointer;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -20893,7 +20893,7 @@
   margin: 4px;
 }
 #external-markup .nbd-save-and-invest-filter .nbd-tag-style .active {
-  background-color: #008533;
+  background-color: #006125;
   color: #ffffff;
 }
 #external-markup .nbd-save-and-invest-filter #noticePeriod {
@@ -21428,7 +21428,7 @@
 }
 #external-markup .save-invest-calc-wrapper .card .card-front-body .nbd-card-text {
   margin: 12px 8px 12px 4px;
-  color: #008533;
+  color: #006125;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21528,14 +21528,14 @@
   content: "";
   width: 16px;
   height: 16px;
-  box-shadow: inset 0.5em 0.5em #008533;
-  border: 8px solid #008533;
+  box-shadow: inset 0.5em 0.5em #006125;
+  border: 8px solid #006125;
   border-radius: 50%;
   transition: 180ms transform ease-in-out;
   transform: scale(0);
 }
 #external-markup .save-invest-calc-wrapper .card .card-back-body input:checked + .radio__control {
-  border: 2px solid #008533;
+  border: 2px solid #006125;
 }
 #external-markup .save-invest-calc-wrapper .card .card-back-body input:checked + .radio__control::before {
   transform: scale(1);
@@ -21551,10 +21551,10 @@
 #external-markup .save-invest-calc-wrapper .card .card-back-body .nbd-select-btn {
   box-sizing: border-box;
   height: 40px;
-  border: 1.5px solid #008533;
+  border: 1.5px solid #006125;
   border-radius: 21px;
   background-color: #ffffff;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -21567,7 +21567,7 @@
   align-items: center;
 }
 #external-markup .save-invest-calc-wrapper .card .card-back-body .nbd-select-btn.selected {
-  background-color: #008533;
+  background-color: #006125;
   color: #ffffff;
 }
 #external-markup .save-invest-calc-wrapper .card .card-back-body .nbd-select-btn:focus {
@@ -21744,7 +21744,7 @@
   margin-left: 0px;
 }
 #external-markup .save-invest-calc-wrapper .journey-btn {
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -21798,7 +21798,7 @@
 }
 #external-markup .save-invest-calc-wrapper .product-onDisplay .value-btn {
   border-radius: 6px;
-  background-color: #008533;
+  background-color: #006125;
   color: #ffffff;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -21966,7 +21966,7 @@
     margin-bottom: 32px;
   }
   #external-markup .save-invest-calc-wrapper .product-i {
-    color: #008533;
+    color: #006125;
     font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 22px;
@@ -21981,7 +21981,7 @@
     padding: 1px 8px;
     border-radius: 6px;
     color: #ffffff;
-    background-color: #008533;
+    background-color: #006125;
     font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
     font-size: 14px;
     line-height: 22px;
@@ -22232,7 +22232,7 @@
   letter-spacing: 0;
 }
 #external-markup .nbd-comparison-table-wapper .nbd-comparison-table .nbd-cmp-table-head .tooltip-div h3 {
-  color: #008533;
+  color: #006125;
   margin: 0px 0px 8px 0px;
 }
 #external-markup .nbd-comparison-table-wapper .nbd-comparison-table .nbd-cmp-table-body {
@@ -22293,7 +22293,7 @@
   border: none;
 }
 #external-markup .nbd-comparison-table-wapper .nbd-comparison-table .nbd-cmp-table-footer a {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -22347,7 +22347,7 @@
 #external-markup .nbd-affordability-container .change-rate {
   background-color: transparent;
   border: none;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -22460,15 +22460,15 @@
   letter-spacing: 0;
 }
 #external-markup .nbd-affordability-container .interest-rate-desc .cmp-text a {
-  color: #008533 !important;
+  color: #006125 !important;
   text-decoration: underline !important;
 }
 #external-markup .nbd-affordability-container .interest-rate-desc .cmp-text a:hover {
-  color: #008533;
+  color: #006125;
   text-decoration: underline;
 }
 #external-markup .nbd-affordability-container .interest-rate-desc .cmp-text a:focus {
-  color: #008533;
+  color: #006125;
   text-decoration: underline;
 }
 #external-markup .nbd-affordability-container .interest-rate-desc p {
@@ -22543,7 +22543,7 @@
   padding: 0;
 }
 #external-markup .nbd-affordability-container .nbd-btn-secondary:focus {
-  border: 2px solid #008533;
+  border: 2px solid #006125;
   box-shadow: none;
 }
 #external-markup .nbd-affordability-container .nbd-card-amount {
@@ -22833,7 +22833,7 @@
   height: 2px;
 }
 #external-markup .nbd-affordability-container .nbd-affordability-expenses a {
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -22924,7 +22924,7 @@
   }
   #external-markup .nbd-affordability-container .slider::-webkit-slider-runnable-track {
     -webkit-appearance: none;
-    color: #008533;
+    color: #006125;
     margin-top: -1px;
   }
   #external-markup .nbd-affordability-container .slider::-webkit-slider-thumb {
@@ -23194,7 +23194,7 @@
   width: 32px;
 }
 #external-markup .nbd-listpopup-container .modal-body .nbd-listpopup-list .nbd-listpopup-head a:hover {
-  color: #008533;
+  color: #006125;
   text-decoration: underline;
 }
 #external-markup .nbd-listpopup-container .modal-body .nbd-listpopup-list .nbd-listpopup-head a:hover img {
@@ -23431,7 +23431,7 @@
   transform: rotate(45deg);
 }
 #external-markup .customcheckbox .checkbox-wrapper .form-check-label input:checked ~ .custom-control-indicator {
-  background-color: #008533;
+  background-color: #006125;
   border: none;
 }
 #external-markup .customcheckbox .checkbox-wrapper .form-check-label input:checked ~ .custom-control-indicator:hover {
@@ -23473,7 +23473,7 @@
 #external-markup .customdropdown .custom-dropdown .select-selected.select-arrow-active {
   background-image: url('/icons/up_arrow.svg');
   background-position: right 10px top 15px;
-  border: 2px solid #008533 !important;
+  border: 2px solid #006125 !important;
 }
 @media only screen and (max-width: 768px) {
   #external-markup .customdropdown .custom-dropdown .select-selected {
@@ -23624,7 +23624,7 @@
 #external-markup .nbd-generic-form .formcontainer .select-selected.select-arrow-active {
   background-image: url('/icons/up_arrow.svg');
   background-position: right 10px top 15px;
-  border: 2px solid #008533 !important;
+  border: 2px solid #006125 !important;
 }
 @media only screen and (max-width: 768px) {
   #external-markup .nbd-generic-form .formcontainer .select-selected {
@@ -23855,7 +23855,7 @@
       .customradio-wrapper input + label::after {
           content: "";
           opacity: 0;
-          border: 8px solid #008533;
+          border: 8px solid #006125;
           border-radius: 50%;
           position: absolute;
           left: 4px;
@@ -23867,7 +23867,7 @@
       opacity: 1;
   }
   .customradio-wrapper input:checked + label::before {
-      border: 2px solid #008533;
+      border: 2px solid #006125;
   } */
   /*reveal check for 'onload' and ''hover' state*/
   /*reveal check for 'on' and ''hover' state*/
@@ -24113,7 +24113,7 @@
   border: 2px solid #bbbbbb;
   border-radius: 5px;
   background-color: #ffffff;
-  accent-color: #008533;
+  accent-color: #006125;
 }
 #external-markup .nbd-formv2-container form#customform .formv2container .renderFields label.checkbox {
   color: #494f50;
@@ -24221,7 +24221,7 @@
   height: 24px;
   width: 24px;
   min-width: 24px;
-  accent-color: #008533;
+  accent-color: #006125;
   border-color: #78be20;
 }
 #external-markup .nbd-formv2-container form#customform .formv2container .id-note {
@@ -24325,7 +24325,7 @@
   letter-spacing: 0;
   font-weight: 500;
   margin: 26px 0px 10px 0px;
-  color: #008533;
+  color: #006125;
 }
 @media only screen and (min-width: 1025px) {
   #external-markup .nbd-formv2-container form#customform .formfooter .nbd-btn {
@@ -24737,7 +24737,7 @@
   border: 2px solid #bbbbbb;
   border-radius: 5px;
   background-color: #ffffff;
-  accent-color: #008533;
+  accent-color: #006125;
 }
 #external-markup .nbd-modal-formv2-container form#custform .formv2container .renderFields label.checkbox {
   color: #494f50;
@@ -24843,7 +24843,7 @@
   height: 24px;
   width: 24px;
   min-width: 24px;
-  accent-color: #008533;
+  accent-color: #006125;
   border-color: #78be20;
 }
 #external-markup .nbd-modal-formv2-container form#custform .formv2container .id-note {
@@ -24946,7 +24946,7 @@
   letter-spacing: 0;
   font-weight: 500;
   margin: 26px 0px 10px 0px;
-  color: #008533;
+  color: #006125;
 }
 @media only screen and (min-width: 1025px) {
   #external-markup .nbd-modal-formv2-container form#custform .formfooter .nbd-btn {
@@ -25188,7 +25188,7 @@
   padding-left: 55px;
 }
 #external-markup .list-container .nb-row .list-right .list-link {
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -25496,7 +25496,7 @@
   background-image: url('/icons/Lefthoverarrow.svg');
 }
 #external-markup .nbd-legal-links-content .back {
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -25512,7 +25512,7 @@
   }
 }
 #external-markup .nbd-legal-links-content .back:hover {
-  color: #008533;
+  color: #006125;
 }
 @media only screen and (min-width: 576px) and (max-width: 1024px) {
   #external-markup .nbd-legal-links-content {
@@ -25756,7 +25756,7 @@
   font-weight: 500;
   text-align: center;
   cursor: pointer;
-  color: #008533;
+  color: #006125;
 }
 @media only screen and (min-width: 576px) {
   #external-markup .nbd-show-more-container span {
@@ -25976,7 +25976,7 @@
   max-width: 100%;
 }
 #external-markup .leftnav-container .cmp-tabs__tab--active {
-  border-bottom: 3px solid #008533;
+  border-bottom: 3px solid #006125;
 }
 #external-markup .leftnav-container .cmp-tabs__tab--active:focus {
   outline: none;
@@ -26187,11 +26187,11 @@
   text-align: center;
 }
 #external-markup .nbd-quotation .nbd-link-to-source {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
 }
 #external-markup .nbd-quotation .nbd-link-to-source:hover {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
 }
 #external-markup .nbd-quotation .nbd-line {
@@ -26561,7 +26561,7 @@
 #external-markup .repayment-container .change-rate {
   background-color: transparent;
   border: none;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -26587,7 +26587,7 @@
 #external-markup .repayment-container .interest-rate-desc .cmp-text a,
 #external-markup .repayment-container .interest-rate-desc .cmp-text a:hover,
 #external-markup .repayment-container .interest-rate-desc .cmp-text a:focus {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
 }
 #external-markup .repayment-container .interest-rate .slidecontainer {
@@ -26834,7 +26834,7 @@
   margin-bottom: 12px;
 }
 #external-markup .repayment-container .loan-insurance-link {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
   font-weight: 400;
 }
@@ -27952,7 +27952,7 @@
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
-  color: #008533;
+  color: #006125;
   display: block;
 }
 @media only screen and (min-width: 1025px) {
@@ -27981,7 +27981,7 @@
   padding-left: 5px;
 }
 #external-markup .nbd-credit-card-banner-link:hover {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-credit-card-banner-content .nbd-btn,
 #external-markup .nbd-ccd-links .nbd-btn {
@@ -28348,7 +28348,7 @@
   margin: 0px 0px 42px 0px;
 }
 #external-markup .nbd-terms-and-cond-link a {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -28651,7 +28651,7 @@
 #external-markup .consolidated-container .change-rate {
   background-color: transparent;
   border: none;
-  color: #008533;
+  color: #006125;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 22px;
@@ -28677,7 +28677,7 @@
 #external-markup .consolidated-container .interest-rate-desc .cmp-text a,
 #external-markup .consolidated-container .interest-rate-desc .cmp-text a:hover,
 #external-markup .consolidated-container .interest-rate-desc .cmp-text a:focus {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
 }
 #external-markup .consolidated-container .interest-rate .colslidecontainer {
@@ -28951,7 +28951,7 @@
   margin-bottom: 12px;
 }
 #external-markup .consolidated-container .loan-insurance-link {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
 }
 #external-markup .consolidated-container .loan-insurance-link:hover,
@@ -29554,10 +29554,10 @@
   margin-left: -2em;
 }
 #external-markup .nbd-app-id a {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-app-id a:hover {
-  color: #008533;
+  color: #006125;
   text-decoration: underline !important;
   cursor: pointer;
 }
@@ -29703,7 +29703,7 @@
   outline: none;
 }
 #external-markup .nbd-ccf-row-container .nbd-ccf-footer .nbd-ccf-find-more {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -29904,7 +29904,7 @@
 }
 #external-markup .nbd-stp-container .nbd-stp-sub-description a,
 #external-markup .nbd-stp-container .nbd-stp-sub-description a:focus {
-  color: #008533;
+  color: #006125;
   outline: none;
 }
 #external-markup .nbd-stp-container .nbd-stp-scantopay {
@@ -30228,7 +30228,7 @@
   }
 }
 #external-markup .nbd-credit-card-banner-link {
-  color: #008533;
+  color: #006125;
   display: block;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
@@ -30262,7 +30262,7 @@
   padding-left: 5px;
 }
 #external-markup .nbd-credit-card-banner-link:hover {
-  color: #008533;
+  color: #006125;
 }
 #external-markup .nbd-credit-card-banner-content .nbd-btn,
 #external-markup .nbd-ccd-links .nbd-btn {
@@ -30624,7 +30624,7 @@
   margin: 0px 0px 42px 0px;
 }
 #external-markup .nbd-terms-and-cond-link a {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -30824,7 +30824,7 @@
   color: #17252e;
 }
 #external-markup .nbd-cc-linkCard a {
-  color: #008533;
+  color: #006125;
   font-weight: 700;
   font-family: 'Open Sans Regular', Arial, Helvetica, sans-serif;
   font-size: 16px;

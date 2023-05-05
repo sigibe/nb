@@ -39,10 +39,10 @@ header primary-nav .nav-sections > ul > li a {
   color: #17252e;
 }
 header primary-nav .nav-sections > ul > li a:hover {
-  color: #008533;
+  color: #006125;
 }
 header primary-nav .nav-sections > ul > li:first-child a {
-  color: #008533;
+  color: #006125;
 }
 header primary-nav .nav-brand {
   margin: 3px 20px 3px 91px;
@@ -84,7 +84,7 @@ header primary-nav .nav-tools > div span:hover {
   color: #17252e;
 }
 header primary-nav .nav-tools > div:hover {
-  color: #008533;
+  color: #006125;
 }
 header primary-nav .nav-tools .nav-tools-search {
   display: none;
@@ -339,7 +339,7 @@ header .sticky {
   }
   header secondary-nav .nav-sections > ul > li[aria-expanded='true']::before {
     content: ' ';
-    border: 2px solid #008533;
+    border: 2px solid #006125;
     display: block;
     transform: translateY(45px);
   }
