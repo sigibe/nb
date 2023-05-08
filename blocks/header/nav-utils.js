@@ -15,6 +15,7 @@ const REPLACE_SCRIPTS = new Map([
 const IGNORE_SCRIPTS = new Set([
   '/etc.clientlibs/nedbank/components/socialshare/clientlibs.min.js',
   '/etc.clientlibs/nedbank/components/bankfilter/clientlibs.min.js',
+  '/6422e0f550a2/017d80491d7e/launch-e08352bc3db4.min.js',
 ]);
 
 function cssLoaded() {
