@@ -183,10 +183,10 @@ function createDigitalData() {
   document.head.append(adobeotmscript);
 }());
 
-setTimeout(function(){
-  var head = document.getElementsByTagName("head")[0];
-  if(head) {
-    var atBodyStyle = document.getElementById("at-body-style");
-    atBodyStyle && head.removeChild(atBodyStyle);
+setTimeout(() => {
+  const head = document.getElementsByTagName('head')[0];
+  if (head) {
+    const atBodyStyle = document.getElementById('at-body-style');
+    head.removeChild(atBodyStyle);
   }
 }, 30000);
