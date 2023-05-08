@@ -182,3 +182,11 @@ function createDigitalData() {
   adobeotmscript.setAttribute('src', 'https://assets.adobedtm.com/6422e0f550a2/017d80491d7e/launch-1e8527b948f6-development.min.js');
   document.head.append(adobeotmscript);
 }());
+
+setTimeout(function(){
+  var head = document.getElementsByTagName("head")[0];
+  if(head) {
+    var atBodyStyle = document.getElementById("at-body-style");
+    atBodyStyle && head.removeChild(atBodyStyle);
+  }
+}, 30000);
