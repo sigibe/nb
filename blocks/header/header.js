@@ -56,6 +56,10 @@ function addLoginEventListener(nav) {
 
       if (eleDisplay === 'none') {
         loginEle.classList.add('modal');
+        setTimeout(() => {
+          loginEle.classList.remove('fade-out');
+          loginEle.classList.add('fade-in');
+        }, 100);
         window.scrollTo(0, 0); // Scrolling to Top
         bodyEle.classList.add('overflow-hidden');
         bodyEle.classList.remove('overflowY-hidden');
@@ -63,8 +67,13 @@ function addLoginEventListener(nav) {
           document.getElementById('querySearchModal').classList.remove('show', 'appear');
         }
       } else if (loginEle.classList.contains('modal')) {
-        loginEle.classList.remove('modal');
-        bodyEle.classList.remove('overflow-hidden');
+        loginEle.classList.remove('fade-in');
+        loginEle.classList.add('fade-out');
+
+        setTimeout(() => {
+          loginEle.classList.remove('modal');
+          bodyEle.classList.remove('overflow-hidden');
+        }, 100);
       }
     });
   }

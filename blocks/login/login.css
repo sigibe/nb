@@ -8,6 +8,13 @@
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0;
+  transition: opacity 0.15s linear;
+}
+.login-overlay.fade-in {
+  opacity: 1;
+}
+.login-overlay.fade-out {
+  opacity: 0;
 }
 .login-overlay * > h1 {
   margin-bottom: 0.5rem;

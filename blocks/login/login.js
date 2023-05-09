@@ -21,8 +21,15 @@ export default async function decorate(block) {
       overLayClose.addEventListener('click', () => {
         const loginEle = document.querySelector('.login-overlay');
         const mainEle = document.querySelector('body');
-        loginEle.classList.remove('modal');
-        mainEle.classList.remove('overflow-hidden');
+
+        loginEle.classList.remove('fade-in');
+        loginEle.classList.add('fade-out');
+
+        /* Delaying the removal of modal class to allow the fade-out animation to complete */
+        setTimeout(() => {
+          loginEle.classList.remove('modal');
+          mainEle.classList.remove('overflow-hidden');
+        }, 100);
       });
     }
 
