@@ -56,6 +56,7 @@ function addLoginEventListener(nav) {
 
       if (eleDisplay === 'none') {
         loginEle.classList.add('modal');
+        /* Delaying the fade-in class addition to allow the modal to be displayed */
         setTimeout(() => {
           loginEle.classList.remove('fade-out');
           loginEle.classList.add('fade-in');
@@ -70,6 +71,7 @@ function addLoginEventListener(nav) {
         loginEle.classList.remove('fade-in');
         loginEle.classList.add('fade-out');
 
+        /* Delaying the removal of modal class to allow the fade-out animation to complete */
         setTimeout(() => {
           loginEle.classList.remove('modal');
           bodyEle.classList.remove('overflow-hidden');
