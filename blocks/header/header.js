@@ -60,7 +60,7 @@ function addLoginEventListener(nav) {
         setTimeout(() => {
           loginEle.classList.remove('fade-out');
           loginEle.classList.add('fade-in');
-        }, 100);
+        }, 150);
         window.scrollTo(0, 0); // Scrolling to Top
         bodyEle.classList.add('overflow-hidden');
         bodyEle.classList.remove('overflowY-hidden');
@@ -75,7 +75,7 @@ function addLoginEventListener(nav) {
         setTimeout(() => {
           loginEle.classList.remove('modal');
           bodyEle.classList.remove('overflow-hidden');
-        }, 100);
+        }, 150);
       }
     });
   }

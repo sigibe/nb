@@ -29,7 +29,7 @@ export default async function decorate(block) {
         setTimeout(() => {
           loginEle.classList.remove('modal');
           mainEle.classList.remove('overflow-hidden');
-        }, 100);
+        }, 150);
       });
     }
 
