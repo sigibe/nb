@@ -1,4 +1,5 @@
 import { getMetadata } from '../../scripts/scripts.js';
+import { closeLoginModal } from '../login/login.js';
 
 const NEDBANK_HOST = 'personal.nedbank.co.za';
 const REPLACE_SCRIPTS = new Map([
@@ -112,15 +113,30 @@ export function toggleHamburger() {
   }
 }
 
-export function toggleSearch() {
+export async function toggleSearch() {
   if (document.getElementById('querySearchModal').style) {
     document.getElementById('querySearchModal').removeAttribute('style');
   }
-  document.getElementById('querySearchModal').classList.toggle('show');
-  document.getElementById('querySearchModal').classList.toggle('appear');
-  document.querySelector('.login-overlay').classList.remove('modal');
-  document.body.classList.remove('overflow-hidden');
-  document.body.classList.toggle('overflowY-hidden');
+
+  /* Ensure animation effects get applied query modal show/hide by delaying adding "show"
+  and removing "appear" since animation effects */
+  if (document.getElementById('querySearchModal').classList.contains('appear')) {
+    document.getElementById('querySearchModal').classList.remove('show');
+    /* Delay hiding modal for animation effects */
+    setTimeout(() => {
+      document.getElementById('querySearchModal').classList.remove('appear');
+      document.body.classList.remove('overflow-hidden');
+    }, 150);
+  } else {
+    await closeLoginModal();
+    document.getElementById('querySearchModal').classList.add('appear');
+    document.body.classList.add('overflow-hidden');
+    /* Delay showing modal for animation effects */
+    setTimeout(() => {
+      document.getElementById('querySearchModal').classList.add('show');
+      window.scrollTo(0, 0); // Scrolling to Top of the page
+    }, 150);
+  }
 }
 
 function configureHamburgerLoginBtn() {

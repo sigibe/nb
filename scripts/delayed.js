@@ -187,6 +187,8 @@ setTimeout(() => {
   const head = document.getElementsByTagName('head')[0];
   if (head) {
     const atBodyStyle = document.getElementById('at-body-style');
-    head.removeChild(atBodyStyle);
+    if (atBodyStyle !== null) {
+      head.removeChild(atBodyStyle);
+    }
   }
 }, 30000);

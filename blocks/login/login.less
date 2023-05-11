@@ -8,6 +8,15 @@ autocomment();
     overflow-x: hidden;
     overflow-y: auto;
     padding: 0;
+    transition: opacity 0.15s linear;
+
+    &.fade-in {
+        opacity: 1;
+    }
+
+    &.fade-out {
+        opacity: 0;
+    }
 
     *>h1 {
         margin-bottom: 0.5rem;
@@ -23,7 +32,7 @@ autocomment();
         font-weight: @font-weight-medium;
         border-bottom: 1px solid #E5EDEC;
         font-size: @font-size-base;
-        
+
         a {
             &:hover {
                 color: @dotcoza-color-greens-default;
@@ -116,7 +125,7 @@ autocomment();
 
             .login-main {
                 margin: 0 18px;
-                
+
                 .button-container {
                     margin-bottom: 0;
                     a {
@@ -233,14 +242,14 @@ autocomment();
                         }
                     }
                 }
-    
+
                 .login-main {
                     margin: 8px 7.37% @spacing-07 7.37% !important;
 
                     .button-container {
                         margin-top: 48px;
                     }
-    
+
                     > div {
                         flex-direction: row;
                         flex-wrap: unset;
