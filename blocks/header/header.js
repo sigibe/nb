@@ -1,6 +1,7 @@
 import {
   readBlockConfig, decorateIcons, makeLinksRelative, getRootPath, decorateAnchor,
 } from '../../scripts/scripts.js';
+import { closeLoginModal, openLoginModal } from '../login/login.js';
 
 import {
   loadNavTools,
@@ -51,31 +52,15 @@ function addLoginEventListener(nav) {
   if (loginButton) {
     loginButton.addEventListener('click', () => {
       const loginEle = document.querySelector('.login-overlay');
-      const bodyEle = document.querySelector('body');
       const eleDisplay = window.getComputedStyle(loginEle).getPropertyValue('display');
 
       if (eleDisplay === 'none') {
-        loginEle.classList.add('modal');
-        /* Delaying the fade-in class addition to allow the modal to be displayed */
-        setTimeout(() => {
-          loginEle.classList.remove('fade-out');
-          loginEle.classList.add('fade-in');
-        }, 150);
-        window.scrollTo(0, 0); // Scrolling to Top
-        bodyEle.classList.add('overflow-hidden');
-        bodyEle.classList.remove('overflowY-hidden');
+        openLoginModal();
         if (document.getElementById('querySearchModal')) {
           document.getElementById('querySearchModal').classList.remove('show', 'appear');
         }
       } else if (loginEle.classList.contains('modal')) {
-        loginEle.classList.remove('fade-in');
-        loginEle.classList.add('fade-out');
-
-        /* Delaying the removal of modal class to allow the fade-out animation to complete */
-        setTimeout(() => {
-          loginEle.classList.remove('modal');
-          bodyEle.classList.remove('overflow-hidden');
-        }, 150);
+        closeLoginModal();
       }
     });
   }
@@ -141,7 +126,7 @@ async function delayedNavTools() {
       } else {
         document.body.classList.add('overflowY-hidden');
         document.getElementById('querySearchModal').classList.remove('show', 'appear');
-        document.querySelector('.login-overlay').classList.remove('modal');
+        closeLoginModal();
         document.body.classList.remove('overflow-hidden');
       }
       nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');

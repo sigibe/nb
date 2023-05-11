@@ -1,4 +1,5 @@
 import { getMetadata } from '../../scripts/scripts.js';
+import { closeLoginModal } from '../login/login.js';
 
 const NEDBANK_HOST = 'personal.nedbank.co.za';
 const REPLACE_SCRIPTS = new Map([
@@ -133,16 +134,7 @@ export function toggleSearch() {
     }, 150);
   }
 
-  const loginEle = document.querySelector('.login-overlay');
-  loginEle.classList.remove('fade-in');
-  loginEle.classList.add('fade-out');
-
-  /* Delay hiding login modal for animation effects */
-  setTimeout(() => {
-    loginEle.classList.remove('modal');
-    document.body.classList.remove('overflow-hidden');
-    document.body.classList.toggle('overflowY-hidden');
-  }, 150);
+  closeLoginModal();
 }
 
 function configureHamburgerLoginBtn() {
