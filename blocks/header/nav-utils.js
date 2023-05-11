@@ -131,6 +131,7 @@ export function toggleSearch() {
     /* Delay showing modal for animation effects */
     setTimeout(() => {
       document.getElementById('querySearchModal').classList.add('show');
+      window.scrollTo(0, 0); // Scrolling to Top of the page
     }, 150);
   }
 

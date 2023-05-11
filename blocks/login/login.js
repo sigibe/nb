@@ -25,8 +25,8 @@ export function openLoginModal() {
   setTimeout(() => {
     loginEle.classList.remove('fade-out');
     loginEle.classList.add('fade-in');
+    window.scrollTo(0, 0); // Scrolling to Top
   }, 150);
-  window.scrollTo(0, 0); // Scrolling to Top
   bodyEle.classList.add('overflow-hidden');
   bodyEle.classList.remove('overflowY-hidden');
 }
