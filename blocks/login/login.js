@@ -2,7 +2,13 @@ import {
   decorateIcons, makeLinksRelative, decorateButtons, getRootPath, decorateAnchor,
 } from '../../scripts/scripts.js';
 
-export function closeLoginModal() {
+function delay(time) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+}
+
+export async function closeLoginModal() {
   const loginEle = document.querySelector('.login-overlay');
   const mainEle = document.querySelector('body');
 
@@ -10,23 +16,22 @@ export function closeLoginModal() {
   loginEle.classList.add('fade-out');
 
   /* Delaying the removal of modal class to allow the fade-out animation to complete */
-  setTimeout(() => {
-    loginEle.classList.remove('modal');
-    mainEle.classList.remove('overflow-hidden');
-  }, 150);
+  await delay(150);
+  loginEle.classList.remove('modal');
+  mainEle.classList.remove('overflow-hidden');
 }
 
-export function openLoginModal() {
+export async function openLoginModal() {
   const loginEle = document.querySelector('.login-overlay');
   const bodyEle = document.querySelector('body');
 
   loginEle.classList.add('modal');
   /* Delaying the fade-in class addition to allow the modal to be displayed */
-  setTimeout(() => {
-    loginEle.classList.remove('fade-out');
-    loginEle.classList.add('fade-in');
-    window.scrollTo(0, 0); // Scrolling to Top
-  }, 150);
+  await delay(150);
+  loginEle.classList.remove('fade-out');
+  loginEle.classList.add('fade-in');
+  window.scrollTo(0, 0); // Scrolling to Top
+
   bodyEle.classList.add('overflow-hidden');
   bodyEle.classList.remove('overflowY-hidden');
 }

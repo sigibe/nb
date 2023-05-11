@@ -113,7 +113,7 @@ export function toggleHamburger() {
   }
 }
 
-export function toggleSearch() {
+export async function toggleSearch() {
   if (document.getElementById('querySearchModal').style) {
     document.getElementById('querySearchModal').removeAttribute('style');
   }
@@ -125,17 +125,18 @@ export function toggleSearch() {
     /* Delay hiding modal for animation effects */
     setTimeout(() => {
       document.getElementById('querySearchModal').classList.remove('appear');
+      document.body.classList.remove('overflow-hidden');
     }, 150);
   } else {
+    await closeLoginModal();
     document.getElementById('querySearchModal').classList.add('appear');
+    document.body.classList.add('overflow-hidden');
     /* Delay showing modal for animation effects */
     setTimeout(() => {
       document.getElementById('querySearchModal').classList.add('show');
       window.scrollTo(0, 0); // Scrolling to Top of the page
     }, 150);
   }
-
-  closeLoginModal();
 }
 
 function configureHamburgerLoginBtn() {
