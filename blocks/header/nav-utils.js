@@ -196,8 +196,12 @@ export async function loadNavTools() {
       });
 
       externalMarkup.appendChild(hamburgerModal);
-      document.querySelector('.nbd-hamburger-close-icon').addEventListener('click', () => {
-        document.querySelector('.nav-hamburger').click();
+
+      const icons = document.querySelectorAll('.nbd-hamburger-close-icon');
+      icons.forEach((x) => {
+        x.addEventListener('click', () => {
+          document.querySelector('.nav-hamburger').click();
+        });
       });
     }
 

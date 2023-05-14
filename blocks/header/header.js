@@ -129,8 +129,13 @@ async function delayedNavTools() {
         closeLoginModal();
         document.body.classList.remove('overflow-hidden');
       }
-      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+
+      // Setting both primary and secondary nav aria-expanded
+      document.querySelector('primary-nav').setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      document.querySelector('secondary-nav').setAttribute('aria-expanded', expanded ? 'false' : 'true');
+
       toggleHamburger();
+      window.scrollTo(0, 0); // Scrolling to Top
     });
 
     const querySearch = nav.querySelector('.nav-tools-search');
